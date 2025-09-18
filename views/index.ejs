@@ -14,72 +14,31 @@
             </div>
         </div>
         <div class="promptbox">
-            <form action="/ivybot" method="POST">
-                <input type="text" id="prompt" name="prompt" placeholder="Type a question..." required autofocus>
+            <form id="chatForm" action="#" onsubmit="return false;">
+                <div id="userTypeSection">
+                    <label for="userType">Are you a guest, student, or faculty?</label>
+                    <select id="userType" name="userType" required>
+                        <option value="">Select...</option>
+                        <option value="Guest">Guest</option>
+                        <option value="Student">Student</option>
+                        <option value="Faculty">Faculty</option>
+                    </select>
+                    <button type="button" id="userTypeNext">Next</button>
+                </div>
+                <div id="emailSection" style="display:none;">
+                    <input type="email" id="schoolEmail" name="schoolEmail" placeholder="Enter your school email" pattern=".+@ivytech\.edu">
+                    <button type="button" id="emailNext">Next</button>
+                </div>
+                <div id="questionSection" style="display:none;">
+                    <input type="text" id="prompt" name="prompt" placeholder="Type a question..." required autofocus>
+                    <button type="submit" style="display:none"></button>
+                </div>
             </form>
         </div>
     </div>
 
-    
-
     <!-- ChatBot Fetch Script -->
-    <script>
-        const form = document.querySelector('form'); 
-
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-
-            //create user query message
-            const chatBody = document.getElementById('chat-body'); 
-            const userMessage = document.createElement('div');
-            userMessage.classList.add('message', 'user');
-            const userMessageContent = document.createElement('div');
-            userMessageContent.classList.add('content');
-            userMessageContent.textContent = form.prompt.value;
-            userMessage.appendChild(userMessageContent);
-            chatBody.appendChild(userMessage);
-
-            // get the values
-            const prompt = form.prompt.value;
-
-            //reset form input
-            form.prompt.value = '';
-
-            //try to send the user prompt via POST
-            try {
-                const res = await fetch('/ivybot', {
-                    method: 'POST',              
-                    headers: { 'Content-Type': 'application/json'},
-                    body: JSON.stringify({ prompt })
-                });
-
-                const data = await res.json();
-                //console.log(data);
-
-                //generate bot response div
-                const botResponse = document.createElement('div');
-                botResponse.classList.add('message', 'bot');
-
-                const botMessageAvatar = document.createElement('div');
-                botMessageAvatar.classList.add('avatar');
-                botMessageAvatar.innerHTML = '<img src="img/ivybot_face.png">';
-
-                const botMessageContent = document.createElement('div');                
-                botMessageContent.classList.add('content');
-                botMessageContent.innerHTML = data.response;
-
-                botResponse.appendChild(botMessageAvatar);
-                botResponse.appendChild(botMessageContent);
-                chatBody.appendChild(botResponse);
-            }
-            catch (err) {
-                console.log(err);
-            }
-
-            //update the view by scrolling to the bottom of the conversation
-            chatBody.scrollTop = chatBody.scrollHeight;
-        });
-    </script> 
+   <script src="/scripts/chatbot.js"></script>
 
     <%- include('./partials/footer.ejs') %>
 

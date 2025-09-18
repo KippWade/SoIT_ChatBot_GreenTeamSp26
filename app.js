@@ -7,10 +7,8 @@ const fuzz = require('fuzzball');
 
 // express app
 const app = express();
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3030;
 
-// connect to mongodb
-const dbURI = process.env.MONGO_URI;
 
 // create a rate limiter for POST requests
 const postLimiter = rateLimit({
