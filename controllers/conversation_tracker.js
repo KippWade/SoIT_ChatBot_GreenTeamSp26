@@ -3,11 +3,7 @@ const path = require('path');
 const filePath = path.join(__dirname, '../data/chat_session_logging.json'); // Creates a JSON file to store conversations
 
 // Function to log conversations
-<<<<<<< Updated upstream
-function addConversation(ticket, userType, schoolEmail, from, message) {
-=======
 function addConversation(ticket, userType, schoolEmail, from, message, intent, originalPrompt, isFilipino, botFilipinoResponse) {
->>>>>>> Stashed changes
     let conversations = [];
     if (fs.existsSync(filePath)) {
         conversations = JSON.parse(fs.readFileSync(filePath));

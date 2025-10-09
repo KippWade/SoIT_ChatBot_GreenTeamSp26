@@ -39,20 +39,8 @@ const responses = [
         link: "Campus Locations"
     },
     {
-<<<<<<< Updated upstream
-        intent: "dean_info_indy",
-        pattern: [
-            "who is the dean of the school of it in indy", "dean of it in indy", "who is the dean of the school of it in indianapolis",
-            "who is the dean of IT at the indy campus", "who is the dean for the school of IT in indy", "dean of it in indianapolis",
-            "dean of it in indianapolis", "who is the dean for the school of IT in indianapolis"
-        ],
-        reply: "The Dean of the School of IT in Indianapolis is Patrick Benner",
-        url: "https://whitepages.ivytech.edu/profile/pbenner/",
-        link: "White Pages Entry"
-=======
         intent: "dean_info",
         pattern: "who is the dean",
->>>>>>> Stashed changes
     },
     {
         intent: "dean_info_hamilton",
@@ -1354,14 +1342,11 @@ const locations = [
         email: "askindianapolis@ivytech.edu",
         url: "/indianapolis/index.html",
         contactDirectoryUrl: "https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=indianapolis&role=faculty&role=staff&title=&bee_syrup_tun=&submit=+Search+",
-<<<<<<< Updated upstream
-=======
         dean: {
             reply: "The Dean of the School of IT in Indianapolis is Patrick Benner. Email: pbenner@ivytech.edu, Phone: 317-921-4699",
             url: "https://whitepages.ivytech.edu/profile/pbenner/",
             link: "White Pages Entry"
         }
->>>>>>> Stashed changes
     },
     {
         position: { lat: 40.5049668, lng: -86.1064558 },
