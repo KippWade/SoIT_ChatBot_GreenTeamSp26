@@ -3,7 +3,7 @@ const path = require('path');
 const filePath = path.join(__dirname, '../data/chat_session_logging.json'); // Creates a JSON file to store conversations
 
 // Function to log conversations
-function addConversation(ticket, userType, schoolEmail, from, message, intent) {
+function addConversation(ticket, userType, schoolEmail, from, message, intent, originalPrompt, isFilipino, botFilipinoResponse) {
     let conversations = [];
     if (fs.existsSync(filePath)) {
         conversations = JSON.parse(fs.readFileSync(filePath));
@@ -26,6 +26,38 @@ function addConversation(ticket, userType, schoolEmail, from, message, intent) {
         };
         conversations.push(convo);
     }
+
+    // Always update currentIntent for every message
+    convo.currentIntent = intent;
+
+    // Add the user message to the conversation
+    if (from === 'user') {
+        if (isFilipino && originalPrompt) {
+            convo.conversation.push({
+                from,
+                message: `Original: ${originalPrompt} | Translated: ${message}`,
+                isFilipino,
+                currentIntent: convo.currentIntent
+            });
+        } else {
+            convo.conversation.push({ from, message, currentIntent: convo.currentIntent });
+        }
+    }
+
+    // Add the bot response to the conversation
+    if (from === 'bot') {
+        if (isFilipino && botFilipinoResponse) {
+            convo.conversation.push({
+                from,
+                message: `Original: ${botFilipinoResponse} | Translated: ${message}`,
+                isFilipino,
+                currentIntent: convo.currentIntent
+            });
+        } else {
+            convo.conversation.push({ from, message, currentIntent: convo.currentIntent });
+        }
+    }
+
     fs.writeFileSync(filePath, JSON.stringify(conversations, null, 2));
 }
 

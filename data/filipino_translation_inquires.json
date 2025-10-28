@@ -1,0 +1,25 @@
+[
+  {
+    "intent": "greetings",
+    "filipino": [
+        "hoy", "oy", "huy", "uy", "magandang pagbati", 
+        "magandang umaga","magandang hapon", "magandang gabi",
+        "anong balita"
+        
+    ],
+    "english": [
+       "hello", "hi", "hey", "greetings", 
+       "good morning", "good afternoon", "good evening", 
+       "howdy", "what's up"
+      ]
+  },
+  {
+    "intent": "bot_status",
+    "filipino": [
+        "kamusta ka", "kumusta ka", "kamusta"
+    ],
+    "english": [
+        "how are you", "how's it going", "how are you doing", "are you doing great"
+      ]
+  }
+]
