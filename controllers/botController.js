@@ -320,8 +320,8 @@ module.exports.query = (req, res) => {
                 break;
             case 'dean_info':
                 if(locIndex > -1 && locations[locIndex]?.dean) {
-                    response = `${locations[locIndex].dean.reply}`;
-                    response += `<br><br><a href='${locations[locIndex].dean.url}' target='_blank'>Dean's Page${suffix}</a>`;
+                    response = `<strong>${locations[locIndex].dean.reply}</strong><br>`;
+                    response += `<br><br><a href='https://www.ivytech.edu/${locations[locIndex].dean.url}' target='_blank'>Campus Page${suffix}`;
                 } else if(locIndex > -1) {
                     response = "Currently, there is no designated Dean for Information Technology at this campus. Please contact the campus administration for more information.";
                 }

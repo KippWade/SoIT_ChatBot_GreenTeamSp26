@@ -11,6 +11,8 @@ function addConversation(ticket, userType, schoolEmail, from, message, intent, o
     let convo = conversations.find(c => c.ticket === ticket);
     if (convo) {
         // Append to existing conversation
+        if(intent)
+            convo.currentIntent = intent; // Update intent if provided
         convo.conversation.push({ from, message });
     } else {
         // Create new conversation
@@ -19,7 +21,8 @@ function addConversation(ticket, userType, schoolEmail, from, message, intent, o
             userType,
             schoolEmail,
             conversation: [{ from, message }],
-            date: new Date().toISOString()
+            date: new Date().toISOString(),
+            currentIntent: intent
         };
         conversations.push(convo);
     }
