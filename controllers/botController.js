@@ -70,6 +70,11 @@ function getLocationIndexFromPrompt(prompt) {
     return -1;
 }
 
+function buildWhitePagesURL(firstName, lastName, location, role, title) 
+{
+    return `https://whitepages.ivytech.edu/?first_name=${encodeURIComponent(firstName)}&last_name=${encodeURIComponent(lastName)}&userid=&location=${encodeURIComponent(location)}&role=${encodeURIComponent(role)}&title=${encodeURIComponent(title)}&bee_syrup_tun=&submit=+Search+`;
+}
+
 
 
 // Main query processing function
@@ -319,14 +324,12 @@ module.exports.query = (req, res) => {
                 }
                 break;
             case 'dean_info':
-                if(locIndex > -1 && locations[locIndex]?.dean) {
-                    response = `<strong>${locations[locIndex].dean.reply}</strong><br>`;
-                    response += `<br><br><a href='https://www.ivytech.edu/${locations[locIndex].dean.url}' target='_blank'>Campus Page${suffix}`;
-                } else if(locIndex > -1) {
-                    response = "Currently, there is no designated Dean for Information Technology at this campus. Please contact the campus administration for more information.";
-                }
-                else {
-                    response = "Which campus are you asking about?"
+                if(locIndex > -1) {
+                    response = `<strong>${matchedResponse.reply}</strong><br>`;
+                    response += `<br><br><a href='${buildWhitePagesURL('', '', locations[locIndex].title, 'faculty', 'Dean')}' target='_blank'>White Page${suffix}`;
+                } else {
+                    response = 'Hmm.. which campus are you wanting dean information for? You can also follow this link to search the White Pages for the dean: ';
+                    response += '<br><br><a href="' + buildWhitePagesURL('', '', '', 'faculty', 'Dean') + '" target="_blank">White Pages</a>';
                 }
                 break;    
             default:
@@ -361,33 +364,13 @@ module.exports.query = (req, res) => {
                 }
                 break;
             case 'dean_info':
-                if(locIndex > -1 && locations[locIndex]?.dean) {
-                    let deanReply = locations[locIndex].dean.reply;
-                    let nameMatch = deanReply.match(/is ([^.]+)\./i);
-                    let deanName = nameMatch ? nameMatch[1].trim() : '';
-                    let deanEmailMatch = deanReply.match(/Email: ([^,\s]+)/i);
-                    let deanEmail = deanEmailMatch ? deanEmailMatch[1].trim() : '';
-                    let deanPhoneMatch = deanReply.match(/Phone: ([^,\s]+)/i);
-                    let deanPhone = deanPhoneMatch ? deanPhoneMatch[1].trim() : '';
-                    // Get main info (before Email:)
-                    let mainInfo = deanReply.split('Email:')[0].replace(/Phone:.*/, '').trim();
-                    // Bold dean name if found
-                    if (nameMatch && deanName) {
-                        mainInfo = mainInfo.replace(deanName, `<strong>${deanName}</strong>`);
-                    }
-                    response = mainInfo;
-                    if (deanEmail) {
-                        response += `<br><br>Email: <a href='mailto:${deanEmail}'>${deanEmail}</a>`;
-                    }
-                    if (deanPhone) {
-                        response += `<br>Phone: <a href='tel:${deanPhone}'>${deanPhone}</a>`;
-                    }
-                    response += `<br><br><a href='${locations[locIndex].dean.url}' target='_blank'>Dean's Page${suffix}`;
-                } else if(locIndex > -1) {
-                    response = "Currently, there is no designated Dean for Information Technology at this campus. Please contact the campus administration for more information.";
+                if(locIndex > -1) {
+                    response = `<strong>I can help you find information about the dean!</strong><br>`;
+                    response += `<br><br><a href='${buildWhitePagesURL('', '', locations[locIndex].title, 'faculty', 'Dean')}' target='_blank'>White Page${suffix}</a>`;
                 }
                 else {
-                    response = "Which campus are you asking about?"
+                    response = 'Hmm.. which campus are you wanting dean information for? You can also follow this link to search the White Pages for the dean: ';
+                    response += '<br><br><a href="' + buildWhitePagesURL('', '', '', 'faculty', 'Dean') + '" target="_blank">White Pages</a>';
                 }
                 break;    
             default:

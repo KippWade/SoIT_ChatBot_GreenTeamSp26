@@ -41,59 +41,11 @@ const responses = [
     {
         intent: "dean_info",
         pattern: [
-            "who is the dean of the school of it in bloomington", "dean of it in bloomington", 
-            "who is the dean of the school of it in bloomington","who is the dean of IT at the bloomington campus",
-            "who is the dean for the school of IT in bloomington "
+            "who is the dean", "dean of", "where is the dean", "what is the dean", "dean info", "dean information"
         ],
-        reply: "The Dean of the School of IT in Bloomington is Chris Carroll",
-        url: "https://whitepages.ivytech.edu/profile/rcarroll/",
+        reply: "I can help you find information about the dean!",
+        url: "https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=all&role=faculty&role=staff&title=Dean&bee_syrup_tun=&submit=+Search+",
         link: "White Pages Entry"
-    },
-    {
-        intent: "dean_info_lafayette",
-        pattern: [
-            "who is the dean of the school of it in lafayette", "dean of it in lafayette", 
-            "who is the dean of the school of it in lafayette","who is the dean of IT at the lafayette campus",
-            "who is the dean for the school of IT in lafayette "
-        ],
-        reply: "The Dean of the School of IT in Lafayette is Andrew Gibbs",
-        url: "https://whitepages.ivytech.edu/profile/agibbs33/",
-        link: "White Pages Entry"
-    },
-    {
-        intent: "dean_info_lake_county",
-        pattern: [
-            "who is the dean of the school of it in lake county", "dean of it in lake county", 
-            "who is the dean of the school of it in lake county","who is the dean of IT at the lake county campus",
-            "who is the dean for the school of IT in lake county "
-        ],
-        reply: "The Dean of the School of IT in Lake County is Feihong Liu",
-        url: "https://whitepages.ivytech.edu/profile/fliu9/",
-        link: "White Pages Entry"
-    },
-    {
-        intent: "dean_info_terre_haute",
-        pattern: [
-            "who is the dean of the school of it in terre haute", "dean of it in terre haute", 
-            "who is the dean of the school of it in terre haute","who is the dean of IT at the terre haute campus",
-            "who is the dean for the school of IT in terre haute "
-        ],
-        reply: "The Dean of the School of IT in Terre Haute is Logan Pearison",
-        url: "https://whitepages.ivytech.edu/profile/lpearison1/",
-        link: "White Pages Entry"
-    },
-    {
-        intent: "dean_info_columbus",
-        pattern: [
-            "who is the dean of the school of it in columbus", "dean of it in columbus", 
-            "who is the dean of the school of it in columbus","who is the dean of IT at the columbus campus",
-            "who is the dean for the school of IT in columbus "
-        ],
-        reply: "The Dean of the School of IT in Columbus is Pam Schmelz",
-        url: "https://whitepages.ivytech.edu/profile/pschmelz/",
-        link: "White Pages Entry"
-            "who is the dean"
-        ]
     },
     {
         intent: "admissions_info_general",
@@ -645,12 +597,7 @@ const locations = [
         phone: "1-317-921-4699",
         email: "askindianapolis@ivytech.edu",
         url: "/indianapolis/index.html",
-        contactDirectoryUrl: "https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=indianapolis&role=faculty&role=staff&title=&bee_syrup_tun=&submit=+Search+",
-        dean: {
-            reply: "The Dean of the School of IT in Indianapolis is Patrick Benner. Email: pbenner@ivytech.edu, Phone: 317-921-4699",
-            url: "https://whitepages.ivytech.edu/profile/pbenner/",
-            link: "White Pages Entry"
-        }
+        contactDirectoryUrl: "https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=indianapolis&role=faculty&role=staff&title=&bee_syrup_tun=&submit=+Search+"
     },
     {
         position: { lat: 40.5049668, lng: -86.1064558 },
@@ -958,12 +905,7 @@ const locations = [
         phone: "1-812-299-1121",
         email: "askterrehaute@ivytech.edu",
         url: "/terrehaute/index.html",
-        contactDirectoryUrl: "https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=terre+haute&role=faculty&role=staff&title=&bee_syrup_tun=&submit=+Search+",
-        dean: {
-            reply: "The Dean of the School of IT in Terre Haute is Logan Pearison. Email: lpearison1@ivytech.edu, Phone: 812-298-2344",
-            url: "https://whitepages.ivytech.edu/profile/lpearison1/",
-            link: "White Pages Entry"
-        }
+        contactDirectoryUrl: "https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=terre+haute&role=faculty&role=staff&title=&bee_syrup_tun=&submit=+Search+"
     },
     {
         position: { lat: 41.462292, lng: -87.0223423 },
