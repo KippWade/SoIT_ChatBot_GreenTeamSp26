@@ -1,0 +1,835 @@
+[
+  {
+    "ticket": "Guest--1762797912326",
+    "userType": "Guest",
+    "schoolEmail": "",
+    "conversation": [
+      {
+        "from": "user",
+        "message": "what is the address"
+      },
+      {
+        "from": "user",
+        "message": "Original: saan matatagpuan ang address ng indianapolis | Translated: what is the address",
+        "isFilipino": true,
+        "currentIntent": null
+      },
+      {
+        "from": "bot",
+        "message": "Sorry, I didn't quite catch that. Could you try asking in a different way?"
+      },
+      {
+        "from": "bot",
+        "message": "Original: Sorry, I didn't quite catch that. Could you try asking in a different way? | Translated: Sorry, I didn't quite catch that. Could you try asking in a different way?",
+        "isFilipino": true,
+        "currentIntent": null
+      },
+      {
+        "from": "user",
+        "message": "what is the address"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang address ng indianapolis | Translated: what is the address",
+        "isFilipino": true,
+        "currentIntent": null
+      },
+      {
+        "from": "bot",
+        "message": "Sorry, I didn't quite catch that. Could you try asking in a different way?"
+      },
+      {
+        "from": "bot",
+        "message": "Original: Sorry, I didn't quite catch that. Could you try asking in a different way? | Translated: Sorry, I didn't quite catch that. Could you try asking in a different way?",
+        "isFilipino": true,
+        "currentIntent": null
+      },
+      {
+        "from": "user",
+        "message": "what programs"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang mga programa | Translated: what programs",
+        "isFilipino": true,
+        "currentIntent": "program_info"
+      },
+      {
+        "from": "bot",
+        "message": "Narito ang mga programa na maaari mong makita sa IvyTech!<br><br><a href='https://www.ivytech.edu/programs/' target='_blank'>Programs&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: Narito ang mga programa na maaari mong makita sa IvyTech! | Translated: Here are the programs you can find at IvyTech! | Translated: Narito ang mga programa na maaari mong makita sa IvyTech!<br><br><a href='https://www.ivytech.edu/programs/' target='_blank'>Programs&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "program_info"
+      }
+    ],
+    "date": "2025-11-10T18:05:24.971Z",
+    "currentIntent": "program_info"
+  },
+  {
+    "ticket": "Guest--1762798076935",
+    "userType": "Guest",
+    "schoolEmail": "",
+    "conversation": [
+      {
+        "from": "user",
+        "message": "campus address"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang address ng indianapolis | Translated: campus address",
+        "isFilipino": true,
+        "currentIntent": "address_info"
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Indianapolis Campus:</strong><br>50 W Fall Creek Parkway N\nIndianapolis, IN 46208<br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a><br><a href='https://www.google.com/maps/search/?api=1&query=39.8053968,-86.1589352' target='_blank'>Google Maps&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: <strong>Indianapolis Campus:</strong><br>50 W Fall Creek Parkway N\nIndianapolis, IN 46208<br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a><br><a href='https://www.google.com/maps/search/?api=1&query=39.8053968,-86.1589352' target='_blank'>Google Maps&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "address_info"
+      },
+      {
+        "from": "user",
+        "message": "campus address"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang address ng evansville | Translated: campus address",
+        "isFilipino": true,
+        "currentIntent": "address_info"
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Evansville Campus:</strong><br>3501 N First Avenue\nEvansville, IN 47710<br><br><a href='https://www.ivytech.edu//evansville/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a><br><a href='https://www.google.com/maps/search/?api=1&query=38.0119772,-87.573088' target='_blank'>Google Maps&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: <strong>Evansville Campus:</strong><br>3501 N First Avenue\nEvansville, IN 47710<br><br><a href='https://www.ivytech.edu//evansville/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a><br><a href='https://www.google.com/maps/search/?api=1&query=38.0119772,-87.573088' target='_blank'>Google Maps&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "address_info"
+      },
+      {
+        "from": "user",
+        "message": "who is the dean"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang matatawagan sa evansville | Translated: who is the dean",
+        "isFilipino": true,
+        "currentIntent": "dean_info"
+      },
+      {
+        "from": "bot",
+        "message": "Maaari kitang tulungan na makahanap ng impormasyon tungkol sa dean!<br><br><a href='https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=Evansville&role=faculty&title=Dean&bee_syrup_tun=&submit=+Search+' target='_blank'>White Pages&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: Maaari kitang tulungan na makahanap ng impormasyon tungkol sa dean! | Translated: I can help you find information about the dean! | Translated: Maaari kitang tulungan na makahanap ng impormasyon tungkol sa dean!<br><br><a href='https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=Evansville&role=faculty&title=Dean&bee_syrup_tun=&submit=+Search+' target='_blank'>White Pages&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "dean_info"
+      },
+      {
+        "from": "user",
+        "message": "phone number"
+      },
+      {
+        "from": "user",
+        "message": "Original: paano ako makatawag sa evansville | Translated: phone number",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "bot",
+        "message": "<italic>Evansville</italic><strong>Contact Info:</strong><br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-812-426-2865'>1-812-426-2865</a><br><i class='bx bxs-envelope' ></i>&nbsp;&nbsp;<a href=\"mailto:askevansville@ivytech.edu\">askevansville@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//evansville/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: <italic>Evansville</italic><strong>Contact Info:</strong><br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-812-426-2865'>1-812-426-2865</a><br><i class='bx bxs-envelope' ></i>&nbsp;&nbsp;<a href=\"mailto:askevansville@ivytech.edu\">askevansville@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//evansville/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "user",
+        "message": "contact info in evansville"
+      },
+      {
+        "from": "user",
+        "message": "contact info in evansville",
+        "currentIntent": null
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Evansville Contact Info:</strong><br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-812-426-2865'>1-812-426-2865</a><br><i class='bx bxs-envelope' ></i>&nbsp;&nbsp;<a href=\"mailto:askevansville@ivytech.edu\">askevansville@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//evansville/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Evansville Contact Info:</strong><br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-812-426-2865'>1-812-426-2865</a><br><i class='bx bxs-envelope' ></i>&nbsp;&nbsp;<a href=\"mailto:askevansville@ivytech.edu\">askevansville@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//evansville/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>",
+        "currentIntent": null
+      },
+      {
+        "from": "user",
+        "message": "what certifications"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang mga sertipikasyon | Translated: what certifications",
+        "isFilipino": true,
+        "currentIntent": "certification_info"
+      },
+      {
+        "from": "bot",
+        "message": "I'm having trouble understanding. Would you mind rephrasing your question?"
+      },
+      {
+        "from": "bot",
+        "message": "Original: I'm having trouble understanding. Would you mind rephrasing your question? | Translated: I'm having trouble understanding. Would you mind rephrasing your question?",
+        "isFilipino": true,
+        "currentIntent": "certification_info"
+      },
+      {
+        "from": "user",
+        "message": "phone number"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang contact number sa indianapolis | Translated: phone number",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "bot",
+        "message": "<italic>Indianapolis</italic><strong>Contact Info:</strong><br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-317-921-4699'>1-317-921-4699</a><br><i class='bx bxs-envelope' ></i>&nbsp;&nbsp;<a href=\"mailto:askindianapolis@ivytech.edu\">askindianapolis@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: <italic>Indianapolis</italic><strong>Contact Info:</strong><br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-317-921-4699'>1-317-921-4699</a><br><i class='bx bxs-envelope' ></i>&nbsp;&nbsp;<a href=\"mailto:askindianapolis@ivytech.edu\">askindianapolis@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "user",
+        "message": "who is the dean"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang dean sa indianapolis | Translated: who is the dean",
+        "isFilipino": true,
+        "currentIntent": "dean_info"
+      },
+      {
+        "from": "bot",
+        "message": "Maaari kitang tulungan na makahanap ng impormasyon tungkol sa dean!<br><br><a href='https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=Indianapolis&role=faculty&title=Dean&bee_syrup_tun=&submit=+Search+' target='_blank'>White Pages&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: Maaari kitang tulungan na makahanap ng impormasyon tungkol sa dean! | Translated: I can help you find information about the dean! | Translated: Maaari kitang tulungan na makahanap ng impormasyon tungkol sa dean!<br><br><a href='https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=Indianapolis&role=faculty&title=Dean&bee_syrup_tun=&submit=+Search+' target='_blank'>White Pages&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "dean_info"
+      },
+      {
+        "from": "user",
+        "message": "campus address"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang address sa indianapolis | Translated: campus address",
+        "isFilipino": true,
+        "currentIntent": "address_info"
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Indianapolis Campus:</strong><br>50 W Fall Creek Parkway N\nIndianapolis, IN 46208<br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a><br><a href='https://www.google.com/maps/search/?api=1&query=39.8053968,-86.1589352' target='_blank'>Google Maps&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: <strong>Indianapolis Campus:</strong><br>50 W Fall Creek Parkway N\nIndianapolis, IN 46208<br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a><br><a href='https://www.google.com/maps/search/?api=1&query=39.8053968,-86.1589352' target='_blank'>Google Maps&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "address_info"
+      },
+      {
+        "from": "user",
+        "message": "campus address"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang address east chicago | Translated: campus address",
+        "isFilipino": true,
+        "currentIntent": "address_info"
+      },
+      {
+        "from": "bot",
+        "message": "<strong>East Chicago Campus:</strong><br>410 E Columbus Drive\nEast Chicago, IN 46312<br><br><a href='https://www.ivytech.edu//lakecounty/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a><br><a href='https://www.google.com/maps/search/?api=1&query=41.6401149,-87.4667754' target='_blank'>Google Maps&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: <strong>East Chicago Campus:</strong><br>410 E Columbus Drive\nEast Chicago, IN 46312<br><br><a href='https://www.ivytech.edu//lakecounty/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a><br><a href='https://www.google.com/maps/search/?api=1&query=41.6401149,-87.4667754' target='_blank'>Google Maps&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "address_info"
+      },
+      {
+        "from": "user",
+        "message": "what are the minimum credit hours i can take"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang pinakamababa na yunit ng kurso na maaari kong kunin | Translated: what are the minimum credit hours i can take",
+        "isFilipino": true,
+        "currentIntent": "credit_hour_info"
+      },
+      {
+        "from": "bot",
+        "message": "Narito ang ilang impormasyon tungkol sa mga credit hour!<br><br><a href='https://ivytech.edusupportcenter.com/shp/ivytech/article?articleId=1510102&pk=192307&articleTag=gh_faapp' target='_blank'>Credit Hours&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: Narito ang ilang impormasyon tungkol sa mga credit hour! | Translated: Here's some information about credit hours! | Translated: Narito ang ilang impormasyon tungkol sa mga credit hour!<br><br><a href='https://ivytech.edusupportcenter.com/shp/ivytech/article?articleId=1510102&pk=192307&articleTag=gh_faapp' target='_blank'>Credit Hours&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "credit_hour_info"
+      }
+    ],
+    "date": "2025-11-10T18:08:08.037Z",
+    "currentIntent": "credit_hour_info"
+  },
+  {
+    "ticket": "Guest--1762798438856",
+    "userType": "Guest",
+    "schoolEmail": "",
+    "conversation": [
+      {
+        "from": "user",
+        "message": "phone number"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang matatawagan sa indianapolis para sa mga impormasyon? | Translated: phone number",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Indianapolis</strong> Contact Info:<br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-317-921-4699'>1-317-921-4699</a><br><i class='bx bxs-envelope'></i>&nbsp;&nbsp;<a href=\"mailto:askindianapolis@ivytech.edu\">askindianapolis@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: <strong>Indianapolis</strong> Contact Info:<br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-317-921-4699'>1-317-921-4699</a><br><i class='bx bxs-envelope'></i>&nbsp;&nbsp;<a href=\"mailto:askindianapolis@ivytech.edu\">askindianapolis@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "user",
+        "message": "who are the instructors in the school of it"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang mga instruktor sa school of it | Translated: who are the instructors in the school of it",
+        "isFilipino": true,
+        "currentIntent": null
+      },
+      {
+        "from": "bot",
+        "message": "I'm a bit confused by that one. Can you ask it another way, please?"
+      },
+      {
+        "from": "bot",
+        "message": "Original: I'm a bit confused by that one. Can you ask it another way, please? | Translated: I'm a bit confused by that one. Can you ask it another way, please?",
+        "isFilipino": true,
+        "currentIntent": null
+      },
+      {
+        "from": "user",
+        "message": "who are the instructors in the school of it"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang mga guro sa school of it | Translated: who are the instructors in the school of it",
+        "isFilipino": true,
+        "currentIntent": null
+      },
+      {
+        "from": "bot",
+        "message": "Sorry, I didn't quite catch that. Could you try asking in a different way?"
+      },
+      {
+        "from": "bot",
+        "message": "Original: Sorry, I didn't quite catch that. Could you try asking in a different way? | Translated: Sorry, I didn't quite catch that. Could you try asking in a different way?",
+        "isFilipino": true,
+        "currentIntent": null
+      },
+      {
+        "from": "user",
+        "message": "who is the instructor for csci 201"
+      },
+      {
+        "from": "user",
+        "message": "who is the instructor for csci 201",
+        "currentIntent": "instructor_info_general"
+      },
+      {
+        "from": "bot",
+        "message": "The instructor for this course is subject to change each semester. Please check the official College Scheduler for the most current instructor information.<br><br><a href='https://ivytech.search.collegescheduler.com/' target='_blank'>College Scheduler&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "The instructor for this course is subject to change each semester. Please check the official College Scheduler for the most current instructor information.<br><br><a href='https://ivytech.search.collegescheduler.com/' target='_blank'>College Scheduler&nbsp;<i class='bx bx-link-external'></i></a>",
+        "currentIntent": "instructor_info_general"
+      },
+      {
+        "from": "user",
+        "message": "course description"
+      },
+      {
+        "from": "user",
+        "message": "Original: paglalarawan ng kurso ng csci 201 | Translated: course description",
+        "isFilipino": true,
+        "currentIntent": "course_info_general"
+      },
+      {
+        "from": "bot",
+        "message": "Para sa detalyadong impormasyon tungkol sa mga kurso, kabilang ang mga paglalarawan at mga kinakailangan, mangyaring bisitahin ang pahina ng paglalarawan ng kurso sa ibaba.<br><br><a href='https://catalog.ivytech.edu/content.php?catoid=11&navoid=1255' target='_blank'>Course Descriptions&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: Para sa detalyadong impormasyon tungkol sa mga kurso, kabilang ang mga paglalarawan at mga kinakailangan, mangyaring bisitahin ang pahina ng paglalarawan ng kurso sa ibaba. | Translated: For detailed information about courses, including descriptions and prerequisites, please visit the course description page | Translated: Para sa detalyadong impormasyon tungkol sa mga kurso, kabilang ang mga paglalarawan at mga kinakailangan, mangyaring bisitahin ang pahina ng paglalarawan ng kurso sa ibaba.<br><br><a href='https://catalog.ivytech.edu/content.php?catoid=11&navoid=1255' target='_blank'>Course Descriptions&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "course_info_general"
+      },
+      {
+        "from": "user",
+        "message": "who are the instructors in the school of it"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang mga instruktor sa school of it | Translated: who are the instructors in the school of it",
+        "isFilipino": true,
+        "currentIntent": null
+      },
+      {
+        "from": "bot",
+        "message": "I'm a bit confused by that one. Can you ask it another way, please?"
+      },
+      {
+        "from": "bot",
+        "message": "Original: I'm a bit confused by that one. Can you ask it another way, please? | Translated: I'm a bit confused by that one. Can you ask it another way, please?",
+        "isFilipino": true,
+        "currentIntent": null
+      }
+    ],
+    "date": "2025-11-10T18:14:15.070Z",
+    "currentIntent": null
+  },
+  {
+    "ticket": "Guest--1762798646874",
+    "userType": "Guest",
+    "schoolEmail": "",
+    "conversation": [
+      {
+        "from": "user",
+        "message": "who are the instructors in the school of it"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang mga nag tuturo sa CSCI 201 | Translated: who are the instructors in the school of it",
+        "isFilipino": true,
+        "currentIntent": null
+      },
+      {
+        "from": "bot",
+        "message": "I'm having trouble understanding. Would you mind rephrasing your question?"
+      },
+      {
+        "from": "bot",
+        "message": "Original: I'm having trouble understanding. Would you mind rephrasing your question? | Translated: I'm having trouble understanding. Would you mind rephrasing your question?",
+        "isFilipino": true,
+        "currentIntent": null
+      },
+      {
+        "from": "user",
+        "message": "who is instructor for SDEV265"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang instructor para sa SDEV265 | Translated: who is instructor for SDEV265",
+        "isFilipino": true,
+        "currentIntent": "instructor_info_sdev265"
+      },
+      {
+        "from": "bot",
+        "message": "Ang SDEV265 ay itinuturo ng ilang mga instruktor depende sa kampus at semestre. Mangyaring tingnan ang opisyal na College Scheduler para sa pinakabagong impormasyon tungkol sa instruktor<br><br><a href='https://ivytech.search.collegescheduler.com/' target='_blank'>College Scheduler&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: Ang SDEV265 ay itinuturo ng ilang mga instruktor depende sa kampus at semestre. Mangyaring tingnan ang opisyal na College Scheduler para sa pinakabagong impormasyon tungkol sa instruktor | Translated: SDEV265 is taught by several instructors depending on campus and semester. Please check the official College Scheduler for the most current instructor information | Translated: Ang SDEV265 ay itinuturo ng ilang mga instruktor depende sa kampus at semestre. Mangyaring tingnan ang opisyal na College Scheduler para sa pinakabagong impormasyon tungkol sa instruktor<br><br><a href='https://ivytech.search.collegescheduler.com/' target='_blank'>College Scheduler&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "instructor_info_sdev265"
+      },
+      {
+        "from": "user",
+        "message": "how can i apply to the school of it"
+      },
+      {
+        "from": "user",
+        "message": "Original: paano ako mag-aapply sa school of it | Translated: how can i apply to the school of it",
+        "isFilipino": true,
+        "currentIntent": "application_process"
+      },
+      {
+        "from": "bot",
+        "message": "Narito ang ilang impormasyon tungkol sa proseso ng aplikasyon!<br><br><a href='https://www.ivytech.edu/admissions/apply-now/' target='_blank'>Application Process&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: Narito ang ilang impormasyon tungkol sa proseso ng aplikasyon! | Translated: Here's some information about the application process! | Translated: Narito ang ilang impormasyon tungkol sa proseso ng aplikasyon!<br><br><a href='https://www.ivytech.edu/admissions/apply-now/' target='_blank'>Application Process&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "application_process"
+      },
+      {
+        "from": "user",
+        "message": "ano ang learanywhere class"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang learanywhere class | Translated: ano ang learanywhere class",
+        "isFilipino": true,
+        "currentIntent": null
+      },
+      {
+        "from": "bot",
+        "message": "I'm a bit confused by that one. Can you ask it another way, please?"
+      },
+      {
+        "from": "bot",
+        "message": "Original: I'm a bit confused by that one. Can you ask it another way, please? | Translated: I'm a bit confused by that one. Can you ask it another way, please?",
+        "isFilipino": true,
+        "currentIntent": null
+      }
+    ],
+    "date": "2025-11-10T18:17:40.239Z",
+    "currentIntent": null
+  },
+  {
+    "ticket": "Guest--1762798792401",
+    "userType": "Guest",
+    "schoolEmail": "",
+    "conversation": [
+      {
+        "from": "user",
+        "message": "learnanywhere class"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang learnanywhere class | Translated: learnanywhere class",
+        "isFilipino": true,
+        "currentIntent": "class_formats"
+      },
+      {
+        "from": "bot",
+        "message": "Nag-aalok ang Ivy Tech ng iba't ibang format ng klase, kabilang ang online, hybrid, tradisyonal, at higit pa. Para sa mga detalye tungkol sa bawat format, pakibisita ang link sa ibaba.<br><br><a href='https://www.ivytech.edu/classes/class-formats/' target='_blank'>Class Formats&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: Nag-aalok ang Ivy Tech ng iba't ibang format ng klase, kabilang ang online, hybrid, tradisyonal, at higit pa. Para sa mga detalye tungkol sa bawat format, pakibisita ang link sa ibaba. | Translated: Ivy Tech offers a variety of class formats, including online, hybrid, traditional, and more. For details about each format, please visit the link below. | Translated: Nag-aalok ang Ivy Tech ng iba't ibang format ng klase, kabilang ang online, hybrid, tradisyonal, at higit pa. Para sa mga detalye tungkol sa bawat format, pakibisita ang link sa ibaba.<br><br><a href='https://www.ivytech.edu/classes/class-formats/' target='_blank'>Class Formats&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "class_formats"
+      },
+      {
+        "from": "user",
+        "message": "campus address"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano and address sa indianapolis | Translated: campus address",
+        "isFilipino": true,
+        "currentIntent": "address_info"
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Indianapolis Campus:</strong><br>50 W Fall Creek Parkway N\nIndianapolis, IN 46208<br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a><br><a href='https://www.google.com/maps/search/?api=1&query=39.8053968,-86.1589352' target='_blank'>Google Maps&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: <strong>Indianapolis Campus:</strong><br>50 W Fall Creek Parkway N\nIndianapolis, IN 46208<br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a><br><a href='https://www.google.com/maps/search/?api=1&query=39.8053968,-86.1589352' target='_blank'>Google Maps&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "address_info"
+      },
+      {
+        "from": "user",
+        "message": "phone number"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang phone number sa indinapolis | Translated: phone number",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "bot",
+        "message": ""
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: ",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "user",
+        "message": "phone number"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang phone number sa indinapolis | Translated: phone number",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "bot",
+        "message": ""
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: ",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      }
+    ],
+    "date": "2025-11-10T18:19:59.332Z",
+    "currentIntent": "phone_number_info"
+  },
+  {
+    "ticket": "Guest--1762799299953",
+    "userType": "Guest",
+    "schoolEmail": "",
+    "conversation": [
+      {
+        "from": "user",
+        "message": "phone number"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang phone number sa indinapolis | Translated: phone number",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "bot",
+        "message": ""
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: ",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "user",
+        "message": "phone number"
+      },
+      {
+        "from": "user",
+        "message": "Original: paano ako makatawag sa indianapolis | Translated: phone number",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Indianapolis</strong> Contact Info:<br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-317-921-4699'>1-317-921-4699</a><br><i class='bx bxs-envelope'></i>&nbsp;&nbsp;<a href=\"mailto:askindianapolis@ivytech.edu\">askindianapolis@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: <strong>Indianapolis</strong> Contact Info:<br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-317-921-4699'>1-317-921-4699</a><br><i class='bx bxs-envelope'></i>&nbsp;&nbsp;<a href=\"mailto:askindianapolis@ivytech.edu\">askindianapolis@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "user",
+        "message": "phone number"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang matatawagan sa evansville | Translated: phone number",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Evansville</strong> Contact Info:<br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-812-426-2865'>1-812-426-2865</a><br><i class='bx bxs-envelope'></i>&nbsp;&nbsp;<a href=\"mailto:askevansville@ivytech.edu\">askevansville@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//evansville/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: <strong>Evansville</strong> Contact Info:<br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-812-426-2865'>1-812-426-2865</a><br><i class='bx bxs-envelope'></i>&nbsp;&nbsp;<a href=\"mailto:askevansville@ivytech.edu\">askevansville@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//evansville/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      }
+    ],
+    "date": "2025-11-10T18:28:21.448Z",
+    "currentIntent": "phone_number_info"
+  },
+  {
+    "ticket": "Guest--1762799424189",
+    "userType": "Guest",
+    "schoolEmail": "",
+    "conversation": [
+      {
+        "from": "user",
+        "message": "phone number"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang matatawagan | Translated: phone number",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "bot",
+        "message": ""
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: ",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "user",
+        "message": "phone number"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang matatawagan sa indianapolis | Translated: phone number",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Indianapolis</strong> Contact Info:<br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-317-921-4699'>1-317-921-4699</a><br><i class='bx bxs-envelope'></i>&nbsp;&nbsp;<a href=\"mailto:askindianapolis@ivytech.edu\">askindianapolis@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: <strong>Indianapolis</strong> Contact Info:<br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-317-921-4699'>1-317-921-4699</a><br><i class='bx bxs-envelope'></i>&nbsp;&nbsp;<a href=\"mailto:askindianapolis@ivytech.edu\">askindianapolis@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      }
+    ],
+    "date": "2025-11-10T18:30:29.263Z",
+    "currentIntent": "phone_number_info"
+  },
+  {
+    "ticket": "Guest--1762799611811",
+    "userType": "Guest",
+    "schoolEmail": "",
+    "conversation": [
+      {
+        "from": "user",
+        "message": "phone number"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang matatawagan | Translated: phone number",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "bot",
+        "message": ""
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: ",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      }
+    ],
+    "date": "2025-11-10T18:33:43.225Z",
+    "currentIntent": "phone_number_info"
+  },
+  {
+    "ticket": "Guest--1762799903496",
+    "userType": "Guest",
+    "schoolEmail": "",
+    "conversation": [
+      {
+        "from": "user",
+        "message": "phone number"
+      },
+      {
+        "from": "user",
+        "message": "Original: sino ang matatawagan | Translated: phone number",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "bot",
+        "message": "Kaya kong hanapin iyon para sa iyo. Aling campus ang gusto mong phone number?"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: Kaya kong hanapin iyon para sa iyo. Aling campus ang gusto mong phone number?",
+        "isFilipino": true,
+        "currentIntent": "phone_number_info"
+      },
+      {
+        "from": "user",
+        "message": "indianapolis campus"
+      },
+      {
+        "from": "user",
+        "message": "indianapolis campus",
+        "currentIntent": null
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Indianapolis Contact Info:</strong><br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-317-921-4699'>1-317-921-4699</a><br><i class='bx bxs-envelope' ></i>&nbsp;&nbsp;<a href=\"mailto:askindianapolis@ivytech.edu\">askindianapolis@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>"
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Indianapolis Contact Info:</strong><br><i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:1-317-921-4699'>1-317-921-4699</a><br><i class='bx bxs-envelope' ></i>&nbsp;&nbsp;<a href=\"mailto:askindianapolis@ivytech.edu\">askindianapolis@ivytech.edu</a><br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page&nbsp;<i class='bx bx-link-external'></i></a>",
+        "currentIntent": null
+      },
+      {
+        "from": "user",
+        "message": "campus address"
+      },
+      {
+        "from": "user",
+        "message": "Original: ano ang address | Translated: campus address",
+        "isFilipino": true,
+        "currentIntent": "address_info"
+      },
+      {
+        "from": "bot",
+        "message": "Kaya kong hanapin iyon para sa iyo. Aling campus ang gusto mong address?"
+      },
+      {
+        "from": "bot",
+        "message": "Original: undefined | Translated: Kaya kong hanapin iyon para sa iyo. Aling campus ang gusto mong address?",
+        "isFilipino": true,
+        "currentIntent": "address_info"
+      },
+      {
+        "from": "user",
+        "message": "indianapolis campus"
+      },
+      {
+        "from": "user",
+        "message": "indianapolis campus",
+        "currentIntent": null
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Indianapolis Campus:</strong><br>50 W Fall Creek Parkway N\nIndianapolis, IN 46208<br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page<br><a href='https://www.google.com/maps/search/?api=1&query=39.8053968,-86.1589352' target='_blank'>Google Maps"
+      },
+      {
+        "from": "bot",
+        "message": "<strong>Indianapolis Campus:</strong><br>50 W Fall Creek Parkway N\nIndianapolis, IN 46208<br><br><a href='https://www.ivytech.edu//indianapolis/index.html' target='_blank'>Campus Page<br><a href='https://www.google.com/maps/search/?api=1&query=39.8053968,-86.1589352' target='_blank'>Google Maps",
+        "currentIntent": null
+      }
+    ],
+    "date": "2025-11-10T18:38:29.967Z",
+    "currentIntent": null
+  }
+]

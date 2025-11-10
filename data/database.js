@@ -1,3 +1,5 @@
+const { fill } = require("lodash");
+
 const responses = [
      {
         intent: "greetings",
@@ -20,7 +22,8 @@ const responses = [
         pattern: [
             "what are you", "how are you made", "who made you", "who created you"
         ],
-        reply: "I am a node.js / ejs interactive chatbot developed for SDEV265 as a School of IT information resource and a capstone project for the course."
+        reply: "I am a node.js / ejs interactive chatbot developed for SDEV265 as a School of IT information resource and a capstone project for the course.",
+        filipino_reply: "Ako ay isang interactive chatbot na ginawa gamit ang node.js / ejs para sa SDEV265 bilang isang mapagkukunan ng impormasyon ng School of IT at isang capstone project para sa kurso."
     },
     {
         intent: "bot_name",
@@ -33,8 +36,12 @@ const responses = [
     },
     {
         intent: "campus_info_general",
-        pattern: "what campuses are there",
+        pattern: [
+            "what campuses are there","campus locations", "where are the campuses located", 
+            "campus location", "where are the campuses located", "list the campuses"
+        ],
         reply: "Here's some information about our campuses",
+        filipino_reply: "Narito ang ilang impormasyon tungkol sa aming mga lokasyon ng kampus",
         url: "https://www.ivytech.edu/locations/",
         link: "Campus Locations"
     },
@@ -45,9 +52,14 @@ const responses = [
             "who is the dean of the school of it in bloomington","who is the dean of IT at the bloomington campus",
             "who is the dean for the school of IT in bloomington "
         ],
+<<<<<<< Updated upstream
         reply: "The Dean of the School of IT in Bloomington is Chris Carroll",
         url: "https://whitepages.ivytech.edu/profile/rcarroll/",
         link: "White Pages Entry"
+=======
+        reply: "I can help you find information about the dean!",
+        filipino_reply: "Maaari kitang tulungan na makahanap ng impormasyon tungkol sa dean!",
+>>>>>>> Stashed changes
     },
     {
         intent: "dean_info_lafayette",
@@ -99,6 +111,7 @@ const responses = [
         intent: "admissions_info_general",
         pattern: ["can you give me information about admissions", "admissions"],
         reply: "Here's some information about admissions!",
+        filipino_reply: "Narito ang ilang impormasyon tungkol sa admisyon!",
         url: "https://www.ivytech.edu/admissions/",
         link: "Admissions"
     },
@@ -106,6 +119,7 @@ const responses = [
         intent: "enrollment_info_general",
         pattern: ["can you give me information about enrollment", "enrollment"],
         reply: "Here's some information about enrollment!",
+        filipino_reply: "Narito ang ilang impormasyon tungkol sa enrollment!",
         url: "https://www.ivytech.edu/admissions/",
         link: "Enrollment"
     },
@@ -121,6 +135,7 @@ const responses = [
             "SDEV265 faculty",
         ],
         reply: "SDEV265 is taught by several instructors depending on campus and semester. Please check the official College Scheduler for the most current instructor information",
+        filipino_reply: "Ang SDEV265 ay itinuturo ng ilang mga instruktor depende sa kampus at semestre. Mangyaring tingnan ang opisyal na College Scheduler para sa pinakabagong impormasyon tungkol sa instruktor",
         url: "https://ivytech.search.collegescheduler.com/",
         link: "College Scheduler"
     },
@@ -132,6 +147,7 @@ const responses = [
             "faculty", "course schedule", "class schedule",
         ],
         reply: "The instructor for this course is subject to change each semester. Please check the official College Scheduler for the most current instructor information.",
+        filipino_reply: "Ang instruktor para sa kursong ito ay maaaring magbago bawat semestre. Mangyaring tingnan ang opisyal na College Scheduler para sa pinakabagong impormasyon tungkol sa instruktor.",
         url: "https://ivytech.search.collegescheduler.com/",
         link: "College Scheduler"
     },
@@ -143,14 +159,15 @@ const responses = [
             "what will I learn in", "what do I learn in", "what are the learning outcomes for", "what are the learning objectives for"
         ],
         reply: "For detailed information about courses, including descriptions and prerequisites, please visit the course description page",
+        filipino_reply: "Para sa detalyadong impormasyon tungkol sa mga kurso, kabilang ang mga paglalarawan at mga kinakailangan, mangyaring bisitahin ang pahina ng paglalarawan ng kurso sa ibaba.",
         url: "https://catalog.ivytech.edu/content.php?catoid=11&navoid=1255",
         link: "Course Descriptions"
     },
     {
         intent: "phone_number_info",
         pattern: [ 
-                   "phone number", "what is the phone number", "contact by phone",
-                   "how can i call", "how can i reach", "contact number"
+                "phone number", "what is the phone number", "contact by phone",
+                "how can i call", "how can i reach", "contact number"
         ]
     },
     {
@@ -169,6 +186,7 @@ const responses = [
             "programs offered ivy tech", "programs ivytech", "programs ivy tech", "programs"
         ],
         reply: "Here are the programs you can find at IvyTech!",
+        filipino_reply: "Narito ang mga programa na maaari mong makita sa IvyTech!",
         url: "https://www.ivytech.edu/programs/",
         link: "Programs"
     },
@@ -178,6 +196,7 @@ const responses = [
             "certifications", "does ivytech offer certifications", "certifications ivytech", "certifications ivy tech",
          ],
         reply: "Certainly!  Here is more information about Degrees and Certifications",
+        filipino_reply: "Siyempre! Narito ang karagdagang impormasyon tungkol sa Mga Degree at Sertipikasyon",
         url: "https://www.ivytech.edu/programs/degrees-certificates/",
         link: "Degrees and Certifications"
     },
@@ -191,6 +210,7 @@ const responses = [
             "application process for ivytech"
         ],
         reply: "Here's some information about the application process!",
+        filipino_reply: "Narito ang ilang impormasyon tungkol sa proseso ng aplikasyon!",
         url: "https://www.ivytech.edu/admissions/apply-now/",
         link: "Application Process"
     },
@@ -205,6 +225,7 @@ const responses = [
             "credit hours needed ivy tech", "credit hours needed ivytech"
         ],
         reply: "Here's some information about credit hours!",
+        filipino_reply: "Narito ang ilang impormasyon tungkol sa mga credit hour!",
         url: "https://ivytech.edusupportcenter.com/shp/ivytech/article?articleId=1510102&pk=192307&articleTag=gh_faapp",
         link: "Credit Hours"
     },
@@ -220,6 +241,7 @@ const responses = [
             "tsap transfer programs ivy tech", "tsap transfer programs ivytech"
         ],
         reply: "Here is some information regarding program transfers!",
+        filipino_reply: "Narito ang ilang impormasyon tungkol sa paglipat ng programa!",
         url: "https://www.ivytech.edu/programs/special-programs-for-students/transfer-options/#accordion-c09fe912eeb048249ddc340cc1a51ee5-0",
         link: "Participating Schools by Program"
     },
@@ -230,7 +252,8 @@ const responses = [
             "available programs ivy tech", "available programs ivytech", "what programs are available ivy tech",
             "what programs are available ivytech",
         ],
-        reply: "Ivy Tech offers more than 70 programs including Nursing, Cloud Technologies, Cybersecurity, Precision Agriculture, and Business Administration.",
+        reply: "Ivy Tech offers more than 70 programs including Nursing, Cloud Technologies, Cybersecurity, Precision Agriculture, and Business Administration. Please the link below to more!",
+        filipino_reply: "Ivy Tech ay nag-aalok ng higit sa 70 mga programa kabilang ang Nursing, Cloud Technologies, Cybersecurity, Precision Agriculture, at Business Administration. Maaring pindutin ang link sa ibaba para sa karagdagan!",
         url: "https://www.ivytech.edu/programs/all-academic-programs/",
         link: "All Academic Programs"
     },
@@ -244,6 +267,7 @@ const responses = [
             "what are the costs ivytech", "payment"
         ],
         reply: "Tuition and fees vary by program and residency status. Detailed information is available on Ivy Tech's tuition page.",
+        filipino_reply: "Ang mga matrikula at iba pang mga bayarin ay nag-iiba depende sa programa at katayuan ng paninirahan. Ang detalyadong impormasyon ay makukuha sa pahina ng matrikula ng Ivy Tech.",
         url: "https://www.ivytech.edu/tuition-aid/tuition-fees/",
         link: "Tuition and Fees"
     },
@@ -256,6 +280,7 @@ const responses = [
             "financial aid", "grants", "scholarships", "loans", "financial deadlines"
         ],
         reply: "Ivy Tech offers various financial aid options including grants, scholarships, and loans. Important deadlines can be found on the financial aid page",
+        filipino_reply: "Ivy Tech ay nag-aalok ng iba't ibang mga opsyon sa pinansyal na tulong kabilang ang mga grant, scholarship, at mga pautang. Ang mga mahahalagang petsa ay makikita sa pahina ng pinansyal na tulong",
         url: "https://www.ivytech.edu/financial-aid/",
         link: "Financial Aid"
     },
@@ -269,6 +294,7 @@ const responses = [
             "access myivy ivytech", "how do I access myivy ivy tech", "how do I access myivy ivytech"
         ],
         reply: "You can access your student portal by logging into MyIvy on the Ivy Tech website.",
+        filipino_reply: "Maaari mong ma-access ang iyong student portal sa pamamagitan ng pag-log in sa MyIvy sa website ng Ivy Tech.",
         url: "https://www.ivytech.edu/myivy/",
         link: "Student Portal"
     },
@@ -281,6 +307,7 @@ const responses = [
             "how do I register for classes ivytech"
         ],
         reply: "You can register for classes through the Ivy Tech class search and schedule builder.",
+        filipino_reply: "Maaari kang magparehistro para sa mga klase sa pamamagitan ng Ivy Tech class search at schedule builder.",
         url: "https://www.ivytech.edu/classes/how-to-register-for-classes/",
         link: "Registration 101"
     },
@@ -291,6 +318,7 @@ const responses = [
             "how do I request my transcripts", "transcripts ivy tech", "transcripts ivytech"
         ],
         reply: "Transcripts can be requested through the Registrar's office.",
+        filipino_reply: "Ang mga transcript ay maaaring hilingin sa pamamagitan ng opisina ng Registrar.",
         url: "https://ivytech.edusupportcenter.com/shp/ivytech/viewarticles?articleId=1510845",
         link: "Registrar/Transcripts"
     },
@@ -302,6 +330,7 @@ const responses = [
             "what student services are available ivytech"
         ],
         reply: "Ivy Tech offers various student services including career coaching, academic advising, and library resources.",
+        filipino_reply: "Ivy Tech ay nag-aalok ng iba't ibang serbisyo para sa mga estudyante kabilang ang career coaching, academic advising, at library resources.",
         url: "https://www.ivytech.edu/student-services/",
         link: "Student Services"
     },
@@ -313,6 +342,7 @@ const responses = [
             "find my advisor ivytech", "academic advisor ivy tech", "academic advisor ivytech"
         ],
         reply: "You can find your advisor by visiting the advising page on the Ivy Tech website.",
+        filipino_reply: "Maaari mong mahanap ang iyong akademikong tagapayo sa pamamagitan ng pagbisita sa pahina ng advising sa website ng Ivy Tech.",
         url: "https://www.ivytech.edu/advising/",
         link: "Advising"
     },
@@ -325,6 +355,7 @@ const responses = [
             "bookstore hours ivy tech", "bookstore hours ivytech"
         ],
         reply: "The bookstore's location and hours can be found on the Ivy Tech campus stores page.",
+        filipino_reply: "Ang lokasyon at oras ng bookstore ng paaralan ay makikita sa pahina ng campus stores ng Ivy Tech.",
         url: "https://www.ivytech.edu/student-services/campus-stores/",
         link: "Campus Stores"
     },
@@ -337,58 +368,99 @@ const responses = [
             "scholarships application ivy tech", "scholarships application ivytech"
         ],
         reply: "You can apply for scholarships through the Ivy Tech scholarships page.",
+        filipino_reply: "Maaari kang mag-apply para sa mga iskorlaship sa pamamagitan ng pahina ng Ivy Tech Scholarships.",
         url: "https://www.ivytech.edu/scholarships/",
         link: "Scholarships"
     },
     {
-        pattern: "how do I check my academic standing",
+        intent: "academic_standing",
+        pattern: [
+            "how do I check my academic standing", "information on my academic standing",
+            "academic standing", "check academic standing"
+        ],
         reply: "You can check your academic standing through the academic progress page.",
+        filipino_reply: "Maaari mong suriin ang iyong akademikong katayuan sa pamamagitan ng pahina ng pag-unlad ng akademiko",
         url: "https://www.ivytech.edu/tuition-aid/financial-aid/satisfactory-academic-progress-sap/",
         link: "Academic Success"
     },
     {
-        pattern: "what are the library resources and services",
+        intent: "library_info",
+        pattern: [
+            "what are the library resources and services", "are there any library resources and services",
+            "library information"
+        ],
         reply: "Ivy Tech's library resources and services can be accessed through the libraries page.",
+        filipino_reply: "Ang mga mapagkukunan at serbisyo ng silid-aklatan ng Ivy Tech ay maaaring ma-access sa pamamagitan ng pahina ng mga silid-aklatan.",
         url: "https://www.ivytech.edu/student-services/libraries/",
         link: "Libraries"
     },
     {
-        pattern: "how do I get involved in clubs and organizations",
+        intent: "student_life",
+        pattern: [
+            "how do I get involved in clubs and organizations", "student life", "campus life",
+            "how to get involved", "student council", "leadership opportunities", "campus events",
+            "college experience", "student government", "clubs", "organizations"
+        ],
         reply: "You can get involved in clubs and organizations through the student life page.",
+        filipino_reply: "Maaari kang makihalok sa mga klub at organisasyon sa pamamagitan ng page ng buhay estudyante.",
         url: "https://www.ivytech.edu/student-life/",
         link: "Student Life"
     },
     {
-        pattern: "what is the process for dual credit enrollment",
+        intent: "dual_credit",
+        pattern: [
+            "what is the process for dual credit enrollment", "how do i enroll in dual credit courses",
+            "what steps are required fo dual credit enrollment", "how does dual credit enrollment work",
+            "information on dual credit", "what do i need to do to register for dual credit", "dual credit"
+
+        ],
         reply: "Information on dual credit enrollment can be found on the dual credit enrollment page.",
+        filipino_reply: "Ang impormasyon sa dual credit enrollment ay makikita sa dual credit enrollment page.",
         url: "https://www.ivytech.edu/programs/special-programs-for-students/high-school-programs/dual-credit/",
         link: "Dual Credit Enrollment"
     },
     {
         intent: "ivyonline_info",
-        pattern: ["how do I access online courses (IvyOnline)", "IvyOnline courses", "access IvyOnline"],
+        pattern: [
+            "how do i access online courses (ivyonline)", "ivyonline courses", "access ivyonline",
+            "ivy online", "ivyonline", "ivy online", "ivy tech online", "ivytech online"
+        ],
         reply: "You can access online courses through the IvyOnline page.",
+        filipino_reply: "Maaari mong ma-access ang mga online na kurso sa pamamagitan ng IvyOnline page.",
         url: "https://www.ivytech.edu/ivyonline/",
         link: "IvyOnline"
     },
     {
         intent: "campus_parking",
-        pattern: ["what are the parking options on campus", "campus parking options", "parking on campus"],
+        pattern: [
+            "what are the parking options on campus", "campus parking options", "parking on campus",
+            "where can students park on campus", "parking areas on campus", "student parking",
+            "campus parking", "student parking"
+        ],
         reply: "Parking options on campus are detailed on the campus stores page.",
+        filipino_reply: "Ang mga pagpipilian sa paradahan sa campus ay nakadetalye sa pahina ng mga tindahan ng campus.",
         url: "https://www.ivytech.edu/locations/indianapolis/maps-and-tour/",
         link: "Campus Stores"
     },
     {
         intent: "campus_events",
-        pattern: ["how do I get information about campus events", "campus events", "events on campus"],
+        pattern: [
+            "how do I get information about campus events", "where can i get updates on campus events",
+            "campus events", "events on campus", "activities on campus", "student events", "college events"
+        ],
         reply: "You can find information about campus events on the events page.",
+        filipino_reply: "Makakahanap ka ng impormasyon tungkol sa mga kaganapan sa campus sa pahina ng mga kaganapan.",
         url: "https://ivylife.ivytech.edu/events",
         link: "Events"
     },
     {
         intent: "online_student_support",
-        pattern: ["what support is available for online students", "online student support", "support for online students"],
+        pattern: [
+            "what support is available for online students", "online student support", "support for online students",
+            "support for online learners", "how can online student get help", "services for online students"
+        ],
         reply: "Support for online students is available through the online support page.",
+        filipino_reply: "Ang suporta para sa mga online na mag-aaral ay makukuha sa pamamagitan ng online na pahina ng suporta.",
         url: "https://www.ivytech.edu/online-support/",
         link: "Online Support"
     },
@@ -400,6 +472,7 @@ const responses = [
             "student population ivytech", "number of students ivy tech", "number of students ivytech"
         ],
         reply: "During the 2023-2024 academic year, we served over 198,000 students!",
+        filipino_reply: "Noong 2023-2024 academic year, nagsilbi kami sa mahigit 198,000 estudyante!",
         url: "https://www.ivytech.edu/about-ivy-tech/college-operations/diversity-equity-belonging/",
         link: "Students"
     },
@@ -411,9 +484,10 @@ const responses = [
             "services for military and veterans ivy tech", "services for military and veterans ivytech",
             "military services ivy tech", "military services ivytech", "veteran services ivy tech",
             "veteran services ivytech", "military veterans", "military active", "active duty", "gi bill",
-            "does ivy tech offers benefits for military veterans",
+            "does ivy tech offers benefits for military veterans"
         ],
         reply: "Ivy Tech offers various services for active military and veteran students, including counseling, academic advising, and career services.",
+        filipino_reply: "Nag-aalok ang Ivy Tech ng iba't ibang serbisyo para sa mga aktibong estudyanteng militar at beterano, kabilang ang pagpapayo, pagpapayo sa akademya, at mga serbisyo sa karera.",
         url: "https://www.ivytech.edu/student-services/support-services/va-education-benefits/",
         link: "VA Education Benefits"
     },
@@ -426,6 +500,7 @@ const responses = [
             "test preparation ivy tech", "test preparation ivytech", "exam services ivy tech",
         ],
         reply: "Ivy Tech offers various testing services, for more detials click the link below",
+        filipino_reply: "Nag-aalok ang Ivy Tech ng iba't ibang mga serbisyo sa pagsubok, para sa higit pang mga detalye i-click ang link sa ibaba",
         url: "https://www.ivytech.edu/student-services/support-services/testing-services/",
         link: "Testing Services"
     },
@@ -441,6 +516,7 @@ const responses = [
             "learnanywhere course", "is this a learnanywhere course",
         ],
         reply: "Ivy Tech offers a variety of class formats, including online, hybrid, traditional, and more. For details about each format, please visit the link below.",
+        filipino_reply: "Nag-aalok ang Ivy Tech ng iba't ibang format ng klase, kabilang ang online, hybrid, tradisyonal, at higit pa. Para sa mga detalye tungkol sa bawat format, pakibisita ang link sa ibaba.",
         url: "https://www.ivytech.edu/classes/class-formats/",
         link: "Class Formats"
     }

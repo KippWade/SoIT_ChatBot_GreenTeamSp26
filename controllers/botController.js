@@ -4,7 +4,7 @@ const fuzz = require('fuzzball'); // NPM Package Info https://www.npmjs.com/pack
 const { responses, locations } = require('../data/database'); // Stand-in for external MongoDB instance
 const unansweredFilePath = path.join(__dirname, '../data/unanswered_inquiries.json'); // File to store unanswered/unmatched inquiries
 const { addConversation, getConversation } = require('./conversation_tracker');
-const { isFilipino, translateFilipinoToEnglish } = require('./filipino_translation'); // File for Filipino translation functions
+const { isFilipino, translateFilipinoToEnglish, handleFilipinoReply } = require('./filipino_translation'); // File for Filipino translation functions
 
 
 // TODO: Example URL for direct course catalog search https://catalog.ivytech.edu/search_advanced.php?cur_cat_oid=9&ecpage=1&cpage=1&ppage=1&pcpage=1&spage=1&tpage=1&search_database=Search&filter%5Bkeyword%5D=SDEV120&filter%5Bexact_match%5D=1&filter%5B3%5D=1&filter%5B31%5D=1
@@ -70,6 +70,118 @@ function getLocationIndexFromPrompt(prompt) {
     return -1;
 }
 
+<<<<<<< Updated upstream
+=======
+function buildWhitePagesURL(firstName, lastName, location, role, title) 
+{
+    return `https://whitepages.ivytech.edu/?first_name=${encodeURIComponent(firstName)}&last_name=${encodeURIComponent(lastName)}&userid=&location=${encodeURIComponent(location)}&role=${encodeURIComponent(role)}&title=${encodeURIComponent(title)}&bee_syrup_tun=&submit=+Search+`;
+}
+
+// Language router - detects user's language and delegates to appropriate handler
+function detectLanguageAndHandle(originalPrompt, req, res, options) {
+    const { ticket, userType, schoolEmail, suffix, responses, locations, getLocationIndexFromPrompt, addConversation, errorStatements } = options;
+    
+    // Check for Filipino
+    if (isFilipino(originalPrompt)) {
+        return handleFilipinoLanguage(originalPrompt, req, res, options);
+    }
+    
+    // Add other language checks here (e.g., Spanish, Vietnamese, etc.)
+    // if (isSpanish(originalPrompt)) {
+    //     return handleSpanishLanguage(originalPrompt, req, res, options);
+    // }
+    
+    // Default: English (return null to continue with normal flow)
+    return null;
+}
+
+// Handle Filipino language processing
+function handleFilipinoLanguage(originalPrompt, req, res, options) {
+    const { ticket, userType, schoolEmail, suffix, responses, getLocationIndexFromPrompt, addConversation, errorStatements } = options;
+    const filipinoMode = (req.body.filipinoMode || 'replace').toLowerCase();
+    
+    console.log(`${new Date().toISOString()} :: DETECTED FILIPINO PROMPT: `, originalPrompt);
+    
+    // Translate and get location indices
+    const translatedPrompt = translateFilipinoToEnglish(originalPrompt);
+    console.log(`${new Date().toISOString()} :: TRANSLATED PROMPT: `, translatedPrompt);
+    
+    const deanLocIndex = getLocationIndexFromPrompt(originalPrompt);
+    const originalLocIndex = getLocationIndexFromPrompt(originalPrompt);
+    
+    // Intent detection for translated prompt
+    let detectedIntent = null;
+    const intentPatterns = {};
+    for (const resp of responses) {
+        if (resp.intent) {
+            if (!intentPatterns[resp.intent]) intentPatterns[resp.intent] = [];
+            if (Array.isArray(resp.pattern)) {
+                intentPatterns[resp.intent].push(...resp.pattern.map(p => p.toLowerCase()));
+            } else if (typeof resp.pattern === 'string') {
+                intentPatterns[resp.intent].push(resp.pattern.toLowerCase());
+            }
+        }
+    }
+    
+    // Detect intent using translated prompt
+    for (const [intent, patterns] of Object.entries(intentPatterns)) {
+        for (const p of patterns) {
+            const wordRegex = new RegExp(`\\b${p.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i');
+            if (wordRegex.test(translatedPrompt.toLowerCase())) {
+                detectedIntent = intent;
+                break;
+            }
+            if (intent === 'greetings') {
+                const fuzzScore = require('fuzzball').token_set_ratio(translatedPrompt.toLowerCase(), p);
+                if (fuzzScore >= 70) {
+                    detectedIntent = intent;
+                    break;
+                }
+            }
+        }
+        if (detectedIntent) break;
+    }
+    
+    // Log user message
+    addConversation(ticket, userType, schoolEmail, 'user', translatedPrompt, detectedIntent, originalPrompt, true, null);
+    
+    // Find matched response
+    let matchedResponse = responses.find(r => {
+        const patterns = Array.isArray(r.pattern) ? r.pattern : [r.pattern];
+        return patterns.some(p => p.toLowerCase() === translatedPrompt.toLowerCase());
+    });
+    
+    // If no match with translated prompt, try original prompt
+    if (!matchedResponse) {
+        matchedResponse = responses.find(r => {
+            const patterns = Array.isArray(r.pattern) ? r.pattern : [r.pattern];
+            return patterns.some(p => p.toLowerCase() === originalPrompt.toLowerCase());
+        });
+    }
+    
+    if (matchedResponse) {
+        // Use Filipino handler for response building
+        const { response, botFilipinoResponse } = handleFilipinoReply(
+            matchedResponse, 
+            filipinoMode, 
+            detectedIntent,
+            { originalLocIndex, deanLocIndex, suffix }
+        );
+        
+        addConversation(ticket, userType, schoolEmail, 'bot', response, detectedIntent, originalPrompt, true, botFilipinoResponse);
+        console.log(`${new Date().toISOString()} :: BOT RESPONSE: `, response);
+        return res.json({response});
+    } else {
+        // Fallback error response
+        const n = Math.floor(Math.random() * 3);
+        const response = errorStatements[n];
+        addConversation(ticket, userType, schoolEmail, 'bot', response, detectedIntent, originalPrompt, true, response);
+        console.log(`${new Date().toISOString()} :: BOT RESPONSE: `, response);
+        return res.json({response});
+    }
+}
+
+>>>>>>> Stashed changes
 
 
 // Main query processing function
@@ -85,139 +197,50 @@ module.exports.query = (req, res) => {
     let detectedIntent = null;
     let matchedResponse = null;
 
-    // Detect and translate Filipino inquiry to English only if prompt is Filipino
-    const isFilipinoPrompt = isFilipino(req.body.prompt);
-    // Refine Filipino prompt handling
-    if (isFilipinoPrompt) {
-        console.log(`${new Date().toISOString()} :: DETECTED FILIPINO PROMPT: `, prompt);
-        const originalPrompt = req.body.prompt; // Store the original Filipino prompt
-        const translatedPrompt = translateFilipinoToEnglish(prompt);
-        console.log(`${new Date().toISOString()} :: TRANSLATED PROMPT: `, translatedPrompt);
-        prompt = translatedPrompt;
+    // Language detection and handling
+    const languageResult = detectLanguageAndHandle(req.body.prompt, req, res, {
+        ticket, userType, schoolEmail, suffix, responses, locations, 
+        getLocationIndexFromPrompt, addConversation, errorStatements
+    });
+    
+    // If language handler processed the request, return early
+    if (languageResult !== null) {
+        return; // Response already sent by language handler
+    }
 
-        // Build intent-to-patterns mapping (all patterns lowercased)
-        const intentPatterns = {};
-        for (const resp of responses) {
-            if (resp.intent) {
-                if (!intentPatterns[resp.intent]) intentPatterns[resp.intent] = [];
-                if (Array.isArray(resp.pattern)) {
-                    intentPatterns[resp.intent].push(...resp.pattern.map(p => p.toLowerCase()));
-                } else if (typeof resp.pattern === 'string') {
-                    intentPatterns[resp.intent].push(resp.pattern.toLowerCase());
-                }
+    console.log(`${new Date().toISOString()} :: USER PROMPT: `, prompt);
+
+    // Track user message in file-based JSON for non-language-specific prompts
+    let detectedIntentForLogging = null;
+    const intentPatternsForLogging = {};
+    for (const resp of responses) {
+        if (resp.intent) {
+            if (!intentPatternsForLogging[resp.intent]) intentPatternsForLogging[resp.intent] = [];
+            if (Array.isArray(resp.pattern)) {
+                intentPatternsForLogging[resp.intent].push(...resp.pattern.map(p => p.toLowerCase()));
+            } else if (typeof resp.pattern === 'string') {
+                intentPatternsForLogging[resp.intent].push(resp.pattern.toLowerCase());
             }
         }
-
-        // Improved intent detection: whole word and fuzzy match
-        detectedIntent = null;
-        for (const [intent, patterns] of Object.entries(intentPatterns)) {
-            for (const p of patterns) {
-                const wordRegex = new RegExp(`\\b${p.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i');
-                if (wordRegex.test(prompt)) {
-                    detectedIntent = intent;
+    }
+    for (const [intent, patterns] of Object.entries(intentPatternsForLogging)) {
+        for (const p of patterns) {
+            const wordRegex = new RegExp(`\\b${p.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i');
+            if (wordRegex.test(prompt)) {
+                detectedIntentForLogging = intent;
+                break;
+            }
+            if (intent === 'greetings') {
+                const fuzzScore = fuzz.token_set_ratio(prompt, p);
+                if (fuzzScore >= 70) {
+                    detectedIntentForLogging = intent;
                     break;
                 }
-                if (intent === 'greetings') {
-                    const fuzzScore = fuzz.token_set_ratio(prompt, p);
-                    if (fuzzScore >= 70) {
-                        detectedIntent = intent;
-                        break;
-                    }
-                }
-            }
-            if (detectedIntent) break;
-        }
-
-        // Log user message with both original and translated prompt and detected intent
-        addConversation(ticket, userType, schoolEmail, 'user', translatedPrompt, detectedIntent, originalPrompt, true, null);
-
-        // Match translated prompt to intent
-        matchedResponse = responses.find(r => {
-            const patterns = Array.isArray(r.pattern) ? r.pattern : [r.pattern];
-            return patterns.some(p => p.toLowerCase() === prompt.toLowerCase());
-        });
-
-        // Always use Filipino reply if available for Filipino prompts
-        if (matchedResponse && matchedResponse.filipino_reply) {
-            response = matchedResponse.filipino_reply;
-            // Use Filipino reply as Original, English reply as Translated if available
-            const botFilipinoResponse = matchedResponse.reply ? `${matchedResponse.filipino_reply} | Translated: ${matchedResponse.reply}` : `${matchedResponse.filipino_reply} | Translated: ${matchedResponse.filipino_reply}`;
-            addConversation(ticket, userType, schoolEmail, 'bot', response, detectedIntent, originalPrompt, true, botFilipinoResponse);
-            console.log(`${new Date().toISOString()} :: BOT RESPONSE: `);
-            console.log(response);
-            return res.json({response});
-        } else if (matchedResponse) {
-            response = matchedResponse.reply;
-            addConversation(ticket, userType, schoolEmail, 'bot', response, detectedIntent, originalPrompt, true, response);
-            console.log(`${new Date().toISOString()} :: BOT RESPONSE: `);
-            console.log(response);
-            return res.json({response});
-        } else {
-            matchedResponse = responses.find(r => {
-                const patterns = Array.isArray(r.pattern) ? r.pattern : [r.pattern];
-                return patterns.some(p => p.toLowerCase() === originalPrompt.toLowerCase());
-            });
-            if (matchedResponse && matchedResponse.filipino_reply) {
-                response = matchedResponse.filipino_reply;
-                const botFilipinoResponse = matchedResponse.reply ? `${matchedResponse.filipino_reply} | Translated: ${matchedResponse.reply}` : `${matchedResponse.filipino_reply} | Translated: ${matchedResponse.filipino_reply}`;
-                addConversation(ticket, userType, schoolEmail, 'bot', response, detectedIntent, originalPrompt, true, botFilipinoResponse);
-                console.log(`${new Date().toISOString()} :: BOT RESPONSE: `, response);
-                return res.json({response});
-            } else if (matchedResponse) {
-                response = matchedResponse.reply;
-                addConversation(ticket, userType, schoolEmail, 'bot', response, detectedIntent, originalPrompt, true, response);
-                console.log(`${new Date().toISOString()} :: BOT RESPONSE: `, response);
-                return res.json({response});
-            } else {
-                response = errorStatements[n]; // Fallback if no match found
-                addConversation(ticket, userType, schoolEmail, 'bot', response, detectedIntent, originalPrompt, true, response);
-                console.log(`${new Date().toISOString()} :: BOT RESPONSE: `, response);
-                return res.json({response});
             }
         }
+        if (detectedIntentForLogging) break;
     }
-
-    if (prompt == isFilipino){
-        console.log(`${new Date().toISOString()} :: USER PROMPT: `, prompt);
-    }
-    else {
-        console.log(`${new Date().toISOString()} :: USER PROMPT: `, prompt);
-    }
-
-    // Track user message in file-based JSON for non-Filipino prompts
-    if (!isFilipinoPrompt) {
-        // Detect intent for non-Filipino prompts
-        let detectedIntentNonFilipino = null;
-        const intentPatterns = {};
-        for (const resp of responses) {
-            if (resp.intent) {
-                if (!intentPatterns[resp.intent]) intentPatterns[resp.intent] = [];
-                if (Array.isArray(resp.pattern)) {
-                    intentPatterns[resp.intent].push(...resp.pattern.map(p => p.toLowerCase()));
-                } else if (typeof resp.pattern === 'string') {
-                    intentPatterns[resp.intent].push(resp.pattern.toLowerCase());
-                }
-            }
-        }
-        for (const [intent, patterns] of Object.entries(intentPatterns)) {
-            for (const p of patterns) {
-                const wordRegex = new RegExp(`\\b${p.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i');
-                if (wordRegex.test(prompt)) {
-                    detectedIntentNonFilipino = intent;
-                    break;
-                }
-                if (intent === 'greetings') {
-                    const fuzzScore = fuzz.token_set_ratio(prompt, p);
-                    if (fuzzScore >= 70) {
-                        detectedIntentNonFilipino = intent;
-                        break;
-                    }
-                }
-            }
-            if (detectedIntentNonFilipino) break;
-        }
-        addConversation(ticket, userType, schoolEmail, 'user', prompt, detectedIntentNonFilipino, null, false, null);
-    }
+    addConversation(ticket, userType, schoolEmail, 'user', prompt, detectedIntentForLogging, null, false, null);
 
     // Build intent-to-patterns mapping (all patterns lowercased)
     const intentPatterns = {};
@@ -310,7 +333,7 @@ module.exports.query = (req, res) => {
                 break;
             case 'phone_number_info':
                 if(locIndex > -1) {
-                    response = `<strong>${locations[locIndex].title} Contact Info:</strong><br>`;
+                    response = `<strong>${locations[locIndex].title} Contact Info:</strong><br><br>`;
                     response += `<i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:${locations[locIndex].phone}'>${locations[locIndex].phone}</a><br>`;
                     response += `<i class='bx bxs-envelope' ></i>&nbsp;&nbsp;<a href="mailto:${locations[locIndex].email}">${locations[locIndex].email}</a>`;
                     response += `<br><br><a href='https://www.ivytech.edu/${locations[locIndex].url}' target='_blank'>Campus Page${suffix}`;
@@ -352,7 +375,7 @@ module.exports.query = (req, res) => {
                 break;
             case 'phone_number_info':
                 if(locIndex > -1) {
-                    response = `<strong>${locations[locIndex].title} Contact Info:</strong><br>`;
+                    response = `<strong>${locations[locIndex].title} Contact Info:</strong><br><br>`;
                     response += `<i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:${locations[locIndex].phone}'>${locations[locIndex].phone}</a><br>`;
                     response += `<i class='bx bxs-envelope' ></i>&nbsp;&nbsp;<a href="mailto:${locations[locIndex].email}">${locations[locIndex].email}</a>`;
                     response += `<br><br><a href='https://www.ivytech.edu/${locations[locIndex].url}' target='_blank'>Campus Page${suffix}`;
