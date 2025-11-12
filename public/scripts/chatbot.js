@@ -39,7 +39,7 @@ userTypeNext.addEventListener('click', function() {
         return;
     }
     userTypeSection.style.display = 'none';
-    if (userType === 'Student' || userType === 'Faculty') {
+    if (userType === 'Student' || userType === 'Faculty' || userType === 'Staff') {
         emailSection.style.display = 'block';
     } else {
         // Only generate ticketId if not already set

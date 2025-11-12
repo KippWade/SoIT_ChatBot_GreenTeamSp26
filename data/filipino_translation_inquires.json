@@ -4,22 +4,22 @@
     "filipino": [
         "hoy", "oy", "huy", "uy", "magandang pagbati", 
         "magandang umaga","magandang hapon", "magandang gabi",
-        "anong balita"
+        "anong balita", "kumusta"
         
     ],
     "english": [
        "hello", "hi", "hey", "greetings", 
        "good morning", "good afternoon", "good evening", 
-       "howdy", "what's up"
+       "howdy", "what's up", "hi"
       ]
   },
   {
     "intent": "bot_status",
     "filipino": [
-        "kamusta ka", "kumusta ka", "kamusta", "okay ka ba"
+        "kamusta ka", "kumusta ka", "okay ka ba"
     ],
     "english": [
-        "how are you", "how's it going", "how are you doing", "are you doing great"
+        "how are you", "how's it going", "are you doing great"
       ]
   },
   {
@@ -77,10 +77,12 @@
     "intent": "enrollment_info_general",
     "filipino": [
         "maaari ka bang magbigay ng impormasyon tungkol sa enrollment", "paano mag-enroll",
-        "proceso ng pag-enroll", "paraan ng pag-enroll", "mga kinakailangan sa pag-enroll"
+        "proceso ng pag-enroll", "paraan ng pag-enroll", "mga kinakailangan sa pag-enroll",
+        "paano mag enroll" 
     ],
     "english": [
-        "can you give information about enrollment", "enrollment", "how to enroll", "enrollment process", "enrollment requirements"
+        "can you give me information about enrollment", "enrollment", "how to enroll", "enrollment process", "enrollment requirements",
+        "how to enroll"
       ]
   },
   {
@@ -432,12 +434,16 @@
     "filipino": [
         "paano ako makakasali sa mga klub at organisasyon", "paano ako makikihalok sa mga klub at samahan",
         "pamumuhay ng estudyante", "ano ang buhay-estudyante", "ano ang buhay estudyante", "paano makihalok",
-        "paano maging bahagi", "mga kaganapan sa kampus", "mga aktibidad sa kampus", "paano sumali sa pamahalaang estudyante"
+        "paano maging bahagi", "mga kaganapan sa kampus", "mga aktibidad sa kampus", "paano sumali sa pamahalaang estudyante",
+        "kamusta ang buhay ng mga estudyante", "ano ang student life", "paano ang student life",
+        "mga organisasyon sa kampus", "mga club sa campus"
     ],
     "english": [
-        "how do I get involved in clubs and organizations", "student life", "campus life",
-        "how to get involved", "student council", "leadership opportunities", 
-        "college experience", "student government", "clubs", "organizations"
+        "how do I get involved in clubs and organizations", "student life", 
+        "campus life", "how to get involved", "student council", "leadership opportunities", 
+        "college experience", "student government", "clubs", "organizations",
+        "how is the student life", "what is student life", "how is student life",
+        "campus organizations", "clubs on campus"
     ]
   },
   {
@@ -471,12 +477,14 @@
     "filipino": [
           "ano ang mga pagpipilian sa paradahan sa kampus", "ano ang mga pag pipilian sa paradahan sa kampus",
           "saan pwedeng mag paradahan ang mga estudyante sa kampus", "mga lugar ng paradahan sa kampus", "paradahan ng estudyante",
-          "kampus paradahan", "paradahan"
+          "kampus paradahan", "paradahan", "san pwede mag park sa campus", "mga opsyon sa parking sa campus",
+          "saan puwede mag park sa campus"
     ],
     "english": [
           "what are the parking options on campus", "campus parking options", "parking on campus",
           "where can students park on campus", "parking areas on campus", "student parking",
-          "campus parking", "student parking"
+          "campus parking", "student parking", "where can i park on campus", "parking options on campus",
+          "where can i park on campus"
     ]
   },
   {
@@ -532,13 +540,15 @@
         "serbisyo sa pagsusulit", "serbisyo sa pag susulit", "pagsusulit at serbisyong kaugnay nito",
         "pag susulit at serbisyong kaugnay nito", "pag hahanda sa pag susulit", "paghahanda sa pagsusulit",
         "iskedyul ng pagsusulit", "iskedyul ng pag susulit", "magpaparehistro sa pagsusulit",
-        "mag paparehistro sa pagsusulit", "mga serbisyo sa pagsusulit"
+        "mag paparehistro sa pagsusulit", "mga serbisyo sa pagsusulit", "paano ako mag schedule ng test sa testing center",
+        "paano ako mag-schedule ng test sa testing center"
     ],
     "english": [
         "testing services", "services for testing", "test preparation",
         "exam services", "testing services ivy tech", "testing services ivytech",
         "services for testing ivy tech", "services for testing ivytech",
-        "test preparation ivy tech", "test preparation ivytech", "exam services ivy tech"
+        "test preparation ivy tech", "test preparation ivytech", "exam services ivy tech", "how do i schedule a test at the testing center",
+        "how do i schedule a test at the testing center"
     ]
   },
   {
@@ -562,6 +572,4 @@
         "learnanywhere course", "is this a learnanywhere course"
     ]
   }
-
-
 ]

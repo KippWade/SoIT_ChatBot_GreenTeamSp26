@@ -51,6 +51,7 @@ const responses = [
             "who is the dean", "dean of", "where is the dean", "what is the dean", "dean info", "dean information"
         ],
         reply: "I can help you find information about the dean!",
+        filipino_reply: "Maaari kitang tulungan na mahanap ang impormasyon tungkol sa mga dekano sa Ivy Tech!",
         url: "https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=all&role=faculty&role=staff&title=Dean&bee_syrup_tun=&submit=+Search+",
         link: "White Pages Entry"
     },
@@ -396,9 +397,9 @@ const responses = [
             "campus events", "events on campus", "activities on campus", "student events", "college events"
         ],
         reply: "You can find information about campus events on the events page.",
-        filipino_reply: "Makakahanap ka ng impormasyon tungkol sa mga kaganapan sa campus sa pahina ng mga kaganapan.",
+        filipino_reply: "Makakahanap ka ng impormasyon tungkol sa mga kaganapan sa campus sa pahina ng mga kaganapan!",
         url: "https://ivylife.ivytech.edu/events",
-        link: "Events"
+        link: "Campus Events"
     },
     {
         intent: "online_student_support",
@@ -445,6 +446,7 @@ const responses = [
             "exam services", "testing services ivy tech", "testing services ivytech",
             "services for testing ivy tech", "services for testing ivytech",
             "test preparation ivy tech", "test preparation ivytech", "exam services ivy tech",
+            "how do i schedule a test", 
         ],
         reply: "Ivy Tech offers various testing services, for more detials click the link below",
         filipino_reply: "Nag-aalok ang Ivy Tech ng iba't ibang mga serbisyo sa pagsubok, para sa higit pang mga detalye i-click ang link sa ibaba",

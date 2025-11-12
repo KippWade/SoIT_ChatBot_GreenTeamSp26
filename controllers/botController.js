@@ -17,6 +17,13 @@ const errorStatements = [
     "I'm a bit confused by that one. Can you ask it another way, please?"
 ];
 
+// Filipino error statements
+const filipinoErrorStatements = [
+    "Pasensya na, medyo hindi ko po gaanong naintindihan ang tanong. Maaari po ba ninyong ipaliwanag o itanong muli sa ibang paraan?",
+    "Pasensya na, nahirapan po akong maintindihan ang tanong. Maaari po ba ninyong ulitin o linawin nang kaunti?",
+    "Medyo nalito po ako sa tanong ninyo. Maaari po ba ninyong ipaliwanag ito sa ibang paraan?"
+];
+
 // Add unanswered question to JSON file
 function addUnansweredQuestion(question, userType, schoolEmail) {
     let questions = [];
@@ -84,19 +91,20 @@ function detectLanguageAndHandle(originalPrompt, req, res, options) {
     if (isFilipino(originalPrompt)) {
         return handleFilipinoLanguage(originalPrompt, req, res, options);
     }
-    
-    // Add other language checks here (e.g., Spanish, Vietnamese, etc.)
-    // if (isSpanish(originalPrompt)) {
-    //     return handleSpanishLanguage(originalPrompt, req, res, options);
-    // }
-    
-    // Default: English (return null to continue with normal flow)
+    /*
+        Add other language checks here (e.g., Spanish, Vietnamese, etc.)
+        if (isSpanish(originalPrompt)) {
+            return handleSpanishLanguage(originalPrompt, req, res, options);
+        }
+        
+        Default: English (return null to continue with normal flow)
+    */
     return null;
 }
 
 // Handle Filipino language processing
 function handleFilipinoLanguage(originalPrompt, req, res, options) {
-    const { ticket, userType, schoolEmail, suffix, responses, getLocationIndexFromPrompt, addConversation, errorStatements } = options;
+    const { ticket, userType, schoolEmail, suffix, responses, getLocationIndexFromPrompt, addConversation, errorStatements, filipinoErrorStatements } = options;
     const filipinoMode = (req.body.filipinoMode || 'replace').toLowerCase();
     
     console.log(`${new Date().toISOString()} :: DETECTED FILIPINO PROMPT: `, originalPrompt);
@@ -170,10 +178,11 @@ function handleFilipinoLanguage(originalPrompt, req, res, options) {
         addConversation(ticket, userType, schoolEmail, 'bot', response, detectedIntent, originalPrompt, true, botFilipinoResponse);
         console.log(`${new Date().toISOString()} :: BOT RESPONSE: `, response);
         return res.json({response});
+
     } else {
-        // Fallback error response
+        // Fallback error response in Filipino
         const n = Math.floor(Math.random() * 3);
-        const response = errorStatements[n];
+        const response = filipinoErrorStatements[n];
         addConversation(ticket, userType, schoolEmail, 'bot', response, detectedIntent, originalPrompt, true, response);
         console.log(`${new Date().toISOString()} :: BOT RESPONSE: `, response);
         return res.json({response});
@@ -197,7 +206,7 @@ module.exports.query = (req, res) => {
     // Language detection and handling
     const languageResult = detectLanguageAndHandle(req.body.prompt, req, res, {
         ticket, userType, schoolEmail, suffix, responses, locations, 
-        getLocationIndexFromPrompt, addConversation, errorStatements
+        getLocationIndexFromPrompt, addConversation, errorStatements, filipinoErrorStatements
     });
     
     // If language handler processed the request, return early
