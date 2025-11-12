@@ -124,7 +124,9 @@ const responses = [
             "campus address", "campus location", "what is the address for",
             "where is ivytech located", "ivytech address",
             "directions to campus", "how do i get to campus"
-        ]
+        ],
+        reply: "Let me help you find the address information.",
+        filipino_reply: "Tulungan ko kayong mahanap ang address information."
     },
     {
         intent: "program_info",
@@ -984,11 +986,7 @@ const locations = [
         email: "askterrehaute@ivytech.edu",
         url: "/terrehaute/index.html",
         contactDirectoryUrl: "https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=terre+haute&role=faculty&role=staff&title=&bee_syrup_tun=&submit=+Search+",
-        dean: {
-            reply: "The Dean of the School of IT in Terre Haute is Logan Pearison. Email: lpearison1@ivytech.edu, Phone: 812-298-2344",
-            url: "https://whitepages.ivytech.edu/profile/lpearison1/",
-            link: "White Pages Entry"
-        }
+       
     },
     {
         position: { lat: 41.462292, lng: -87.0223423 },
