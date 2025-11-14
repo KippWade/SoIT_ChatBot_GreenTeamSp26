@@ -124,7 +124,9 @@ const responses = [
             "campus address", "campus location", "what is the address for",
             "where is ivytech located", "ivytech address",
             "directions to campus", "how do i get to campus"
-        ]
+        ],
+        reply: "Let me help you find the address information.",
+        filipino_reply: "Tulungan ko kayong mahanap ang address information."
     },
     {
         intent: "program_info",

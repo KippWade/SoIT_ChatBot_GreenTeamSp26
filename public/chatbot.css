@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Agbalumo&display=swap');
+html {
+  overflow: hidden; 
+}
 body {
   max-width: 80%;
-  margin: 20px auto;
-  padding: 0 20px;
-  font-family: 'Noto Serif', serif;
+  margin: 5px auto;
+  padding: 0 20px 100px 20px;
+  font-family: "Inter", sans-serif;
   background: #f5f5f5;
 }
 
@@ -66,34 +68,37 @@ nav a:hover {
 /* nav & footer styles */
 nav {
   display: center;
-  margin-left: 0px;
-  margin-right: 0px;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: -5px;
+  width: 100vw;
   justify-content: space-between;
-  margin-bottom: 48px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
   border-bottom: 1px solid rgb(0, 0, 0);
-  text-transform: uppercase;
   background-color: #006648;
-  border-radius: 8px;
+  border-radius: 0;
 }
 
 nav ul {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-end;
-  margin-top: 24px;
+  margin-top: 15px;
+  gap: 60px;
 }
 
 nav li {
   list-style-type: none;
-  margin-left: 0.15em;
-  margin-right: 0.15em;
 }
 
 nav h1 {
   text-align: center;
-  font-size: 3em;
+  font-size: 2.2em;
 }
 
 nav p {
@@ -148,11 +153,12 @@ h3 {
 
 .secondary-title {
   color: #8dc63f;
+  font-family: "Agbalumo", cursive;
 }
 
 .chat-container {
-  height: 60%;
-  width: 100%;
+  height: 80%;
+  width: 98%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -180,9 +186,63 @@ h3 {
   outline-width: medium;
 }
 
+/* Simple form styling with inline layout */
+#userTypeSection {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+#userTypeSection label {
+  margin: 0;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+select, input[type="email"] {
+  padding: 10px 30px 10px 14px;
+  border: 2px solid #d8d8d8;
+  border-radius: 6px;
+  font-size: 1em;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+
+#userType {
+  width: 130px;
+}
+
+input[type="email"] {
+  width: 30%;
+  margin: 8px 0 12px 0;
+}
+
+select:focus, input[type="email"]:focus {
+  outline: none;
+  border-color: #8dc63f;
+}
+
+button[type="button"] {
+  background-color: #006648;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  white-space: nowrap;
+}
+
+button[type="button"]:hover {
+  background-color: #8dc63f;
+}
+
 /* avatar styles */
 .avatar img{
-  width: 64px;
+  width: 44px;
 }
 
 /* bot message styles */
@@ -200,9 +260,12 @@ h3 {
   background-color: white;
   display: flex;
   justify-content: left;
+  align-items: center;
   flex-wrap: nowrap;
   font-size: calc(0.5em + 1vmin);
-  width: 80%;
+  width: fit-content;
+  max-width: 85%;
+  margin-bottom: 15px;
 }
 
 .content{ 
@@ -224,12 +287,16 @@ h3 {
   justify-content: right;
   flex-wrap: nowrap;
   font-size: calc(0.5em + 1vmin);
-  width: 80%;
+  width: fit-content;
+  max-width: 85%;
+  margin-bottom: 15px;
 }
 
 .message.user content{ 
-  margin-left: 24px;
+  margin-left: 4px;
 }
+
+
 
 .snippet {
   margin-left: 24px;
@@ -268,7 +335,8 @@ textarea {
   margin-left: auto;
   margin-right: auto;
   padding-top: 1%;  
-  max-width: 100%;
+  max-width: 15%;
+  height: auto;
 }
 
 #chatbotitle{
@@ -284,7 +352,7 @@ textarea {
 .chatdiv{
   margin: 0;
   padding-top: 25%;
-  padding-bottom: 30%;
+  padding-bottom: 15%;
 }
 #helptitle{
   padding-top: 5%;
@@ -332,47 +400,85 @@ textarea {
 }
 
 /* CSS for the Footer*/
-
-footer{
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
   background-color: #006648;
-  padding: 5px 2px 5px 2px;
-  border-radius: 8px;
-  font-size: calc(0.5em + 0.5vw);
-}
-#footerdiv{
-  display: flex;
-  justify-content: space-between;
-  margin-left: 16px;
-  margin-right: 16px;
-  color: #ffffff;
-}
-#footerlinks{
-  margin: 0px 16px 8px 16px;
-}
-#footerlinks p{
-  color: #ffffff;
-  display:none
-}
-#footerlinks a{
-  display: block;
-  text-decoration:none;
-  color: #ffffff;
-  font-weight: bold;
-}
-
-#footerlinks a:hover{
-  color:#8dc63f;
-}
-
-#footerphone{
-  color: #ffffff;
-  font-family: serif;
-  font-weight: bold;
-  margin: 8px 8px 8px 8px;
-}
-#copy{
-  text-align: center;
   color: #FFFFFF;
+  z-index: 50;
+}
+
+.footer .container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.footer .credits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  order: 0;
+}
+
+.footer .credits .ivylogo {
+  max-width: 200px;
+  height: auto;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.footer .credits p {
+  margin: 0;
+  font-family: 'Noto Serif', serif;
+  font-style: italic;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+/* Vertical divider */
+.footer .container::before {
+  content: '';
+  width: 1px;
+  height: 4rem;
+  background: rgba(253, 240, 213, 0.3);
+  order: 1;
+}
+
+.footer .social-links {
+  order: 2;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer .social-links a {
+  display: inline-block;
+  transition: opacity 0.25s ease;
+}
+
+.footer .social-links a:hover {
+  opacity: 0.7;
+}
+
+.footer .social-links img {
+  width: 24px;
+  height: 24px;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(98%) sepia(6%) saturate(897%) hue-rotate(315deg) brightness(103%) contrast(98%);
 }
 
 
@@ -380,7 +486,7 @@ footer{
 @media (min-width: 600px){
 
   .chat-container {
-    width: 80%;
+    width: 90%;
   }
 
   /*Header css*/
@@ -405,7 +511,7 @@ footer{
   .chatdiv{
       margin: 0;
       padding-top: 5%;
-      padding-bottom: 5%;
+      padding-bottom: 3%;
   }
   #helptitle{
       padding-top: 12%;
@@ -446,12 +552,12 @@ footer{
   
   /*  Chatbot css*/
   .chat-container {
-    height: 70%;
+    height: 85%;
   }
 
   .chatdiv{
       padding-top: 4%;
-      padding-bottom: 3%;
+      padding-bottom: 2%;
   }
 
   #helptitle{
