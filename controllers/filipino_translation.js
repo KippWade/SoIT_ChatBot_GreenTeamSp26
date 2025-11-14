@@ -1,5 +1,11 @@
 const fuzz = require('fuzzball');
 const filipinoTranslations = require('../data/filipino_translation_inquires.json');
+const { locations } = require('../data/database');
+
+// Build WhitePages URL helper
+function buildWhitePagesURL(firstName, lastName, location, role, title) {
+    return `https://whitepages.ivytech.edu/?first_name=${encodeURIComponent(firstName)}&last_name=${encodeURIComponent(lastName)}&userid=&location=${encodeURIComponent(location)}&role=${encodeURIComponent(role)}&title=${encodeURIComponent(title)}&bee_syrup_tun=&submit=+Search+`;
+}
 
 // Simple Filipino language detection (checks for common Filipino words)
 function isFilipino(text) {
@@ -43,7 +49,89 @@ function translateFilipinoToEnglish(prompt) {
     return prompt;
 }
 
+// Append links (White Pages, campus pages, or matchedResponse.url) to a response string
+function enhanceWithLinks(response, matchedResponse, opts = {}) {
+    const suffix = opts.suffix || "&nbsp;<i class='bx bx-link-external'></i></a>";
+    const originalLocIndex = typeof opts.originalLocIndex === 'number' ? opts.originalLocIndex : -1;
+    const deanLocIndex = typeof opts.deanLocIndex === 'number' ? opts.deanLocIndex : -1;
+
+    if (!matchedResponse) return response;
+
+    // For location-specific queries, build formatted response with campus info
+    if (matchedResponse.intent === 'address_info' || matchedResponse.intent === 'phone_number_info') {
+        if (originalLocIndex > -1) {
+            const location = locations[originalLocIndex];
+            
+            if (matchedResponse.intent === 'address_info') {
+                response = `<strong>${location.title} Campus:</strong><br>${location.address}`;
+                response += `<br><br><a href='https://www.ivytech.edu/${location.url}' target='_blank'>Campus Page${suffix}`;
+                response += `<br><a href='https://www.google.com/maps/search/?api=1&query=${location.position.lat},${location.position.lng}' target='_blank'>Google Maps${suffix}`;
+            } 
+            else if (matchedResponse.intent === 'phone_number_info') {
+                response = `<strong>${location.title}</strong> Contact Info:<br><br>`;
+                response += `<i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:${location.phone}'>${location.phone}</a><br>`;
+                response += `<i class='bx bxs-envelope'></i>&nbsp;&nbsp;<a href="mailto:${location.email}">${location.email}</a>`;
+                response += `<br><br><a href='https://www.ivytech.edu/${location.url}' target='_blank'>Campus Page${suffix}`;
+            }
+        } else {
+            // No location specified, ask which campus
+            if (matchedResponse.intent === 'address_info') {
+                response = "Kaya kong hanapin iyon para sa iyo. Aling campus ang gusto mong address?";
+            } else {
+                response = "Kaya kong hanapin iyon para sa iyo. Aling campus ang gusto mong phone number?";
+            }
+        }
+    }
+    
+    // For dean queries, append White Pages link
+    else if (matchedResponse.intent === 'dean_info') {
+        const campusName = (deanLocIndex > -1) ? locations[deanLocIndex].title : '';
+        response += `<br><br><a href='${buildWhitePagesURL('', '', campusName, 'faculty', 'Dean')}' target='_blank'>White Pages${suffix}`;
+    }
+    
+    // For general resource URLs, append them
+    else if (matchedResponse.url) {
+        response += `<br><br><a href='${matchedResponse.url}' target='_blank'>${matchedResponse.link || 'More info'}${suffix}`;
+    }
+
+    return response;
+}
+
+// Build a Filipino-mode aware response for a matchedResponse
+// mode: 'replace' | 'both' | 'append'
+function handleFilipinoReply(matchedResponse, mode = 'replace', detectedIntent, opts = {}) {
+    if (!matchedResponse) return { response: '', botFilipinoResponse: '' };
+    const originalLocIndex = typeof opts.originalLocIndex === 'number' ? opts.originalLocIndex : -1;
+    const deanLocIndex = typeof opts.deanLocIndex === 'number' ? opts.deanLocIndex : -1;
+    const suffix = opts.suffix || "&nbsp;<i class='bx bx-link-external'></i></a>";
+
+    let response = '';
+    let botFilipinoResponse = '';
+
+    if (mode === 'replace') {
+        response = matchedResponse.filipino_reply || matchedResponse.reply || '';
+        botFilipinoResponse = matchedResponse.reply ? `${matchedResponse.filipino_reply} | Translated: ${matchedResponse.reply}` : `${matchedResponse.filipino_reply}`;
+    } else if (mode === 'both') {
+        const first = matchedResponse.filipino_reply || matchedResponse.reply || '';
+        const second = matchedResponse.reply || matchedResponse.filipino_reply || '';
+        response = `${first} | Translated: ${second}`;
+        botFilipinoResponse = response;
+    } else { // append
+        response = matchedResponse.reply || matchedResponse.filipino_reply || '';
+        if (matchedResponse.filipino_reply) response += `<br><br>${matchedResponse.filipino_reply}`;
+        botFilipinoResponse = response;
+    }
+
+    // Enhance with links (White Pages, campus pages, or URL)
+    response = enhanceWithLinks(response, matchedResponse, { originalLocIndex, deanLocIndex, suffix });
+
+    return { response, botFilipinoResponse };
+}
+
 module.exports = {
     isFilipino,
-    translateFilipinoToEnglish
+    translateFilipinoToEnglish,
+    enhanceWithLinks,
+    handleFilipinoReply,
+    filipinoTranslations
 };

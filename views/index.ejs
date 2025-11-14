@@ -16,17 +16,19 @@
         <div class="promptbox">
             <form id="chatForm" action="#" onsubmit="return false;">
                 <div id="userTypeSection">
-                    <label for="userType">Are you a guest, student, or faculty?</label>
+                    <label for="userType">Are you a guest, student, faculty, or staff?</label>
                     <select id="userType" name="userType" required>
-                        <option value="">Select...</option>
+                        <option value="">Select</option>
                         <option value="Guest">Guest</option>
                         <option value="Student">Student</option>
                         <option value="Faculty">Faculty</option>
+                        <option value="Staff">Staff</option>
                     </select>
                     <button type="button" id="userTypeNext">Next</button>
                 </div>
                 <div id="emailSection" style="display:none;">
-                    <input type="email" id="schoolEmail" name="schoolEmail" placeholder="Enter your school email" pattern=".+@ivytech\.edu">
+                    <!-- Ensure valid Ivy Tech email and will only accepts Ivy Tech email if the "Guest" is not chosen-->
+                    <input type="email" id="schoolEmail" name="schoolEmail" placeholder="Enter your school email" pattern=".+@ivytech\.edu"> 
                     <button type="button" id="emailNext">Next</button>
                 </div>
                 <div id="questionSection" style="display:none;">
