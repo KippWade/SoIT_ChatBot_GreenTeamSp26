@@ -210,7 +210,7 @@ h3 {
 }
 
 .chat-container {
-  height: 80%;
+  height: 70%;
   width: auto;
   margin-left: auto;
   margin-right: auto;
@@ -227,7 +227,7 @@ h3 {
   border-color: #d8d8d8;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: 100;
+  font-weight: 600;
   font-size: 1em;
   display: inline-block;
   margin: 0 auto;
@@ -247,6 +247,47 @@ h3 {
   flex-wrap: wrap;
 }
 
+/* Role dropdown and Next button sizing + color tweaks */
+#userTypeDropdownBtn {
+  font-size: 1rem;
+  background-color: #ffffff; /* white dropdown button */
+  color: #0b4f2b; /* dark green text to match brand */
+  border: 1px solid #d8d8d8;
+}
+#userTypeDropdownBtn:hover,
+#userTypeDropdownBtn:focus {
+  background-color: #fafafa;
+  color: #07381f;
+}
+
+.usertype-choice,
+.language-choice,
+.dropdown-menu .dropdown-item {
+  font-size: 1rem; /* make dropdown items readable */
+}
+
+#userTypeNext {
+  font-size: 1rem; /* Next button font size */
+}
+
+/* Muted (disabled) Next appearance */
+#userTypeNext[disabled],
+#userTypeNext:disabled {
+  background-color: #dcdcdc !important; /* grey when muted */
+  color: #6c6c6c !important;
+  border-color: #dcdcdc !important;
+  cursor: not-allowed !important;
+  box-shadow: none !important;
+}
+
+/* Ensure the dropdown toggle stays white even when Bootstrap applies outline classes */
+#userTypeDropdownBtn.show,
+#userTypeDropdownBtn:active,
+#userTypeDropdownBtn[aria-expanded="true"] {
+  background-color: #ffffff;
+  color: #0b4f2b;
+}
+
 /* Visibility helper: JS will remove the inline `display:none` to reveal sections.
   We only use a `.visible` marker where a media-query needs to override layout (see #emailSection.visible below). */
 
@@ -254,6 +295,7 @@ h3 {
   margin: 0;
   white-space: nowrap;
   font-weight: 600; 
+  font-size: 1rem;
 }
 
 select, input[type="email"] {
@@ -266,7 +308,7 @@ select, input[type="email"] {
 }
 
 #userType {
-  width: 140px;
+  width: 100px;
 }
 
 input[type="email"] {
@@ -386,12 +428,14 @@ button[id$="Back"]:focus {
 }
 .message.user .content {
   margin-left: 0; 
+  font-weight: 400;
 }
 
 /* Ensure bot content stacks and long links wrap instead of forming multi-column layouts */
 .message.bot .content {
   display: block; 
   white-space: normal;
+  font-weight: 400;
 }
 
 .message.bot .content a {
@@ -754,7 +798,7 @@ textarea {
     display: block;
   }
   .chat-container{
-    height: 100%;
+    height: 75%;
     width: 100%;
   }
   .avatar img{

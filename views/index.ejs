@@ -2,6 +2,7 @@
 <%- include('./partials/head.ejs') %>
 <body style="background-image: url(img/bg_faint.png);">
 
+
     <%- include('./partials/nav.ejs') %>
 
     <div class="chat-container">
@@ -13,18 +14,32 @@
                 </div>                       
             </div>
         </div>
+        <div class="language-hint" style="margin:8px 0 16px 0;color:#000;font-weight:600;">Please select your preferred language to continue</div>
+        <div class="language-menu">
+            <button id="languageDropdownBtn" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select Language</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item language-choice" data-lang="english" href="#">English</a></li>
+                <li><a class="dropdown-item language-choice" data-lang="filipino" href="#">Filipino</a></li>
+            </ul>
+        </div>
         <div class="promptbox">
             <form id="chatForm" action="#" onsubmit="return false;">
-                <div id="userTypeSection">
+                <!-- Hidden language input so server receives the chosen language with submissions -->
+                <input type="hidden" id="language" name="language" value="">
+                <div id="userTypeSection" style="display:none;">
                     <label for="userType">Are you a guest, student, faculty, or staff?</label>
-                    <select id="userType" name="userType" required>
-                        <option value="">Select</option>
-                        <option value="Guest">Guest</option>
-                        <option value="Student">Student</option>
-                        <option value="Faculty">Faculty</option>
-                        <option value="Staff">Staff</option>
-                    </select>
-                    <button type="button" id="userTypeNext">Next</button>
+                    <div class="btn-group">
+                        <button id="userTypeDropdownBtn" type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Select</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item usertype-choice" data-value="Guest" href="#">Guest</a></li>
+                            <li><a class="dropdown-item usertype-choice" data-value="Student" href="#">Student</a></li>
+                            <li><a class="dropdown-item usertype-choice" data-value="Faculty" href="#">Faculty</a></li>
+                            <li><a class="dropdown-item usertype-choice" data-value="Staff" href="#">Staff</a></li>
+                        </ul>
+                    </div>
+                    <!-- hidden input kept as single source of truth for legacy JS/server -->
+                    <input type="hidden" id="userType" name="userType" value="">
+                    <button type="button" id="userTypeNext" class="btn btn-primary" disabled>Next</button>
                 </div>
                 <div id="emailSection" style="display:none;">
                     <!-- Ensure valid Ivy Tech email and will only accepts Ivy Tech email if the "Guest" is not chosen-->
@@ -39,9 +54,29 @@
             </form>
         </div>
     </div>
+      <!-- Language confirmation modal (asks user if they want to continue with selected language) -->
+        <div class="modal fade" id="languageConfirmModal" tabindex="-1" aria-labelledby="languageConfirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="languageConfirmModalLabel">Chosen Language</h5>
+                    </div>
+                    <div class="modal-body">
+                       Are you sure you want to continue in <span id="languageConfirmName"></span>?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="languageChangeBtn" class="btn btn-secondary" style="background-color:#d9d9d9"  data-bs-dismiss="modal">Change Language</button>
+                        <button type="button" id="languageContinueBtn" class="btn btn-primary" data-bs-dismiss="modal">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    <!-- ChatBot Fetch Script -->
-   <script src="/scripts/chatbot.js"></script>
+        <!-- Bootstrap's JS Script (load before our chatbot script so bootstrap APIs are available) -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+     <!-- ChatBot Fetch Script -->
+     <script src="/scripts/chatbot.js"></script>
+
 
     <%- include('./partials/footer.ejs') %>
 
