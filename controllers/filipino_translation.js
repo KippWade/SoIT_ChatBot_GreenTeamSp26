@@ -1,6 +1,6 @@
 const fuzz = require('fuzzball');
 const filipinoTranslations = require('../data/filipino_translation_inquires.json');
-const { locations } = require('../data/database');
+const { locations, INTENT } = require('../data/database');
 
 // Build WhitePages URL helper
 function buildWhitePagesURL(firstName, lastName, location, role, title) {
@@ -76,16 +76,16 @@ function enhanceWithLinks(response, matchedResponse, opts = {}) {
     if (!matchedResponse) return response;
 
     // For location-specific queries, build formatted response with campus info
-    if (matchedResponse.intent === 'address_info' || matchedResponse.intent === 'phone_number_info') {
+    if (matchedResponse.intent === INTENT.ADDRESS_INFO || matchedResponse.intent === INTENT.PHONE_NUMBER_INFO) {
         if (originalLocIndex > -1) {
             const location = locations[originalLocIndex];
             
-            if (matchedResponse.intent === 'address_info') {
+            if (matchedResponse.intent === INTENT.ADDRESS_INFO) {
                 response = `<strong>${location.title} Campus:</strong><br>${location.address}`;
                 response += `<br><br><a href='https://www.ivytech.edu/${location.url}' target='_blank'>Campus Page${suffix}`;
                 response += `<br><a href='https://www.google.com/maps/search/?api=1&query=${location.position.lat},${location.position.lng}' target='_blank'>Google Maps${suffix}`;
             } 
-            else if (matchedResponse.intent === 'phone_number_info') {
+            else if (matchedResponse.intent === INTENT.PHONE_NUMBER_INFO) {
                 response = `<strong>${location.title}</strong> Contact Info:<br><br>`;
                 response += `<i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:${location.phone}'>${location.phone}</a><br>`;
                 response += `<i class='bx bxs-envelope'></i>&nbsp;&nbsp;<a href="mailto:${location.email}">${location.email}</a>`;
@@ -93,7 +93,7 @@ function enhanceWithLinks(response, matchedResponse, opts = {}) {
             }
         } else {
             // No location specified, ask which campus
-            if (matchedResponse.intent === 'address_info') {
+            if (matchedResponse.intent === INTENT.ADDRESS_INFO) {
                 response = "Kaya kong hanapin iyon para sa iyo. Aling campus ang gusto mong address?";
             } else {
                 response = "Kaya kong hanapin iyon para sa iyo. Aling campus ang gusto mong phone number?";
@@ -102,7 +102,7 @@ function enhanceWithLinks(response, matchedResponse, opts = {}) {
     }
     
     // For dean queries, append White Pages link
-    else if (matchedResponse.intent === 'dean_info') {
+    else if (matchedResponse.intent === INTENT.DEAN_INFO) {
         const campusName = (deanLocIndex > -1) ? locations[deanLocIndex].title : '';
         response += `<br><a href='${buildWhitePagesURL('', '', campusName, 'faculty', 'Dean')}' target='_blank'>White Pages${suffix}`;
     }

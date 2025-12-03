@@ -1,8 +1,51 @@
 const { fill } = require("lodash");
 
+const INTENT = [
+    GREETINGS = "greetings",
+    BOT_STATUS = "bot_status",
+    BOT_IDENTITY = "bot_identity",
+    BOT_NAME = "bot_name",
+    CAMPUS_INFO_GENERAL = "campus_info_general",
+    DEAN_INFO = "dean_info",
+    ADMISSIONS_INFO_GENERAL = "admissions_info_general",
+    ENROLLMENT_INFO_GENERAL = "enrollment_info_general",
+    INSTRUCTOR_INFO_SDEV265 = "instructor_info_sdev265",
+    INSTRUCTOR_INFO_GENERAL = "instructor_info_general",
+    COURSE_INFO_GENERAL = "course_info_general",
+    PHONE_NUMBER_INFO = "phone_number_info",
+    ADDRESS_INFO = "address_info",
+    PROGRAM_INFO = "program_info",
+    CERTIFICATION_INFO = "certification_info",
+    APPLICATION_PROCESS = "application_process",
+    CREDIT_HOUR_INFO = "credit_hour_info",
+    TRANSFER_PROGRAMS_INFO = "transfer_programs_info",
+    AVAILABLE_PROGRAMS = "available_programs",
+    TUITION_FEES = "tuition_fees",
+    FINANCIAL_AID_OPTIONS = "financial_aid_options",
+    STUDENT_PORTAL_ACCESS = "student_portal_access",
+    CLASS_REGISTRATION = "class_registration",
+    TRANSCRIPT_REQUEST = "transcript_request",
+    STUDENT_SERVICES = "student_services",
+    FIND_ADVISOR = "find_advisor",
+    BOOKSTORE_INFO = "bookstore_info",
+    SCHOLARSHIP_APPLICATION = "scholarship_application",
+    ACADEMIC_STANDING = "academic_standing",
+    LIBRARY_INFO = "library_info",
+    STUDENT_LIFE = "student_life",
+    DUAL_CREDIT = "dual_credit",
+    IVYONLINE_INFO = "ivyonline_info",
+    CAMPUS_PARKING = "campus_parking",
+    CAMPUS_EVENTS = "campus_events",
+    ONLINE_STUDENT_SUPPORT = "online_student_support",
+    STUDENT_POPULATION = "student_population",
+    MILITARY_VETERAN_SERVICES = "military_veteran_services",
+    TESTING_SERVICES = "testing_services",
+    CLASS_FORMATS = "class_formats"
+];
+
 const responses = [
      {
-        intent: "greetings",
+        intent: INTENT.GREETINGS,
         pattern: [
             "hello", "hi", "hey", "greetings", 
             "good morning", "good afternoon", "good evening", 
@@ -12,13 +55,13 @@ const responses = [
         filipino_reply: "Mabuhay! Paano kita matutulungan ngayon?",
     },
     {
-        intent: "bot_status",
+        intent: INTENT.BOT_STATUS,
         pattern: ["how are you", "how's it going", "how are you doing", "are you doing great"],
         reply: "Doing great! I'm excited to help you find the information you require!",
         filipino_reply: "Ayos lang! Excited akong tulungan ka na mahanap ang impormasyong kailangan mo!"
     },
     {
-        intent: "bot_identity",
+        intent: INTENT.BOT_IDENTITY,
         pattern: [
             "what are you", "how are you made", "who made you", "who created you"
         ],
@@ -26,7 +69,7 @@ const responses = [
         filipino_reply: "Ako ay isang interactive chatbot na ginawa gamit ang node.js / ejs para sa SDEV265 bilang isang mapagkukunan ng impormasyon ng School of IT at isang capstone project para sa kurso."
     },
     {
-        intent: "bot_name",
+        intent: INTENT.BOT_NAME,
         pattern: [
             "what's your name", "what can i call you", "who are you",
             "your name", "do you have a name"
@@ -35,7 +78,7 @@ const responses = [
         filipino_reply: "Ang buong pangalan ko ay IvyBot, pero maaari mo akong tawaging Ivy"
     },
     {
-        intent: "campus_info_general",
+        intent: INTENT.CAMPUS_INFO_GENERAL,
         pattern: [
             "what campuses are there","campus locations", "where are the campuses located", 
             "campus location", "where are the campuses located", "list the campuses"
@@ -46,7 +89,7 @@ const responses = [
         link: "Campus Locations"
     },
     {
-        intent: "dean_info",
+        intent: INTENT.DEAN_INFO,
         pattern: [
             "who is the dean", "dean of", "where is the dean", "what is the dean", "dean info", "dean information"
         ],
@@ -56,7 +99,7 @@ const responses = [
         link: "White Pages Entry"
     },
     {
-        intent: "admissions_info_general",
+        intent: INTENT.ADMISSIONS_INFO_GENERAL,
         pattern: ["can you give me information about admissions", "admissions"],
         reply: "Here's some information about admissions!",
         filipino_reply: "Narito ang ilang impormasyon tungkol sa admisyon!",
@@ -64,7 +107,7 @@ const responses = [
         link: "Admissions"
     },
     {
-        intent: "enrollment_info_general",
+        intent: INTENT.ENROLLMENT_INFO_GENERAL,
         pattern: ["can you give me information about enrollment", "enrollment"],
         reply: "Here's some information about enrollment!",
         filipino_reply: "Narito ang ilang impormasyon tungkol sa enrollment!",
@@ -72,7 +115,7 @@ const responses = [
         link: "Enrollment"
     },
     {
-        intent: "instructor_info_sdev265",
+        intent: INTENT.INSTRUCTOR_INFO_SDEV265,
         pattern: [
             "who is instructor for SDEV265",
             "who teaches SDEV265",
@@ -88,7 +131,7 @@ const responses = [
         link: "College Scheduler"
     },
     {
-        intent: "instructor_info_general",
+        intent: INTENT.INSTRUCTOR_INFO_GENERAL,
         pattern: [
             "who is the instructor for", "who teaches", "instructor",
             "who is the professor for", "who is my teacher", "who is teaching this semester",
@@ -100,7 +143,7 @@ const responses = [
         link: "College Scheduler"
     },
     {
-        intent: "course_info_general",
+        intent: INTENT.COURSE_INFO_GENERAL,
         pattern: [
             "course description", "course descriptions","prerequisites for", "course details", "course info", "course information", "course syllabus", 
             "course outline", "course overview", "course topics", "course content", "course objectives", "course goals",
@@ -112,14 +155,14 @@ const responses = [
         link: "Course Descriptions"
     },
     {
-        intent: "phone_number_info",
+        intent: INTENT.PHONE_NUMBER_INFO,
         pattern: [ 
                 "phone number", "what is the phone number", "contact by phone",
                 "how can i call", "how can i reach", "contact number"
         ]
     },
     {
-        intent : "address_info",
+        intent : INTENT.ADDRESS_INFO,
         pattern: [
             "campus address", "campus location", "what is the address for",
             "where is ivytech located", "ivytech address",
@@ -129,7 +172,7 @@ const responses = [
         filipino_reply: "Tulungan ko kayong mahanap ang address information."
     },
     {
-        intent: "program_info",
+        intent: INTENT.PROGRAM_INFO,
         pattern: [
             "what programs", "what programs ivy tech", "what kind of programs do you offer",
             "what programs ivytech", "what programs does ivytech offer", "programs offered ivytech",
@@ -141,7 +184,7 @@ const responses = [
         link: "Programs"
     },
     {
-        intent: "certification_info",
+        intent: INTENT.CERTIFICATION_INFO,
         pattern: [
             "certifications", "does ivytech offer certifications", "certifications ivytech", "certifications ivy tech",
          ],
@@ -151,7 +194,7 @@ const responses = [
         link: "Degrees and Certifications"
     },
     {
-        intent: "application_process",
+        intent: INTENT.APPLICATION_PROCESS,
         pattern: [
             "how can i apply to the school of it", "application process", "it application process",
             "how do i apply to the school of it", "how do i apply to ivy tech", "how can i apply to ivy tech",
@@ -165,7 +208,7 @@ const responses = [
         link: "Application Process"
     },
     {
-        intent: "credit_hour_info",
+        intent: INTENT.CREDIT_HOUR_INFO,
         pattern: [
             "what are the minimum credit hours i can take", "minimum credit hours", "credit hours",
             "how many credit hours can i take", "how many credit hours do i need", "credit hours needed",
@@ -180,7 +223,7 @@ const responses = [
         link: "Credit Hours"
     },
     {
-        intent: "transfer_programs_info",
+        intent: INTENT.TRANSFER_PROGRAMS_INFO,
         pattern: [
             "what programs can transfer to a 4 year institution", "transfer programs", "transfer programs ivy tech",
             "tsap", "tsap transfer", "tsap transfer programs", "transfer programs ivytech",
@@ -196,7 +239,7 @@ const responses = [
         link: "Participating Schools by Program"
     },
     {
-        intent: "available_programs",
+        intent: INTENT.AVAILABLE_PROGRAMS,
         pattern: [
             "what programs and courses are available", "what programs are available", "available programs",
             "available programs ivy tech", "available programs ivytech", "what programs are available ivy tech",
@@ -208,7 +251,7 @@ const responses = [
         link: "All Academic Programs"
     },
     {
-        intent: "tuition_fees",
+        intent: INTENT.TUITION_FEES,
         pattern: [
             "what are the tuition and fees", "tuition and fees", "tuition fees",
             "tuition and fees ivy tech", "tuition and fees ivytech", "tuition fees ivy tech",
@@ -222,7 +265,7 @@ const responses = [
         link: "Tuition and Fees"
     },
     {
-        intent: "financial_aid_options",
+        intent: INTENT.FINANCIAL_AID_OPTIONS,
         pattern: [
             "what financial aid options are available", "financial aid options", "financial aid",
             "financial aid ivy tech", "financial aid ivytech", "what are the financial aid options ivy tech",
@@ -235,7 +278,7 @@ const responses = [
         link: "Financial Aid"
     },
     {
-        intent: "student_portal_access",
+        intent: INTENT.STUDENT_PORTAL_ACCESS,
         pattern: [
             "how do I access my student portal (MyIvy)", "student portal", "access student portal",
             "myivy", "myivy portal", "access myivy", "how do I access myivy",
@@ -249,7 +292,7 @@ const responses = [
         link: "Student Portal"
     },
     {
-        intent: "class_registration",
+        intent: INTENT.CLASS_REGISTRATION,
         pattern: [
             "what is the process for registering for classes", "class registration", "register for classes",
             "how do I register for classes", "register for classes ivy tech", "register for classes ivytech",
@@ -262,7 +305,7 @@ const responses = [
         link: "Registration 101"
     },
     {
-        intent: "transcript_request",
+        intent: INTENT.TRANSCRIPT_REQUEST,
         pattern: [
             "how do I get my transcripts", "transcript request", "request transcripts",
             "how do I request my transcripts", "transcripts ivy tech", "transcripts ivytech"
@@ -273,7 +316,7 @@ const responses = [
         link: "Registrar/Transcripts"
     },
     {
-        intent: "student_services",
+        intent: INTENT.STUDENT_SERVICES,
         pattern: [
             "what student services are available", "student services", "services for students",
             "student services ivy tech", "student services ivytech", "what student services are available ivy tech",
@@ -285,7 +328,7 @@ const responses = [
         link: "Student Services"
     },
     {
-        intent: "find_advisor",
+        intent: INTENT.FIND_ADVISOR,
         pattern: [
             "how do I find my advisor", "find my advisor", "academic advisor",
             "how do I find my advisor ivy tech", "how do I find my advisor ivytech", "find my advisor ivy tech",
@@ -297,7 +340,7 @@ const responses = [
         link: "Advising"
     },
     {
-        intent: "bookstore_info",
+        intent: INTENT.BOOKSTORE_INFO,
         pattern: [
             "what is the bookstore's location and hours", "bookstore location and hours", "bookstore hours",
             "bookstore location", "bookstore ivy tech", "bookstore ivytech", "what is the bookstore's location and hours ivy tech",
@@ -310,7 +353,7 @@ const responses = [
         link: "Campus Stores"
     },
     {
-        intent: "scholarship_application",
+        intent: INTENT.SCHOLARSHIP_APPLICATION,
         pattern: [
             "how do I apply for scholarships", "apply for scholarships", "scholarships",
             "scholarships ivy tech", "scholarships ivytech", "how do I apply for scholarships ivy tech",
@@ -323,7 +366,7 @@ const responses = [
         link: "Scholarships"
     },
     {
-        intent: "academic_standing",
+        intent: INTENT.ACADEMIC_STANDING,
         pattern: [
             "how do I check my academic standing", "information on my academic standing",
             "academic standing", "check academic standing"
@@ -334,7 +377,7 @@ const responses = [
         link: "Academic Success"
     },
     {
-        intent: "library_info",
+        intent: INTENT.LIBRARY_INFO,
         pattern: [
             "what are the library resources and services", "are there any library resources and services",
             "library information"
@@ -345,7 +388,7 @@ const responses = [
         link: "Libraries"
     },
     {
-        intent: "student_life",
+        intent: INTENT.STUDENT_LIFE,
         pattern: [
             "how do I get involved in clubs and organizations", "student life", "campus life",
             "how to get involved", "student council", "leadership opportunities", "campus events",
@@ -357,7 +400,7 @@ const responses = [
         link: "Student Life"
     },
     {
-        intent: "dual_credit",
+        intent: INTENT.DUAL_CREDIT,
         pattern: [
             "what is the process for dual credit enrollment", "how do i enroll in dual credit courses",
             "what steps are required fo dual credit enrollment", "how does dual credit enrollment work",
@@ -370,7 +413,7 @@ const responses = [
         link: "Dual Credit Enrollment"
     },
     {
-        intent: "ivyonline_info",
+        intent: INTENT.IVYONLINE_INFO,
         pattern: [
             "how do i access online courses (ivyonline)", "ivyonline courses", "access ivyonline",
             "ivy online", "ivyonline", "ivy online", "ivy tech online", "ivytech online"
@@ -381,7 +424,7 @@ const responses = [
         link: "IvyOnline"
     },
     {
-        intent: "campus_parking",
+        intent: INTENT.CAMPUS_PARKING,
         pattern: [
             "what are the parking options on campus", "campus parking options", "parking on campus",
             "where can students park on campus", "parking areas on campus", "student parking",
@@ -393,7 +436,7 @@ const responses = [
         link: "Campus Stores"
     },
     {
-        intent: "campus_events",
+        intent: INTENT.CAMPUS_EVENTS,
         pattern: [
             "how do I get information about campus events", "where can i get updates on campus events",
             "campus events", "events on campus", "activities on campus", "student events", "college events"
@@ -404,7 +447,7 @@ const responses = [
         link: "Campus Events"
     },
     {
-        intent: "online_student_support",
+        intent: INTENT.ONLINE_STUDENT_SUPPORT,
         pattern: [
             "what support is available for online students", "online student support", "support for online students",
             "support for online learners", "how can online student get help", "services for online students"
@@ -415,7 +458,7 @@ const responses = [
         link: "Online Support"
     },
     {
-        intent: "student_population",
+        intent: INTENT.STUDENT_POPULATION,
         pattern: [
             "how many students are there", "student population", "number of students",
             "how many students ivy tech", "how many students ivytech", "student population ivy tech",
@@ -427,7 +470,7 @@ const responses = [
         link: "Students"
     },
     {
-        intent: "military_veteran_services",
+        intent: INTENT.MILITARY_VETERAN_SERVICES,
         pattern: [
             "military and veteran services", "services for military and veterans", "military services",
             "veteran services", "military and veteran services ivy tech", "military and veteran services ivytech",
@@ -442,7 +485,7 @@ const responses = [
         link: "VA Education Benefits"
     },
     {
-        intent: "testing_services",
+        intent: INTENT.TESTING_SERVICES,
         pattern: [
             "testing services", "services for testing", "test preparation",
             "exam services", "testing services ivy tech", "testing services ivytech",
@@ -456,7 +499,7 @@ const responses = [
         link: "Testing Services"
     },
     {
-        intent: "class_formats",
+        intent: INTENT.CLASS_FORMATS,
         pattern: [
             "learnanywhere class", "online class", "hybrid class", "traditional class", "blended class",
             "what class formats are available", "types of classes", "class delivery methods", "how are classes offered",
@@ -1006,4 +1049,4 @@ const locations = [
     }
 ];
 
-module.exports = { responses, locations };
+module.exports = { responses, locations, INTENT };

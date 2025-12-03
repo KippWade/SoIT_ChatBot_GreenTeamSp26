@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const fuzz = require('fuzzball'); // NPM Package Info https://www.npmjs.com/package/fuzzball
-const { responses, locations } = require('../data/database'); // Stand-in for external MongoDB instance
+const { responses, locations, INTENT } = require('../data/database'); // Stand-in for external MongoDB instance
 const unansweredFilePath = path.join(__dirname, '../data/unanswered_inquiries.json'); // File to store unanswered/unmatched inquiries
 const { addConversation, getConversation } = require('./conversation_tracker');
 const { isFilipino, translateFilipinoToEnglish, handleFilipinoReply } = require('./filipino_translation'); // File for Filipino translation functions
@@ -265,7 +265,7 @@ module.exports.query = (req, res) => {
             }
             // Fuzzy match for greetings (only for 'greetings' intent)
             // This try to catch casual greetings
-            if (intent === 'greetings') {
+            if (intent === INTENT.GREETINGS) {
                 const fuzzScore = fuzz.token_set_ratio(prompt, p);
                 if (fuzzScore >= 70) {
                     detectedIntent = intent;
@@ -292,7 +292,7 @@ module.exports.query = (req, res) => {
                         break;
                     }
                     // Fuzzy match for greetings and address_info
-                    if (resp.intent === 'greetings' || resp.intent === 'address_info') {
+                    if (resp.intent === INTENT.GREETINGS || resp.intent === INTENT.ADDRESS_INFO) {
                         const fuzzScore = fuzz.token_set_ratio(prompt, p.toLowerCase());
                         if (fuzzScore >= 70) {
                             matchedResponse = resp;
@@ -319,7 +319,7 @@ module.exports.query = (req, res) => {
     if (matchedResponse) {
         console.log(`${new Date().toISOString()} :: PROCESSING MATCHED RESPONSE FOR INTENT: ${matchedResponse.intent}`);
         switch(matchedResponse.intent){
-            case 'address_info':
+            case INTENT.ADDRESS_INFO:
                 if (locIndex > -1) {
                     console.log("Matched location title:", locations[locIndex].title);
                     response = `<strong>${locations[locIndex].title} Campus Location:</strong><br>`;
@@ -330,7 +330,7 @@ module.exports.query = (req, res) => {
                     response = "I can look that up for you. Which campus do you want the address of?";
                 }
                 break;
-            case 'phone_number_info':
+            case INTENT.PHONE_NUMBER_INFO:
                 if (locIndex > -1) {
                     response = `<strong>${locations[locIndex].title} Campus Contact Info:</strong><br><br>`;
                     response += `<i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:${locations[locIndex].phone}'>${locations[locIndex].phone}</a><br>`;
@@ -340,7 +340,7 @@ module.exports.query = (req, res) => {
                     response = "Which campus are you talking about? Or would you like the 24 hour toll free number?";
                 }
                 break;
-            case 'dean_info':
+            case INTENT.DEAN_INFO:
                 if (locIndex > -1) {
                     response = `<strong>${matchedResponse.reply}</strong><br>`;
                     response += `<br><a href='${buildWhitePagesURL('', '', locations[locIndex].title, 'faculty', 'Dean')}' target='_blank'>White Page${suffix}`;
@@ -360,7 +360,7 @@ module.exports.query = (req, res) => {
     else if(session) {
         console.log(`${new Date().toISOString()} :: NO MATCHED RESPONSE, USING SESSION INTENT: ${session.currentIntent}`);
         switch(session.currentIntent){
-            case 'address_info':
+            case INTENT.ADDRESS_INFO:
                 if (locIndex > -1) {
                     console.log("Matched location title:", locations[locIndex].title);
                     response = `<strong>${locations[locIndex].title} Campus:</strong><br>`;
@@ -371,7 +371,7 @@ module.exports.query = (req, res) => {
                     response = "I can look that up for you. Which campus do you want the address of?";
                 }
                 break;
-            case 'phone_number_info':
+            case INTENT.PHONE_NUMBER_INFO:
                 if (locIndex > -1) {
                     response = `<strong>${locations[locIndex].title} Campus Contact Info:</strong><br><br>`;
                     response += `<i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:${locations[locIndex].phone}'>${locations[locIndex].phone}</a><br>`;
@@ -381,7 +381,7 @@ module.exports.query = (req, res) => {
                     response = "I can look that up for you. Which campus do you want the phone number of?";
                 }
                 break;
-            case 'dean_info':
+            case INTENT.DEAN_INFO:
                 if (locIndex > -1) {
                     response = `<strong>I can help you find information about the dean!</strong><br>`;
                     response += `<br><a href='${buildWhitePagesURL('', '', locations[locIndex].title, 'faculty', 'Dean')}' target='_blank'>White Page${suffix}</a>`;
