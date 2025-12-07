@@ -69,6 +69,15 @@ function getLocationIndexFromPrompt(prompt) {
     return -1;
 }
 
+function getCourseCodeFromPrompt(prompt) {
+    const courseCodeRegex = /[A-Za-z]{2,4}[- ]?\d{3,4}/; // Mattches upper/lowercase letters (2-4), optional dash/space, followed by 3-4 digits
+    const matches = prompt.match(courseCodeRegex);
+    if (matches && matches.length > 0) {
+        return matches[0].replace(/[\s-]+/g, ''); // Remove any spaces and dashes in the course code
+    }
+    return null;
+}
+
 // Main query processing function
 module.exports.query = (req, res) => {
     let prompt = (req.body.prompt || '').toLowerCase();
@@ -165,8 +174,9 @@ module.exports.query = (req, res) => {
     console.log(`${new Date().toISOString()} :: MATCHED RESPONSE: ${matchedResponse !== null}`);
     console.log(`${new Date().toISOString()} :: MATCHED RESPONSE TYPE: ${matchedResponse?.type}`);
     const locIdx = getLocationIndexFromPrompt(prompt);
+    const courseCode = getCourseCodeFromPrompt(prompt);
 
-    response = buildResponse(matchedResponse, activeLanguage, { locIdx, session });
+    response = buildResponse(matchedResponse, activeLanguage, { locIdx, session, courseCode });
 
     // Always log unanswered if error statement is used
     if (isErrorResponse(response, activeLanguage)) {

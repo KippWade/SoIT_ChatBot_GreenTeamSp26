@@ -1,4 +1,4 @@
-const { responses, locations, INTENT, LANGUAGE } = require('../data/database');
+const { responses, locations, INTENT, LANGUAGE, COURSE_PREFIXES } = require('../data/database');
 const { ENG_ERROR_STATEMENTS, FIL_ERROR_STATEMENTS } = require('./languageController');
 
 const suffix = "&nbsp;<i class='bx bx-link-external'></i></a>"; // External link icon
@@ -6,6 +6,11 @@ const suffix = "&nbsp;<i class='bx bx-link-external'></i></a>"; // External link
 // Build WhitePages URL helper
 function buildWhitePagesURL(firstName, lastName, location, role, title) {
     return `https://whitepages.ivytech.edu/?first_name=${encodeURIComponent(firstName)}&last_name=${encodeURIComponent(lastName)}&userid=&location=${encodeURIComponent(location)}&role=${encodeURIComponent(role)}&title=${encodeURIComponent(title)}&bee_syrup_tun=&submit=+Search+`;
+}
+
+//Build course catelog URL helper
+function buildCourseCatalogURL(courseCode) {
+    return `https://catalog.ivytech.edu/search_advanced.php?cur_cat_oid=9&ecpage=1&cpage=1&ppage=1&pcpage=1&spage=1&tpage=1&search_database=Search&filter%5Bkeyword%5D=${encodeURIComponent(courseCode.toUpperCase())}&filter%5Bexact_match%5D=1&filter%5B3%5D=1&filter%5B31%5D=1`;
 }
 
 function getErrorResponse(language = LANGUAGE.ENGLISH) {
@@ -70,9 +75,54 @@ function getResponseReply(matchedResponse, language = LANGUAGE.ENGLISH) {
     return response;
 }
 
+function getCourseGeneralResponse(courseCode, matchedResponse, language = LANGUAGE.ENGLISH) {
+    let response = '';
+    if (courseCode) {
+        switch (language) {
+            case LANGUAGE.FILIPINO:
+                response = `Narito ang impormasyon para sa kursong<strong>${courseCode.toUpperCase()}</strong>:<br><br>`;
+                break;
+            case LANGUAGE.ENGLISH:
+            default:
+                response = `Here is the information for course <strong>${courseCode.toUpperCase()}</strong>:<br><br>`;
+                break;
+        }
+        let courseLink = buildCourseCatalogURL(courseCode);
+        response += `<a href='${courseLink}' target='_blank'>Course Details</a>`;
+
+        if(!COURSE_PREFIXES.some(prefix => courseCode.toUpperCase().startsWith(prefix))) {
+            switch (language) {
+                case LANGUAGE.FILIPINO:
+                    response += `<br><br>Paunawa: Hindi ko kinikilala ang prefix ng course code. Mangyaring tiyakin na ito ay isang wastong Ivy Tech course code.`;
+                    break;
+                case LANGUAGE.ENGLISH:
+                default:
+                    response += `<br><br>Note: I do not recognize the course code prefix. Please ensure it is a valid Ivy Tech course code.`;
+                    break;
+            }
+        }
+    } else if (matchedResponse) {
+        response = getResponseReply(matchedResponse, language);
+    } else {
+        let infoResponse = responses.find(r => r.intent === INTENT.COURSE_INFO_GENERAL);
+        switch (language) {
+            case LANGUAGE.FILIPINO:
+                response = infoResponse.reply.fil || infoResponse.reply.en;
+                break;
+            case LANGUAGE.ENGLISH:
+            default:
+                response = infoResponse.reply.en || infoResponse.reply.fil;
+                break;
+        }
+    }
+
+    return response;
+}
+
 function buildResponse(matchedResponse, language = LANGUAGE.ENGLISH, opts = {}) {
     const locIdx = opts.locIdx || null;
     const session = opts.session || null;
+    const courseCode = opts.courseCode || null;
 
     if (!matchedResponse && !session)
         return getErrorResponse(language);
@@ -86,6 +136,7 @@ function buildResponse(matchedResponse, language = LANGUAGE.ENGLISH, opts = {}) 
     console.log('Language for response:', language);
     console.log('Matched response object:', matchedResponse);
     console.log('Session data:', session);
+    console.log('Course code for response:', courseCode);
 
     switch (intent) {
         case INTENT.ADDRESS_INFO:
@@ -94,6 +145,8 @@ function buildResponse(matchedResponse, language = LANGUAGE.ENGLISH, opts = {}) 
             return getPhoneResponse(locIdx, language);
         case INTENT.DEAN_INFO:
             return getDeanResponse(locIdx, language);
+        case INTENT.COURSE_INFO_GENERAL:
+            return getCourseGeneralResponse(courseCode, matchedResponse, language);
         default:
             if (matchedResponse) {
                 return getResponseReply(matchedResponse, language);

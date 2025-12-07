@@ -201,7 +201,7 @@ const responses = [
                 "mga hangarin ng kurso", "ano ang aking matututunan sa", "ano ang mag layunin ng pagkaturo para sa"
             ]
         },
-        reply: { en: "For detailed information about courses, including descriptions and prerequisites, please visit the course description page", fil: "Para sa detalyadong impormasyon tungkol sa mga kurso, kabilang ang mga paglalarawan at mga kinakailangan, mangyaring bisitahin ang pahina ng paglalarawan ng kurso sa ibaba." },
+        reply: { en: "For detailed information about courses, including descriptions and prerequisites, please visit the course description page or provide me a course code and I can give you a direct link.", fil: "Para sa detalyadong impormasyon tungkol sa mga kurso, kabilang ang mga paglalarawan at mga kinakailangan, mangyaring bisitahin ang pahina ng paglalarawan ng kurso, o magbigay lamang ng course code at maibibigay ko sa iyo ang direktang link." },
         url: "https://catalog.ivytech.edu/content.php?catoid=11&navoid=1255",
         link: "Course Descriptions"
     },
@@ -1259,4 +1259,43 @@ const locations = [
     }
 ];
 
-module.exports = { responses, locations, INTENT, LANGUAGE };
+
+
+const COURSE_PREFIXES = [
+    "ABRK", "ACCT", "ADMF",
+    "AGRI", "ALTF", "AMSL", "ANTH",
+    "AOLS", "APHY", "ARAB", "ARTH",
+    "ARTS", "ASTR", "AUBR", "AUTI",
+    "AVIM", "AVIT", "BCOM", "BCOT",
+    "BCTI", "BIOL", "BIOT", "BOAT",
+    "BUSI", "BUSN", "CARD", "CATX",
+    "CHEM", "CHIN", "CIMG", "CINS",
+    "COMM", "CONT", "CPIN", "CPTR",
+    "CRIM", "CSCI", "CSIA", "CSTC",
+    "DBMS", "DENT", "DESN", "DHYG",
+    "DMSI", "ECED", "ECON", "EDSN",
+    "EDUC", "EECT", "EETC", "ENGL",
+    "ENGR", "ENGT", "ENRG", "ENTR",
+    "EPCS", "ESOL", "EXER", "FREN",
+    "GENS", "GEOG", "GEOL", "GERM",
+    "GLOB", "GRDN", "HIMT", "HIST",
+    "HLHS", "HOSP", "HPER", "HSPS",
+    "HUMA", "HUMS", "HVAC", "INDT",
+    "INFM", "ITSP", "IVYC", "IVYT",
+    "LEGS", "LIBA", "LOGM", "MAMO",
+    "MATH", "MEAS", "MEDL", "MEMS",
+    "METC", "MKTG", "MORT", "MPRO",
+    "MRIT", "MRTC", "MTTC", "NANO",
+    "NETI", "NGAS", "NRSG", "NSGA",
+    "NSGP", "OPTI", "PAET", "PARA",
+    "PARM", "PHAR", "PHIL", "PHLB",
+    "PHOT", "PHYS", "PLAS", "POLS",
+    "PPTC", "PRCM", "PROC", "PSYC",
+    "PTAS", "QUAL", "RADT", "RDTH",
+    "RESP", "SCIN", "SDEV", "SMDI",
+    "SOCI", "SPAN", "SPED", "SURG",
+    "SUST", "SVAD", "TMAS", "TRCK",
+    "VIDT", "VISC", "WELD"
+];
+
+module.exports = { responses, locations, INTENT, LANGUAGE, COURSE_PREFIXES };
