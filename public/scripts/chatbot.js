@@ -135,6 +135,24 @@ userTypeNext.addEventListener('click', function() {
 });
 
 
+// Email input validation - disable Next button until valid email is entered
+schoolEmailInput.addEventListener('input', function() {
+    if (schoolEmailInput.checkValidity() && schoolEmailInput.value.trim()) {
+        emailNext.disabled = false;
+    } else {
+        emailNext.disabled = true;
+    }
+});
+
+// Also check on focus/blur
+schoolEmailInput.addEventListener('blur', function() {
+    if (schoolEmailInput.checkValidity() && schoolEmailInput.value.trim()) {
+        emailNext.disabled = false;
+    } else {
+        emailNext.disabled = true;
+    }
+});
+
 emailNext.addEventListener('click', function() {
     schoolEmail = schoolEmailInput.value;
     if (!schoolEmailInput.checkValidity()) {

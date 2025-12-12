@@ -210,10 +210,11 @@ h3 {
 }
 
 .chat-container {
-  height: 70%;
+  height: 75%;
   width: auto;
   margin-left: auto;
   margin-right: auto;
+  min-height: calc(70vh - 75px);
 }
 
 .promptbox input[type=text]{
@@ -271,13 +272,26 @@ h3 {
 }
 
 /* Muted (disabled) Next appearance */
-#userTypeNext[disabled],
-#userTypeNext:disabled {
-  background-color: #dcdcdc !important; /* grey when muted */
-  color: #6c6c6c !important;
-  border-color: #dcdcdc !important;
-  cursor: not-allowed !important;
-  box-shadow: none !important;
+#userTypeNext:disabled,
+#emailNext:disabled {
+  background-color: #dcdcdc;
+  color: #6c6c6c;
+  border-color: #dcdcdc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Enabled state for Next buttons */
+#userTypeNext:not(:disabled),
+#emailNext:not(:disabled) {
+  background-color: #006648;
+  color: white;
+  cursor: pointer;
+}
+
+#userTypeNext:not(:disabled):hover,
+#emailNext:not(:disabled):hover {
+  background-color: #8dc63f;
 }
 
 /* Ensure the dropdown toggle stays white even when Bootstrap applies outline classes */
@@ -800,6 +814,7 @@ textarea {
   .chat-container{
     height: 75%;
     width: 100%;
+    min-height: calc(93vh - 65px);
   }
   .avatar img{
     width: 30px;
@@ -911,6 +926,13 @@ textarea {
     background-color: #8dc63f;
   }
 
+  /* Make Next buttons smaller */
+  #userTypeNext,
+  #emailNext {
+    font-size: 0.75rem;
+    padding: 8px 10px;
+  }
+
   /* Mobile: ensure Back button keeps a distinct, muted color when stacked full-width */
   button[id$="Back"] {
     background-color: #f2f6f2;
@@ -936,5 +958,49 @@ textarea {
     width: 100%;
     padding: 12px 16px;
     font-size: 0.85rem;
+  }
+
+  /* Language dropdown buttons on small screens */
+  #languageDropdownBtn,
+  #userTypeDropdownBtn {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+
+  .language-hint {
+    font-size: 0.75rem;
+  }
+
+  .language-choice,
+  .usertype-choice {
+    font-size: 0.75rem;
+  }
+
+  /* Make modal smaller on mobile */
+  .modal-dialog {
+    max-width: 90%;
+  }
+
+  .modal-header {
+    padding: 0.75rem;
+  }
+
+  .modal-title {
+    font-size: 0.9rem;
+  }
+
+  .modal-body {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .modal-footer {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .modal-footer button {
+    font-size: 0.75rem;
+    padding: 6px 10px;
   }
 }

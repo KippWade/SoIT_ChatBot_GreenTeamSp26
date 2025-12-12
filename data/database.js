@@ -1,6 +1,12 @@
 const { fill } = require("lodash");
 
+const LANGUAGE = {
+    FILIPINO: 'filipino',
+    ENGLISH: 'english'
+};
+
 const INTENT = {
+    UNKNOWN: "unknown",
     GREETINGS: "greetings",
     BOT_STATUS: "bot_status",
     BOT_IDENTITY: "bot_identity",
@@ -44,477 +50,681 @@ const INTENT = {
 };
 
 const responses = [
-     {
+    {
         intent: INTENT.GREETINGS,
-        pattern: [
-            "hello", "hi", "hey", "greetings", 
-            "good morning", "good afternoon", "good evening", 
-            "howdy", "what's up"
-        ],
-        reply: "Hi there! What can I help you with today?",
-        filipino_reply: "Mabuhay! Paano kita matutulungan ngayon?",
+        pattern: {
+            en: [
+                "hello", "hi", "hey", "greetings",
+                "good morning", "good afternoon", "good evening",
+                "howdy", "what's up"],
+            fil: [
+                "hoy", "oy", "huy", "uy", "magandang pagbati",
+                "magandang umaga", "magandang hapon", "magandang gabi",
+                "anong balita"]
+        },
+        reply: {
+            en: "Hi there! What can I help you with today?",
+            fil: "Mabuhay! Paano kita matutulungan ngayon?"
+        },
     },
     {
         intent: INTENT.BOT_STATUS,
-        pattern: ["how are you", "how's it going", "how are you doing", "are you doing great"],
-        reply: "Doing great! I'm excited to help you find the information you require!",
-        filipino_reply: "Ayos lang! Excited akong tulungan ka na mahanap ang impormasyong kailangan mo!"
+        pattern: {
+            en: ["how are you", "how's it going", "how are you doing", "are you doing great"],
+            fil: ["kamusta ka", "kumusta ka", "okay ka ba"]
+        },
+        reply: { en: "Doing great! I'm excited to help you find the information you require!", fil: "Ayos lang! Excited akong tulungan ka na mahanap ang impormasyong kailangan mo!" }
     },
     {
         intent: INTENT.BOT_IDENTITY,
-        pattern: [
-            "what are you", "how are you made", "who made you", "who created you"
-        ],
-        reply: "I am a node.js / ejs interactive chatbot developed for SDEV265 as a School of IT information resource and a capstone project for the course.",
-        filipino_reply: "Ako ay isang interactive chatbot na ginawa gamit ang node.js / ejs para sa SDEV265 bilang isang mapagkukunan ng impormasyon ng School of IT at isang capstone project para sa kurso."
+        pattern: {
+            en: [
+                "what are you", "how are you made", "who made you", "who created you"
+            ],
+            fil: [
+                "ano ka", "paano ka ginawa", "sino ang gumawa sa iyo", "sino ang lumikha sa iyo"
+            ]
+        },
+        reply: { en: "I am a node.js / ejs interactive chatbot developed for SDEV265 as a School of IT information resource and a capstone project for the course.", fil: "Ako ay isang interactive chatbot na ginawa gamit ang node.js / ejs para sa SDEV265 bilang isang mapagkukunan ng impormasyon ng School of IT at isang capstone project para sa kurso." }
     },
     {
         intent: INTENT.BOT_NAME,
-        pattern: [
-            "what's your name", "what can i call you", "who are you",
-            "your name", "do you have a name"
-        ],
-        reply: "My full name is IvyBot, but you can call me Ivy",
-        filipino_reply: "Ang buong pangalan ko ay IvyBot, pero maaari mo akong tawaging Ivy"
+        pattern: {
+            en: [
+                "what's your name", "what can i call you", "who are you", "your name", "do you have a name"
+            ],
+            fil: [
+                "ano ang pangalan mo", "ano ang tawag sa iyo", "sino ka", "pangalan mo", "may pangalan ka ba"
+            ]
+        },
+        reply: { en: "My full name is IvyBot, but you can call me Ivy", fil: "Ang buong pangalan ko ay IvyBot, pero maaari mo akong tawaging Ivy" }
     },
     {
         intent: INTENT.CAMPUS_INFO_GENERAL,
-        pattern: [
-            "what campuses are there","campus locations", "where are the campuses located", 
-            "campus location", "where are the campuses located", "list the campuses"
-        ],
-        reply: "Here's some information about our campuses",
-        filipino_reply: "Narito ang ilang impormasyon tungkol sa aming mga lokasyon ng kampus",
+        pattern: {
+            en: [
+                "what campuses are there", "campus locations", "where are the campuses located",
+                "campus location", "where are the campuses located", "list the campuses"
+            ],
+            fil: [
+                "ano ang mga campus", "ano ang mga lokasyon ng campus", "saan ang mga campus",
+                "saan matatagpuan ang mga campus", "ilista ang mga campus", "mga lokasyon ng campus"
+            ]
+        },
+        reply: { en: "Here's some information about our campuses", fil: "Narito ang ilang impormasyon tungkol sa aming mga lokasyon ng kampus" },
         url: "https://www.ivytech.edu/locations/",
         link: "Campus Locations"
     },
     {
         intent: INTENT.DEAN_INFO,
-        pattern: [
-            "who is the dean", "dean of", "where is the dean", "what is the dean", "dean info", "dean information"
-        ],
-        reply: "I can help you find information about the dean!",
-        filipino_reply: "Maaari kitang tulungan na mahanap ang impormasyon tungkol sa mga dekano sa Ivy Tech!",
+        pattern: {
+            en: [
+                "who is the dean", "dean of", "where is the dean", "what is the dean", "dean info", "dean information"
+            ],
+            fil: [
+                "sino ang dean", "dean ng", "nasaan ang dean", "ano ang dean", "impormasyon tungkol sa dean", "dean impormasyon"
+            ]
+        },
+        reply: { en: "I can help you find information about the dean!", fil: "Maaari kitang tulungan na mahanap ang impormasyon tungkol sa mga dekano sa Ivy Tech!" },
         url: "https://whitepages.ivytech.edu/?first_name=&last_name=&userid=&location=all&role=faculty&role=staff&title=Dean&bee_syrup_tun=&submit=+Search+",
         link: "White Pages Entry"
     },
     {
         intent: INTENT.ADMISSIONS_INFO_GENERAL,
-        pattern: ["can you give me information about admissions", "admissions"],
-        reply: "Here's some information about admissions!",
-        filipino_reply: "Narito ang ilang impormasyon tungkol sa admisyon!",
+        pattern: {
+            en: ["can you give me information about admissions", "admissions", "admission details", "admission process", "how to apply"], fil: ["impormasyon tungkol sa pagpasok", "mga detalye sa pagpasok", "mga proseso ng pagpasok",
+                "mga alintuntunin sa pagpasok", "paano mag-apply"]
+        },
+        reply: { en: "Here's some information about admissions!", fil: "Narito ang ilang impormasyon tungkol sa admisyon!" },
         url: "https://www.ivytech.edu/admissions/",
         link: "Admissions"
     },
     {
         intent: INTENT.ENROLLMENT_INFO_GENERAL,
-        pattern: ["can you give me information about enrollment", "enrollment"],
-        reply: "Here's some information about enrollment!",
-        filipino_reply: "Narito ang ilang impormasyon tungkol sa enrollment!",
+        pattern: {
+            en: ["can you give me information about enrollment", "enrollment", "how to enroll"], fil: ["maaari ka bang magbigay ng impormasyon tungkol sa enrollment", "paano mag-enroll",
+                "proceso ng pag-enroll", "paraan ng pag-enroll", "mga kinakailangan sa pag-enroll",
+                "paano mag enroll"]
+        },
+        reply: { en: "Here's some information about enrollment!", fil: "Narito ang ilang impormasyon tungkol sa enrollment!" },
         url: "https://www.ivytech.edu/admissions/",
         link: "Enrollment"
     },
     {
         intent: INTENT.INSTRUCTOR_INFO_SDEV265,
-        pattern: [
-            "who is instructor for SDEV265",
-            "who teaches SDEV265",
-            "SDEV265 instructor",
-            "who is the professor for SDEV265",
-            "who is my SDEV265 teacher",
-            "who is teaching SDEV265 this semester",
-            "SDEV265 faculty",
-        ],
-        reply: "SDEV265 is taught by several instructors depending on campus and semester. Please check the official College Scheduler for the most current instructor information",
-        filipino_reply: "Ang SDEV265 ay itinuturo ng ilang mga instruktor depende sa kampus at semestre. Mangyaring tingnan ang opisyal na College Scheduler para sa pinakabagong impormasyon tungkol sa instruktor",
+        pattern: {
+            en: [
+                "who is instructor for SDEV265",
+                "who teaches SDEV265",
+                "SDEV265 instructor",
+                "who is the professor for SDEV265",
+                "who is my SDEV265 teacher",
+                "who is teaching SDEV265 this semester",
+                "SDEV265 faculty",
+            ],
+            fil: [
+                "sino ang instructor para sa SDEV265", "sino ang nagtuturo ng SDEV265",
+                "instructor ng SDEV265", "sino ang propesor para sa SDEV265",
+                "sino ang aking guro sa SDEV265", "sino ang nagtuturo ng SDEV265 ngayong semestre",
+                "faculty ng SDEV265"
+            ]
+        },
+        reply: { en: "SDEV265 is taught by several instructors depending on campus and semester. Please check the official College Scheduler for the most current instructor information", fil: "Ang SDEV265 ay itinuturo ng ilang mga instruktor depende sa kampus at semestre. Mangyaring tingnan ang opisyal na College Scheduler para sa pinakabagong impormasyon tungkol sa instruktor" },
         url: "https://ivytech.search.collegescheduler.com/",
         link: "College Scheduler"
     },
     {
         intent: INTENT.INSTRUCTOR_INFO_GENERAL,
-        pattern: [
-            "who is the instructor for", "who teaches", "instructor",
-            "who is the professor for", "who is my teacher", "who is teaching this semester",
-            "faculty", "course schedule", "class schedule",
-        ],
-        reply: "The instructor for this course is subject to change each semester. Please check the official College Scheduler for the most current instructor information.",
-        filipino_reply: "Ang instruktor para sa kursong ito ay maaaring magbago bawat semestre. Mangyaring tingnan ang opisyal na College Scheduler para sa pinakabagong impormasyon tungkol sa instruktor.",
+        pattern: {
+            en: [
+                "who is the instructor for", "who teaches", "instructor",
+                "who is the professor for", "who is my teacher", "who is teaching this semester",
+                "faculty", "course schedule", "class schedule",
+            ], fil: ["sino ang mga instruktor sa school of it", "sino ang mga guro sa school of it",
+                "sino ang mga propesor sa school of it", "mga instruktor ng school of it",
+                "mga guro ng school of it", "mga propesor ng school of it", "sino ang mga nagtuturo sa school of it"
+            ]
+        },
+        reply: { en: "The instructor for this course is subject to change each semester. Please check the official College Scheduler for the most current instructor information.", fil: "Ang instruktor para sa kursong ito ay maaaring magbago bawat semestre. Mangyaring tingnan ang opisyal na College Scheduler para sa pinakabagong impormasyon tungkol sa instruktor." },
         url: "https://ivytech.search.collegescheduler.com/",
         link: "College Scheduler"
     },
     {
         intent: INTENT.COURSE_INFO_GENERAL,
-        pattern: [
-            "course description", "course descriptions","prerequisites for", "course details", "course info", "course information", "course syllabus", 
-            "course outline", "course overview", "course topics", "course content", "course objectives", "course goals",
-            "what will I learn in", "what do I learn in", "what are the learning outcomes for", "what are the learning objectives for"
-        ],
-        reply: "For detailed information about courses, including descriptions and prerequisites, please visit the course description page",
-        filipino_reply: "Para sa detalyadong impormasyon tungkol sa mga kurso, kabilang ang mga paglalarawan at mga kinakailangan, mangyaring bisitahin ang pahina ng paglalarawan ng kurso sa ibaba.",
+        pattern: {
+            en: [
+                "course description", "course descriptions", "prerequisites for", "course details", "course info", "course information", "course syllabus",
+                "course outline", "course overview", "course topics", "course content", "course objectives", "course goals",
+                "what will I learn in", "what do I learn in", "what are the learning outcomes for", "what are the learning objectives for"
+            ], fil: ["paglalarawan ng kurso", "mga paglalarawan ng kurso", "mga kinakailangan bago kuhain ang", "mga detalye ng kurso",
+                "panguhaning-ideya ng kurso", "nilalaman ng kurso", "mga paksa ng kurso", "mga layunin kurso",
+                "mga hangarin ng kurso", "ano ang aking matututunan sa", "ano ang mag layunin ng pagkaturo para sa"
+            ]
+        },
+        reply: { en: "For detailed information about courses, including descriptions and prerequisites, please visit the course description page or provide me a course code and I can give you a direct link.", fil: "Para sa detalyadong impormasyon tungkol sa mga kurso, kabilang ang mga paglalarawan at mga kinakailangan, mangyaring bisitahin ang pahina ng paglalarawan ng kurso, o magbigay lamang ng course code at maibibigay ko sa iyo ang direktang link." },
         url: "https://catalog.ivytech.edu/content.php?catoid=11&navoid=1255",
         link: "Course Descriptions"
     },
     {
         intent: INTENT.PHONE_NUMBER_INFO,
-        pattern: [ 
+        pattern: {
+            en: [
                 "phone number", "what is the phone number", "contact by phone",
                 "how can i call", "how can i reach", "contact number"
-        ]
+            ], fil: ["numero ng telepono", "ano ang numero ng telepono", "makipag-ugnayan sa telepono",
+                "paano ako makatawag", "ano ang contact number", "numero ng contact", "sino ang matatawagan",
+                "paano ako makakahiling ng tulong", "paano ako makakakuha ng tulong",
+                "ano ang phone number", "sino ang pwede kong tagawan para sa tulong"
+            ]
+        },
     },
     {
-        intent : INTENT.ADDRESS_INFO,
-        pattern: [
-            "campus address", "campus location", "what is the address for",
-            "where is ivytech located", "ivytech address",
-            "directions to campus", "how do i get to campus", "where is campus"
-        ],
-        reply: "Let me help you find the address information.",
-        filipino_reply: "Tulungan ko kayong mahanap ang address information."
+        intent: INTENT.ADDRESS_INFO,
+        pattern: {
+            en: [
+                "campus address", "campus location", "what is the address for",
+                "where is ivytech located", "ivytech address",
+                "directions to campus", "how do i get to campus", "where is campus"
+            ], fil: ["ano ang address", "ano ang lokasyon", "saan kayo matatagpuan", "saan ang lokasyon",
+                "lokasyon ng campus", "address ng campus"
+            ]
+        },
+        reply: { en: "Let me help you find the address information.", fil: "Tulungan ko kayong mahanap ang address information." }
     },
     {
         intent: INTENT.PROGRAM_INFO,
-        pattern: [
-            "what programs", "what programs ivy tech", "what kind of programs do you offer",
-            "what programs ivytech", "what programs does ivytech offer", "programs offered ivytech",
-            "programs offered ivy tech", "programs ivytech", "programs ivy tech", "programs"
-        ],
-        reply: "Here are the programs you can find at IvyTech!",
-        filipino_reply: "Narito ang mga programa na maaari mong makita sa IvyTech!",
+        pattern: {
+            en: [
+                "what programs", "what programs ivy tech", "what kind of programs do you offer",
+                "what programs ivytech", "what programs does ivytech offer", "programs offered ivytech",
+                "programs offered ivy tech", "programs ivytech", "programs ivy tech", "programs"
+            ], fil: ["ano ang mga programa", "ano ang mga programa sa ivy tech", "ano ang mga uri ng programa na inaalok ninyo",
+                "ano ang mga programa ng ivytech", "ano ang mga programa na inaalok ng ivytech", "mga programang inaalok ng ivytech",
+                "mga programang inaalok ng ivy tech", "mga programa ng ivytech", "mga programa ng ivy tech", "mga programa"
+            ]
+        },
+        reply: { en: "Here are the programs you can find at IvyTech!", fil: "Narito ang mga programa na maaari mong makita sa IvyTech!" },
         url: "https://www.ivytech.edu/programs/",
         link: "Programs"
     },
     {
         intent: INTENT.CERTIFICATION_INFO,
-        pattern: [
-            "certifications", "does ivytech offer certifications", "certifications ivytech", "certifications ivy tech",
-         ],
-        reply: "Certainly!  Here is more information about Degrees and Certifications",
-        filipino_reply: "Siyempre! Narito ang karagdagang impormasyon tungkol sa Mga Degree at Sertipikasyon",
+        pattern: {
+            en: [
+                "certifications", "does ivytech offer certifications", "certifications ivytech", "certifications ivy tech",
+            ], fil: ["ano ang mga sertipikasyon", "ano ang mga sertipikasyon na inaalok ninyo", "mga sertipikasyon na inaalok ng ivytech",
+                "mga sertipikasyon na inaalok ng ivy tech", "mga sertipikasyon ng ivytech", "mga sertipikasyon ng ivy tech",
+                "mga sertipikasyon"
+            ]
+        },
+        reply: { en: "Certainly!  Here is more information about Degrees and Certifications", fil: "Siyempre! Narito ang karagdagang impormasyon tungkol sa Mga Degree at Sertipikasyon" },
         url: "https://www.ivytech.edu/programs/degrees-certificates/",
         link: "Degrees and Certifications"
     },
     {
         intent: INTENT.APPLICATION_PROCESS,
-        pattern: [
-            "how can i apply to the school of it", "application process", "it application process",
-            "how do i apply to the school of it", "how do i apply to ivy tech", "how can i apply to ivy tech",
-            "how do i apply to ivytech", "how can i apply to ivytech", "application process ivy tech",
-            "application process ivytech", "application process for school of it", "application process for ivy tech",
-            "application process for ivytech"
-        ],
-        reply: "Here's some information about the application process!",
-        filipino_reply: "Narito ang ilang impormasyon tungkol sa proseso ng aplikasyon!",
+        pattern: {
+            en: [
+                "how can i apply to the school of it", "application process", "it application process",
+                "how do i apply to the school of it", "how do i apply to ivy tech", "how can i apply to ivy tech",
+                "how do i apply to ivytech", "how can i apply to ivytech", "application process ivy tech",
+                "application process ivytech", "application process for school of it", "application process for ivy tech",
+                "application process for ivytech"
+            ], fil: ["paano ako mag-aapply sa school of it", "proseso ng aplikasyon", "proseso ng aplikasyon para sa it",
+                "paano ako mag-aapply sa ivy tech", "paano ako mag-aapply sa ivytech", "paano mag-apply sa ivy tech",
+                "paano mag-apply sa ivytech", "proseso ng aplikasyon ivy tech", "proseso ng aplikasyon ivytech",
+                "proseso ng aplikasyon para sa school of it", "proseso ng aplikasyon para sa ivy tech"
+            ]
+        },
+        reply: { en: "Here's some information about the application process!", fil: "Narito ang ilang impormasyon tungkol sa proseso ng aplikasyon!" },
         url: "https://www.ivytech.edu/admissions/apply-now/",
         link: "Application Process"
     },
     {
         intent: INTENT.CREDIT_HOUR_INFO,
-        pattern: [
-            "what are the minimum credit hours i can take", "minimum credit hours", "credit hours",
-            "how many credit hours can i take", "how many credit hours do i need", "credit hours needed",
-            "minimum credit hours ivy tech", "minimum credit hours ivytech", "credit hours ivy tech",
-            "credit hours ivytech", "how many credit hours ivy tech", "how many credit hours ivytech",
-            "how many credit hours do i need ivy tech", "how many credit hours do i need ivytech",
-            "credit hours needed ivy tech", "credit hours needed ivytech"
-        ],
-        reply: "Here's some information about credit hours!",
-        filipino_reply: "Narito ang ilang impormasyon tungkol sa mga credit hour!",
+        pattern: {
+            en: [
+                "what are the minimum credit hours i can take", "minimum credit hours", "credit hours",
+                "how many credit hours can i take", "how many credit hours do i need", "credit hours needed",
+                "minimum credit hours ivy tech", "minimum credit hours ivytech", "credit hours ivy tech",
+                "credit hours ivytech", "how many credit hours ivy tech", "how many credit hours ivytech",
+                "how many credit hours do i need ivy tech", "how many credit hours do i need ivytech",
+                "credit hours needed ivy tech", "credit hours needed ivytech"
+            ], fil: ["ano ang pinakamababa na yunit ng kurso na maaari kong kunin", "pinakamababa na yunit ng kurso", "yunit ng kurso",
+                "ilang yunit ng kurso ang maaari kong kunin", "ilang yunit ng kurso ang kailangan ko", "yunit ng kurso na kailangan",
+                "pinakamababang yunit ng kurso ivy tech", "pinakamababang yunit ng kurso ivytech", "yunit ng kurso ivy tech",
+                "yunit ng kurso ivytech",
+                "ilang yunit ng kurso ang kailangan ko ivy tech", "ilang yunit ng kurso ang kailangan ko ivytech",
+                "yunit ng kurso na kailangan ivy tech", "yunit ng kurso na kailangan ivytech"
+            ]
+        },
+        reply: { en: "Here's some information about credit hours!", fil: "Narito ang ilang impormasyon tungkol sa mga credit hour!" },
         url: "https://ivytech.edusupportcenter.com/shp/ivytech/article?articleId=1510102&pk=192307&articleTag=gh_faapp",
         link: "Credit Hours"
     },
     {
         intent: INTENT.TRANSFER_PROGRAMS_INFO,
-        pattern: [
-            "what programs can transfer to a 4 year institution", "transfer programs", "transfer programs ivy tech",
-            "tsap", "tsap transfer", "tsap transfer programs", "transfer programs ivytech",
-            "what programs can transfer to a 4 year institution ivy tech", "what programs can transfer to a 4 year institution ivytech",
-            "transfer programs for ivy tech", "transfer programs for ivytech", "transfer programs to 4 year institution",
-            "transfer programs to 4 year institution ivy tech", "transfer programs to 4 year institution ivytech",
-            "tsap ivy tech", "tsap ivytech", "tsap transfer ivy tech", "tsap transfer ivytech",
-            "tsap transfer programs ivy tech", "tsap transfer programs ivytech"
-        ],
-        reply: "Here is some information regarding program transfers!",
-        filipino_reply: "Narito ang ilang impormasyon tungkol sa paglipat ng programa!",
+        pattern: {
+            en: [
+                "what programs can transfer to a 4 year institution", "transfer programs", "transfer programs ivy tech",
+                "tsap", "tsap transfer", "tsap transfer programs", "transfer programs ivytech",
+                "what programs can transfer to a 4 year institution ivy tech", "what programs can transfer to a 4 year institution ivytech",
+                "transfer programs for ivy tech", "transfer programs for ivytech", "transfer programs to 4 year institution",
+                "transfer programs to 4 year institution ivy tech", "transfer programs to 4 year institution ivytech",
+                "tsap ivy tech", "tsap ivytech", "tsap transfer ivy tech", "tsap transfer ivytech",
+                "tsap transfer programs ivy tech", "tsap transfer programs ivytech"
+            ], fil: ["ano ang mga programang maaaring mag-transfer sa isang 4 na taong institusyon", "mga programang transfer",
+                "mga programang transfer ivy tech", "tsap", "tsap transfer", "tsap transfer programs",
+                "mga programang transfer ivytech", "ano ang mga programang maaaring mag-transfer sa isang 4 na taong institusyon ivy tech",
+                "ano ang mga programang maaaring mag-transfer sa isang 4 na taong institusyon ivytech",
+                "mga programang transfer para sa ivy tech", "mga programang transfer para sa ivytech",
+                "mga programang transfer sa 4 na taong institusyon", "mga programang transfer sa 4 na taong institusyon ivy tech",
+                "mga programang transfer sa 4 na taong institusyon ivytech",
+                "tsap ivy tech", "tsap ivytech", "tsap transfer ivy tech", "tsap transfer ivytech",
+                "tsap transfer programs ivy tech", "tsap transfer programs ivytech"
+            ]
+        },
+        reply: { en: "Here is some information regarding program transfers!", fil: "Narito ang ilang impormasyon tungkol sa paglipat ng programa!" },
         url: "https://www.ivytech.edu/programs/special-programs-for-students/transfer-options/#accordion-c09fe912eeb048249ddc340cc1a51ee5-0",
         link: "Participating Schools by Program"
     },
     {
         intent: INTENT.AVAILABLE_PROGRAMS,
-        pattern: [
-            "what programs and courses are available", "what programs are available", "available programs",
-            "available programs ivy tech", "available programs ivytech", "what programs are available ivy tech",
-            "what programs are available ivytech",
-        ],
-        reply: "Ivy Tech offers more than 70 programs including Nursing, Cloud Technologies, Cybersecurity, Precision Agriculture, and Business Administration. Please the link below to more!",
-        filipino_reply: "Ivy Tech ay nag-aalok ng higit sa 70 mga programa kabilang ang Nursing, Cloud Technologies, Cybersecurity, Precision Agriculture, at Business Administration. Maaring pindutin ang link sa ibaba para sa karagdagan!",
+        pattern: {
+            en: [
+                "what programs and courses are available", "what programs are available", "available programs",
+                "available programs ivy tech", "available programs ivytech", "what programs are available ivy tech",
+                "what programs are available ivytech",
+            ], fil: ["ano ang mga mayroon na programa at kurso", "ano ang mga mayroon na programa", "mayroon na mga programa",
+                "mayroon na mga programa ivy tech", "mayroon na mga programa ivytech", "ano ang mga mayroon na programa ivy tech",
+                "ano ang mga mayroon na programa ivytech"
+            ]
+        },
+        reply: { en: "Ivy Tech offers more than 70 programs including Nursing, Cloud Technologies, Cybersecurity, Precision Agriculture, and Business Administration. Please the link below to more!", fil: "Ivy Tech ay nag-aalok ng higit sa 70 mga programa kabilang ang Nursing, Cloud Technologies, Cybersecurity, Precision Agriculture, at Business Administration. Maaring pindutin ang link sa ibaba para sa karagdagan!" },
         url: "https://www.ivytech.edu/programs/all-academic-programs/",
         link: "All Academic Programs"
     },
     {
         intent: INTENT.TUITION_FEES,
-        pattern: [
-            "what are the tuition and fees", "tuition and fees", "tuition fees",
-            "tuition and fees ivy tech", "tuition and fees ivytech", "tuition fees ivy tech",
-            "tuition fees ivytech", "what are the tuition and fees ivy tech", "what are the tuition and fees ivytech",
-            "costs", "costs ivy tech", "costs ivytech", "what are the costs", "what are the costs ivy tech",
-            "what are the costs ivytech", "payment"
-        ],
-        reply: "Tuition and fees vary by program and residency status. Detailed information is available on Ivy Tech's tuition page.",
-        filipino_reply: "Ang mga matrikula at iba pang mga bayarin ay nag-iiba depende sa programa at katayuan ng paninirahan. Ang detalyadong impormasyon ay makukuha sa pahina ng matrikula ng Ivy Tech.",
+        pattern: {
+            en: [
+                "what are the tuition and fees", "tuition and fees", "tuition fees",
+                "tuition and fees ivy tech", "tuition and fees ivytech", "tuition fees ivy tech",
+                "tuition fees ivytech", "what are the tuition and fees ivy tech", "what are the tuition and fees ivytech",
+                "costs", "costs ivy tech", "costs ivytech", "what are the costs", "what are the costs ivy tech",
+                "what are the costs ivytech", "payment"
+            ], fil: ["ano ang mga matrikula at iba pang mga bayarin", "matrikula at iba pang mga bayarin", "mga bayarin sa matrikula",
+                "matrikula at iba pang mga bayarin ivy tech", "matrikula at iba pang mga bayarin ivytech", "mga bayarin sa matrikula ivy tech",
+                "mga bayarin sa matrikula ivytech", "ano ang mga matrikula at iba pang mga bayarin ivy tech", "ano ang mga matrikula at iba pang mga bayarin ivytech",
+                "mga gastos", "mga gastusin ivy tech", "mga gastusin ivytech", "ano ang mga gastos", "ano ang mga gastos ivy tech",
+                "ano ang mga gastos ivytech", "pagbabayad"
+            ]
+        },
+        reply: { en: "Tuition and fees vary by program and residency status. Detailed information is available on Ivy Tech's tuition page.", fil: "Ang mga matrikula at iba pang mga bayarin ay nag-iiba depende sa programa at katayuan ng paninirahan. Ang detalyadong impormasyon ay makukuha sa pahina ng matrikula ng Ivy Tech." },
         url: "https://www.ivytech.edu/tuition-aid/tuition-fees/",
         link: "Tuition and Fees"
     },
     {
         intent: INTENT.FINANCIAL_AID_OPTIONS,
-        pattern: [
-            "what financial aid options are available", "financial aid options", "financial aid",
-            "financial aid ivy tech", "financial aid ivytech", "what are the financial aid options ivy tech",
-            "what are the financial aid options ivytech", "financial aid options ivy tech", "financial aid options ivytech",
-            "financial aid", "grants", "scholarships", "loans", "financial deadlines"
-        ],
-        reply: "Ivy Tech offers various financial aid options including grants, scholarships, and loans. Important deadlines can be found on the financial aid page",
-        filipino_reply: "Ivy Tech ay nag-aalok ng iba't ibang mga opsyon sa pinansyal na tulong kabilang ang mga grant, scholarship, at mga pautang. Ang mga mahahalagang petsa ay makikita sa pahina ng pinansyal na tulong",
+        pattern: {
+            en: [
+                "what financial aid options are available", "financial aid options", "financial aid",
+                "financial aid ivy tech", "financial aid ivytech", "what are the financial aid options ivy tech",
+                "what are the financial aid options ivytech", "financial aid options ivy tech", "financial aid options ivytech",
+                "financial aid", "grants", "scholarships", "loans", "financial deadlines"
+            ], fil: ["ano ang mga opsyon sa pinansyal na tulong", "mga opsyon sa pinansyal na tulong", "pinansyal na tulong",
+                "pinansyal na tulong ivy tech", "pinansyal na tulong ivytech", "ano ang mga opsyon sa pinansyal na tulong ivy tech",
+                "ano ang mga opsyon sa pinansyal na tulong ivytech", "mga opsyon sa pinansyal na tulong ivy tech", "mga opsyon sa pinansyal na tulong ivytech",
+                "pinansyal na tulong", "mga grant", "mga iskolarship", "mga pautang", "mga deadline sa pinansyal na tulong"
+            ]
+        },
+        reply: { en: "Ivy Tech offers various financial aid options including grants, scholarships, and loans. Important deadlines can be found on the financial aid page", fil: "Ivy Tech ay nag-aalok ng iba't ibang mga opsyon sa pinansyal na tulong kabilang ang mga grant, scholarship, at mga pautang. Ang mga mahahalagang petsa ay makikita sa pahina ng pinansyal na tulong" },
         url: "https://www.ivytech.edu/financial-aid/",
         link: "Financial Aid"
     },
     {
         intent: INTENT.STUDENT_PORTAL_ACCESS,
-        pattern: [
-            "how do I access my student portal (MyIvy)", "student portal", "access student portal",
-            "myivy", "myivy portal", "access myivy", "how do I access myivy",
-            "student portal ivy tech", "student portal ivytech", "access student portal ivy tech",
-            "access student portal ivytech", "myivy ivy tech", "myivy ivytech", "access myivy ivy tech",
-            "access myivy ivytech", "how do I access myivy ivy tech", "how do I access myivy ivytech"
-        ],
-        reply: "You can access your student portal by logging into MyIvy on the Ivy Tech website.",
-        filipino_reply: "Maaari mong ma-access ang iyong student portal sa pamamagitan ng pag-log in sa MyIvy sa website ng Ivy Tech.",
+        pattern: {
+            en: [
+                "how do I access my student portal (MyIvy)", "student portal", "access student portal",
+                "myivy", "myivy portal", "access myivy", "how do I access myivy",
+                "student portal ivy tech", "student portal ivytech", "access student portal ivy tech",
+                "access student portal ivytech", "myivy ivy tech", "myivy ivytech", "access myivy ivy tech",
+                "access myivy ivytech", "how do I access myivy ivy tech", "how do I access myivy ivytech"
+            ], fil: ["paano ako makaka-access sa student portal", "access sa student portal", "student portal",
+                "paano mag-access sa student portal", "paano ako makakapunta sa student portal", "student portal access",
+                "paano ako makaka-access sa student portal ivy tech", "paano ako makaka-access sa student portal ivytech",
+                "access sa student portal ivy tech", "access sa student portal ivytech", "student portal ivy tech",
+                "student portal ivytech", "paano mag-access sa student portal ivy tech", "paano mag-access sa student portal ivytech",
+                "paano ako makakapunta sa student portal ivy tech", "paano ako makakapunta sa student portal ivytech",
+                "student portal access ivy tech", "student portal access ivytech"
+            ]
+        },
+        reply: { en: "You can access your student portal by logging into MyIvy on the Ivy Tech website.", fil: "Maaari mong ma-access ang iyong student portal sa pamamagitan ng pag-log in sa MyIvy sa website ng Ivy Tech." },
         url: "https://www.ivytech.edu/myivy/",
         link: "Student Portal"
     },
     {
         intent: INTENT.CLASS_REGISTRATION,
-        pattern: [
-            "what is the process for registering for classes", "class registration", "register for classes",
-            "how do I register for classes", "register for classes ivy tech", "register for classes ivytech",
-            "class registration ivy tech", "class registration ivytech", "how do I register for classes ivy tech",
-            "how do I register for classes ivytech"
-        ],
-        reply: "You can register for classes through the Ivy Tech class search and schedule builder.",
-        filipino_reply: "Maaari kang magparehistro para sa mga klase sa pamamagitan ng Ivy Tech class search at schedule builder.",
+        pattern: {
+            en: [
+                "what is the process for registering for classes", "class registration", "register for classes",
+                "how do I register for classes", "register for classes ivy tech", "register for classes ivytech",
+                "class registration ivy tech", "class registration ivytech", "how do I register for classes ivy tech",
+                "how do I register for classes ivytech"
+            ], fil: ["ano ang proseso para magparehistro sa mga klase", "pagpaparehistro sa klase", "magparehistro sa mga klase",
+                "paano ako magparehistro sa mga klase", "magparehistro sa mga klase ivy tech", "magparehistro sa mga klase ivytech",
+                "pagpaparehistro sa klase ivy tech", "pagpaparehistro sa klase ivytech", "paano ako magparehistro sa mga klase ivy tech",
+                "paano ako magparehistro sa mga klase ivytech"
+            ]
+        },
+        reply: { en: "You can register for classes through the Ivy Tech class search and schedule builder.", fil: "Maaari kang magparehistro para sa mga klase sa pamamagitan ng Ivy Tech class search at schedule builder." },
         url: "https://www.ivytech.edu/classes/how-to-register-for-classes/",
         link: "Registration 101"
     },
     {
         intent: INTENT.TRANSCRIPT_REQUEST,
-        pattern: [
-            "how do I get my transcripts", "transcript request", "request transcripts",
-            "how do I request my transcripts", "transcripts ivy tech", "transcripts ivytech"
-        ],
-        reply: "Transcripts can be requested through the Registrar's office.",
-        filipino_reply: "Ang mga transcript ay maaaring hilingin sa pamamagitan ng opisina ng Registrar.",
+        pattern: {
+            en: [
+                "how do I get my transcripts", "transcript request", "request transcripts",
+                "how do I request my transcripts", "transcripts ivy tech", "transcripts ivytech"
+            ], fil: ["paano ako kukuha ng transcript", "pag kuha ng transcript", "transcript", "saan puwedeng kumuha ng transcript",
+                "saan pwedeng kumuha ng transcript", "sino ang pwedeng kontakin para sa transcript", "sino ang puwedeng kontakin para sa transcript",
+                "paano ako makakakuha ng transcript ivy tech", "paano ako makakakuha ng transcript ivytech",
+                "pag kuha ng transcript ivy tech", "pag kuha ng transcript ivytech", "transcript ivy tech",
+                "san puwedeng hilingin ang transcript ivy tech", "san puwedeng hilingin ang transcript ivytech",
+                "pag hiling ng transcript ivy tech", "pag hiling ng transcript ivytech",
+                "transcript ivytech"
+            ]
+        },
+        reply: { en: "Transcripts can be requested through the Registrar's office.", fil: "Ang mga transcript ay maaaring hilingin sa pamamagitan ng opisina ng Registrar." },
         url: "https://ivytech.edusupportcenter.com/shp/ivytech/viewarticles?articleId=1510845",
         link: "Registrar/Transcripts"
     },
     {
         intent: INTENT.STUDENT_SERVICES,
-        pattern: [
-            "what student services are available", "student services", "services for students",
-            "student services ivy tech", "student services ivytech", "what student services are available ivy tech",
-            "what student services are available ivytech"
-        ],
-        reply: "Ivy Tech offers various student services including career coaching, academic advising, and library resources.",
-        filipino_reply: "Ivy Tech ay nag-aalok ng iba't ibang serbisyo para sa mga estudyante kabilang ang career coaching, academic advising, at library resources.",
+        pattern: {
+            en: [
+                "what student services are available", "student services", "services for students",
+                "student services ivy tech", "student services ivytech", "what student services are available ivy tech",
+                "what student services are available ivytech"
+            ], fil: [
+                "ano ang mga serbisyo para sa mga mag-aaral", "mga serbisyo para sa mga mag-aaral", "serbisyo para sa mga mag-aaral",
+                "mga serbisyo para sa mga mag-aaral ivy tech", "mga serbisyo para sa mga mag-aaral ivytech",
+                "ano ang mga serbisyo para sa mga mag-aaral ivy tech", "ano ang mga serbisyo para sa mga mag-aaral ivytech"
+            ]
+        },
+        reply: { en: "Ivy Tech offers various student services including career coaching, academic advising, and library resources.", fil: "Ivy Tech ay nag-aalok ng iba't ibang serbisyo para sa mga estudyante kabilang ang career coaching, academic advising, at library resources." },
         url: "https://www.ivytech.edu/student-services/",
         link: "Student Services"
     },
     {
         intent: INTENT.FIND_ADVISOR,
-        pattern: [
-            "how do I find my advisor", "find my advisor", "academic advisor",
-            "how do I find my advisor ivy tech", "how do I find my advisor ivytech", "find my advisor ivy tech",
-            "find my advisor ivytech", "academic advisor ivy tech", "academic advisor ivytech"
-        ],
-        reply: "You can find your advisor by visiting the advising page on the Ivy Tech website.",
-        filipino_reply: "Maaari mong mahanap ang iyong akademikong tagapayo sa pamamagitan ng pagbisita sa pahina ng advising sa website ng Ivy Tech.",
+        pattern: {
+            en: [
+                "how do I find my advisor", "find my advisor", "academic advisor",
+                "how do I find my advisor ivy tech", "how do I find my advisor ivytech", "find my advisor ivy tech",
+                "find my advisor ivytech", "academic advisor ivy tech", "academic advisor ivytech"
+            ], fil: ["paano ko mahahanap ang aking tagapayo", "hanapin ang aking tagapayo", "academic advisor",
+                "paano ko mahahanap ang aking tagapayo ivy tech", "paano ko mahahanap ang aking tagapayo ivytech",
+                "hanapin ang aking tagapayo ivy tech", "hanapin ang aking tagapayo ivytech",
+                "akademikong tagapayo", "akademikong tagapayo ivytech"
+            ]
+        },
+        reply: { en: "You can find your advisor by visiting the advising page on the Ivy Tech website.", fil: "Maaari mong mahanap ang iyong akademikong tagapayo sa pamamagitan ng pagbisita sa pahina ng advising sa website ng Ivy Tech." },
         url: "https://www.ivytech.edu/advising/",
         link: "Advising"
     },
     {
         intent: INTENT.BOOKSTORE_INFO,
-        pattern: [
-            "what is the bookstore's location and hours", "bookstore location and hours", "bookstore hours",
-            "bookstore location", "bookstore ivy tech", "bookstore ivytech", "what is the bookstore's location and hours ivy tech",
-            "what is the bookstore's location and hours ivytech", "bookstore location ivy tech", "bookstore location ivytech",
-            "bookstore hours ivy tech", "bookstore hours ivytech"
-        ],
-        reply: "The bookstore's location and hours can be found on the Ivy Tech campus stores page.",
-        filipino_reply: "Ang lokasyon at oras ng bookstore ng paaralan ay makikita sa pahina ng campus stores ng Ivy Tech.",
+        pattern: {
+            en: [
+                "what is the bookstore's location and hours", "bookstore location and hours", "bookstore hours",
+                "bookstore location", "bookstore ivy tech", "bookstore ivytech", "what is the bookstore's location and hours ivy tech",
+                "what is the bookstore's location and hours ivytech", "bookstore location ivy tech", "bookstore location ivytech",
+                "bookstore hours ivy tech", "bookstore hours ivytech"
+            ], fil: ["ano ang lokasyon at oras ng bookstore", "lokasyon at oras ng bookstore", "oras ng bookstore",
+                "lokasyon ng bookstore", "bookstore ivy tech", "bookstore ivytech", "ano ang lokasyon at oras ng bookstore ivy tech",
+                "ano ang lokasyon at oras ng bookstore ivytech", "lokasyon ng bookstore ivy tech", "lokasyon ng bookstore ivytech",
+                "oras ng bookstore ivy tech", "oras ng bookstore ivytech"
+            ]
+        },
+        reply: { en: "The bookstore's location and hours can be found on the Ivy Tech campus stores page.", fil: "Ang lokasyon at oras ng bookstore ng paaralan ay makikita sa pahina ng campus stores ng Ivy Tech." },
         url: "https://www.ivytech.edu/student-services/campus-stores/",
         link: "Campus Stores"
     },
     {
         intent: INTENT.SCHOLARSHIP_APPLICATION,
-        pattern: [
-            "how do I apply for scholarships", "apply for scholarships", "scholarships",
-            "scholarships ivy tech", "scholarships ivytech", "how do I apply for scholarships ivy tech",
-            "how do I apply for scholarships ivytech", "apply for scholarships ivy tech", "apply for scholarships ivytech",
-            "scholarships application ivy tech", "scholarships application ivytech"
-        ],
-        reply: "You can apply for scholarships through the Ivy Tech scholarships page.",
-        filipino_reply: "Maaari kang mag-apply para sa mga iskorlaship sa pamamagitan ng pahina ng Ivy Tech Scholarships.",
+        pattern: {
+            en: [
+                "how do I apply for scholarships", "apply for scholarships", "scholarships",
+                "scholarships ivy tech", "scholarships ivytech", "how do I apply for scholarships ivy tech",
+                "how do I apply for scholarships ivytech", "apply for scholarships ivy tech", "apply for scholarships ivytech",
+                "scholarships application ivy tech", "scholarships application ivytech"
+            ], fil: ["paano ako mag-aapply para sa iskolarships", "mag-apply para sa iskolarships", "iskolarships",
+                "iskolarships ivy tech", "iskorlarships ivytech", "mga iskolarship", "iskolarships sa ivy tech",
+                "iskorlaships sa ivytech", "iskolarship aplikasyon ivy tech", "iskolarship ivytech"
+            ]
+        },
+        reply: { en: "You can apply for scholarships through the Ivy Tech scholarships page.", fil: "Maaari kang mag-apply para sa mga iskorlaship sa pamamagitan ng pahina ng Ivy Tech Scholarships." },
         url: "https://www.ivytech.edu/scholarships/",
         link: "Scholarships"
     },
     {
         intent: INTENT.ACADEMIC_STANDING,
-        pattern: [
-            "how do I check my academic standing", "information on my academic standing",
-            "academic standing", "check academic standing"
-        ],
-        reply: "You can check your academic standing through the academic progress page.",
-        filipino_reply: "Maaari mong suriin ang iyong akademikong katayuan sa pamamagitan ng pahina ng pag-unlad ng akademiko",
+        pattern: {
+            en: [
+                "how do I check my academic standing", "information on my academic standing",
+                "academic standing", "check academic standing"
+            ], fil: ["paano ko malalaman ang aking academic standing", "paano ko masusuri ang aking katayuan sa akademya",
+                "impormasyon sa aking katayuan sa akademya", "surian ng katayuan sa akademya"
+            ]
+        },
+        reply: { en: "You can check your academic standing through the academic progress page.", fil: "Maaari mong suriin ang iyong akademikong katayuan sa pamamagitan ng pahina ng pag-unlad ng akademiko" },
         url: "https://www.ivytech.edu/tuition-aid/financial-aid/satisfactory-academic-progress-sap/",
         link: "Academic Success"
     },
     {
         intent: INTENT.LIBRARY_INFO,
-        pattern: [
-            "what are the library resources and services", "are there any library resources and services",
-            "library information"
-        ],
-        reply: "Ivy Tech's library resources and services can be accessed through the libraries page.",
-        filipino_reply: "Ang mga mapagkukunan at serbisyo ng silid-aklatan ng Ivy Tech ay maaaring ma-access sa pamamagitan ng pahina ng mga silid-aklatan.",
+        pattern: {
+            en: [
+                "what are the library resources and services", "are there any library resources and services",
+                "library information"
+            ], fil: ["ano ang mga mapagkukunan at serbisyo ng aklatan sa paaralan", "ano ang mga impormasyon ukol sa aklatan sa paaralan",
+                "akalatan ng paaralan", "aklatan", "impormasyon sa aklatan",
+                "ano ang mga mapagkukunan at serbisyo ng silid-aklatan sa paaralan", "ano ang mga impormasyon ukol sa silid-aklatan sa paaralan",
+                "silid-aklatan ng paaralan", "silid-aklatan", "impormasyon sa silid-aklatan",
+                "ano ang mga mapagkukunan at serbisyo ng silid aklatan sa paaralan", "ano ang mga impormasyon ukol sa silid aklatan sa paaralan",
+                "silid aklatan ng paaralan", "silid aklatan", "impormasyon sa silid aklatan"
+            ]
+        },
+        reply: { en: "Ivy Tech's library resources and services can be accessed through the libraries page.", fil: "Ang mga mapagkukunan at serbisyo ng silid-aklatan ng Ivy Tech ay maaaring ma-access sa pamamagitan ng pahina ng mga silid-aklatan." },
         url: "https://www.ivytech.edu/student-services/libraries/",
         link: "Libraries"
     },
     {
         intent: INTENT.STUDENT_LIFE,
-        pattern: [
-            "how do I get involved in clubs and organizations", "student life", "campus life",
-            "how to get involved", "student council", "leadership opportunities", "campus events",
-            "college experience", "student government", "clubs", "organizations"
-        ],
-        reply: "You can get involved in clubs and organizations through the student life page.",
-        filipino_reply: "Maaari kang makihalok sa mga klub at organisasyon sa pamamagitan ng page ng buhay estudyante.",
+        pattern: {
+            en: [
+                "how do I get involved in clubs and organizations", "student life", "campus life",
+                "how to get involved", "student council", "leadership opportunities", "campus events",
+                "college experience", "student government", "clubs", "organizations"
+            ], fil: ["paano ako makakasali sa mga klub at organisasyon", "paano ako makikihalok sa mga klub at samahan",
+                "pamumuhay ng estudyante", "ano ang buhay-estudyante", "ano ang buhay estudyante", "paano makihalok",
+                "paano maging bahagi", "mga kaganapan sa kampus", "mga aktibidad sa kampus", "paano sumali sa pamahalaang estudyante",
+                "kamusta ang buhay ng mga estudyante", "ano ang student life", "paano ang student life",
+                "mga organisasyon sa kampus", "mga club sa campus"
+            ]
+        },
+        reply: { en: "You can get involved in clubs and organizations through the student life page.", fil: "Maaari kang makihalok sa mga klub at organisasyon sa pamamagitan ng page ng buhay estudyante." },
         url: "https://www.ivytech.edu/student-life/",
         link: "Student Life"
     },
     {
         intent: INTENT.DUAL_CREDIT,
-        pattern: [
-            "what is the process for dual credit enrollment", "how do i enroll in dual credit courses",
-            "what steps are required fo dual credit enrollment", "how does dual credit enrollment work",
-            "information on dual credit", "what do i need to do to register for dual credit", "dual credit"
+        pattern: {
+            en: [
+                "what is the process for dual credit enrollment", "how do i enroll in dual credit courses",
+                "what steps are required fo dual credit enrollment", "how does dual credit enrollment work",
+                "information on dual credit", "what do i need to do to register for dual credit", "dual credit"
 
-        ],
-        reply: "Information on dual credit enrollment can be found on the dual credit enrollment page.",
-        filipino_reply: "Ang impormasyon sa dual credit enrollment ay makikita sa dual credit enrollment page.",
+            ], fil: ["ano ang proceso para sa dual credit enrollment", "paano mag enroll sa mga dual credit courses",
+                "anong mga hakbang para sa dual credit enrollment", "paano gumagana ang dual credit enrollment",
+                "impormasyon sa dual credit", "ano ang mga kailangan kong gawin para magparehistro sa dual credit",
+                "dual credit"
+            ]
+        },
+        reply: { en: "Information on dual credit enrollment can be found on the dual credit enrollment page.", fil: "Ang impormasyon sa dual credit enrollment ay makikita sa dual credit enrollment page." },
         url: "https://www.ivytech.edu/programs/special-programs-for-students/high-school-programs/dual-credit/",
         link: "Dual Credit Enrollment"
     },
     {
         intent: INTENT.IVYONLINE_INFO,
-        pattern: [
-            "how do i access online courses (ivyonline)", "ivyonline courses", "access ivyonline",
-            "ivy online", "ivyonline", "ivy online", "ivy tech online", "ivytech online"
-        ],
-        reply: "You can access online courses through the IvyOnline page.",
-        filipino_reply: "Maaari mong ma-access ang mga online na kurso sa pamamagitan ng IvyOnline page.",
+        pattern: {
+            en: [
+                "how do i access online courses (ivyonline)", "ivyonline courses", "access ivyonline",
+                "ivy online", "ivyonline", "ivy online", "ivy tech online", "ivytech online"
+            ], fil: ["paano ako makaka-access sa mga online na kurso", "paano ako makakapasok sa mga online na kurso sa ivyonline",
+                "mga kurso sa ivyonline", "mag-access sa ivyonline", "mag access sa ivyonline", "mag-access sa ivy online",
+                "mag access sa ivy online", "ivyonline", "ivy online", "ivy tech online", "ivytech online"
+            ]
+        },
+        reply: { en: "You can access online courses through the IvyOnline page.", fil: "Maaari mong ma-access ang mga online na kurso sa pamamagitan ng IvyOnline page." },
         url: "https://www.ivytech.edu/ivyonline/",
         link: "IvyOnline"
     },
     {
         intent: INTENT.CAMPUS_PARKING,
-        pattern: [
-            "what are the parking options on campus", "campus parking options", "parking on campus",
-            "where can students park on campus", "parking areas on campus", "student parking",
-            "campus parking", "student parking"
-        ],
-        reply: "Parking options on campus are detailed on the campus stores page.",
-        filipino_reply: "Ang mga pagpipilian sa paradahan sa campus ay nakadetalye sa pahina ng mga tindahan ng campus.",
+        pattern: {
+            en: [
+                "what are the parking options on campus", "campus parking options", "parking on campus",
+                "where can students park on campus", "parking areas on campus", "student parking",
+                "campus parking", "student parking"
+            ], fil: ["ano ang mga pagpipilian sa paradahan sa kampus", "ano ang mga pag pipilian sa paradahan sa kampus",
+                "saan pwedeng mag paradahan ang mga estudyante sa kampus", "mga lugar ng paradahan sa kampus", "paradahan ng estudyante",
+                "kampus paradahan", "paradahan", "san pwede mag park sa campus", "mga opsyon sa parking sa campus",
+                "saan puwede mag park sa campus"
+            ]
+        },
+        reply: { en: "Parking options on campus are detailed on the campus stores page.", fil: "Ang mga pagpipilian sa paradahan sa campus ay nakadetalye sa pahina ng mga tindahan ng campus." },
         url: "https://www.ivytech.edu/locations/indianapolis/maps-and-tour/",
         link: "Campus Stores"
     },
     {
         intent: INTENT.CAMPUS_EVENTS,
-        pattern: [
-            "how do I get information about campus events", "where can i get updates on campus events",
-            "campus events", "events on campus", "activities on campus", "student events", "college events"
-        ],
-        reply: "You can find information about campus events on the events page.",
-        filipino_reply: "Makakahanap ka ng impormasyon tungkol sa mga kaganapan sa campus sa pahina ng mga kaganapan!",
+        pattern: {
+            en: [
+                "how do I get information about campus events", "where can i get updates on campus events",
+                "campus events", "events on campus", "activities on campus", "student events", "college events"
+            ], fil: ["paano ako makakakuha ng impormasyon tungkol sa mga kaganapan sa campus", "saan ako makakakuha ng mga update sa mga kaganapan sa campus",
+                "mga kaganapan sa campus", "mga kaganapan sa campus", "mga aktibidad sa campus", "mga kaganapan ng mag-aaral",
+                "mga kaganapan ng mag aaral", "mga kaganapan sa kolehiyo"
+            ]
+        },
+        reply: { en: "You can find information about campus events on the events page.", fil: "Makakahanap ka ng impormasyon tungkol sa mga kaganapan sa campus sa pahina ng mga kaganapan!" },
         url: "https://ivylife.ivytech.edu/events",
         link: "Campus Events"
     },
     {
         intent: INTENT.ONLINE_STUDENT_SUPPORT,
-        pattern: [
-            "what support is available for online students", "online student support", "support for online students",
-            "support for online learners", "how can online student get help", "services for online students"
-        ],
-        reply: "Support for online students is available through the online support page.",
-        filipino_reply: "Ang suporta para sa mga online na mag-aaral ay makukuha sa pamamagitan ng online na pahina ng suporta.",
+        pattern: {
+            en: [
+                "what support is available for online students", "online student support", "support for online students",
+                "support for online learners", "how can online student get help", "services for online students"
+            ], fil: ["ilan ang mga estudyante", "populasyon ng estudyante", "bilang ng mga estudyante",
+                "ilang mag aaral ang nag-aaral sa ivy tech", "ilang mag aaral ang nag aaral sa ivy tech",
+                "populasyon ng mag aaral sa ivy tech", "populasyon ng mag aaral sa ivytech",
+                "populasyon ng mag-aaral ivy tech", "populasyon ng mag aaral ivy tech",
+                "bilang ng mga mag-aaral ivy tech", "bilang ng mga mag-aaral ivytech",
+                "bilang ng mga mag aaral ivy tech", "bilang ng mga mag aaral ivytech"
+            ]
+        },
+        reply: { en: "Support for online students is available through the online support page.", fil: "Ang suporta para sa mga online na mag-aaral ay makukuha sa pamamagitan ng online na pahina ng suporta." },
         url: "https://www.ivytech.edu/online-support/",
         link: "Online Support"
     },
     {
         intent: INTENT.STUDENT_POPULATION,
-        pattern: [
-            "how many students are there", "student population", "number of students",
-            "how many students ivy tech", "how many students ivytech", "student population ivy tech",
-            "student population ivytech", "number of students ivy tech", "number of students ivytech"
-        ],
-        reply: "During the 2023-2024 academic year, we served over 198,000 students!",
-        filipino_reply: "Noong 2023-2024 academic year, nagsilbi kami sa mahigit 198,000 estudyante!",
+        pattern: {
+            en: [
+                "how many students are there", "student population", "number of students",
+                "how many students ivy tech", "how many students ivytech", "student population ivy tech",
+                "student population ivytech", "number of students ivy tech", "number of students ivytech"
+            ], fil: ["ilan ang mga estudyante", "populasyon ng estudyante", "bilang ng mga estudyante",
+                "ilang mag aaral ang nag-aaral sa ivy tech", "ilang mag aaral ang nag aaral sa ivy tech",
+                "populasyon ng mag aaral sa ivy tech", "populasyon ng mag aaral sa ivytech",
+                "populasyon ng mag-aaral ivy tech", "populasyon ng mag aaral ivy tech",
+                "bilang ng mga mag-aaral ivy tech", "bilang ng mga mag-aaral ivytech",
+                "bilang ng mga mag aaral ivy tech", "bilang ng mga mag aaral ivytech"]
+        },
+        reply: { en: "During the 2023-2024 academic year, we served over 198,000 students!", fil: "Noong 2023-2024 academic year, nagsilbi kami sa mahigit 198,000 estudyante!" },
         url: "https://www.ivytech.edu/about-ivy-tech/college-operations/diversity-equity-belonging/",
         link: "Students"
     },
     {
         intent: INTENT.MILITARY_VETERAN_SERVICES,
-        pattern: [
-            "military and veteran services", "services for military and veterans", "military services",
-            "veteran services", "military and veteran services ivy tech", "military and veteran services ivytech",
-            "services for military and veterans ivy tech", "services for military and veterans ivytech",
-            "military services ivy tech", "military services ivytech", "veteran services ivy tech",
-            "veteran services ivytech", "military veterans", "military active", "active duty", "gi bill",
-            "does ivy tech offers benefits for military veterans"
-        ],
-        reply: "Ivy Tech offers various services for active military and veteran students, including counseling, academic advising, and career services.",
-        filipino_reply: "Nag-aalok ang Ivy Tech ng iba't ibang serbisyo para sa mga aktibong estudyanteng militar at beterano, kabilang ang pagpapayo, pagpapayo sa akademya, at mga serbisyo sa karera.",
+        pattern: {
+            en: [
+                "military and veteran services", "services for military and veterans", "military services",
+                "veteran services", "military and veteran services ivy tech", "military and veteran services ivytech",
+                "services for military and veterans ivy tech", "services for military and veterans ivytech",
+                "military services ivy tech", "military services ivytech", "veteran services ivy tech",
+                "veteran services ivytech", "military veterans", "military active", "active duty", "gi bill",
+                "does ivy tech offers benefits for military veterans"
+            ], fil: ["serbisyong militar at beterano", "serbisyo para sa militar at mga beterano", "serbisyong militar",
+                "serbisyo para sa mga beterano", "serbisyong militar at beterano ivy tech", "serbisyong militar at beterano ivytech",
+                "mga beterano ng militar", "aktibo sa militar", "aktibong tungkulin", "gi bill",
+                "nag-aalok ba ang ivy tech ng mga benepisyo para sa mga beterano ng militar"
+            ]
+        },
+        reply: { en: "Ivy Tech offers various services for active military and veteran students, including counseling, academic advising, and career services.", fil: "Nag-aalok ang Ivy Tech ng iba't ibang serbisyo para sa mga aktibong estudyanteng militar at beterano, kabilang ang pagpapayo, pagpapayo sa akademya, at mga serbisyo sa karera." },
         url: "https://www.ivytech.edu/student-services/support-services/va-education-benefits/",
         link: "VA Education Benefits"
     },
     {
         intent: INTENT.TESTING_SERVICES,
-        pattern: [
-            "testing services", "services for testing", "test preparation",
-            "exam services", "testing services ivy tech", "testing services ivytech",
-            "services for testing ivy tech", "services for testing ivytech",
-            "test preparation ivy tech", "test preparation ivytech", "exam services ivy tech",
-            "how do i schedule a test", 
-        ],
-        reply: "Ivy Tech offers various testing services, for more detials click the link below",
-        filipino_reply: "Nag-aalok ang Ivy Tech ng iba't ibang mga serbisyo sa pagsubok, para sa higit pang mga detalye i-click ang link sa ibaba",
+        pattern: {
+            en: [
+                "testing services", "services for testing", "test preparation",
+                "exam services", "testing services ivy tech", "testing services ivytech",
+                "services for testing ivy tech", "services for testing ivytech",
+                "test preparation ivy tech", "test preparation ivytech", "exam services ivy tech",
+                "how do i schedule a test",
+            ], fil: ["serbisyo sa pagsusulit", "serbisyo sa pag susulit", "pagsusulit at serbisyong kaugnay nito",
+                "pag susulit at serbisyong kaugnay nito", "pag hahanda sa pag susulit", "paghahanda sa pagsusulit",
+                "iskedyul ng pagsusulit", "iskedyul ng pag susulit", "magpaparehistro sa pagsusulit",
+                "mag paparehistro sa pagsusulit", "mga serbisyo sa pagsusulit", "paano ako mag schedule ng test sa testing center",
+                "paano ako mag-schedule ng test sa testing center"
+            ]
+        },
+        reply: { en: "Ivy Tech offers various testing services, for more detials click the link below", fil: "Nag-aalok ang Ivy Tech ng iba't ibang mga serbisyo sa pagsubok, para sa higit pang mga detalye i-click ang link sa ibaba" },
         url: "https://www.ivytech.edu/student-services/support-services/testing-services/",
         link: "Testing Services"
     },
     {
         intent: INTENT.CLASS_FORMATS,
-        pattern: [
-            "learnanywhere class", "online class", "hybrid class", "traditional class", "blended class",
-            "what class formats are available", "types of classes", "class delivery methods", "how are classes offered",
-            "in-person class", "virtual class", "remote class", "what is a hybrid class", "what is a blended class",
-            "what is a learnanywhere class", "what is an online class", "what is a traditional class", "class formats",
-            "course delivery", "is this online or in person", "learning format",
-            "learnanywhere", "learn anywhere course", "is this a learn anywhere course?", 
-            "learnanywhere course", "is this a learnanywhere course",
-        ],
-        reply: "Ivy Tech offers a variety of class formats, including online, hybrid, traditional, and more. For details about each format, please visit the link below.",
-        filipino_reply: "Nag-aalok ang Ivy Tech ng iba't ibang format ng klase, kabilang ang online, hybrid, tradisyonal, at higit pa. Para sa mga detalye tungkol sa bawat format, pakibisita ang link sa ibaba.",
+        pattern: {
+            en: [
+                "learnanywhere class", "online class", "hybrid class", "traditional class", "blended class",
+                "what class formats are available", "types of classes", "class delivery methods", "how are classes offered",
+                "in-person class", "virtual class", "remote class", "what is a hybrid class", "what is a blended class",
+                "what is a learnanywhere class", "what is an online class", "what is a traditional class", "class formats",
+                "course delivery", "is this online or in person", "learning format",
+                "learnanywhere", "learn anywhere course", "is this a learn anywhere course?",
+                "learnanywhere course", "is this a learnanywhere course",
+            ], fil: ["klaseng learnanywhere", "online na klase", "hybrid na klase", "tradisyunal na klase", "pinaghalong klase",
+                "anong mga format ng klase ang mayroon", "anong uri ng mga klase ang inaalok", "mga uri ng klase",
+                "paraan ng pag hahatid ng klase", "pamamaraan ng klase", "paano inaalok ang mga klase",
+                "personal na klase", "virtual na klase", "malayong klase", "ano ang hybrid na klase", "ano ang pinaghalong klase",
+                "ano ang klaseng learnanywhere", "ano ang online na klase", "ano ang tradisyunal na klase", "mga format ng klase",
+                "paghahatid ng kurso", "online ba ito o personal", "format ng pag-aaral",
+                "learnanywhere", "learnanywhere na kurso", "ito ba ay learnanywhere na kurso"
+            ]
+        },
+        reply: { en: "Ivy Tech offers a variety of class formats, including online, hybrid, traditional, and more. For details about each format, please visit the link below.", fil: "Nag-aalok ang Ivy Tech ng iba't ibang format ng klase, kabilang ang online, hybrid, tradisyonal, at higit pa. Para sa mga detalye tungkol sa bawat format, pakibisita ang link sa ibaba." },
         url: "https://www.ivytech.edu/classes/class-formats/",
         link: "Class Formats"
     }
-
 
 ];
 
@@ -1049,4 +1259,43 @@ const locations = [
     }
 ];
 
-module.exports = { responses, locations, INTENT };
+
+
+const COURSE_PREFIXES = [
+    "ABRK", "ACCT", "ADMF",
+    "AGRI", "ALTF", "AMSL", "ANTH",
+    "AOLS", "APHY", "ARAB", "ARTH",
+    "ARTS", "ASTR", "AUBR", "AUTI",
+    "AVIM", "AVIT", "BCOM", "BCOT",
+    "BCTI", "BIOL", "BIOT", "BOAT",
+    "BUSI", "BUSN", "CARD", "CATX",
+    "CHEM", "CHIN", "CIMG", "CINS",
+    "COMM", "CONT", "CPIN", "CPTR",
+    "CRIM", "CSCI", "CSIA", "CSTC",
+    "DBMS", "DENT", "DESN", "DHYG",
+    "DMSI", "ECED", "ECON", "EDSN",
+    "EDUC", "EECT", "EETC", "ENGL",
+    "ENGR", "ENGT", "ENRG", "ENTR",
+    "EPCS", "ESOL", "EXER", "FREN",
+    "GENS", "GEOG", "GEOL", "GERM",
+    "GLOB", "GRDN", "HIMT", "HIST",
+    "HLHS", "HOSP", "HPER", "HSPS",
+    "HUMA", "HUMS", "HVAC", "INDT",
+    "INFM", "ITSP", "IVYC", "IVYT",
+    "LEGS", "LIBA", "LOGM", "MAMO",
+    "MATH", "MEAS", "MEDL", "MEMS",
+    "METC", "MKTG", "MORT", "MPRO",
+    "MRIT", "MRTC", "MTTC", "NANO",
+    "NETI", "NGAS", "NRSG", "NSGA",
+    "NSGP", "OPTI", "PAET", "PARA",
+    "PARM", "PHAR", "PHIL", "PHLB",
+    "PHOT", "PHYS", "PLAS", "POLS",
+    "PPTC", "PRCM", "PROC", "PSYC",
+    "PTAS", "QUAL", "RADT", "RDTH",
+    "RESP", "SCIN", "SDEV", "SMDI",
+    "SOCI", "SPAN", "SPED", "SURG",
+    "SUST", "SVAD", "TMAS", "TRCK",
+    "VIDT", "VISC", "WELD"
+];
+
+module.exports = { responses, locations, INTENT, LANGUAGE, COURSE_PREFIXES };

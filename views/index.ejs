@@ -45,7 +45,7 @@
                     <!-- Ensure valid Ivy Tech email and will only accepts Ivy Tech email if the "Guest" is not chosen-->
                     <input type="email" id="schoolEmail" name="schoolEmail" placeholder="Enter your school email" pattern=".+@ivytech\.edu"> 
                     <button type="button" id="emailBack">Back</button>
-                    <button type="button" id="emailNext">Next</button>
+                    <button type="button" id="emailNext" disabled>Next</button>
                 </div>
                 <div id="questionSection" style="display:none;">
                     <input type="text" id="prompt" name="prompt" placeholder="Type a question..." required autofocus>
@@ -65,7 +65,7 @@
                        Are you sure you want to continue in <span id="languageConfirmName"></span>?
                     </div>
                     <div class="modal-footer">
-                        <button type="button" id="languageChangeBtn" class="btn btn-secondary" style="background-color:#d9d9d9"  data-bs-dismiss="modal">Change Language</button>
+                        <button type="button" id="languageChangeBtn" class="btn" style="background-color:#ffffff;color:#073c1f;border:1px solid rgba(11,79,43,0.14);" data-bs-dismiss="modal">Change Language</button>
                         <button type="button" id="languageContinueBtn" class="btn btn-primary" data-bs-dismiss="modal">Continue</button>
                     </div>
                 </div>
