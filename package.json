@@ -1,5 +1,5 @@
 {
-  "name": "sdev_265_team_blue_soit_chatbot",
+  "name": "sdev_265_fa24_teamblue_with_fa25_teambrown_contributions_soit_chatbot",
   "version": "1.0.0",
   "main": "app.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "dependencies": {
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.6.1",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "express-rate-limit": "^7.4.1",

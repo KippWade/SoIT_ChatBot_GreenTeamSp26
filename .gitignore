@@ -1,0 +1,4 @@
+node_modules/
+data/chat_session_logging.json
+.env
+data/unanswered_inquiries.json

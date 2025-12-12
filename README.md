@@ -3,6 +3,8 @@
 
 ## Installation
 
+- [From FA25: install dotenv (npm install dotenv) ]
+
 Note: These instructions will enable a local installation and demonstration of the IvyBot application. A web hosted solution will require additional development and consultation.
 
 Follow the instructions below to install IvyBot:
@@ -78,3 +80,4 @@ Instructions for using IvyBot:
 	-   You can keep sending messages to the chatbot and it will continue to respond.
     
 	-   Feel free to ask questions, request information, or just have a casual conversation.
+

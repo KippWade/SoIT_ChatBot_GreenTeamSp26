@@ -1,11 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:wght@400;700&&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Agbalumo&display=swap');
+
+/* Readability baseline variables */
+:root {
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  --fs-base: clamp(15px, 1.2vw + 12px, 18px); /* fluid base size */
+  --line-height: 1.5;
+  --text-color: #222222;
+  --brand-green: #8dc63f;
+}
+
+html {
+  overflow: hidden;
+  font-size: var(--fs-base);
+}
 
 body {
   max-width: 80%;
-  margin: 20px auto;
-  padding: 0 20px;
-  font-family: 'Noto Serif', serif;
+  margin: 5px auto;
+  padding: 0 20px 100px 20px;
+  font-family: var(--font-sans);
   background: #f5f5f5;
+  color: var(--text-color);
+  line-height: var(--line-height);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* 404 styling */
@@ -66,34 +84,37 @@ nav a:hover {
 /* nav & footer styles */
 nav {
   display: center;
-  margin-left: 0px;
-  margin-right: 0px;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: -5px;
+  width: 100vw;
   justify-content: space-between;
-  margin-bottom: 48px;
-  padding-bottom: 10px;
-  padding-top: 10px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  padding-top: 20px;
   border-bottom: 1px solid rgb(0, 0, 0);
-  text-transform: uppercase;
   background-color: #006648;
-  border-radius: 8px;
+  border-radius: 0;
 }
 
 nav ul {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: flex-end;
-  margin-top: 24px;
+  margin-top: 15px;
+  gap: 60px;
 }
 
 nav li {
   list-style-type: none;
-  margin-left: 0.15em;
-  margin-right: 0.15em;
 }
 
 nav h1 {
   text-align: center;
-  font-size: 3em;
+  font-size: 2.2em;
 }
 
 nav p {
@@ -106,6 +127,43 @@ nav a {
   text-align: center;
   color: #ffffff;
   font-weight: 700;
+}
+
+/* Hamburger / mobile nav toggle - hidden by default */
+#nav-toggle {
+  display: none;
+}
+
+.nav-toggle {
+  display: none; /* shown in media query */
+  position: absolute;
+  right: 20px;
+  top: 18px;
+  width: 36px;
+  height: 28px;
+  cursor: pointer;
+  z-index: 60;
+}
+
+.nav-toggle .bar {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background: #ffffff;
+  margin: 5px 0;
+  border-radius: 2px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* When checkbox is checked, animate bars into an X */
+#nav-toggle:checked + .nav-toggle .bar:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+#nav-toggle:checked + .nav-toggle .bar:nth-child(2) {
+  opacity: 0;
+}
+#nav-toggle:checked + .nav-toggle .bar:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
 }
 
 span.count {
@@ -148,13 +206,15 @@ h3 {
 
 .secondary-title {
   color: #8dc63f;
+  font-family: "Agbalumo", cursive;
 }
 
 .chat-container {
-  height: 60%;
-  width: 100%;
+  height: 75%;
+  width: auto;
   margin-left: auto;
   margin-right: auto;
+  min-height: calc(70vh - 75px);
 }
 
 .promptbox input[type=text]{
@@ -168,7 +228,7 @@ h3 {
   border-color: #d8d8d8;
   border-radius: 4px;
   cursor: pointer;
-  font-weight: 100;
+  font-weight: 600;
   font-size: 1em;
   display: inline-block;
   margin: 0 auto;
@@ -180,15 +240,160 @@ h3 {
   outline-width: medium;
 }
 
+/* Simple form styling with inline layout */
+#userTypeSection {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+/* Role dropdown and Next button sizing + color tweaks */
+#userTypeDropdownBtn {
+  font-size: 1rem;
+  background-color: #ffffff; /* white dropdown button */
+  color: #0b4f2b; /* dark green text to match brand */
+  border: 1px solid #d8d8d8;
+}
+#userTypeDropdownBtn:hover,
+#userTypeDropdownBtn:focus {
+  background-color: #fafafa;
+  color: #07381f;
+}
+
+.usertype-choice,
+.language-choice,
+.dropdown-menu .dropdown-item {
+  font-size: 1rem; /* make dropdown items readable */
+}
+
+#userTypeNext {
+  font-size: 1rem; /* Next button font size */
+}
+
+/* Muted (disabled) Next appearance */
+#userTypeNext:disabled,
+#emailNext:disabled {
+  background-color: #dcdcdc;
+  color: #6c6c6c;
+  border-color: #dcdcdc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* Enabled state for Next buttons */
+#userTypeNext:not(:disabled),
+#emailNext:not(:disabled) {
+  background-color: #006648;
+  color: white;
+  cursor: pointer;
+}
+
+#userTypeNext:not(:disabled):hover,
+#emailNext:not(:disabled):hover {
+  background-color: #8dc63f;
+}
+
+/* Ensure the dropdown toggle stays white even when Bootstrap applies outline classes */
+#userTypeDropdownBtn.show,
+#userTypeDropdownBtn:active,
+#userTypeDropdownBtn[aria-expanded="true"] {
+  background-color: #ffffff;
+  color: #0b4f2b;
+}
+
+/* Visibility helper: JS will remove the inline `display:none` to reveal sections.
+  We only use a `.visible` marker where a media-query needs to override layout (see #emailSection.visible below). */
+
+#userTypeSection label {
+  margin: 0;
+  white-space: nowrap;
+  font-weight: 600; 
+  font-size: 1rem;
+}
+
+select, input[type="email"] {
+  padding: 10px 30px 10px 14px;
+  border: 2px solid #d8d8d8;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
+}
+
+#userType {
+  width: 100px;
+}
+
+input[type="email"] {
+  width: 30%;
+  margin: 8px 0 12px 0;
+}
+
+select:focus, input[type="email"]:focus {
+  outline: none;
+  border-color: #8dc63f;
+}
+
+button[type="button"] {
+  background-color: #006648;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  white-space: nowrap;
+}
+
+button[type="button"]:hover {
+  background-color: #8dc63f;
+}
+
+/* Style the Back buttons differently for clearer affordance.
+   We target buttons whose id ends with "Back" (e.g. emailBack, questionBack).
+   This keeps the markup unchanged while allowing a distinct color and hover state. */
+button[id$="Back"] {
+  background-color: #ffffff; /* soft, muted background */
+  color: #0b4f2b; /* darker green for readable contrast */
+  border: 1px solid rgba(11,79,43,0.14);
+  padding: 9px 18px;
+  border-radius: 6px;
+  /* subtle outline for better separation from primary btn */
+  outline: 2px solid rgba(141,198,63,0.06);
+  outline-offset: 2px;
+}
+
+button[id$="Back"]:hover {
+  background-color: #e1e9e1;
+  color: #07381f;
+}
+
+/* Keep Back button appearance consistent when clicked or focused */
+button[id$="Back"]:active {
+  /* don't let active/pressed state darken it too much */
+  background-color: #dfe9df;
+  color: #07381f;
+}
+
+button[id$="Back"]:focus {
+  /* ensure focus uses the same visual language as focus-visible above */
+  outline: 3px solid rgba(141,198,63,0.22);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(141,198,63,0.06);
+}
+
 /* avatar styles */
 .avatar img{
-  width: 64px;
+  width: 44px;
 }
 
 /* bot message styles */
 .chat-body {
   overflow: auto;
-  max-height: 80%;
+  max-height: 73%;
 }
 
 .message.bot {  
@@ -200,13 +405,20 @@ h3 {
   background-color: white;
   display: flex;
   justify-content: left;
+  align-items: center;
   flex-wrap: nowrap;
   font-size: calc(0.5em + 1vmin);
-  width: 80%;
+  width: fit-content;
+  max-width: 85%;
+  margin-bottom: 15px;
 }
 
 .content{ 
   margin-left: 24px;
+}
+
+.message.bot p {
+  margin: 0; /* remove default p margins so text sits centered */
 }
 
 /* user message styles */
@@ -224,12 +436,29 @@ h3 {
   justify-content: right;
   flex-wrap: nowrap;
   font-size: calc(0.5em + 1vmin);
-  width: 80%;
+  width: fit-content;
+  max-width: 85%;
+  margin-bottom: 15px;
+}
+.message.user .content {
+  margin-left: 0; 
+  font-weight: 400;
 }
 
-.message.user content{ 
-  margin-left: 24px;
+/* Ensure bot content stacks and long links wrap instead of forming multi-column layouts */
+.message.bot .content {
+  display: block; 
+  white-space: normal;
+  font-weight: 400;
 }
+
+.message.bot .content a {
+  display: inline-block;
+  max-width: 100%;
+  overflow-wrap: anywhere; /* allow long URLs to break */
+  word-break: break-word;
+}
+
 
 .snippet {
   margin-left: 24px;
@@ -268,7 +497,8 @@ textarea {
   margin-left: auto;
   margin-right: auto;
   padding-top: 1%;  
-  max-width: 100%;
+  max-width: 15%;
+  height: auto;
 }
 
 #chatbotitle{
@@ -284,7 +514,7 @@ textarea {
 .chatdiv{
   margin: 0;
   padding-top: 25%;
-  padding-bottom: 30%;
+  padding-bottom: 15%;
 }
 #helptitle{
   padding-top: 5%;
@@ -332,164 +562,445 @@ textarea {
 }
 
 /* CSS for the Footer*/
-
-footer{
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  width: 100vw;
   background-color: #006648;
-  padding: 5px 2px 5px 2px;
-  border-radius: 8px;
-  font-size: calc(0.5em + 0.5vw);
-}
-#footerdiv{
-  display: flex;
-  justify-content: space-between;
-  margin-left: 16px;
-  margin-right: 16px;
-  color: #ffffff;
-}
-#footerlinks{
-  margin: 0px 16px 8px 16px;
-}
-#footerlinks p{
-  color: #ffffff;
-  display:none
-}
-#footerlinks a{
-  display: block;
-  text-decoration:none;
-  color: #ffffff;
-  font-weight: bold;
-}
-
-#footerlinks a:hover{
-  color:#8dc63f;
-}
-
-#footerphone{
-  color: #ffffff;
-  font-family: serif;
-  font-weight: bold;
-  margin: 8px 8px 8px 8px;
-}
-#copy{
-  text-align: center;
   color: #FFFFFF;
+  z-index: 50;
 }
 
+.footer .container {
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1rem 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
 
-/*  Adding the media query for a tablet*/
-@media (min-width: 600px){
+.footer .credits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  order: 0;
+}
 
-  .chat-container {
+.footer .credits .ivylogo {
+  max-width: 200px;
+  height: auto;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+.footer .credits p {
+  margin: 0;
+  font-family: 'Noto Serif', serif;
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.02em;
+  opacity: 0.9;
+  color: #FFFFFF;
+  text-align: center;
+}
+
+/* Vertical divider */
+.footer .container::before {
+  content: '';
+  width: 1px;
+  height: 4rem;
+  background: rgba(253, 240, 213, 0.3);
+  order: 1;
+}
+
+.footer .social-links {
+  order: 2;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.footer .social-links a {
+  display: inline-block;
+  transition: opacity 0.25s ease;
+}
+
+.footer .social-links a:hover {
+  opacity: 0.7;
+}
+
+.footer .social-links img {
+  width: 20px;
+  height: auto;
+  display: block;
+  filter: brightness(0) saturate(100%) invert(98%) sepia(6%) saturate(897%) hue-rotate(315deg) brightness(103%) contrast(98%);
+}
+
+/* Responsive nav: show hamburger and collapse links on small screens */
+@media (max-width: 800px) {
+  nav {
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  /* smaller base font for narrow screens to reduce visual clutter */
+  body {
+    font-size: 1.325rem;
+  }
+
+  /* show toggle (label) and visually hide checkbox input but keep it accessible */
+  #nav-toggle {
+    position: absolute;
+    left: -9999px;
+  }
+
+  .nav-toggle {
+    display: block;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 28px;
+    height: 20px;
+    cursor: pointer;
+    z-index: 60;
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+    padding: 2px;
+  }
+
+  .nav-toggle .bar {
+    height: 2px;
+    margin: 0;
+    /* consistent, slightly longer easing for transform so open/close match visually */
+    transition: transform 0.36s cubic-bezier(.2,.8,.2,1), opacity 0.28s ease;
+    transform-origin: center;
+    display: block;
     width: 80%;
+    background: #ffffff;
+    border-radius: 2px;
+    will-change: transform, opacity; /* hint to browser for smoother animation */
   }
 
-  /*Header css*/
-  .ivylogo{
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
-      padding-top: 1%;
+  /* Give the middle bar a tiny delay when re-appearing so the X settles before the middle line fades in */
+  .nav-toggle .bar:nth-child(2) {
+    transition-delay: 0.08s;
   }
 
-  #chatbotitle{
-      text-align: center;
-      padding-top: 3%;
-      padding-bottom: 3%;
-      color: #FFFFFF;
-      font-family: serif;
-      font-size: 40px;
+  /* checked state: create an even X and fade middle bar */
+  #nav-toggle:checked + .nav-toggle .bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  #nav-toggle:checked + .nav-toggle .bar:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+    transition-delay: 0.08s; /* remove delay when hiding so it disappears immediately */
+  }
+  #nav-toggle:checked + .nav-toggle .bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
   }
 
-  /* Css for the chat body */
+  /* collapse nav links but keep in DOM for smooth transition */
+  nav ul {
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    /* Keep the menu positioned absolutely so we don't toggle `position` or `display`
+       during open/close which causes layout jank. Animate max-height + opacity + transform. */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.36s cubic-bezier(.2,.8,.2,1), opacity 0.28s ease, transform 0.28s ease;
+    opacity: 0;
+    transform: translateY(-6px);
+    width: 100%;
+    position: absolute;
+    left: 0;
+    right: 0;
+   /* remove inherited top margin and anchor slightly above 100% to overlap the nav's 1px border
+     so the dropdown sits visually flush with no seam */
+   margin-top: 0;
+   top: calc(100% - 1px); /* overlap the nav's bottom border by 1px */
+  background-color: #006648;
+  padding: 0 0 0 0; /* no extra hidden padding when closed */
+  /* ensure the collapsed menu sits above most page content when opened; will be raised further when toggled */
+  z-index: 200000;
+    pointer-events: none; /* disable interactions when hidden */
+  }
 
-  .chatdiv{
-      margin: 0;
-      padding-top: 5%;
-      padding-bottom: 5%;
+  /* when toggled, expand menu smoothly without changing position/display. */
+  #nav-toggle:checked ~ .site-title ul {
+    max-height: 480px; /* large enough for menu content; transition will animate to this height */
+    opacity: 1;
+    transform: translateY(0);
+    padding: 6px 0 8px 0; /* reveal padding when opened */
+    pointer-events: auto; /* allow interactions when open */
+    box-shadow: 0 6px 18px rgba(0,0,0,0.18); /* subtle drop so it appears above content */
+    z-index: 200001; /* place the open dropdown above other page layers (footer, selects) */
   }
-  #helptitle{
-      padding-top: 12%;
-      text-align: center;
-      color: #000000;
-      font-family: serif;
-      font-size: 50px;
-      font-weight: bold;
+
+  /* make links full-width and stacked */
+  .site-title ul li {
+    width: 100%;
   }
-  footer{
-      font-size: 1em;
+
+  .site-title ul li a {
+    display: block;
+    width: 100%;
+    padding: 10px 16px;
+    text-align: center;
+    border-top: 1px solid rgba(255,255,255,0.06);
   }
-  #footerlinks p{
+
+  /* adjust title spacing */
+  .site-title h1 {
+    font-size: 1.25em;
+    padding-left: 12px;
+  }
+
+  /* make nav links slightly smaller on phones */
+  .site-title ul li a {
+    font-size: 0.95rem;
+  }
+
+  /* remove divider on small screens */
+  .footer .container::before {
+    content: none;
+  }
+  /* keep footer fixed but reduce footprint on small screens */
+  .footer .container {
+    padding: 0.75rem 12px;
+    gap: 0.5rem;
+    /* stack credits above socials on small screens */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .footer .credits .ivylogo {
+    max-width: 120px;
+    height: auto;
+    display: inline-block;
+    margin: 0;
+    padding: 0;
+  }
+
+  .footer .credits p {
+    margin: 0;
+    font-family: 'Noto Serif', serif;
+    font-style: italic;
+    font-size: 0.5rem;
+    letter-spacing: 0.02em;
+    opacity: 0.9;
+    color: #FFFFFF;
+    text-align: center;
+  }
+  .footer .social-links {
+    margin-top: 0.5rem;
+  }
+  .footer .social-links img {
+    width: 15px;
+    height: auto;
     display: block;
   }
-}
-
-
-/*  Adding the media query for the desktop*/
-@media (min-width: 1024px){
-  /*Header css*/
-  .headerdiv{
-      display: flex;    
-      height: 100px;
-      align-items: center;
-      justify-content: space-between;
+  .chat-container{
+    height: 75%;
+    width: 100%;
+    min-height: calc(93vh - 65px);
+  }
+  .avatar img{
+    width: 30px;
   }
 
-  #titlediv{
-      text-align: center;
-      margin: auto;
-      padding-top: 1%;
-      padding-right: 12%;
-  }
-  #chatbotitle{
-      font-size: 50px;    
-  }
-  
-  /*  Chatbot css*/
-  .chat-container {
-    height: 70%;
+  /* Small-screen form layout: stack controls vertically and make them full width */
+  #userTypeSection {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+    padding: 0 12px; /* keep a little horizontal padding on very small screens */
+    box-sizing: border-box;
   }
 
-  .chatdiv{
-      padding-top: 4%;
-      padding-bottom: 3%;
+  #userTypeSection label {
+    margin: 0 0 4px 0;
+    white-space: normal; /* allow wrapping on very small screens */
+    font-weight: 600;
+    font-size: 0.85rem;
   }
 
-  #helptitle{
-      padding-top: 5%;
-      padding-bottom: 5%;
-      text-align: center;
-      color: #000000;
-      font-family: serif;
-      font-size: 50px;
-      font-weight: bold;
-  }
-  #inputdiv{
-      display: flex;
-      margin: auto;
-      text-align: center;
-  }
-  #inputdiv input {
-      display: inline-block;
-      margin: 0 auto;
-      width: 70%;      
-  }
-  #linksdiv{    
-      display: flex;
-      margin: auto;
-      text-align: center;
-      padding: 3% 8% 5% 8%;
-  }
-  #linksdiv a{
-      display: inline-block;
-      margin: auto;
-      background-color: #006648;
-      border-radius: 25px;
-      padding: 8px 35px 11px 35px;
+  /* Make selects and email input expand to available width */
+  select, input[type="email"] {
+    padding: 9px 10px;
+    border: 2px solid #d8d8d8;
+    border-radius: 6px;
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    font-size: 0.85rem;
   }
 
-  /*   Footer css*/
-  footer{
-      background-color: #006648;
-      padding: 16px 2px 10px 2px;
+  /* Ensure native select dropdowns are rendered above fixed/footer elements and not clipped
+     by stacking contexts. We can't force the browser to open the menu below if there's
+     not enough viewport space, but this prevents clipping under fixed elements. */
+  select, #userType {
+    font-size: 0.85rem;
+    position: relative;
+    /* keep select above low page layers (footer) but below the mobile menu overlay
+       (we'll raise the menu z-index significantly when opened). */
+    z-index: 5000;
+    appearance: menulist-button;
+    -webkit-appearance: menulist-button;
+  }
+
+  /* Reduce the specific userType select width to full width inside stacked layout */
+  #userType {
+    width: 100%;
+  }
+
+  input[type="email"] {
+    width: 100%;
+    margin: 0;
+  }
+
+  /* Email step layout: put the input above and buttons side-by-side underneath */
+  #emailSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 10px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    align-items: center;
+  }
+
+  #emailSection input[type="email"] {
+    grid-column: 1 / -1;
+  }
+
+  #emailSection button[type="button"] {
+    width: 100%;
+  }
+
+  /* When using the `.visible` helper class, show the emailSection as grid on small screens */
+  #emailSection.visible {
+    display: grid;
+  }
+
+  select:focus, input[type="email"]:focus {
+    outline: none;
+    border-color: #8dc63f;
+  }
+
+  /* Accessible focus for keyboard users across the site */
+  :focus-visible {
+    outline: 3px solid var(--brand-green);
+    outline-offset: 2px;
+  }
+  /* Make buttons full-width and easier to tap on phones */
+  button[type="button"] {
+    background-color: #006648;
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: "Inter", sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  button[type="button"]:hover {
+    background-color: #8dc63f;
+  }
+
+  /* Make Next buttons smaller */
+  #userTypeNext,
+  #emailNext {
+    font-size: 0.75rem;
+    padding: 8px 10px;
+  }
+
+  /* Mobile: ensure Back button keeps a distinct, muted color when stacked full-width */
+  button[id$="Back"] {
+    background-color: #f2f6f2;
+    color: #0b4f2b;
+    border: 1px solid rgba(11,79,43,0.12);
+    border-radius: 6px;
+    outline: 2px solid rgba(141,198,63,0.06);
+    outline-offset: 2px;
+  }
+
+  button[id$="Back"]:hover {
+    background-color: #e6efe6;
+    color: #07381f;
+  }
+
+  /* Visible focus state for keyboard users */
+  button[id$="Back"]:focus-visible {
+    outline: 3px solid rgba(141,198,63,0.22);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 3px rgba(141,198,63,0.08);
+  }
+  .promptbox input[type=text]{
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 0.85rem;
+  }
+
+  /* Language dropdown buttons on small screens */
+  #languageDropdownBtn,
+  #userTypeDropdownBtn {
+    font-size: 0.75rem;
+    padding: 6px 12px;
+  }
+
+  .language-hint {
+    font-size: 0.75rem;
+  }
+
+  .language-choice,
+  .usertype-choice {
+    font-size: 0.75rem;
+  }
+
+  /* Make modal smaller on mobile */
+  .modal-dialog {
+    max-width: 90%;
+  }
+
+  .modal-header {
+    padding: 0.75rem;
+  }
+
+  .modal-title {
+    font-size: 0.9rem;
+  }
+
+  .modal-body {
+    padding: 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .modal-footer {
+    padding: 0.75rem;
+    gap: 0.5rem;
+  }
+
+  .modal-footer button {
+    font-size: 0.75rem;
+    padding: 6px 10px;
   }
 }

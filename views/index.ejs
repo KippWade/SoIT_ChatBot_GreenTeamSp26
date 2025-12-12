@@ -2,6 +2,7 @@
 <%- include('./partials/head.ejs') %>
 <body style="background-image: url(img/bg_faint.png);">
 
+
     <%- include('./partials/nav.ejs') %>
 
     <div class="chat-container">
@@ -9,77 +10,73 @@
             <div class="message bot">
                 <div class="avatar"><img src="img/ivybot_face.png"></div>
                 <div class="content">
-                    <p>Hi, I'm Ivy! I am here to assist you.</p><br>
+                    <p>Hi, I'm Ivy! I am here to assist you.</p>
                 </div>                       
             </div>
         </div>
+        <div class="language-hint" style="margin:8px 0 16px 0;color:#000;font-weight:600;">Please select your preferred language to continue</div>
+        <div class="language-menu">
+            <button id="languageDropdownBtn" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select Language</button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item language-choice" data-lang="english" href="#">English</a></li>
+                <li><a class="dropdown-item language-choice" data-lang="filipino" href="#">Filipino</a></li>
+            </ul>
+        </div>
         <div class="promptbox">
-            <form action="/ivybot" method="POST">
-                <input type="text" id="prompt" name="prompt" placeholder="Type a question..." required autofocus>
+            <form id="chatForm" action="#" onsubmit="return false;">
+                <!-- Hidden language input so server receives the chosen language with submissions -->
+                <input type="hidden" id="language" name="language" value="">
+                <div id="userTypeSection" style="display:none;">
+                    <label for="userType">Are you a guest, student, faculty, or staff?</label>
+                    <div class="btn-group">
+                        <button id="userTypeDropdownBtn" type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Select</button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item usertype-choice" data-value="Guest" href="#">Guest</a></li>
+                            <li><a class="dropdown-item usertype-choice" data-value="Student" href="#">Student</a></li>
+                            <li><a class="dropdown-item usertype-choice" data-value="Faculty" href="#">Faculty</a></li>
+                            <li><a class="dropdown-item usertype-choice" data-value="Staff" href="#">Staff</a></li>
+                        </ul>
+                    </div>
+                    <!-- hidden input kept as single source of truth for legacy JS/server -->
+                    <input type="hidden" id="userType" name="userType" value="">
+                    <button type="button" id="userTypeNext" class="btn btn-primary" disabled>Next</button>
+                </div>
+                <div id="emailSection" style="display:none;">
+                    <!-- Ensure valid Ivy Tech email and will only accepts Ivy Tech email if the "Guest" is not chosen-->
+                    <input type="email" id="schoolEmail" name="schoolEmail" placeholder="Enter your school email" pattern=".+@ivytech\.edu"> 
+                    <button type="button" id="emailBack">Back</button>
+                    <button type="button" id="emailNext" disabled>Next</button>
+                </div>
+                <div id="questionSection" style="display:none;">
+                    <input type="text" id="prompt" name="prompt" placeholder="Type a question..." required autofocus>
+                    <button type="submit" style="display:none"></button>
+                </div>
             </form>
         </div>
     </div>
+      <!-- Language confirmation modal (asks user if they want to continue with selected language) -->
+        <div class="modal fade" id="languageConfirmModal" tabindex="-1" aria-labelledby="languageConfirmModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="languageConfirmModalLabel">Chosen Language</h5>
+                    </div>
+                    <div class="modal-body">
+                       Are you sure you want to continue in <span id="languageConfirmName"></span>?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="languageChangeBtn" class="btn" style="background-color:#ffffff;color:#073c1f;border:1px solid rgba(11,79,43,0.14);" data-bs-dismiss="modal">Change Language</button>
+                        <button type="button" id="languageContinueBtn" class="btn btn-primary" data-bs-dismiss="modal">Continue</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-    
+        <!-- Bootstrap's JS Script (load before our chatbot script so bootstrap APIs are available) -->
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+     <!-- ChatBot Fetch Script -->
+     <script src="/scripts/chatbot.js"></script>
 
-    <!-- ChatBot Fetch Script -->
-    <script>
-        const form = document.querySelector('form'); 
-
-        form.addEventListener('submit', async (e) => {
-          e.preventDefault();
-
-            //create user query message
-            const chatBody = document.getElementById('chat-body'); 
-            const userMessage = document.createElement('div');
-            userMessage.classList.add('message', 'user');
-            const userMessageContent = document.createElement('div');
-            userMessageContent.classList.add('content');
-            userMessageContent.textContent = form.prompt.value;
-            userMessage.appendChild(userMessageContent);
-            chatBody.appendChild(userMessage);
-
-            // get the values
-            const prompt = form.prompt.value;
-
-            //reset form input
-            form.prompt.value = '';
-
-            //try to send the user prompt via POST
-            try {
-                const res = await fetch('/ivybot', {
-                    method: 'POST',              
-                    headers: { 'Content-Type': 'application/json'},
-                    body: JSON.stringify({ prompt })
-                });
-
-                const data = await res.json();
-                //console.log(data);
-
-                //generate bot response div
-                const botResponse = document.createElement('div');
-                botResponse.classList.add('message', 'bot');
-
-                const botMessageAvatar = document.createElement('div');
-                botMessageAvatar.classList.add('avatar');
-                botMessageAvatar.innerHTML = '<img src="img/ivybot_face.png">';
-
-                const botMessageContent = document.createElement('div');                
-                botMessageContent.classList.add('content');
-                botMessageContent.innerHTML = data.response;
-
-                botResponse.appendChild(botMessageAvatar);
-                botResponse.appendChild(botMessageContent);
-                chatBody.appendChild(botResponse);
-            }
-            catch (err) {
-                console.log(err);
-            }
-
-            //update the view by scrolling to the bottom of the conversation
-            chatBody.scrollTop = chatBody.scrollHeight;
-        });
-    </script> 
 
     <%- include('./partials/footer.ejs') %>
 
