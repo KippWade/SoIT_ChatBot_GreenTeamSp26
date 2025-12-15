@@ -15,10 +15,10 @@ Follow the instructions below to install IvyBot:
 -   **Clone the Repository:** Open your terminal and navigate to the directory where you want to clone the repository. Use the following command to clone the GitHub repository:
     
 
-	```git clone https://github.com/your-repository-url.git```
+	```git clone https://github.com/rohydro93/SoIT_ChatBot_BrownTeam.git your-repository-name```
     
 
--   **Replace** https://github.com/your-repository-url.git with the actual URL of the IvyBot repository (URL will be provided upon consultation and is not provided in this document to maintain long-term relevance).
+-   **Replace** `your-repository-name` replace it with your actual repository name
     
 -   **Navigate to the Project Directory:** Run the following command to change directory:
     
