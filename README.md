@@ -1,92 +1,97 @@
-# Project Information 
-This project was forked from SDEV 265 FA24 Blue Team and aims to help Ivy Tech students and staff use the chatbot as their _go-to_ source for information. We hope our contributions will be helpful to both users and fellow contributors.
+# IvyBot: Ivy Tech Student Chatbot
+
+This project is forked from the SDEV 265 FA24 Blue Team's original repository and enhances the IvyBot chatbot to serve as a reliable, go-to resource for Ivy Tech students and staff. Our improvements focus on accessibility, usability, and expanded functionality, making it easier for users to access campus information while providing valuable tools for developers and contributors.
 
 ## Key Features
-- Added Filipino Language 
-- Logs Conversations and Unanswered Inquiries
-- Improved the UI/UX
-- Expanded the Database
+- **Multilingual Support**: Added Filipino language for broader accessibility.
+- **Conversation Logging**: Automatically logs user conversations and unanswered inquiries for analysis and future improvements.
+- **Improved UI/UX**: Enhanced user interface with a more intuitive design, suggested prompts, and responsive layout.
+- **Expanded Database**: Updated knowledge base to include more comprehensive information on campus resources, classes, financial aid, tutoring, and website navigation.
 
-## Installation (Credits to Blue Team)
-Note: These instructions will enable a local installation and demonstration of the IvyBot application. A web hosted solution will require additional development and consultation.
+## Installation
+*Credits to the Blue Team for the foundational setup.*
 
-Follow the instructions below to install IvyBot:
+These instructions guide you through a local installation for testing and demonstration. For a web-hosted deployment, additional configuration (e.g., server setup) is required—consult with your team or instructor.
 
-1. **Clone the Repository:** Open your terminal and navigate to the directory where you want to clone the repository. Use the following command to clone the GitHub repository:
-    
-	```git clone https://github.com/rohydro93/SoIT_ChatBot_BrownTeam.git your-repository-name```    
+### Prerequisites
+- **Node.js**: Download and install from [nodejs.org](https://nodejs.org). Node.js is required for NPM (Node Package Manager) to handle dependencies.
 
-	- **Replace:** `your-repository-name` replace it with your actual repository name
-	
-    
-3.  **Navigate to the Project Directory:** Run the following command to change directory:
-    
-	```cd your-repository-name```
-	- **Replace:** `your-repository-name` replace it with your actual repository name
-    
+### Steps
+1. **Clone the Repository**:  
+   Open your terminal, navigate to your desired directory, and run:  
+   ```
+   git clone https://github.com/rohydro93/SoIT_ChatBot_BrownTeam.git your-repository-name
+   ```  
+   Replace `your-repository-name` with the name of your local folder (e.g., `IvyBot`).
 
-4.   **Install Dependencies:** Run the following command to install the necessary Node.js dependencies listed in the package.json file:
-	
-		`npm install`
-    
+2. **Navigate to the Project Directory**:  
+   ```
+   cd your-repository-name
+   ```  
+   Replace `your-repository-name` with the folder name from Step 1.
 
-5.   **Start the Server:** Once the dependencies are installed, start the server by running:
-    
-		`npm start`
-    
+3. **Install Dependencies**:  
+   Install the required Node.js packages from `package.json`:  
+   ```
+   npm install
+   ```
 
-6.  **Open Your Browser:** Open your web browser and go to http://localhost:3030 to view the IvyBot chat app.
-    
+4. **Start the Server**:  
+   Launch the application:  
+   ```
+   npm start
+   ```
 
-That's it! You should now have the Node.js app running and serving EJS pages. If you encounter any issues, feel free to request installation assistance.
+5. **Access the Chatbot**:  
+   Open a web browser and visit [http://localhost:3030](http://localhost:3030) to interact with IvyBot.
 
-## User Guide (Credits to Blue Team)
+If you encounter issues, check your Node.js installation or reach out for assistance. Common troubleshooting: Ensure ports are free and dependencies are up-to-date.
 
-Interacting with IvyBot could not be simpler and is based on typical conversational English. Instructions for using IvyBot:
+## User Guide
+*Credits to the Blue Team for the core interaction guidelines.*
 
--   **Open Your Web Browser:**
-    
+IvyBot is designed for simple, natural-language conversations. Here's how to get started:
 
-	-   Launch any web browser (e.g., Chrome, Firefox, Safari).
-    
+1. **Open a Web Browser**:  
+   Use any modern browser like Chrome, Firefox, or Safari.
 
--   **Navigate to the Chatbot URL:**
-    
+2. **Navigate to the Chatbot**:  
+   Go to [http://localhost:3030](http://localhost:3030) (or the hosted URL if deployed).
 
-	-   Enter the following URL in the address bar: http://localhost:3030 (replace with the actual URL if different).
-    
+3. **Start Chatting**:  
+   - Type your question in the input field at the bottom (e.g., "How do I apply for financial aid?").  
+   - Press Enter to send.  
+   - The chatbot will respond with helpful information, drawing from its expanded database.
 
--   **Start the Conversation:**
-    
+4. **Tips for Better Interactions**:  
+   - Use suggested prompts for quick access to common topics.  
+   - If the response isn't clear, rephrase your question.  
+   - Conversations are logged for quality improvement—feel free to explore!
 
-	-   Type your message in the text input field at the bottom of the chat window.
-    
-	-   Press the Enter key to send your message.
-    
+Enjoy seamless access to Ivy Tech resources. For advanced queries, the chatbot may suggest contacting staff.
 
--   **Receive Responses:**
-    
-
-	-   The chatbot will process your message and display a response in the chat window.
-    
-	-   If the chatbot’s response indicates a lack of understanding on its part, try to rephrase the question for better results.
-    
-
--   **Continue the Interaction:**
-    
-
-	-   You can keep sending messages to the chatbot and it will continue to respond.
-    
-	-   Feel free to ask questions, request information, or just have a casual conversation.
-
-## 
 ## Technologies Used
-- **[SDEV 265 FA25 Blue Team](https://github.com/LiongsonEnzo/SoIT_ChatBot)** | Original Creators 
-- **Bootstrap** | Responsive layout with its grid system and its icons
-- **Google Fonts** | Fonts used in the chatbot
-- **VS Code** | Coding the chatbot
-- **Google Chrome** | Interacting with the chatbot
-- **Git** | Version Control
-- **GitHub** | Remote Git Repository 
-- **VS Code extension: Go Live** | Previewing HTML & CSS Changes
-- **VS Code extension: Tree** | Visualizing Folder Structure
+- **Node.js**: Core runtime for the server-side application.
+- **Bootstrap**: For responsive layouts, grid systems, and icons.
+- **Google Fonts**: Custom fonts to enhance readability and design.
+- **Visual Studio Code (VS Code)**: Primary IDE for development.
+- **Google Chrome**: Testing and debugging the web interface.
+- **Git**: Version control system.
+- **GitHub**: Remote repository hosting.
+- **VS Code Extensions**:  
+  - Live Server: For previewing HTML/CSS changes.  
+  - Project Manager (or similar): For visualizing folder structures.
+
+## Credits
+- Original Creators: [SDEV 265 FA24 Blue Team](https://github.com/LiongsonEnzo/SoIT_ChatBot)
+- Additional Enhancements: [SDEV 265 FA25 BrownTeam](https://github.com/rohydro93/SoIT_ChatBot_BrownTeam)
+- Additional Enhamcements (this repository): [SDEV 265 SP26 Green Team](https://github.com/KippWade/SoIT_ChatBot_GreenTeamSp26)
+
+## Contributing
+We welcome contributions! Fork the repository, make your changes, and submit a pull request. Focus on bug fixes, feature enhancements, or database expansions. Please follow standard GitHub workflows.
+
+## License
+This project is licensed under the MIT License—see the [LICENSE](LICENSE) file for details (add one if not present).
+
+## Contact
+For questions or feedback, reach out via GitHub issues or contact the Brown Team leads.
