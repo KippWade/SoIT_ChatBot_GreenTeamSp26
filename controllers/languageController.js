@@ -1,3 +1,9 @@
+
+/**
+ * Language Controller
+ * Provides language detection and error statement patterns for chatbot responses.
+ * @module controllers/languageController
+ */
 const { LANGUAGE } = require('../data/database');
 
 // Generic misunderstanding responses

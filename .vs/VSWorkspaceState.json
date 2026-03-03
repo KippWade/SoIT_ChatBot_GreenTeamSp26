@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\config",
+    "\\controllers",
+    "\\data",
+    "\\public",
+    "\\routes",
+    "\\services",
+    "\\tests",
+    "\\views",
+    "\\views\\partials"
+  ],
+  "SelectedNode": "\\package-lock.json",
+  "PreviewInSolutionExplorer": false
+}

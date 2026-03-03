@@ -1,13 +1,25 @@
+
+/**
+ * Bot Controller
+ * Handles chatbot query processing, intent detection, and logging unanswered questions.
+ * @module controllers/botController
+ */
 const fs = require('fs');
 const path = require('path');
 const fuzz = require('fuzzball'); // NPM Package Info https://www.npmjs.com/package/fuzzball
-const { responses, locations, INTENT, LANGUAGE } = require('../data/database'); // Stand-in for external MongoDB instance
+const { responses, locations, INTENT, LANGUAGE, COURSE_PREFIXES } = require('../data/database'); // Stand-in for external MongoDB instance
 const unansweredFilePath = path.join(__dirname, '../data/unanswered_inquiries.json'); // File to store unanswered/unmatched inquiries
 const { addConversation, getConversation } = require('./conversation_tracker');
 const { buildResponse, isErrorResponse } = require('./replyController'); // Response building functions
 const { detectLanguage } = require('./languageController'); // Language detection functions
 
-// Add unanswered question to JSON file
+/**
+ * Add unanswered question to JSON file for later review.
+ * @param {string} question - The user's question.
+ * @param {string} userType - The type of user.
+ * @param {string} schoolEmail - The user's email.
+ * @param {string|null} originalQuestion - The original question, if any.
+ */
 function addUnansweredQuestion(question, userType, schoolEmail, originalQuestion = null) {
     let questions = [];
     if (fs.existsSync(unansweredFilePath)) {
@@ -33,15 +45,20 @@ function addUnansweredQuestion(question, userType, schoolEmail, originalQuestion
     fs.writeFileSync(unansweredFilePath, JSON.stringify(questions, null, 2));
 }
 
-// To store unanswered questions/inquiries in JSON file
+/**
+ * Retrieve unanswered questions from JSON file.
+ * @returns {Array} Array of unanswered question objects.
+ */
 function getUnansweredQuestions() {
     if (!fs.existsSync(unansweredFilePath)) return [];
     return JSON.parse(fs.readFileSync(unansweredFilePath));
 }
 
-/* 
-    Function to get best matching location index from user prompt
-    This would determine which campus/location the user is asking about and return its index in the locations array
+/**
+ * Get best matching location index from user prompt.
+ * Determines which campus/location the user is asking about.
+ * @param {string} prompt - The user's prompt.
+ * @returns {number} Index of matched location or -1 if not found.
  */
 function getLocationIndexFromPrompt(prompt) {
     console.log(`${new Date().toISOString()} :: GETTING LOCATION`);
@@ -66,13 +83,23 @@ function getLocationIndexFromPrompt(prompt) {
     return -1;
 }
 
+/**
+ * Extract course code from user prompt using regex.
+ * @param {string} prompt - The user's prompt.
+ * @returns {string|null} The matched course code or null.
+ */
 function getCourseCodeFromPrompt(prompt) {
     const db = require('../data/database');           // Import here (or move to top)
     const match = prompt.match(db.COURSE_CODE_REGEX);
     return match ? match[0].replace(/[\s-]+/g, '') : null;  // Clean spaces/dashes
 }
 
-// Main query processing function
+/**
+ * Main query processing function for chatbot.
+ * Processes user prompt, detects intent, builds response, and logs conversation.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 module.exports.query = (req, res) => {
     let prompt = (req.body.prompt || '').toLowerCase();
     const userType = req.body.userType || 'Guest';
@@ -84,80 +111,58 @@ module.exports.query = (req, res) => {
     let detectedIntent = null;
     let matchedResponse = null;
 
+    // Check for course prefix in prompt
+    const coursePrefixMatch = COURSE_PREFIXES.find(prefix => {
+        // Match prefix as a whole word, case-insensitive
+        const regex = new RegExp(`\\b${prefix}\\b`, 'i');
+        return regex.test(prompt);
+    });
+
+    if (coursePrefixMatch) {
+        detectedIntent = INTENT.COURSE_INFO_GENERAL;
+        matchedResponse = responses.find(r => r.intent === INTENT.COURSE_INFO_GENERAL);
+    }
+
     console.log(`${new Date().toISOString()} :: USER PROMPT: `, prompt);
     // Establish active language: requested or auto-detected
     let activeLanguage = requestedLanguage || detectLanguage(prompt);
 
-    // Build intent-to-patterns mapping (all patterns lowercased)
-    const intentPatterns = {};
+    // Build a flat array of all patterns with their associated intent
+    const allPatterns = [];
     for (const resp of responses) {
-        console.log("Processing response intent", resp.intent);
-        console.log("Active language:", activeLanguage);
-        if(resp.intent){
-            if(!intentPatterns[resp.intent]) intentPatterns[resp.intent] = [];
-            if(activeLanguage === LANGUAGE.FILIPINO){
-                if(resp.pattern && Array.isArray(resp.pattern.fil)){
-                    intentPatterns[resp.intent].push(...resp.pattern.fil.map(p => p.toLowerCase()));
-                }
-            } else {
-                if(resp.pattern && Array.isArray(resp.pattern.en)){
-                    intentPatterns[resp.intent].push(...resp.pattern.en.map(p => p.toLowerCase()));
-                }
-            }
-        }
+        const patterns = (activeLanguage === LANGUAGE.FILIPINO)
+            ? resp.pattern?.fil || []
+            : resp.pattern?.en || [];
+        patterns.forEach(p => allPatterns.push({ intent: resp.intent, pattern: p }));
     }
 
-    // Improved intent detection: whole word and fuzzy match
-    for (const [intent, patterns] of Object.entries(intentPatterns)) {
-        for (const p of patterns) {
-            // Whole word regex match
-            const wordRegex = new RegExp(`\\b${p.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i');
-            if (wordRegex.test(prompt)) {
-                detectedIntent = intent; // Intent is the category
-                break;
-            }
-            // Fuzzy match for greetings (only for 'greetings' intent)
-            // This try to catch casual greetings
-            if (intent === INTENT.GREETINGS) {
-                const fuzzScore = fuzz.token_set_ratio(prompt, p);
-                if (fuzzScore >= 70) {
-                    detectedIntent = intent;
-                    break;
-                }
-            }            
-        }
-    }
+    // Use fuzzball to extract best fuzzy match for user input
+    const results = fuzz.extract(prompt, allPatterns, {
+        scorer: (input, choice) => fuzz.token_set_ratio(input, choice.pattern),
+        processor: choice => choice.pattern,
+        limit: 1,
+        cutoff: 70,
+        force_ascii: true
+    });
 
-    if (detectedIntent) {
-        console.log(`${new Date().toISOString()} :: DETECTED INTENT: ${detectedIntent}`);
+    if (results.length > 0 && results[0][1] >= 70) {
+        detectedIntent = results[0][0].intent;
         matchedResponse = responses.find(r => r.intent === detectedIntent);
+        console.log(`${new Date().toISOString()} :: FUZZY MATCHED INTENT: ${detectedIntent}`);
     }
+
+    // Fallback to regex/whole word matching if no fuzzy match found
     if (!matchedResponse) {
-        console.log(`${new Date().toISOString()} :: NO INTENT DETECTED, FALLING BACK TO PATTERN MATCHING`);
-        // Fallback to pattern matching if no intent detected
+        console.log(`${new Date().toISOString()} :: NO FUZZY MATCH, FALLING BACK TO PATTERN MATCHING`);
         for (const resp of responses) {
-            if (Array.isArray(resp.pattern)) {
-                for (const p of resp.pattern) {
-                    const wordRegex = new RegExp(`\\b${p.toLowerCase().replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i');
-                    if (wordRegex.test(prompt)) {
-                        matchedResponse = resp;
-                        break;
-                    }
-                    // Fuzzy match for greetings and address_info
-                    if (resp.intent === INTENT.GREETINGS || resp.intent === INTENT.ADDRESS_INFO) {
-                        const fuzzScore = fuzz.token_set_ratio(prompt, p.toLowerCase());
-                        if (fuzzScore >= 70) {
-                            matchedResponse = resp;
-                            break;
-                        }
-                    }
-                    if (matchedResponse) break;
-                }
-            }
-            if (typeof resp.pattern === 'string') {
-                const wordRegex = new RegExp(`\\b${resp.pattern.toLowerCase().replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i');
+            const patterns = (activeLanguage === LANGUAGE.FILIPINO)
+                ? resp.pattern?.fil || []
+                : resp.pattern?.en || [];
+            for (const p of patterns) {
+                const wordRegex = new RegExp(`\\b${p.toLowerCase().replace(/[-/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`, 'i');
                 if (wordRegex.test(prompt)) {
                     matchedResponse = resp;
+                    detectedIntent = resp.intent;
                     break;
                 }
             }
@@ -178,14 +183,21 @@ module.exports.query = (req, res) => {
         courseCode = getCourseCodeFromPrompt(prompt);
     }
 
-    response = buildResponse(matchedResponse, activeLanguage, { locIdx, session, courseCode });
-    // Always log unanswered if error statement is used
-    if (isErrorResponse(response, activeLanguage)) {
+    if (!matchedResponse) {
+        response = (activeLanguage === LANGUAGE.FILIPINO)
+            ? "Paumanhin, hindi ko naintindihan ang iyong tanong."
+            : "Sorry, I didn't understand your question.";
         addUnansweredQuestion(prompt, userType, schoolEmail);
+    } else {
+        response = buildResponse(matchedResponse, activeLanguage, { locIdx, session, courseCode });
+        // Always log unanswered if error statement is used
+        if (isErrorResponse(response, activeLanguage)) {
+            addUnansweredQuestion(prompt, userType, schoolEmail);
+        }
     }
-    
+
     // Log user message
-    let detectedIntentForLogging = detectedIntent || (session ? session.currentIntent : null);
+    let detectedIntentForLogging = matchedResponse ? (detectedIntent || null) : null; // or use 'UNKNOWN' if preferred
     console.log(`${new Date().toISOString()} :: LOGGING USER MESSAGE WITH INTENT: ${detectedIntentForLogging}`);
     addConversation(ticket, userType, schoolEmail, 'user', prompt, detectedIntentForLogging, { locIdx });
 
@@ -196,6 +208,11 @@ module.exports.query = (req, res) => {
     res.json({ response });
 }
 
+/**
+ * Renders the home page.
+ * @param {Object} req - Express request object.
+ * @param {Object} res - Express response object.
+ */
 module.exports.response = (req, res) => {
     res.render('index', { title: 'Home' });
 }

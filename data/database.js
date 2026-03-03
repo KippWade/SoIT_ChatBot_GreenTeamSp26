@@ -1,10 +1,21 @@
+/**
+ * Database module
+ * Contains chatbot intents, responses, locations, and course code utilities.
+ * @module data/database
+ */
 const { fill } = require("lodash");
 
+/**
+ * Supported languages.
+ */
 const LANGUAGE = {
     FILIPINO: 'filipino',
     ENGLISH: 'english'
 };
 
+/**
+ * Chatbot intent constants.
+ */
 const INTENT = {
     UNKNOWN: "unknown",
     GREETINGS: "greetings",
@@ -46,9 +57,13 @@ const INTENT = {
     STUDENT_POPULATION: "student_population",
     MILITARY_VETERAN_SERVICES: "military_veteran_services",
     TESTING_SERVICES: "testing_services",
-    CLASS_FORMATS: "class_formats"
+    CLASS_FORMATS: "class_formats",
+    EASTER_EGG_HITCHHIKER: "easter_egg_hitchhiker"
 };
 
+/**
+ * Chatbot response patterns and replies for each intent.
+ */
 const responses = [
     {
         intent: INTENT.GREETINGS,
@@ -727,10 +742,47 @@ const responses = [
         reply: { en: "Ivy Tech offers a variety of class formats, including online, hybrid, traditional, and more. For details about each format, please visit the link below.", fil: "Nag-aalok ang Ivy Tech ng iba't ibang format ng klase, kabilang ang online, hybrid, tradisyonal, at higit pa. Para sa mga detalye tungkol sa bawat format, pakibisita ang link sa ibaba." },
         url: "https://www.ivytech.edu/classes/class-formats/",
         link: "Class Formats"
-    }
+    },
+    {
+        intent: INTENT.EASTER_EGG_HITCHHIKER,
+        pattern: {
+            en: [
+                "what is the answer to life, the universe and everything",
+                "what's the answer to life the universe and everything",
+                "what's the answer to life",
+                "hitchhiker's guide",
+                "don't panic",
+                "so long and thanks for all the fish",
+                "where's my towel",
+                "babel fish",
+                "42"
+            ],
+            fil: [
+                "ano ang sagot sa buhay, uniberso, at lahat ng bagay",
+                "ano ang sagot sa buhay, uniberso at lahat",
+                "ano ang sagot sa buhay",
+                "gabay ng hitchhiker",
+                "gabay ng naglalakbay",
+                "huwag mag-panic",
+                "huwag kang mag-panic",
+                "paalam at salamat sa lahat ng isda",
+                "nasaan ang tuwalya ko",
+                "babel na isda",
+                "42",
+                "apatnapu't dalawa"
+            ]
+        },
+        reply: {
+            en: "42. Don't panic! So long, and thanks for all the fish.",
+            fil: "42. Huwag kang mag-panic! Paalam, at salamat sa lahat ng isda."
+        }
+    },
 
 ];
 
+/**
+ * Campus and satellite location data.
+ */
 const locations = [
     {
         position: { lat: 40.0529917, lng: -85.6695955 },
@@ -1264,6 +1316,9 @@ const locations = [
 
 
 
+/**
+ * Valid course code prefixes for Ivy Tech courses.
+ */
 const COURSE_PREFIXES = [
     "ABRK", "ACCT", "ADMF",
     "AGRI", "ALTF", "AMSL", "ANTH",
@@ -1301,7 +1356,11 @@ const COURSE_PREFIXES = [
     "VIDT", "VISC", "WELD"
 ];
 
-// === NEW: COURSE CATALOG URL BUILDER ===
+/**
+ * Build course catalog URL for a given course code.
+ * @param {string} rawCourseCode
+ * @returns {string} Course catalog URL
+ */
 const getCourseCatalogUrl = (rawCourseCode) => {
     if (!rawCourseCode) return "https://catalog.ivytech.edu/";
 
@@ -1318,6 +1377,9 @@ const COURSE_CODE_REGEX = new RegExp(
     "i"
 );
 
+/**
+ * Exported database module API.
+ */
 module.exports = {
     responses,
     locations,

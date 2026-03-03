@@ -1,3 +1,9 @@
+/**
+ * Chatbot client script
+ * Handles UI logic, session management, and AJAX requests for the chatbot interface.
+ * @module public/scripts/chatbot
+ */
+
 /*
     Clear ticketId and sessionTimestamp on page load to ensure a fresh ticket on every refresh.
     This way, each refresh generates a new ticket and language selection resets.
@@ -42,13 +48,17 @@ let languageConfirmTimer;
 let pendingLanguage = null; // language chosen but awaiting confirmation
 let isChangingLanguage = false; // Flag to track if user is in "change language" flow
 
-// Helper to focus the visible user type control
+/**
+ * Helper to focus the visible user type control.
+ */
 function focusUserTypeControl() {
     if (userTypeDropdownBtn) userTypeDropdownBtn.focus();
     else if (userTypeSelect) userTypeSelect.focus();
 }
 
-// Function to reset inactivity timer
+/**
+ * Reset inactivity timer for chatbot session.
+ */
 function resetInactivityTimer() {
     clearTimeout(inactivityTimer);
     inactivityTimer = setTimeout(() => {
@@ -63,6 +73,9 @@ function resetInactivityTimer() {
     resetLanguageConfirmTimer();
 }
 
+/**
+ * Reset language confirmation timer for chatbot session.
+ */
 function resetLanguageConfirmTimer() {
     clearTimeout(languageConfirmTimer);
     if (!language) return; // nothing chosen yet
@@ -218,6 +231,9 @@ if (questionBack) {
     });
 }
 
+/**
+ * Handle chat form submission and send user prompt to server.
+ */
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
@@ -275,6 +291,12 @@ form.addEventListener('submit', async (e) => {
 });
 
 
+/**
+ * Generate a unique ticket ID for the session.
+ * @param {string} userType
+ * @param {string} schoolEmail
+ * @returns {string} Ticket ID
+ */
 function generateTicketId(userType, schoolEmail) {
     // Use a persistent timestamp for the session
     let sessionTimestamp = localStorage.getItem('sessionTimestamp');

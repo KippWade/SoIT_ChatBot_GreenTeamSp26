@@ -1,9 +1,23 @@
+/**
+ * Conversation Tracker Controller
+ * Handles logging and retrieval of chatbot conversations for each user session.
+ * @module controllers/conversation_tracker
+ */
 const fs = require('fs');
 const path = require('path');
 const filePath = path.join(__dirname, '../data/chat_session_logging.json'); // Creates a JSON file to store conversations
 const { INTENT } = require('../data/database');
 
-// Function to log conversations
+/**
+ * Log a conversation message to the session file.
+ * @param {string} ticket - Unique session ticket ID.
+ * @param {string} userType - Type of user.
+ * @param {string} schoolEmail - User's email.
+ * @param {string} from - Who sent the message ('user' or 'bot').
+ * @param {string} message - The message content.
+ * @param {string} intent - The detected intent.
+ * @param {Object} opts - Additional options (e.g., locIdx).
+ */
 function addConversation(ticket, userType, schoolEmail, from, message, intent, opts = {}) {
     let conversations = [];
     if (fs.existsSync(filePath)) {
@@ -58,6 +72,11 @@ function addConversation(ticket, userType, schoolEmail, from, message, intent, o
     fs.writeFileSync(filePath, JSON.stringify(conversations, null, 2));
 }
 
+/**
+ * Retrieve a conversation by ticket ID.
+ * @param {string} ticket - Unique session ticket ID.
+ * @returns {Object|null} The conversation object or null if not found.
+ */
 function getConversation(ticket) {
     if (!fs.existsSync(filePath)) return null;
     const conversations = JSON.parse(fs.readFileSync(filePath));

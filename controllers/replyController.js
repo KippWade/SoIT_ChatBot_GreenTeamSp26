@@ -1,22 +1,51 @@
+
+/**
+ * Reply Controller
+ * Handles building chatbot responses for various intents and user queries.
+ * @module controllers/replyController
+ */
 const { responses, locations, INTENT, LANGUAGE, COURSE_PREFIXES } = require('../data/database');
 const { ENG_ERROR_STATEMENTS, FIL_ERROR_STATEMENTS } = require('./languageController');
 
 const suffix = "&nbsp;<i class='bx bx-link-external'></i></a>"; // External link icon
 
-// Build WhitePages URL helper
+/**
+ * Build WhitePages URL for staff/faculty lookup.
+ * @param {string} firstName
+ * @param {string} lastName
+ * @param {string} location
+ * @param {string} role
+ * @param {string} title
+ * @returns {string} URL
+ */
 function buildWhitePagesURL(firstName, lastName, location, role, title) {
     return `https://whitepages.ivytech.edu/?first_name=${encodeURIComponent(firstName)}&last_name=${encodeURIComponent(lastName)}&userid=&location=${encodeURIComponent(location)}&role=${encodeURIComponent(role)}&title=${encodeURIComponent(title)}&bee_syrup_tun=&submit=+Search+`;
 }
 
-//Build course catelog URL helper
+/**
+ * Build course catalog URL for course lookup.
+ * @param {string} courseCode
+ * @returns {string} URL
+ */
 function buildCourseCatalogURL(courseCode) {
-    return `https://catalog.ivytech.edu/search_advanced.php?cur_cat_oid=9&ecpage=1&cpage=1&ppage=1&pcpage=1&spage=1&tpage=1&search_database=Search&filter%5Bkeyword%5D=${encodeURIComponent(courseCode.toUpperCase())}&filter%5Bexact_match%5D=1&filter%5B3%5D=1&filter%5B31%5D=1`;
+    return `https://catalog.ivytech.edu/search_advanced.php?cur_cat_oid=0&ecpage=1&cpage=1&ppage=1&pcpage=1&spage=1&tpage=1&search_database=Search&filter%5Bkeyword%5D=${encodeURIComponent(courseCode.toUpperCase())}&filter%5Bexact_match%5D=1&filter%5B3%5D=1&filter%5B31%5D=1`;
 }
 
+/**
+ * Get a random error response in the specified language.
+ * @param {string} language
+ * @returns {string} Error response
+ */
 function getErrorResponse(language = LANGUAGE.ENGLISH) {
     const index = Math.floor(Math.random() * 3);
     return language === LANGUAGE.FILIPINO ? FIL_ERROR_STATEMENTS[index] : ENG_ERROR_STATEMENTS[index];
 }
+/**
+ * Build address response for a campus location.
+ * @param {number} locIdx - Location index
+ * @param {string} language
+ * @returns {string} Address response
+ */
 function getAddressResponse(locIdx, language = LANGUAGE.ENGLISH) {
     console.log('Getting address response for location index:', locIdx);
     let response = '';
@@ -34,6 +63,12 @@ function getAddressResponse(locIdx, language = LANGUAGE.ENGLISH) {
     return response;
 }
 
+/**
+ * Build phone/contact response for a campus location.
+ * @param {number} locIdx - Location index
+ * @param {string} language
+ * @returns {string} Phone response
+ */
 function getPhoneResponse(locIdx, language = LANGUAGE.ENGLISH) {
     let response = '';
     if (locIdx > -1) {
@@ -49,6 +84,12 @@ function getPhoneResponse(locIdx, language = LANGUAGE.ENGLISH) {
     return response;
 }
 
+/**
+ * Build dean information response for a campus location.
+ * @param {number} locIdx - Location index
+ * @param {string} language
+ * @returns {string} Dean response
+ */
 function getDeanResponse(locIdx, language = LANGUAGE.ENGLISH) {
     let response = '';
     if (locIdx > -1) {
@@ -66,6 +107,12 @@ function getDeanResponse(locIdx, language = LANGUAGE.ENGLISH) {
     return response;
 }
 
+/**
+ * Build reply from matched response object.
+ * @param {Object} matchedResponse
+ * @param {string} language
+ * @returns {string|null} Reply string or null
+ */
 function getResponseReply(matchedResponse, language = LANGUAGE.ENGLISH) {
     if (!matchedResponse) return null;
     response = language === LANGUAGE.FILIPINO ? (matchedResponse.reply.fil || matchedResponse.reply.en) : (matchedResponse.reply.en || matchedResponse.reply.fil);
@@ -75,6 +122,13 @@ function getResponseReply(matchedResponse, language = LANGUAGE.ENGLISH) {
     return response;
 }
 
+/**
+ * Build course general response for a course code.
+ * @param {string|null} courseCode
+ * @param {Object} matchedResponse
+ * @param {string} language
+ * @returns {string} Course response
+ */
 function getCourseGeneralResponse(courseCode, matchedResponse, language = LANGUAGE.ENGLISH) {
     let response = '';
 
@@ -114,6 +168,13 @@ function getCourseGeneralResponse(courseCode, matchedResponse, language = LANGUA
 
     return response;
 }
+/**
+ * Build chatbot response based on matched intent and options.
+ * @param {Object} matchedResponse
+ * @param {string} language
+ * @param {Object} opts - Additional options (locIdx, session, courseCode)
+ * @returns {string} Chatbot response
+ */
 function buildResponse(matchedResponse, language = LANGUAGE.ENGLISH, opts = {}) {
     const locIdx = opts.locIdx || null;
     const session = opts.session || null;
@@ -149,6 +210,12 @@ function buildResponse(matchedResponse, language = LANGUAGE.ENGLISH, opts = {}) 
         } 
 }
 
+/**
+ * Checks if the response is an error statement.
+ * @param {string} response
+ * @param {string} language
+ * @returns {boolean}
+ */
 function isErrorResponse(response, language = LANGUAGE.ENGLISH) {
     const errorStatements = language === LANGUAGE.FILIPINO ? FIL_ERROR_STATEMENTS : ENG_ERROR_STATEMENTS;
     return errorStatements.includes(response);

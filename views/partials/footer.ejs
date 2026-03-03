@@ -2,7 +2,13 @@
     <div class="container">
         <div class="credits">
             <img class="ivylogo" src="/img/New%20Ivy%20Tech%20Logo.png" alt="Ivy Tech Logo">
-            <p>Copyright &#xA9; FA24 Blue Team with FA25 Brown Team Contributions</p>
+            <p id="copyright" style="cursor:pointer; text-decoration:underline;" tabindex="0">
+                Copyright &#xA9; <span id="copyright-year"></span> Contributors
+            </p>
+            <div id="team-popup" style="display:none; position:absolute; background:#fff; border:1px solid #ccc; box-shadow:0 2px 8px rgba(0,0,0,0.15); padding:12px; z-index:1000; min-width:220px;">
+                <strong style="color:#006648;">IvyBot SDEV 265 Contributing Teams:</strong>
+                <ul id="team-list" style="margin:8px 0 0 0; padding:0; list-style:none;"></ul>
+            </div>
         </div>
         <div class="social-links">
             <a href="https://www.linkedin.com/school/ivy-tech-community-college/" target="_blank"><img src="img/linkedin.svg" alt="LinkedIn"></a>
@@ -14,4 +20,48 @@
             <a href="tel:888-489-5463"><img src="img/telephone-fill.svg" alt="Phone"></a>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // List of contributing teams (edit this array to add/remove teams)
+            const contributingTeams = [
+                'FA24 Blue Team',
+                'FA25 Brown Team',
+                'SP26 Green Team',
+            ];
+            // Set copyright year
+            document.getElementById('copyright-year').textContent = new Date().getFullYear();
+            // Render team list
+            const teamList = document.getElementById('team-list');
+            teamList.innerHTML = '';
+            contributingTeams.forEach(team => {
+                const li = document.createElement('li');
+                li.textContent = team;
+                teamList.appendChild(li);
+            });
+            // Show/hide popup on hover/focus
+            const copyright = document.getElementById('copyright');
+            const popup = document.getElementById('team-popup');
+            function showPopup(e) {
+                popup.style.position = 'fixed';
+                popup.style.bottom = '60px';
+                popup.style.left = '50%';
+                popup.style.transform = 'translateX(-50%)';
+                popup.style.display = 'block';
+                popup.style.background = '#fff';
+                popup.style.border = '2px solid #006648';
+                popup.style.borderRadius = '18px';
+                popup.style.boxShadow = '0 4px 16px rgba(0,0,0,0.25)';
+                popup.style.zIndex = '9999';
+            }
+            function hidePopup() {
+                popup.style.display = 'none';
+            }
+            // Show popup on hover and focus
+            copyright.addEventListener('mouseenter', showPopup);
+            copyright.addEventListener('focus', showPopup);
+            // Hide popup on mouseleave and blur
+            copyright.addEventListener('mouseleave', hidePopup);
+            copyright.addEventListener('blur', hidePopup);
+        });
+    </script>
 </footer>
