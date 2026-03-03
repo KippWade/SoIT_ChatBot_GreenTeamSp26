@@ -77,43 +77,34 @@ function getResponseReply(matchedResponse, language = LANGUAGE.ENGLISH) {
 
 function getCourseGeneralResponse(courseCode, matchedResponse, language = LANGUAGE.ENGLISH) {
     let response = '';
-    if (courseCode) {
-        switch (language) {
-            case LANGUAGE.FILIPINO:
-                response = `Narito po ang impormasyon para sa kursong <strong>${courseCode.toUpperCase()}</strong>:<br><br>`;
-                break;
-            case LANGUAGE.ENGLISH:
-            default:
-                response = `Here is the information for course  <strong>${courseCode.toUpperCase()}</strong>:<br><br>`;
-                break;
-        }
-        let courseLink = buildCourseCatalogURL(courseCode);
-        response += `<a href='${courseLink}' target='_blank'>Course Details</a>`;
 
-        if(!COURSE_PREFIXES.some(prefix => courseCode.toUpperCase().startsWith(prefix))) {
-            switch (language) {
-                case LANGUAGE.FILIPINO:
-                    response += `<br><br>Paunawa Po: Hindi ko po kinikilala ang prefix ng course code. Mangyaring tiyakin na ito ay isang wastong Ivy Tech course code.`;
-                    break;
-                case LANGUAGE.ENGLISH:
-                default:
-                    response += `<br><br>Note: I do not recognize the course code prefix. Please ensure it is a valid Ivy Tech course code.`;
-                    break;
-            }
+    if (courseCode) {
+        const courseUpper = courseCode.toUpperCase();
+        
+        // Language-specific intro
+        response = language === LANGUAGE.FILIPINO
+            ? `Narito po ang impormasyon para sa kursong <strong>${courseUpper}</strong>:<br><br>`
+            : `Here is the information for course <strong>${courseUpper}</strong> in the current catalog:<br><br>`;
+
+        const courseLink = buildCourseCatalogURL(courseCode);
+        response += `<a href='${courseLink}' target='_blank'>View Full Course Details${suffix}`;
+
+        // Warning if prefix not recognized
+        if (!COURSE_PREFIXES.some(prefix => courseUpper.startsWith(prefix))) {
+            response += language === LANGUAGE.FILIPINO
+                ? `<br><br>Paunawa: Hindi ko po kinikilala ang prefix ng course code. Mangyaring tiyakin na ito ay isang wastong Ivy Tech course code.`
+                : `<br><br>Note: I do not recognize this course code prefix. Please make sure it is a valid Ivy Tech course code.`;
         }
-    } else if (matchedResponse) {
+    } 
+    else if (matchedResponse) {
         response = getResponseReply(matchedResponse, language);
-    } else {
-        let infoResponse = responses.find(r => r.intent === INTENT.COURSE_INFO_GENERAL);
-        switch (language) {
-            case LANGUAGE.FILIPINO:
-                response = infoResponse.reply.fil || infoResponse.reply.en;
-                break;
-            case LANGUAGE.ENGLISH:
-            default:
-                response = infoResponse.reply.en || infoResponse.reply.fil;
-                break;
-        }
+    } 
+    else {
+        // Fallback to general course info when no specific code is given
+        const infoResponse = responses.find(r => r.intent === INTENT.COURSE_INFO_GENERAL);
+        response = language === LANGUAGE.FILIPINO 
+            ? (infoResponse.reply.fil || infoResponse.reply.en)
+            : (infoResponse.reply.en || infoResponse.reply.fil);
     }
 
     return response;
@@ -148,10 +139,9 @@ function buildResponse(matchedResponse, language = LANGUAGE.ENGLISH, opts = {}) 
         case INTENT.COURSE_INFO_GENERAL:
             return getCourseGeneralResponse(courseCode, matchedResponse, language);
         default:
-            if (matchedResponse) {
-                return getResponseReply(matchedResponse, language);
-            }
-            return getErrorResponse(language); 
+            return matchedResponse 
+                ? getResponseReply(matchedResponse, language)
+                : getErrorResponse(language); 
         } 
 }
 

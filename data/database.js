@@ -194,14 +194,17 @@ const responses = [
         pattern: {
             en: [
                 "course description", "course descriptions", "prerequisites for", "course details", "course info", "course information", "course syllabus",
-                "course outline", "course overview", "course topics", "course content", "course objectives", "course goals",
+                "course outline", "course overview", "course topics", "course content", "course objectives", "course goals", "course",
                 "what will I learn in", "what do I learn in", "what are the learning outcomes for", "what are the learning objectives for"
             ], fil: ["paglalarawan ng kurso", "mga paglalarawan ng kurso", "mga kinakailangan bago kuhain ang", "mga detalye ng kurso",
                 "panguhaning-ideya ng kurso", "nilalaman ng kurso", "mga paksa ng kurso", "mga layunin kurso",
                 "mga hangarin ng kurso", "ano ang aking matututunan sa", "ano ang mag layunin ng pagkaturo para sa"
             ]
         },
-        reply: { en: "For detailed information about courses, including descriptions and prerequisites, please visit the course description page or provide me a course code and I can give you a direct link.", fil: "Para sa detalyadong impormasyon tungkol sa mga kurso, kabilang ang mga paglalarawan at mga kinakailangan, mangyaring bisitahin ang pahina ng paglalarawan ng kurso, o magbigay lamang ng course code at maibibigay ko sa iyo ang direktang link." },
+        reply: {
+            en: "For detailed information about courses, including descriptions and prerequisites, please visit the course description page. If you give me a specific course code (like SDEV265), I can give you a direct link to the current catalog!",
+            fil: "Para sa detalyadong impormasyon tungkol sa mga kurso... Kung bibigyan mo ako ng specific na course code (halimbawa SDEV265), maibibigay ko sa iyo ang direktang link sa kasalukuyang catalog!"
+        },
         url: "https://catalog.ivytech.edu/content.php?catoid=11&navoid=1255",
         link: "Course Descriptions"
     },
@@ -1298,4 +1301,26 @@ const COURSE_PREFIXES = [
     "VIDT", "VISC", "WELD"
 ];
 
-module.exports = { responses, locations, INTENT, LANGUAGE, COURSE_PREFIXES };
+// === NEW: COURSE CATALOG URL BUILDER ===
+const getCourseCatalogUrl = (rawCourseCode) => {
+    if (!rawCourseCode) return "https://catalog.ivytech.edu/";
+
+    // Normalize input → "SDEV+265"
+    let code = rawCourseCode.toUpperCase().trim().replace(/\s+/g, "");
+    const formatted = code.replace(/(\D+)(\d+)/, "$1+$2");
+
+    return `https://catalog.ivytech.edu/search_advanced.php?cur_cat_oid=0&search_database=Search&search_db=Search&cpage=1&ecpage=1&ppage=1&spage=1&tpage=1&location=3&filter[keyword]=${formatted}&filter[exact_match]=1`;
+};
+
+// Also export a regex for easy course code detection
+const COURSE_CODE_REGEX = new RegExp(`\\b(${COURSE_PREFIXES.join("|")})\\s*\\d{3,4}\\b`, "i");
+
+module.exports = {
+    responses,
+    locations,
+    INTENT,
+    LANGUAGE,
+    COURSE_PREFIXES,
+    COURSE_CODE_REGEX,     // ← new
+    getCourseCatalogUrl    // ← new
+};
