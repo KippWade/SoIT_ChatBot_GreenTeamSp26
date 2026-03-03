@@ -67,12 +67,9 @@ function getLocationIndexFromPrompt(prompt) {
 }
 
 function getCourseCodeFromPrompt(prompt) {
-    const courseCodeRegex = /[A-Za-z]{2,4}[- ]?\d{3,4}/; // Mattches upper/lowercase letters (2-4), optional dash/space, followed by 3-4 digits
-    const matches = prompt.match(courseCodeRegex);
-    if (matches && matches.length > 0) {
-        return matches[0].replace(/[\s-]+/g, ''); // Remove any spaces and dashes in the course code
-    }
-    return null;
+    const db = require('../data/database');           // Import here (or move to top)
+    const match = prompt.match(db.COURSE_CODE_REGEX);
+    return match ? match[0].replace(/[\s-]+/g, '') : null;  // Clean spaces/dashes
 }
 
 // Main query processing function
@@ -170,14 +167,18 @@ module.exports.query = (req, res) => {
 
     console.log(`${new Date().toISOString()} :: MATCHED RESPONSE: ${matchedResponse !== null}`);
     console.log(`${new Date().toISOString()} :: MATCHED RESPONSE TYPE: ${matchedResponse?.type}`);
+    console.log(`${new Date().toISOString()} :: MATCHED RESPONSE: ${matchedResponse !== null}`);
     let locIdx = getLocationIndexFromPrompt(prompt);
     if(locIdx < 0 && session && session.entities.campusLocationIdx !== undefined) {
         locIdx = session.entities.campusLocationIdx;
     }
-    const courseCode = getCourseCodeFromPrompt(prompt);
+
+    let courseCode = null;
+    if (matchedResponse && matchedResponse.intent === INTENT.COURSE_INFO_GENERAL) {
+        courseCode = getCourseCodeFromPrompt(prompt);
+    }
 
     response = buildResponse(matchedResponse, activeLanguage, { locIdx, session, courseCode });
-
     // Always log unanswered if error statement is used
     if (isErrorResponse(response, activeLanguage)) {
         addUnansweredQuestion(prompt, userType, schoolEmail);

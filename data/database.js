@@ -194,7 +194,7 @@ const responses = [
         pattern: {
             en: [
                 "course description", "course descriptions", "prerequisites for", "course details", "course info", "course information", "course syllabus",
-                "course outline", "course overview", "course topics", "course content", "course objectives", "course goals", "course",
+                "course outline", "course overview", "course topics", "course content", "course objectives", "course goals",
                 "what will I learn in", "what do I learn in", "what are the learning outcomes for", "what are the learning objectives for"
             ], fil: ["paglalarawan ng kurso", "mga paglalarawan ng kurso", "mga kinakailangan bago kuhain ang", "mga detalye ng kurso",
                 "panguhaning-ideya ng kurso", "nilalaman ng kurso", "mga paksa ng kurso", "mga layunin kurso",
@@ -1313,7 +1313,10 @@ const getCourseCatalogUrl = (rawCourseCode) => {
 };
 
 // Also export a regex for easy course code detection
-const COURSE_CODE_REGEX = new RegExp(`\\b(${COURSE_PREFIXES.join("|")})\\s*\\d{3,4}\\b`, "i");
+const COURSE_CODE_REGEX = new RegExp(
+    `\\b(${COURSE_PREFIXES.join("|")})\\s*\\d{3,4}\\b`,
+    "i"
+);
 
 module.exports = {
     responses,
@@ -1321,6 +1324,6 @@ module.exports = {
     INTENT,
     LANGUAGE,
     COURSE_PREFIXES,
-    COURSE_CODE_REGEX,     // ← new
-    getCourseCatalogUrl    // ← new
+    COURSE_CODE_REGEX,
+    getCourseCatalogUrl
 };

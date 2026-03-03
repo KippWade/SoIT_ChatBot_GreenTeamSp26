@@ -81,26 +81,31 @@ function getCourseGeneralResponse(courseCode, matchedResponse, language = LANGUA
     if (courseCode) {
         const courseUpper = courseCode.toUpperCase();
         
-        // Language-specific intro
         response = language === LANGUAGE.FILIPINO
-            ? `Narito po ang impormasyon para sa kursong <strong>${courseUpper}</strong>:<br><br>`
+            ? `Narito po ang impormasyon para sa kursong <strong>${courseUpper}</strong> sa kasalukuyang catalog:<br><br>`
             : `Here is the information for course <strong>${courseUpper}</strong> in the current catalog:<br><br>`;
 
         const courseLink = buildCourseCatalogURL(courseCode);
-        response += `<a href='${courseLink}' target='_blank'>View Full Course Details${suffix}`;
+        
+        // BONUS: Nice blue button with icon
+        response += `
+            <a href="${courseLink}" target="_blank" 
+               class="btn btn-primary btn-sm d-inline-flex align-items-center gap-2">
+                <strong>View ${courseUpper} Details</strong>
+                <i class='bx bx-link-external'></i>
+            </a>`;
 
-        // Warning if prefix not recognized
+        // Fallback warning if prefix not recognized (already in your previous version)
         if (!COURSE_PREFIXES.some(prefix => courseUpper.startsWith(prefix))) {
             response += language === LANGUAGE.FILIPINO
-                ? `<br><br>Paunawa: Hindi ko po kinikilala ang prefix ng course code. Mangyaring tiyakin na ito ay isang wastong Ivy Tech course code.`
-                : `<br><br>Note: I do not recognize this course code prefix. Please make sure it is a valid Ivy Tech course code.`;
+                ? `<br><br><small class="text-warning">Paunawa: Hindi ko po kinikilala ang prefix na ito. Pakisigurado na ito ay wastong Ivy Tech course code.</small>`
+                : `<br><br><small class="text-warning">Note: I do not recognize this course code prefix. Please ensure it is a valid Ivy Tech course code.</small>`;
         }
     } 
     else if (matchedResponse) {
         response = getResponseReply(matchedResponse, language);
     } 
     else {
-        // Fallback to general course info when no specific code is given
         const infoResponse = responses.find(r => r.intent === INTENT.COURSE_INFO_GENERAL);
         response = language === LANGUAGE.FILIPINO 
             ? (infoResponse.reply.fil || infoResponse.reply.en)
@@ -109,7 +114,6 @@ function getCourseGeneralResponse(courseCode, matchedResponse, language = LANGUA
 
     return response;
 }
-
 function buildResponse(matchedResponse, language = LANGUAGE.ENGLISH, opts = {}) {
     const locIdx = opts.locIdx || null;
     const session = opts.session || null;
