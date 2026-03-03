@@ -87,11 +87,5 @@ Enjoy seamless access to Ivy Tech resources. For advanced queries, the chatbot m
 - Additional Enhancements: [SDEV 265 FA25 BrownTeam](https://github.com/rohydro93/SoIT_ChatBot_BrownTeam)
 - Additional Enhamcements (this repository): [SDEV 265 SP26 Green Team](https://github.com/KippWade/SoIT_ChatBot_GreenTeamSp26)
 
-## Contributing
-We welcome contributions! Fork the repository, make your changes, and submit a pull request. Focus on bug fixes, feature enhancements, or database expansions. Please follow standard GitHub workflows.
 
-## License
-This project is licensed under the MIT License—see the [LICENSE](LICENSE) file for details (add one if not present).
 
-## Contact
-For questions or feedback, reach out via GitHub issues or contact the Brown Team leads.
