@@ -1,7 +1,18 @@
 
 /**
  * Reply Controller
- * Handles building chatbot responses for various intents and user queries.
+ *
+ * This module handles the construction of chatbot responses for various detected intents and user queries.
+ * It provides functions to build responses for campus information, course lookups, error handling, and more.
+ *
+ * Exports:
+ *   - getAddressResponse: Build address response for a campus location
+ *   - getPhoneResponse: Build phone/contact response for a campus location
+ *   - getDeanResponse: Build dean information response for a campus location
+ *   - buildResponse: Main function to build a chatbot response based on intent and options
+ *   - getErrorResponse: Get a random error response in the specified language
+ *   - isErrorResponse: Check if a response is an error statement
+ *
  * @module controllers/replyController
  */
 const { responses, locations, INTENT, LANGUAGE, COURSE_PREFIXES } = require('../data/database');
@@ -10,41 +21,47 @@ const { ENG_ERROR_STATEMENTS, FIL_ERROR_STATEMENTS } = require('./languageContro
 const suffix = "&nbsp;<i class='bx bx-link-external'></i></a>"; // External link icon
 
 /**
- * Build WhitePages URL for staff/faculty lookup.
- * @param {string} firstName
- * @param {string} lastName
- * @param {string} location
- * @param {string} role
- * @param {string} title
- * @returns {string} URL
+ * Constructs a WhitePages search URL for staff or faculty lookup based on provided parameters.
+ *
+ * @param {string} firstName - First name of the person to search for.
+ * @param {string} lastName - Last name of the person to search for.
+ * @param {string} location - Campus or location name.
+ * @param {string} role - Role to filter by (e.g., 'faculty').
+ * @param {string} title - Title to filter by (e.g., 'Dean').
+ * @returns {string} A URL string for the WhitePages search.
  */
 function buildWhitePagesURL(firstName, lastName, location, role, title) {
     return `https://whitepages.ivytech.edu/?first_name=${encodeURIComponent(firstName)}&last_name=${encodeURIComponent(lastName)}&userid=&location=${encodeURIComponent(location)}&role=${encodeURIComponent(role)}&title=${encodeURIComponent(title)}&bee_syrup_tun=&submit=+Search+`;
 }
 
 /**
- * Build course catalog URL for course lookup.
- * @param {string} courseCode
- * @returns {string} URL
+ * Constructs a course catalog search URL for a given course code.
+ *
+ * @param {string} courseCode - The course code to search for (e.g., 'CSCI101').
+ * @returns {string} A URL string for the course catalog search.
  */
 function buildCourseCatalogURL(courseCode) {
     return `https://catalog.ivytech.edu/search_advanced.php?cur_cat_oid=0&ecpage=1&cpage=1&ppage=1&pcpage=1&spage=1&tpage=1&search_database=Search&filter%5Bkeyword%5D=${encodeURIComponent(courseCode.toUpperCase())}&filter%5Bexact_match%5D=1&filter%5B3%5D=1&filter%5B31%5D=1`;
 }
 
 /**
- * Get a random error response in the specified language.
- * @param {string} language
- * @returns {string} Error response
+ * Returns a random error response in the specified language.
+ * Used when the chatbot cannot understand or process a user's query.
+ *
+ * @param {string} [language=LANGUAGE.ENGLISH] - The language for the error response.
+ * @returns {string} A randomly selected error response string.
  */
 function getErrorResponse(language = LANGUAGE.ENGLISH) {
     const index = Math.floor(Math.random() * 3);
     return language === LANGUAGE.FILIPINO ? FIL_ERROR_STATEMENTS[index] : ENG_ERROR_STATEMENTS[index];
 }
 /**
- * Build address response for a campus location.
- * @param {number} locIdx - Location index
- * @param {string} language
- * @returns {string} Address response
+ * Builds a formatted address response for a given campus location index.
+ * Includes campus name, address, and links to campus page and Google Maps.
+ *
+ * @param {number} locIdx - Index of the campus location in the locations array.
+ * @param {string} [language=LANGUAGE.ENGLISH] - The language for the response.
+ * @returns {string} The formatted address response, or a prompt to specify campus if not found.
  */
 function getAddressResponse(locIdx, language = LANGUAGE.ENGLISH) {
     console.log('Getting address response for location index:', locIdx);
@@ -64,10 +81,12 @@ function getAddressResponse(locIdx, language = LANGUAGE.ENGLISH) {
 }
 
 /**
- * Build phone/contact response for a campus location.
- * @param {number} locIdx - Location index
- * @param {string} language
- * @returns {string} Phone response
+ * Builds a formatted phone/contact response for a given campus location index.
+ * Includes campus name, phone number, email, and campus page link.
+ *
+ * @param {number} locIdx - Index of the campus location in the locations array.
+ * @param {string} [language=LANGUAGE.ENGLISH] - The language for the response.
+ * @returns {string} The formatted phone/contact response, or a prompt to specify campus if not found.
  */
 function getPhoneResponse(locIdx, language = LANGUAGE.ENGLISH) {
     let response = '';
@@ -85,10 +104,12 @@ function getPhoneResponse(locIdx, language = LANGUAGE.ENGLISH) {
 }
 
 /**
- * Build dean information response for a campus location.
- * @param {number} locIdx - Location index
- * @param {string} language
- * @returns {string} Dean response
+ * Builds a response containing dean information for a given campus location index.
+ * Includes a link to the White Pages for dean search.
+ *
+ * @param {number} locIdx - Index of the campus location in the locations array.
+ * @param {string} [language=LANGUAGE.ENGLISH] - The language for the response.
+ * @returns {string} The formatted dean information response, or a prompt to specify campus if not found.
  */
 function getDeanResponse(locIdx, language = LANGUAGE.ENGLISH) {
     let response = '';
@@ -108,10 +129,11 @@ function getDeanResponse(locIdx, language = LANGUAGE.ENGLISH) {
 }
 
 /**
- * Build reply from matched response object.
- * @param {Object} matchedResponse
- * @param {string} language
- * @returns {string|null} Reply string or null
+ * Builds a reply string from a matched response object, including any associated link if present.
+ *
+ * @param {Object} matchedResponse - The matched response object from the responses array.
+ * @param {string} [language=LANGUAGE.ENGLISH] - The language for the reply.
+ * @returns {string|null} The reply string, or null if no matched response is provided.
  */
 function getResponseReply(matchedResponse, language = LANGUAGE.ENGLISH) {
     if (!matchedResponse) return null;
@@ -123,11 +145,14 @@ function getResponseReply(matchedResponse, language = LANGUAGE.ENGLISH) {
 }
 
 /**
- * Build course general response for a course code.
- * @param {string|null} courseCode
- * @param {Object} matchedResponse
- * @param {string} language
- * @returns {string} Course response
+ * Builds a general course information response for a given course code.
+ * If a course code is provided, returns a formatted response with a link to the course catalog.
+ * If not, falls back to a generic course info response.
+ *
+ * @param {string|null} courseCode - The course code to look up, or null if not provided.
+ * @param {Object} matchedResponse - The matched response object for course info.
+ * @param {string} [language=LANGUAGE.ENGLISH] - The language for the response.
+ * @returns {string} The formatted course information response.
  */
 function getCourseGeneralResponse(courseCode, matchedResponse, language = LANGUAGE.ENGLISH) {
     let response = '';
@@ -169,11 +194,13 @@ function getCourseGeneralResponse(courseCode, matchedResponse, language = LANGUA
     return response;
 }
 /**
- * Build chatbot response based on matched intent and options.
- * @param {Object} matchedResponse
- * @param {string} language
- * @param {Object} opts - Additional options (locIdx, session, courseCode)
- * @returns {string} Chatbot response
+ * Builds the chatbot's response based on the matched intent and provided options.
+ * Handles all supported intents, including address, phone, dean, and course info.
+ *
+ * @param {Object} matchedResponse - The matched response object for the detected intent.
+ * @param {string} [language=LANGUAGE.ENGLISH] - The language for the response.
+ * @param {Object} [opts={}] - Additional options: locIdx (location index), session (conversation session), courseCode (course code).
+ * @returns {string} The chatbot's response string.
  */
 function buildResponse(matchedResponse, language = LANGUAGE.ENGLISH, opts = {}) {
     const locIdx = opts.locIdx || null;
@@ -211,10 +238,11 @@ function buildResponse(matchedResponse, language = LANGUAGE.ENGLISH, opts = {}) 
 }
 
 /**
- * Checks if the response is an error statement.
- * @param {string} response
- * @param {string} language
- * @returns {boolean}
+ * Checks if a given response string is one of the known error statements for the specified language.
+ *
+ * @param {string} response - The response string to check.
+ * @param {string} [language=LANGUAGE.ENGLISH] - The language to check error statements for.
+ * @returns {boolean} True if the response is an error statement, false otherwise.
  */
 function isErrorResponse(response, language = LANGUAGE.ENGLISH) {
     const errorStatements = language === LANGUAGE.FILIPINO ? FIL_ERROR_STATEMENTS : ENG_ERROR_STATEMENTS;

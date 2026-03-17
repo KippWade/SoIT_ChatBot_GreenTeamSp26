@@ -10,7 +10,11 @@ const router = Router();
 
 // Render chatbot page
 router.get('/ivybot', botController.response);
-// Handle chatbot query
-router.post('/ivybot', botController.query);
+// Handle chatbot query with rate limiting
+const rateLimit = require('express-rate-limit');
+const config = require('../config/config');
+const postLimiter = rateLimit(config.rateLimit);
+const asyncHandler = require('../middlewares/asyncHandler');
+router.post('/ivybot', postLimiter, asyncHandler(botController.query));
 
 module.exports = router;

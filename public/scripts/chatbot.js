@@ -1,14 +1,23 @@
 /**
- * Chatbot client script
- * Handles UI logic, session management, and AJAX requests for the chatbot interface.
+ * Chatbot Client Script
+ *
+ * This script manages the client-side logic for the chatbot interface, including:
+ *   - UI state transitions and user input handling
+ *   - Session and ticket management using localStorage
+ *   - Language selection and reconfirmation logic
+ *   - Inactivity and language confirmation timers
+ *   - AJAX requests to the server for chatbot responses
+ *
+ * Designed for maintainability and extensibility to support future UI or logic updates.
+ *
  * @module public/scripts/chatbot
  */
 
 /*
-    Clear ticketId and sessionTimestamp on page load to ensure a fresh ticket on every refresh.
-    This way, each refresh generates a new ticket and language selection resets.
-    Once a language is selected in the current session, it persists until the 3-minute timer fires or the page is refreshed.
-*/
+ * On page load, clear ticketId and sessionTimestamp to ensure a fresh session on every refresh.
+ * This guarantees that each page reload starts a new chatbot session and resets language/userType selection.
+ * Language selection persists only for the current session unless the timer expires or the page is refreshed.
+ */
 window.addEventListener('DOMContentLoaded', () => {
     localStorage.removeItem('ticketId');
     localStorage.removeItem('sessionTimestamp');
@@ -49,7 +58,9 @@ let pendingLanguage = null; // language chosen but awaiting confirmation
 let isChangingLanguage = false; // Flag to track if user is in "change language" flow
 
 /**
- * Helper to focus the visible user type control.
+ * Focuses the currently visible user type control (dropdown button or select input).
+ *
+ * @returns {void}
  */
 function focusUserTypeControl() {
     if (userTypeDropdownBtn) userTypeDropdownBtn.focus();
@@ -57,7 +68,11 @@ function focusUserTypeControl() {
 }
 
 /**
- * Reset inactivity timer for chatbot session.
+ * Resets the inactivity timer for the chatbot session.
+ * If the user is inactive for the defined limit, a bot message prompts for activity.
+ * Also resets the language confirmation timer to follow user activity.
+ *
+ * @returns {void}
  */
 function resetInactivityTimer() {
     clearTimeout(inactivityTimer);
@@ -74,7 +89,10 @@ function resetInactivityTimer() {
 }
 
 /**
- * Reset language confirmation timer for chatbot session.
+ * Resets the language confirmation timer for the chatbot session.
+ * After a set delay, prompts the user to reconfirm their language choice via a modal dialog.
+ *
+ * @returns {void}
  */
 function resetLanguageConfirmTimer() {
     clearTimeout(languageConfirmTimer);
@@ -232,7 +250,11 @@ if (questionBack) {
 }
 
 /**
- * Handle chat form submission and send user prompt to server.
+ * Handles chat form submission, sends the user prompt to the server, and updates the chat UI with user and bot messages.
+ *
+ * @event form#submit
+ * @param {Event} e - The form submission event.
+ * @returns {Promise<void>}
  */
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -292,10 +314,11 @@ form.addEventListener('submit', async (e) => {
 
 
 /**
- * Generate a unique ticket ID for the session.
- * @param {string} userType
- * @param {string} schoolEmail
- * @returns {string} Ticket ID
+ * Generates a unique ticket ID for the chatbot session, combining user type, email, and a persistent timestamp.
+ *
+ * @param {string} userType - The selected user type (e.g., 'Student', 'Guest').
+ * @param {string} schoolEmail - The user's school email address (may be empty for guests).
+ * @returns {string} The generated ticket ID string.
  */
 function generateTicketId(userType, schoolEmail) {
     // Use a persistent timestamp for the session

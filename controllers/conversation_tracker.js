@@ -1,6 +1,14 @@
 /**
  * Conversation Tracker Controller
- * Handles logging and retrieval of chatbot conversations for each user session.
+ *
+ * This module manages the logging and retrieval of chatbot conversations for each user session.
+ * It is responsible for:
+ *   - Persisting all user and bot messages for a session
+ *   - Tracking current and previous detected intents
+ *   - Storing session-specific entities (such as campus location index)
+ *
+ * The conversation history is stored in a JSON file for later analysis or debugging.
+ *
  * @module controllers/conversation_tracker
  */
 const fs = require('fs');
@@ -9,14 +17,26 @@ const filePath = path.join(__dirname, '../data/chat_session_logging.json'); // C
 const { INTENT } = require('../data/database');
 
 /**
- * Log a conversation message to the session file.
- * @param {string} ticket - Unique session ticket ID.
- * @param {string} userType - Type of user.
- * @param {string} schoolEmail - User's email.
+ * Logs a conversation message to the session file, creating a new session if needed.
+ *
+ * This function will:
+ *   - Create a new conversation session if the ticket is not found
+ *   - Update the current and previous intent for the session
+ *   - Track entities such as campus location index if provided
+ *   - Append the message (from user or bot) to the conversation history
+ *   - Persist all changes to the JSON file on disk
+ *
+ * @param {string} ticket - Unique session ticket ID for the conversation.
+ * @param {string} userType - Type of user (e.g., 'Student', 'Guest').
+ * @param {string} schoolEmail - User's school email address.
  * @param {string} from - Who sent the message ('user' or 'bot').
- * @param {string} message - The message content.
- * @param {string} intent - The detected intent.
- * @param {Object} opts - Additional options (e.g., locIdx).
+ * @param {string} message - The message content to log.
+ * @param {string} intent - The detected intent for this message (may be null for bot messages).
+ * @param {Object} [opts={}] - Additional options (e.g., { locIdx: number }) for entity tracking.
+ *
+ * @returns {void}
+ *
+ * @sideeffect Writes to the 'chat_session_logging.json' file in the data directory.
  */
 function addConversation(ticket, userType, schoolEmail, from, message, intent, opts = {}) {
     let conversations = [];
@@ -73,9 +93,12 @@ function addConversation(ticket, userType, schoolEmail, from, message, intent, o
 }
 
 /**
- * Retrieve a conversation by ticket ID.
- * @param {string} ticket - Unique session ticket ID.
- * @returns {Object|null} The conversation object or null if not found.
+ * Retrieves a conversation session by its unique ticket ID.
+ *
+ * @param {string} ticket - Unique session ticket ID to look up.
+ * @returns {Object|null} The conversation object (with ticket, userType, schoolEmail, conversation, date, currentIntent, previousIntent, entities), or null if not found.
+ *
+ * @sideeffect Reads from the 'chat_session_logging.json' file in the data directory.
  */
 function getConversation(ticket) {
     if (!fs.existsSync(filePath)) return null;
