@@ -1,39 +1,56 @@
 
 /**
- * Main application entry point.
- * Sets up Express server, middleware, routes, and error handling.
+ * Main Application Entry Point
+ *
+ * This file initializes and configures the Express server for the chatbot application. It is responsible for:
+ *   - Loading environment variables and configuration
+ *   - Setting up core middleware (static files, body parsing, logging, rate limiting)
+ *   - Registering main routes and bot-related routes
+ *   - Handling 404 errors and centralized error handling
+ *   - Starting the HTTP server
+ *
+ * Designed for maintainability and extensibility to support future middleware, route, or configuration changes.
+ *
+ * @file app.js
  */
 require('dotenv').config();
 const express = require('express');
 const rateLimit = require('express-rate-limit');
-const morgan = require('morgan');
 const botRoutes = require('./routes/botRoutes');
 const fuzz = require('fuzzball'); // Used for fuzzy string matching
 const config = require('./config/config');
+const registerCoreMiddleware = require('./middlewares/core');
 
-// Initialize Express app
+// =========================
+// Initialize Express app and configuration
+// =========================
 const app = express();
 const PORT = config.port;
 
-// Create a rate limiter for POST requests
+// =========================
+// Rate Limiting
+// =========================
 const postLimiter = rateLimit(config.rateLimit);
 
-// Set EJS as the view engine
+// =========================
+// View Engine Setup
+// =========================
 app.set('view engine', 'ejs');
 
-// Start server
+// =========================
+// Start HTTP Server
+// =========================
 app.listen(PORT, () => {
     console.log(`${new Date().toISOString()} :: Server started on port ${PORT}`);
 });
 
-// Middleware & static files
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
-app.use(morgan('dev')); // Logging
-app.use(express.json()); // Parse JSON bodies
-app.use(postLimiter); // Apply rate limiting
-
-// Main routes
+// =========================
+// Core Middleware & Static Files
+// =========================
+registerCoreMiddleware(app);
+// =========================
+// Main Routes
+// =========================
 app.get('/', (req, res) => {
     res.render('index', { title: 'Home' });
 });
@@ -41,14 +58,26 @@ app.get('/test', (req, res) => {
     res.render('test', { title: 'Home' });
 });
 
-// Bot-related routes
+// =========================
+// Bot-Related Routes
+// =========================
 app.use(botRoutes);
 
-// 404 page for unmatched routes
-app.use((req, res) => {
-    res.status(404).render('404', { title: '404' });
+// =========================
+// 404 Handler for Unmatched Routes
+// =========================
+app.use((req, res, next) => {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
 });
 
-// Centralized error handler (handles errors from all routes/middleware)
+// =========================
+// Centralized Error Handler
+// =========================
+/**
+ * Handles errors from all routes and middleware, rendering an error page or JSON as appropriate.
+ * @see middlewares/errorHandler.js
+ */
 const errorHandler = require('./middlewares/errorHandler');
 app.use(errorHandler);

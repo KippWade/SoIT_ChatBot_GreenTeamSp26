@@ -1,19 +1,36 @@
 
 /**
  * Language Controller
- * Provides language detection and error statement patterns for chatbot responses.
+ *
+ * This module provides language detection utilities and common error statement patterns
+ * for chatbot responses. It helps the chatbot determine whether a user's input is in English
+ * or Filipino, and supplies localized error messages for misunderstood queries.
+ *
+ * Exports:
+ *   - detectLanguage: Function to detect language from user input
+ *   - ENG_COMMON_PATTERNS, FIL_COMMON_PATTERNS: Arrays of common words/phrases for detection
+ *   - ENG_ERROR_STATEMENTS, FIL_ERROR_STATEMENTS: Arrays of error messages for each language
+ *
  * @module controllers/languageController
  */
 const { LANGUAGE } = require('../data/database');
 
-// Generic misunderstanding responses
+/**
+ * English error statements for misunderstood or unrecognized user queries.
+ * Used to provide a friendly fallback response when the chatbot cannot process input.
+ * @type {string[]}
+ */
 const ENG_ERROR_STATEMENTS = [
     "Sorry, I didn't quite catch that. Could you try asking in a different way?",
     "I'm having trouble understanding. Would you mind rephrasing your question?",
     "I'm a bit confused by that one. Can you ask it another way, please?"
 ];
 
-// Filipino error statements
+/**
+ * Filipino error statements for misunderstood or unrecognized user queries.
+ * Used to provide a localized fallback response when the chatbot cannot process input.
+ * @type {string[]}
+ */
 const FIL_ERROR_STATEMENTS = [
     "Pasensya na, medyo hindi ko po gaanong naintindihan ang tanong. Maaari po ba ninyong ipaliwanag o itanong muli sa ibang paraan?",
     "Pasensya na, nahirapan po akong maintindihan ang tanong. Maaari po ba ninyong ulitin o linawin nang kaunti?",

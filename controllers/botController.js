@@ -1,7 +1,15 @@
 
 /**
  * Bot Controller
- * Handles chatbot query processing, intent detection, and logging unanswered questions.
+ *
+ * This module manages the main chatbot logic, including:
+ *   - Processing user queries and detecting their intent
+ *   - Matching user input to known patterns and responses
+ *   - Logging conversations and unanswered questions for review
+ *   - Handling language detection and response localization
+ *
+ * Designed for maintainability and extensibility to support future updates and new features.
+ *
  * @module controllers/botController
  */
 const fs = require('fs');
@@ -14,11 +22,19 @@ const { buildResponse, isErrorResponse } = require('./replyController'); // Resp
 const { detectLanguage } = require('./languageController'); // Language detection functions
 
 /**
- * Add unanswered question to JSON file for later review.
- * @param {string} question - The user's question.
- * @param {string} userType - The type of user.
- * @param {string} schoolEmail - The user's email.
- * @param {string|null} originalQuestion - The original question, if any.
+ * Logs an unanswered or unmatched user question to a JSON file for later review by administrators.
+ * This helps improve the chatbot by tracking queries it could not answer.
+ *
+ * @param {string} question - The user's submitted question (as received).
+ * @param {string} userType - The type of user (e.g., 'Student', 'Guest', etc.).
+ * @param {string} schoolEmail - The user's school email address, if provided.
+ * @param {string|null} [originalQuestion=null] - The original question, if this is a follow-up or rephrased inquiry.
+ *
+ * @returns {void}
+ *
+ * @throws Will log an error if the JSON file cannot be parsed, but will not throw to the caller.
+ *
+ * @sideeffect Writes to the 'unanswered_inquiries.json' file in the data directory.
  */
 function addUnansweredQuestion(question, userType, schoolEmail, originalQuestion = null) {
     let questions = [];
@@ -46,8 +62,11 @@ function addUnansweredQuestion(question, userType, schoolEmail, originalQuestion
 }
 
 /**
- * Retrieve unanswered questions from JSON file.
- * @returns {Array} Array of unanswered question objects.
+ * Retrieves all unanswered questions previously logged to the JSON file.
+ *
+ * @returns {Array<Object>} Array of unanswered question objects, each containing question, userType, schoolEmail, date, ticket, and optionally originalQuestion.
+ *
+ * @sideeffect Reads from the 'unanswered_inquiries.json' file in the data directory.
  */
 function getUnansweredQuestions() {
     if (!fs.existsSync(unansweredFilePath)) return [];
@@ -55,10 +74,13 @@ function getUnansweredQuestions() {
 }
 
 /**
- * Get best matching location index from user prompt.
- * Determines which campus/location the user is asking about.
- * @param {string} prompt - The user's prompt.
- * @returns {number} Index of matched location or -1 if not found.
+ * Attempts to determine which campus/location the user is referring to in their prompt.
+ * Uses fuzzy string matching to compare the prompt to known locations.
+ *
+ * @param {string} prompt - The user's input prompt (should be lowercased for best results).
+ * @returns {number} The index of the matched location in the locations array, or -1 if no strong match is found.
+ *
+ * @sideeffect Logs matching process and results to the console for debugging.
  */
 function getLocationIndexFromPrompt(prompt) {
     console.log(`${new Date().toISOString()} :: GETTING LOCATION`);
@@ -84,9 +106,11 @@ function getLocationIndexFromPrompt(prompt) {
 }
 
 /**
- * Extract course code from user prompt using regex.
- * @param {string} prompt - The user's prompt.
- * @returns {string|null} The matched course code or null.
+ * Extracts a course code from the user's prompt using a regular expression.
+ * Course codes are matched based on the pattern defined in the database module.
+ *
+ * @param {string} prompt - The user's input prompt.
+ * @returns {string|null} The matched course code (with spaces/dashes removed), or null if not found.
  */
 function getCourseCodeFromPrompt(prompt) {
     const db = require('../data/database');           // Import here (or move to top)
@@ -95,10 +119,23 @@ function getCourseCodeFromPrompt(prompt) {
 }
 
 /**
- * Main query processing function for chatbot.
- * Processes user prompt, detects intent, builds response, and logs conversation.
- * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
+ * Main entry point for processing chatbot queries.
+ *
+ * Handles the following:
+ *   - Receives user prompt and metadata from the Express request
+ *   - Detects the user's intent using fuzzy matching and pattern recognition
+ *   - Determines the appropriate response, including language localization
+ *   - Extracts relevant entities (such as location or course code) from the prompt
+ *   - Logs both the user message and the bot's response for conversation history
+ *   - Records unanswered questions for future review
+ *
+ * @function
+ * @param {Object} req - Express request object. Expects body fields: prompt (string), userType (string), schoolEmail (string), ticketId (string), language (string).
+ * @param {Object} res - Express response object. Responds with JSON: { response: string }.
+ *
+ * @returns {void}
+ *
+ * @sideeffect Logs conversation and unanswered questions, writes to conversation and unanswered files.
  */
 module.exports.query = (req, res) => {
     let prompt = (req.body.prompt || '').toLowerCase();
@@ -209,9 +246,12 @@ module.exports.query = (req, res) => {
 }
 
 /**
- * Renders the home page.
+ * Renders the chatbot's home page.
+ *
  * @param {Object} req - Express request object.
- * @param {Object} res - Express response object.
+ * @param {Object} res - Express response object. Calls res.render with the 'index' view and a title.
+ *
+ * @returns {void}
  */
 module.exports.response = (req, res) => {
     res.render('index', { title: 'Home' });
