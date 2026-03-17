@@ -84,7 +84,7 @@ Enjoy seamless access to Ivy Tech resources. For advanced queries, the chatbot m
 
 ## Credits
 - Original Creators: [SDEV 265 FA24 Blue Team](https://github.com/LiongsonEnzo/SoIT_ChatBot)
-- Additional Enhancements: [SDEV 265 FA25 BrownTeam](https://github.com/rohydro93/SoIT_ChatBot_BrownTeam)
+- Additional Enhancements: [SDEV 265 FA25 Brown Team](https://github.com/rohydro93/SoIT_ChatBot_BrownTeam)
 - Additional Enhamcements (this repository): [SDEV 265 SP26 Green Team](https://github.com/KippWade/SoIT_ChatBot_GreenTeamSp26)
 
 
