@@ -1,78 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\",
+  "WorkspaceRootPath": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\data\\database.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:data\\database.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\controllers\\replyController.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\controllers\\replyController.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:controllers\\replyController.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\controllers\\botController.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\controllers\\botController.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:controllers\\botController.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\controllers\\languageController.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\data\\database.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:data\\database.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:.gitignore||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\package-lock.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:package-lock.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\controllers\\languageController.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:controllers\\languageController.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\index.ejs||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:views\\index.ejs||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\partials\\footer.ejs||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:views\\partials\\footer.ejs||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\routes\\botRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:routes\\botRoutes.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\public\\scripts\\chatbot.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\scripts\\chatbot.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\controllers\\conversation_tracker.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:controllers\\conversation_tracker.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\404.ejs||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:views\\404.ejs||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\config\\config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:config\\config.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:app.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\middlewares\\errorHandler.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:middlewares\\errorHandler.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\services\\.gitkeep||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:services\\.gitkeep||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\tests\\.gitkeep||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:tests\\.gitkeep||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:package.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\partials\\head.ejs||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:views\\partials\\head.ejs||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\partials\\nav.ejs||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:views\\partials\\nav.ejs||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -82,7 +34,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 17,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -90,13 +42,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 1,
               "Title": "botController.js",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\controllers\\botController.js",
+              "DocumentMoniker": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\controllers\\botController.js",
               "RelativeDocumentMoniker": "controllers\\botController.js",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\controllers\\botController.js",
+              "ToolTip": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\controllers\\botController.js",
               "RelativeToolTip": "controllers\\botController.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAvAAAAAAAAAA==",
+              "ViewState": "AgIAANwAAAAAAAAAAAAwwOYAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2026-03-03T15:09:56.805Z",
               "IsPinned": true,
@@ -104,13 +56,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "replyController.js",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\controllers\\replyController.js",
+              "DocumentMoniker": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\controllers\\replyController.js",
               "RelativeDocumentMoniker": "controllers\\replyController.js",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\controllers\\replyController.js",
+              "ToolTip": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\controllers\\replyController.js",
               "RelativeToolTip": "controllers\\replyController.js",
-              "ViewState": "AgIAAH4AAAAAAAAAAIAwwBkAAAAuAAAAAAAAAA==",
+              "ViewState": "AgIAABUAAAAAAAAAAAAWwCIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2026-03-03T15:10:12.616Z",
               "IsPinned": true,
@@ -118,11 +70,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "languageController.js",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\controllers\\languageController.js",
+              "DocumentMoniker": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\controllers\\languageController.js",
               "RelativeDocumentMoniker": "controllers\\languageController.js",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\controllers\\languageController.js",
+              "ToolTip": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\controllers\\languageController.js",
               "RelativeToolTip": "controllers\\languageController.js",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAACAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
@@ -132,197 +84,42 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "footer.ejs",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\partials\\footer.ejs",
-              "RelativeDocumentMoniker": "views\\partials\\footer.ejs",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\partials\\footer.ejs",
-              "RelativeToolTip": "views\\partials\\footer.ejs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAOAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-03-03T15:55:53.957Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "nav.ejs",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\partials\\nav.ejs",
-              "RelativeDocumentMoniker": "views\\partials\\nav.ejs",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\partials\\nav.ejs",
-              "RelativeToolTip": "views\\partials\\nav.ejs",
+              "DocumentIndex": 3,
+              "Title": ".gitignore",
+              "DocumentMoniker": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\.gitignore",
+              "RelativeDocumentMoniker": ".gitignore",
+              "ToolTip": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\.gitignore",
+              "RelativeToolTip": ".gitignore",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-03-03T15:55:53.883Z",
+              "WhenOpened": "2026-03-27T12:27:52.97Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "head.ejs",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\partials\\head.ejs",
-              "RelativeDocumentMoniker": "views\\partials\\head.ejs",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\partials\\head.ejs",
-              "RelativeToolTip": "views\\partials\\head.ejs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-03-03T15:55:53.72Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "package.json",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\package.json",
-              "RelativeDocumentMoniker": "package.json",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\package.json",
-              "RelativeToolTip": "package.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-03-03T15:40:52.616Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": ".gitkeep",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\tests\\.gitkeep",
-              "RelativeDocumentMoniker": "tests\\.gitkeep",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\tests\\.gitkeep",
-              "RelativeToolTip": "tests\\.gitkeep",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAABeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-03-03T15:28:28.604Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": ".gitkeep",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\services\\.gitkeep",
-              "RelativeDocumentMoniker": "services\\.gitkeep",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\services\\.gitkeep",
-              "RelativeToolTip": "services\\.gitkeep",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-03-03T15:28:28.529Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "errorHandler.js",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\middlewares\\errorHandler.js",
-              "RelativeDocumentMoniker": "middlewares\\errorHandler.js",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\middlewares\\errorHandler.js",
-              "RelativeToolTip": "middlewares\\errorHandler.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAA8AAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "database.js",
+              "DocumentMoniker": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\data\\database.js",
+              "RelativeDocumentMoniker": "data\\database.js",
+              "ToolTip": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\data\\database.js",
+              "RelativeToolTip": "data\\database.js",
+              "ViewState": "AgIAAPkCAAAAAAAAAAAwwAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-03-03T15:18:21.207Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "app.js",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\app.js",
-              "RelativeDocumentMoniker": "app.js",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\app.js",
-              "RelativeToolTip": "app.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-03-03T15:13:39.965Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "config.js",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\config\\config.js",
-              "RelativeDocumentMoniker": "config\\config.js",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\config\\config.js",
-              "RelativeToolTip": "config\\config.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAADAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-03-03T15:16:14.105Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "404.ejs",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\404.ejs",
-              "RelativeDocumentMoniker": "views\\404.ejs",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\404.ejs",
-              "RelativeToolTip": "views\\404.ejs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-03-03T15:10:25.886Z",
+              "WhenOpened": "2026-03-27T12:37:55.714Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "index.ejs",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\index.ejs",
-              "RelativeDocumentMoniker": "views\\index.ejs",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\views\\index.ejs",
-              "RelativeToolTip": "views\\index.ejs",
-              "ViewState": "AgIAAEEAAAAAAAAAAAAAAFMAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-03-03T15:10:25.65Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "botRoutes.js",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\routes\\botRoutes.js",
-              "RelativeDocumentMoniker": "routes\\botRoutes.js",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\routes\\botRoutes.js",
-              "RelativeToolTip": "routes\\botRoutes.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-03-03T15:10:20.874Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "chatbot.js",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\public\\scripts\\chatbot.js",
-              "RelativeDocumentMoniker": "public\\scripts\\chatbot.js",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\public\\scripts\\chatbot.js",
-              "RelativeToolTip": "public\\scripts\\chatbot.js",
-              "ViewState": "AgIAAPMBAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-03-03T15:10:18.481Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "database.js",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\data\\database.js",
-              "RelativeDocumentMoniker": "data\\database.js",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\data\\database.js",
-              "RelativeToolTip": "data\\database.js",
-              "ViewState": "AgIAAGAFAAAAAAAAAAAAAG4FAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-03-03T15:10:13.89Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "conversation_tracker.js",
-              "DocumentMoniker": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\controllers\\conversation_tracker.js",
-              "RelativeDocumentMoniker": "controllers\\conversation_tracker.js",
-              "ToolTip": "C:\\Source Control\\GitHub\\SoIT_ChatBot_GreenTeamSp26\\controllers\\conversation_tracker.js",
-              "RelativeToolTip": "controllers\\conversation_tracker.js",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2026-03-03T15:09:59.895Z",
+              "Title": "package-lock.json",
+              "DocumentMoniker": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\package-lock.json",
+              "RelativeDocumentMoniker": "package-lock.json",
+              "ToolTip": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\package-lock.json",
+              "RelativeToolTip": "package-lock.json",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-03-27T12:22:56.325Z",
               "EditorCaption": ""
             },
             {
