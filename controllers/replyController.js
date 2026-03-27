@@ -18,7 +18,20 @@
 const { responses, locations, INTENT, LANGUAGE, COURSE_PREFIXES } = require('../data/database');
 const { ENG_ERROR_STATEMENTS, FIL_ERROR_STATEMENTS } = require('./languageController');
 
-const suffix = "&nbsp;<i class='bx bx-link-external'></i></a>"; // External link icon
+
+/**
+ * Builds a reusable styled link button with an external link icon.
+ * @param {string} url - The URL to link to.
+ * @param {string} label - The button label text.
+ * @returns {string} HTML for the button.
+ */
+function buildLinkButton(url, label) {
+    // Uses button[type="button"] for consistent dark green styling via CSS
+    return `<button type="button" onclick="window.open('${url}', '_blank')" class="d-inline-flex align-items-center gap-2">
+        ${label}
+        <i class='bx bx-link-external'></i>
+    </button>`;
+}
 
 /**
  * Constructs a WhitePages search URL for staff or faculty lookup based on provided parameters.
@@ -70,8 +83,8 @@ function getAddressResponse(locIdx, language = LANGUAGE.ENGLISH) {
         console.log("Matched location title:", locations[locIdx].title);
         response = `<strong>${locations[locIdx].title} Campus Location:</strong><br>`;
         response += locations[locIdx].address;
-        response += `<br><a href='https://www.ivytech.edu/${locations[locIdx].url}' target='_blank'>Campus Page</a>`;
-        response += `<br><a href='https://www.google.com/maps/search/?api=1&query=${locations[locIdx].position.lat},${locations[locIdx].position.lng}' target='_blank'>Google Maps</a>`;
+        response += `<br>` + buildLinkButton(`https://www.ivytech.edu/${locations[locIdx].url}`, 'Campus Page');
+        response += `<br>` + buildLinkButton(`https://www.google.com/maps/search/?api=1&query=${locations[locIdx].position.lat},${locations[locIdx].position.lng}`, 'Google Maps');
     } else {
         response = language === LANGUAGE.FILIPINO
             ? "Kaya ko pong hanapin iyon para sa iyo. Aling campus ang gusto niyo pong makuha ang address?"
@@ -94,7 +107,7 @@ function getPhoneResponse(locIdx, language = LANGUAGE.ENGLISH) {
         response = `<strong>${locations[locIdx].title} Campus Contact Info:</strong><br><br>`;
         response += `<i class='bx bxs-phone-call'></i>&nbsp;&nbsp;<a href='tel:${locations[locIdx].phone}'>${locations[locIdx].phone}</a><br>`;
         response += `<i class='bx bxs-envelope' ></i>&nbsp;&nbsp;<a href="mailto:${locations[locIdx].email}">${locations[locIdx].email}</a>`;
-        response += `<br><a href='https://www.ivytech.edu/${locations[locIdx].url}' target='_blank'>Campus Page${suffix}`;
+        response += `<br>` + buildLinkButton(`https://www.ivytech.edu/${locations[locIdx].url}`, 'Campus Page');
     } else {
         response = language === LANGUAGE.FILIPINO
             ? "Aling kampus ang tinutukoy niyo po? O gusto niyo po ba ang 24 oras na toll-free na numero?"
@@ -117,13 +130,13 @@ function getDeanResponse(locIdx, language = LANGUAGE.ENGLISH) {
         let deanResponse = responses.find(r => r.intent === INTENT.DEAN_INFO);
         deanResponse = language === LANGUAGE.FILIPINO ? (deanResponse.reply.fil || deanResponse.reply.en) : (deanResponse.reply.en || deanResponse.reply.fil);
         response = `<strong>${deanResponse}</strong><br>`;
-        response += `<br><a href='${buildWhitePagesURL('', '', locations[locIdx].title, 'faculty', 'Dean')}' target='_blank'>White Pages&nbsp;<i class='bx bx-link-external'></i></a>`;
+        response += `<br>` + buildLinkButton(buildWhitePagesURL('', '', locations[locIdx].title, 'faculty', 'Dean'), 'White Pages');
         return response;
     } else {
         response = language === LANGUAGE.FILIPINO
             ? 'Hmm.. aling kampus ang gusto niyo pong mong impormasyon tungkol sa dean? Maaari niyo rin pong sundan ang link na ito para mahanap sa White Pages tungkol sa mga dean: '
             : 'Hmm.. which campus are you wanting dean information for? You can also follow this link to search the White Pages for the dean: ';
-        response += '<a href="' + buildWhitePagesURL('', '', '', 'faculty', 'Dean') + '" target="_blank">White Pages</a>';
+        response += buildLinkButton(buildWhitePagesURL('', '', '', 'faculty', 'Dean'), 'White Pages');
     }
     return response;
 }
@@ -137,9 +150,9 @@ function getDeanResponse(locIdx, language = LANGUAGE.ENGLISH) {
  */
 function getResponseReply(matchedResponse, language = LANGUAGE.ENGLISH) {
     if (!matchedResponse) return null;
-    response = language === LANGUAGE.FILIPINO ? (matchedResponse.reply.fil || matchedResponse.reply.en) : (matchedResponse.reply.en || matchedResponse.reply.fil);
+    let response = language === LANGUAGE.FILIPINO ? (matchedResponse.reply.fil || matchedResponse.reply.en) : (matchedResponse.reply.en || matchedResponse.reply.fil);
     if (matchedResponse.url) {
-        response += `<br><br><a href='${matchedResponse.url}' target='_blank'>${matchedResponse.link}${suffix}`;
+        response += `<br><br>` + buildLinkButton(matchedResponse.url, matchedResponse.link || 'More Info');
     }
     return response;
 }
@@ -165,14 +178,7 @@ function getCourseGeneralResponse(courseCode, matchedResponse, language = LANGUA
             : `Here is the information for course <strong>${courseUpper}</strong> in the current catalog:<br><br>`;
 
         const courseLink = buildCourseCatalogURL(courseCode);
-        
-        // BONUS: Nice blue button with icon
-        response += `
-            <a href="${courseLink}" target="_blank" 
-               class="btn btn-primary btn-sm d-inline-flex align-items-center gap-2">
-                <strong>View ${courseUpper} Details</strong>
-                <i class='bx bx-link-external'></i>
-            </a>`;
+        response += buildLinkButton(courseLink, `View ${courseUpper} Details`);
 
         // Fallback warning if prefix not recognized (already in your previous version)
         if (!COURSE_PREFIXES.some(prefix => courseUpper.startsWith(prefix))) {
@@ -256,4 +262,5 @@ module.exports = {
     buildResponse,
     getErrorResponse,
     isErrorResponse,
+    buildLinkButton,
 };

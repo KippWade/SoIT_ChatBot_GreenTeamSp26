@@ -15,7 +15,7 @@
 const fs = require('fs');
 const path = require('path');
 const fuzz = require('fuzzball'); // NPM Package Info https://www.npmjs.com/package/fuzzball
-const { responses, locations, INTENT, LANGUAGE, COURSE_PREFIXES } = require('../data/database'); // Stand-in for external MongoDB instance
+const { responses, locations, INTENT, LANGUAGE, COURSE_PREFIXES, HELPFUL_SUGGESTIONS, HELP_PATTERNS } = require('../data/database'); // Stand-in for external MongoDB instance
 const unansweredFilePath = path.join(__dirname, '../data/unanswered_inquiries.json'); // File to store unanswered/unmatched inquiries
 const { addConversation, getConversation } = require('./conversation_tracker');
 const { buildResponse, isErrorResponse } = require('./replyController'); // Response building functions
@@ -137,6 +137,7 @@ function getCourseCodeFromPrompt(prompt) {
  *
  * @sideeffect Logs conversation and unanswered questions, writes to conversation and unanswered files.
  */
+
 module.exports.query = (req, res) => {
     let prompt = (req.body.prompt || '').toLowerCase();
     const userType = req.body.userType || 'Guest';
@@ -207,6 +208,12 @@ module.exports.query = (req, res) => {
         }
     }
 
+    // Check if prompt matches a help pattern
+    const matchesHelpPattern = HELP_PATTERNS.some(pattern => {
+        const regex = new RegExp(pattern, 'i');
+        return regex.test(prompt);
+    });
+
     console.log(`${new Date().toISOString()} :: MATCHED RESPONSE: ${matchedResponse !== null}`);
     console.log(`${new Date().toISOString()} :: MATCHED RESPONSE TYPE: ${matchedResponse?.type}`);
     console.log(`${new Date().toISOString()} :: MATCHED RESPONSE: ${matchedResponse !== null}`);
@@ -221,9 +228,34 @@ module.exports.query = (req, res) => {
     }
 
     if (!matchedResponse) {
-        response = (activeLanguage === LANGUAGE.FILIPINO)
-            ? "Paumanhin, hindi ko naintindihan ang iyong tanong."
-            : "Sorry, I didn't understand your question.";
+        if (matchesHelpPattern) {
+            // Only show helpful suggestions, no "didn't understand" message
+            const shuffled = HELPFUL_SUGGESTIONS.slice().sort(() => 0.5 - Math.random());
+            const suggestions = shuffled.slice(0, 3);
+            if (suggestions.length > 0) {
+                const htmlList = `<ul>` + suggestions.map(s => `<li>${s}</li>`).join('') + `</ul>`;
+                response = (activeLanguage === LANGUAGE.FILIPINO)
+                    ? `Narito ang ilang halimbawa ng mga tanong na maaari kong sagutin:${htmlList}`
+                    : `Here are some example questions I can answer:${htmlList}`;
+            } else {
+                response = (activeLanguage === LANGUAGE.FILIPINO)
+                    ? `Narito ang ilang halimbawa ng mga tanong na maaari kong sagutin.`
+                    : `Here are some example questions I can answer.`;
+            }
+        } else {
+            response = (activeLanguage === LANGUAGE.FILIPINO)
+                ? "Paumanhin, hindi ko naintindihan ang iyong tanong."
+                : "Sorry, I didn't understand your question.";
+            // Add up to 3 random helpful suggestions as an HTML bullet list
+            const shuffled = HELPFUL_SUGGESTIONS.slice().sort(() => 0.5 - Math.random());
+            const suggestions = shuffled.slice(0, 3);
+            if (suggestions.length > 0) {
+                const htmlList = `<ul>` + suggestions.map(s => `<li>${s}</li>`).join('') + `</ul>`;
+                response += (activeLanguage === LANGUAGE.FILIPINO)
+                    ? `<br>Narito ang ilang halimbawa ng mga tanong na maaari kong sagutin:${htmlList}`
+                    : `<br>Here are some example questions I can answer:${htmlList}`;
+            }
+        }
         addUnansweredQuestion(prompt, userType, schoolEmail);
     } else {
         response = buildResponse(matchedResponse, activeLanguage, { locIdx, session, courseCode });
