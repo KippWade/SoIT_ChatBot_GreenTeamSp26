@@ -252,7 +252,7 @@ const responses = [
         intent: INTENT.COURSE_INFO_GENERAL,
         pattern: {
             en: [
-                "course description", "course descriptions", "prerequisites for", "course details", "course info", "course information", "course syllabus",
+                "course description", "course descriptions", "course catalog", "prerequisites for", "course details", "course info", "course information", "course syllabus",
                 "course outline", "course overview", "course topics", "course content", "course objectives", "course goals",
                 "what will I learn in", "what do I learn in", "what are the learning outcomes for", "what are the learning objectives for"
             ], fil: ["paglalarawan ng kurso", "mga paglalarawan ng kurso", "mga kinakailangan bago kuhain ang", "mga detalye ng kurso",
@@ -271,7 +271,7 @@ const responses = [
         intent: INTENT.PHONE_NUMBER_INFO,
         pattern: {
             en: [
-                "phone number", "what is the phone number", "contact by phone",
+                "phone number", "what is the phone number", "contact information", "how can i contact", "contact by phone",
                 "how can i call", "how can i reach", "contact number"
             ], fil: ["numero ng telepono", "ano ang numero ng telepono", "makipag-ugnayan sa telepono",
                 "paano ako makatawag", "ano ang contact number", "numero ng contact", "sino ang matatawagan",
@@ -313,7 +313,7 @@ const responses = [
         intent: INTENT.CERTIFICATION_INFO,
         pattern: {
             en: [
-                "certifications", "does ivytech offer certifications", "certifications ivytech", "certifications ivy tech",
+                "certifications", "degrees","does ivytech offer certifications", "certifications ivytech", "certifications ivy tech",
             ], fil: ["ano ang mga sertipikasyon", "ano ang mga sertipikasyon na inaalok ninyo", "mga sertipikasyon na inaalok ng ivytech",
                 "mga sertipikasyon na inaalok ng ivy tech", "mga sertipikasyon ng ivytech", "mga sertipikasyon ng ivy tech",
                 "mga sertipikasyon"
@@ -413,7 +413,7 @@ const responses = [
                 "what are the tuition and fees", "tuition and fees", "tuition fees",
                 "tuition and fees ivy tech", "tuition and fees ivytech", "tuition fees ivy tech",
                 "tuition fees ivytech", "what are the tuition and fees ivy tech", "what are the tuition and fees ivytech",
-                "costs", "costs ivy tech", "costs ivytech", "what are the costs", "what are the costs ivy tech",
+                "costs", "cost", "cost to attend", "cost per credit hour", "costs ivy tech", "costs ivytech", "what are the costs", "what are the costs ivy tech",
                 "what are the costs ivytech", "payment"
             ], fil: ["ano ang mga matrikula at iba pang mga bayarin", "matrikula at iba pang mga bayarin", "mga bayarin sa matrikula",
                 "matrikula at iba pang mga bayarin ivy tech", "matrikula at iba pang mga bayarin ivytech", "mga bayarin sa matrikula ivy tech",
@@ -489,7 +489,7 @@ const responses = [
         pattern: {
             en: [
                 "how do I get my transcripts", "transcript request", "request transcripts",
-                "how do I request my transcripts", "transcripts ivy tech", "transcripts ivytech"
+                "how do I request my transcripts", "transcript", "transcripts", "transcripts ivy tech", "transcripts ivytech"
             ], fil: ["paano ako kukuha ng transcript", "pag kuha ng transcript", "transcript", "saan puwedeng kumuha ng transcript",
                 "saan pwedeng kumuha ng transcript", "sino ang pwedeng kontakin para sa transcript", "sino ang puwedeng kontakin para sa transcript",
                 "paano ako makakakuha ng transcript ivy tech", "paano ako makakakuha ng transcript ivytech",
@@ -507,7 +507,7 @@ const responses = [
         intent: INTENT.STUDENT_SERVICES,
         pattern: {
             en: [
-                "what student services are available", "student services", "services for students",
+                "what student services are available", "student resources", "student services", "services for students",
                 "student services ivy tech", "student services ivytech", "what student services are available ivy tech",
                 "what student services are available ivytech"
             ], fil: [
@@ -524,7 +524,7 @@ const responses = [
         intent: INTENT.FIND_ADVISOR,
         pattern: {
             en: [
-                "how do I find my advisor", "find my advisor", "academic advisor",
+                "how do I find my advisor", "find my advisor", "academic advisors", "academic advisor",
                 "how do I find my advisor ivy tech", "how do I find my advisor ivytech", "find my advisor ivy tech",
                 "find my advisor ivytech", "academic advisor ivy tech", "academic advisor ivytech"
             ], fil: ["paano ko mahahanap ang aking tagapayo", "hanapin ang aking tagapayo", "academic advisor",
@@ -590,7 +590,7 @@ const responses = [
         intent: INTENT.LIBRARY_INFO,
         pattern: {
             en: [
-                "what are the library resources and services", "are there any library resources and services",
+                "what are the library resources and services", "student library", "library", "are there any library resources and services",
                 "library information"
             ], fil: ["ano ang mga mapagkukunan at serbisyo ng aklatan sa paaralan", "ano ang mga impormasyon ukol sa aklatan sa paaralan",
                 "akalatan ng paaralan", "aklatan", "impormasyon sa aklatan",
