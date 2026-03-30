@@ -26,10 +26,10 @@ const { ENG_ERROR_STATEMENTS, FIL_ERROR_STATEMENTS } = require('./languageContro
  * @returns {string} HTML for the button.
  */
 function buildLinkButton(url, label) {
-    // Uses button[type="button"] for consistent dark green styling via CSS
-    return `<button type="button" onclick="window.open('${url}', '_blank')" class="d-inline-flex align-items-center gap-2">
+    // Uses button[type="button"] for consistent dark green styling via CSS and adds aria-label for a11y
+    return `<button type="button" onclick="window.open('${url}', '_blank')" class="d-inline-flex align-items-center gap-2" aria-label="${label} (opens in new tab)">
         ${label}
-        <i class='bx bx-link-external'></i>
+        <i class='bx bx-link-external' aria-hidden="true"></i>
     </button>`;
 }
 

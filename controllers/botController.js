@@ -233,7 +233,7 @@ module.exports.query = (req, res) => {
             const shuffled = HELPFUL_SUGGESTIONS.slice().sort(() => 0.5 - Math.random());
             const suggestions = shuffled.slice(0, 3);
             if (suggestions.length > 0) {
-                const htmlList = `<ul class="helpful-suggestions-list">` + suggestions.map(s => `<li>${s}</li>`).join('') + `</ul>`;
+                const htmlList = `<ul class="helpful-suggestions-list" aria-label="Example questions you can ask">` + suggestions.map(s => `<li>${s}</li>`).join('') + `</ul>`;
                 response = (activeLanguage === LANGUAGE.FILIPINO)
                     ? `Narito ang ilang halimbawa ng mga tanong na maaari kong sagutin:${htmlList}`
                     : `Here are some example questions I can answer:${htmlList}`;
@@ -250,7 +250,7 @@ module.exports.query = (req, res) => {
             const shuffled = HELPFUL_SUGGESTIONS.slice().sort(() => 0.5 - Math.random());
             const suggestions = shuffled.slice(0, 3);
             if (suggestions.length > 0) {
-            const htmlList = `<ul class="helpful-suggestions-list">` + suggestions.map(s => `<li>${s}</li>`).join('') + `</ul>`;
+            const htmlList = `<ul class="helpful-suggestions-list" aria-label="Example questions you can ask">` + suggestions.map(s => `<li>${s}</li>`).join('') + `</ul>`;
             response += (activeLanguage === LANGUAGE.FILIPINO)
                 ? `<br>Narito ang ilang halimbawa ng mga tanong na maaari kong sagutin:${htmlList}`
                 : `<br>Here are some example questions I can answer:${htmlList}`;
