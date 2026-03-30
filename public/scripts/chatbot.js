@@ -157,11 +157,14 @@ userTypeNext.addEventListener('click', function() {
     } else {
         // Only generate ticketId if not already set
         if (!localStorage.getItem('ticketId')) {
-                const newTicket = generateTicketId(userType, '');
-                localStorage.setItem('ticketId', newTicket);
-                // Do NOT persist language/userType; keep them in-memory only
+            const newTicket = generateTicketId(userType, '');
+            localStorage.setItem('ticketId', newTicket);
+            // Do NOT persist language/userType; keep them in-memory only
         }
         showSection(questionSection);
+        // Autofocus the question input
+        const promptInput = document.getElementById('prompt');
+        if (promptInput) promptInput.focus();
     }
 });
 
@@ -207,6 +210,9 @@ emailNext.addEventListener('click', function() {
     }
     hideSection(emailSection);
     showSection(questionSection);
+    // Autofocus the question input
+    const promptInput = document.getElementById('prompt');
+    if (promptInput) promptInput.focus();
 });
 
 
@@ -256,8 +262,16 @@ if (questionBack) {
  * @param {Event} e - The form submission event.
  * @returns {Promise<void>}
  */
+
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Hide any previous error message
+    const errorMessage = document.getElementById('error-message');
+    if (errorMessage) {
+        errorMessage.style.display = 'none';
+        errorMessage.textContent = '';
+    }
 
     //create user query message
     const chatBody = document.getElementById('chat-body'); 
@@ -284,6 +298,10 @@ form.addEventListener('submit', async (e) => {
             body: JSON.stringify({ prompt, userType, schoolEmail, ticketId, language })
         });
 
+        if (!res.ok) {
+            throw new Error('Network response was not ok');
+        }
+
         const data = await res.json();
 
         //generate bot response div
@@ -292,7 +310,7 @@ form.addEventListener('submit', async (e) => {
 
         const botMessageAvatar = document.createElement('div');
         botMessageAvatar.classList.add('avatar');
-        botMessageAvatar.innerHTML = '<img src="img/ivybot_face.png">';
+        botMessageAvatar.innerHTML = '<img src="img/ivybot_face.png" alt="IvyBot avatar">';
 
         const botMessageContent = document.createElement('div');                
         botMessageContent.classList.add('content');
@@ -303,6 +321,11 @@ form.addEventListener('submit', async (e) => {
         chatBody.appendChild(botResponse);
     }
     catch (err) {
+        // Show error message in the error-message container
+        if (errorMessage) {
+            errorMessage.textContent = 'An error occurred. Please try again.';
+            errorMessage.style.display = 'block';
+        }
         console.log(err);
     }
 
