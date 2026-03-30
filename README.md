@@ -1,13 +1,15 @@
 # IvyBot: Ivy Tech Student Chatbot
 
-This project is forked from the SDEV 265 FA24 Blue Team's original repository and enhances the IvyBot chatbot to serve as a reliable, go-to resource for Ivy Tech students and staff. Our improvements focus on accessibility, usability, and expanded functionality, making it easier for users to access campus information while providing valuable tools for developers and contributors.
+This project is forked from the SDEV 265 FA25 Brown Team's repository and enhances the IvyBot chatbot to serve as a reliable, go-to resource for Ivy Tech students and staff. Our improvements focus on accessibility, usability, and expanded functionality, making it easier for users to access campus information while providing valuable tools for developers and contributors.
 
 ## Key Features
 - **Multilingual Support**: Added Filipino language for broader accessibility.
 - **Conversation Logging**: Automatically logs user conversations and unanswered inquiries for analysis and future improvements.
 - **Improved UI/UX**: Enhanced user interface with a more intuitive design, suggested prompts, and responsive layout.
 - **Expanded Database**: Updated knowledge base to include more comprehensive information on campus resources, classes, financial aid, tutoring, and website navigation.
-
+  - **Additional Database Entries**: Added course catalog information, friendly response for unknown queries offering helpful suggestions, and ability for the chatbot to offer suggestions if asked for help.
+- - **Developer-Friendly**: Includes detailed documentation for developers to easily contribute and enhance the chatbot's functionality.
+- **Accessibility Enhancements**: Improved keyboard navigation and screen reader compatibility to ensure all users can interact with the chatbot effectively.
 ## Installation
 *Credits to the Blue Team for the foundational setup.*
 
@@ -85,7 +87,9 @@ Enjoy seamless access to Ivy Tech resources. For advanced queries, the chatbot m
 ## Credits
 - Original Creators: [SDEV 265 FA24 Blue Team](https://github.com/LiongsonEnzo/SoIT_ChatBot)
 - Additional Enhancements: [SDEV 265 FA25 Brown Team](https://github.com/rohydro93/SoIT_ChatBot_BrownTeam)
-- Additional Enhamcements (this repository): [SDEV 265 SP26 Green Team](https://github.com/KippWade/SoIT_ChatBot_GreenTeamSp26)
+- Additional Enhancements (this repository): [SDEV 265 SP26 Green Team](https://github.com/KippWade/SoIT_ChatBot_GreenTeamSp26)
+  - Live service temporarily available for the Spring 2026 semester at [https://ivybot-chatbot.onrender.com](https://ivybot-chatbot.onrender.com) 
+- Special thanks to all contributors for their efforts in making IvyBot a valuable resource for the Ivy Tech community.
 
 
 

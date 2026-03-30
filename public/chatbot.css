@@ -1004,3 +1004,8 @@ textarea {
     padding: 6px 10px;
   }
 }
+
+/* Indentation for helpful suggestions bullet list */
+.helpful-suggestions-list {
+  margin-left: 1.5em;
+}
