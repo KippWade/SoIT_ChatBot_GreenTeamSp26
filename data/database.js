@@ -102,6 +102,7 @@ const INTENT = {
     MILITARY_VETERAN_SERVICES: "military_veteran_services",
     TESTING_SERVICES: "testing_services",
     CLASS_FORMATS: "class_formats",
+    ACADEMIC_CALENDAR: "academic_calendar",
     EASTER_EGG_HITCHHIKER: "easter_egg_hitchhiker"
 };
 
@@ -786,6 +787,16 @@ const responses = [
         reply: { en: "Ivy Tech offers a variety of class formats, including online, hybrid, traditional, and more. For details about each format, please visit the link below.", fil: "Nag-aalok ang Ivy Tech ng iba't ibang format ng klase, kabilang ang online, hybrid, tradisyonal, at higit pa. Para sa mga detalye tungkol sa bawat format, pakibisita ang link sa ibaba." },
         url: "https://www.ivytech.edu/classes/class-formats/",
         link: "Class Formats"
+    },
+    {
+        intent: INTENT.ACADEMIC_CALENDAR,
+        pattern: {
+            en: ["academic calendar", "calendar", "where is the academic calendar", "when is winter break","when is fall break","when is spring break", "when is summer break"], fil: ["akademikong kalendaryo", "kalendaryo", "nasaan ang akademikong kalendaryo",
+                "kailan ang winter break", "kailan ang pahinga ng taglagas", "kailan spring break", "kailan ang summer break"]
+        },
+        reply: { en: "Here's the Academic Calendar!", fil: "Narito ang akademikong kalendaryo!" },
+        url: "https://www.ivytech.edu/classes/academic-calendar/",
+        link: "Academic Calendar"
     },
     {
         intent: INTENT.EASTER_EGG_HITCHHIKER,
