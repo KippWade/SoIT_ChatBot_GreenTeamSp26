@@ -293,6 +293,30 @@ h3 {
   font-size: 1rem; /* Next button font size */
 }
 
+/* Consistent styling for all Next buttons */
+.next-btn {
+  background-color: #006648;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  white-space: nowrap;
+  transition: background 0.2s, color 0.2s, opacity 0.2s;
+}
+.next-btn:hover:not(:disabled) {
+  background-color: #8dc63f;
+}
+.next-btn:disabled {
+  background-color: #cccccc !important;
+  color: #666666 !important;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
 /* Muted (disabled) Next appearance */
 #userTypeNext:disabled,
 #emailNext:disabled {
@@ -402,6 +426,35 @@ button[id$="Back"]:active {
 
 button[id$="Back"]:focus {
   /* ensure focus uses the same visual language as focus-visible above */
+  outline: 3px solid rgba(141,198,63,0.22);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 3px rgba(141,198,63,0.06);
+}
+
+/* Consistent styling for all Back buttons */
+.back-btn {
+  background-color: #ffffff;
+  color: #0b4f2b;
+  border: 1px solid rgba(11,79,43,0.14);
+  padding: 9px 18px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  outline: 2px solid rgba(141,198,63,0.06);
+  outline-offset: 2px;
+  margin-right: 4px;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.back-btn:hover {
+  background-color: #e1e9e1;
+  color: #07381f;
+}
+.back-btn:active {
+  background-color: #dfe9df;
+  color: #07381f;
+}
+.back-btn:focus {
   outline: 3px solid rgba(141,198,63,0.22);
   outline-offset: 2px;
   box-shadow: 0 0 0 3px rgba(141,198,63,0.06);
@@ -663,6 +716,86 @@ textarea {
   height: auto;
   display: block;
   filter: brightness(0) saturate(100%) invert(98%) sepia(6%) saturate(897%) hue-rotate(315deg) brightness(103%) contrast(98%);
+}
+
+/* Consistent styling for all select dropdown buttons */
+.select-btn {
+  min-width: 180px;
+  border: 2px solid #006648;
+  color: #006648 !important;
+  background: #fff !important;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  border-radius: 6px;
+  transition: border 0.2s, color 0.2s, background 0.2s;
+}
+.select-btn:focus, .select-btn:active {
+  border-color: #8dc63f;
+  color: #006648 !important;
+  background: #e6f5e6 !important;
+}
+.select-btn:hover {
+  border-color: #8dc63f;
+  color: #006648 !important;
+  background: #f4fbe6 !important;
+}
+
+/* Flex row for label, select, and buttons in form sections */
+.form-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.form-row label {
+  margin-bottom: 0;
+  margin-right: 8px;
+  white-space: nowrap;
+}
+.form-row .btn-group {
+  margin-bottom: 0 !important;
+}
+
+/* Row layout for multiple response link buttons */
+.response-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+.response-link {
+    /* Optional: ensure consistent button look */
+    min-width: 120px;
+    margin: 4px;
+    text-align: center;
+}
+
+/* Green button style for response links (applies to <a> and <button>) */
+.btn.response-link, a.btn.response-link {
+  background-color: #006648;
+  color: #fff;
+  border: 1px solid #006648;
+  padding: 9px 18px;
+  border-radius: 6px;
+  font-size: 1em;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  margin-right: 12px; /* Ensure spacing between buttons */
+}
+.response-links-row > .btn.response-link:last-child,
+.response-links-row > a.btn.response-link:last-child {
+  margin-right: 0;
+}
+.btn.response-link:hover, a.btn.response-link:hover {
+  background-color: #00553a;
+  color: #fff;
+  text-decoration: none;
 }
 
 /* Responsive nav: show hamburger and collapse links on small screens */

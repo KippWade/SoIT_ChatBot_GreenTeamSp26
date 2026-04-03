@@ -9,45 +9,63 @@ const { fill } = require("lodash");
  * Helpful suggestions for unknown inquiries.
  * These are example questions the bot can answer.
  */
-const HELPFUL_SUGGESTIONS = [
-    "What programs are offered at Ivy Tech?",
-    "How do I apply for admission?",
-    "Where are the campus locations?",
-    "How do I access my student portal?",
-    "What financial aid options are available?",
-    "How do I register for classes?",
-    "Who is the dean?",
-    "How do I request my transcripts?",
-    "What are the tuition and fees?",
-    "How can I find my advisor?"
-];
+const HELPFUL_SUGGESTIONS = {
+    en: [
+        "What programs are offered at Ivy Tech?",
+        "How do I apply for admission?",
+        "Where are the campus locations?",
+        "How do I access my student portal?",
+        "What financial aid options are available?",
+        "How do I register for classes?",
+        "Who is the dean?",
+        "How do I request my transcripts?",
+        "What are the tuition and fees?",
+        "How can I find my advisor?"
+    ],
+    fil: [
+        "Anong mga programa ang inaalok sa Ivy Tech?",
+        "Paano ako mag-aapply para sa pagpasok?",
+        "Saan matatagpuan ang mga campus?",
+        "Paano ko maa-access ang aking student portal?",
+        "Anong mga opsyon sa pinansyal na tulong ang available?",
+        "Paano ako magrerehistro para sa mga klase?",
+        "Sino ang dean?",
+        "Paano ko mahihiling ang aking transcript?",
+        "Ano ang mga matrikula at bayarin?",
+        "Paano ko mahahanap ang aking tagapayo?"
+    ]
+    // Add more languages as needed
+};
 
 /**
  * Patterns that indicate a user is asking for help or assistance.
  */
-const HELP_PATTERNS = [
-    // English
-    "help",
-    "i need help",
-    "can you help",
-    "can you assist",
-    "i need assistance",
-    "assist me",
-    "support",
-    "how do i use this",
-    "how does this work",
-    "what can you do",
-    "what can i ask",
-    "show me examples",
-    "show suggestions",
-    "suggestions",
-    // Filipino (optional, can be expanded)
-    "tulong",
-    "kailangan ko ng tulong",
-    "pwede mo ba akong tulungan",
-    "ano ang magagawa mo",
-    "ano ang pwede kong itanong"
-];
+const HELP_PATTERNS = {
+    en: [
+        "help",
+        "i need help",
+        "can you help",
+        "can you assist",
+        "i need assistance",
+        "assist me",
+        "support",
+        "how do i use this",
+        "how does this work",
+        "what can you do",
+        "what can i ask",
+        "show me examples",
+        "show suggestions",
+        "suggestions"
+    ],
+    fil: [
+        "tulong",
+        "kailangan ko ng tulong",
+        "pwede mo ba akong tulungan",
+        "ano ang magagawa mo",
+        "ano ang pwede kong itanong"
+    ]
+    // Add more languages as needed
+};
 
 /**
  * Supported languages.
