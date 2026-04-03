@@ -1,0 +1,8 @@
+<button
+  type="button"
+  id="<%= typeof id !== 'undefined' ? id : '' %>"
+  class="btn next-btn"
+  <%= typeof disabled !== 'undefined' && disabled ? 'disabled' : '' %>
+>
+  <%= typeof label !== 'undefined' ? label : 'Next' %>
+</button>

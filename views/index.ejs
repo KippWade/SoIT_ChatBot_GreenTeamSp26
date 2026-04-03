@@ -18,40 +18,49 @@
                     </div>                       
                 </div>
             </div>
-        <div class="language-hint" style="margin:8px 0 16px 0;color:#000;font-weight:600;">Please select your preferred language to continue</div>
-        <div class="language-menu">
-            <button id="languageDropdownBtn" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Select Language</button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item language-choice" data-lang="english" href="#">English</a></li>
-                <li><a class="dropdown-item language-choice" data-lang="filipino" href="#">Filipino</a></li>
-            </ul>
-        </div>
+        <!-- Language and user type selection unified below -->
         <div id="error-message" class="error" aria-live="assertive" role="alert" style="display:none;"></div>
         <div class="promptbox">
             <form id="chatForm" action="#" onsubmit="return false;">
                 <!-- Hidden language input so server receives the chosen language with submissions -->
                 <input type="hidden" id="language" name="language" value="">
-                <div id="userTypeSection" style="display:none;">
-                    <label for="userType">Are you a guest, student, faculty, or staff?</label>
-                    <div class="btn-group">
-                        <button id="userTypeDropdownBtn" type="button" class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Select user type">Select</button>
-                        <ul class="dropdown-menu">
-                            <li><a class="dropdown-item usertype-choice" data-value="Guest" href="#">Guest</a></li>
-                            <li><a class="dropdown-item usertype-choice" data-value="Student" href="#">Student</a></li>
-                            <li><a class="dropdown-item usertype-choice" data-value="Faculty" href="#">Faculty</a></li>
-                            <li><a class="dropdown-item usertype-choice" data-value="Staff" href="#">Staff</a></li>
-                        </ul>
+                <div id="languageSection">
+                    <div class="form-row">
+                        <label for="languageDropdownBtn">Please select your preferred language to continue</label>
+                        <div class="btn-group" style="margin-bottom:12px;">
+                            <button id="languageDropdownBtn" type="button" class="btn btn-outline-secondary dropdown-toggle select-btn" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Select language">Select</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item language-choice" data-lang="english" href="#">English</a></li>
+                                <li><a class="dropdown-item language-choice" data-lang="filipino" href="#">Filipino</a></li>
+                            </ul>
+                        </div>
+                        <%- include('partials/next_button.ejs', { id: 'languageNext', disabled: true, label: 'Next' }) %>
                     </div>
-                    <!-- hidden input kept as single source of truth for legacy JS/server -->
-                    <input type="hidden" id="userType" name="userType" value="">
-                    <button type="button" id="userTypeNext" class="btn btn-primary" disabled>Next</button>
+                </div>
+                <div id="userTypeSection" style="display:none;">
+                    <div class="form-row">
+                        <label for="userType">Are you a guest, student, faculty, or staff?</label>
+                        <div class="btn-group" style="margin-bottom:12px;">
+                            <button id="userTypeDropdownBtn" type="button" class="btn btn-outline-secondary dropdown-toggle select-btn" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Select user type">Select</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item usertype-choice" data-value="Guest" href="#">Guest</a></li>
+                                <li><a class="dropdown-item usertype-choice" data-value="Student" href="#">Student</a></li>
+                                <li><a class="dropdown-item usertype-choice" data-value="Faculty" href="#">Faculty</a></li>
+                                <li><a class="dropdown-item usertype-choice" data-value="Staff" href="#">Staff</a></li>
+                            </ul>
+                        </div>
+                        <!-- hidden input kept as single source of truth for legacy JS/server -->
+                        <input type="hidden" id="userType" name="userType" value="">
+                        <%- include('partials/back_button.ejs', { id: 'userTypeBack', label: 'Back' }) %>
+                        <%- include('partials/next_button.ejs', { id: 'userTypeNext', disabled: true, label: 'Next' }) %>
+                    </div>
                 </div>
                 <div id="emailSection" style="display:none;">
                     <!-- Ensure valid Ivy Tech email and will only accepts Ivy Tech email if the "Guest" is not chosen-->
                     <label for="schoolEmail" class="visually-hidden">School Email</label>
                     <input type="email" id="schoolEmail" name="schoolEmail" placeholder="Enter your school email" pattern=".+@ivytech\.edu" aria-describedby="schoolEmailHelp"> 
                     <span id="schoolEmailHelp" class="visually-hidden">Enter your Ivy Tech email address. Required unless you are a guest.</span>
-                    <button type="button" id="emailBack">Back</button>
+                    <%- include('partials/back_button.ejs', { id: 'emailBack', label: 'Back' }) %>
                     <button type="button" id="emailNext" disabled>Next</button>
                 </div>
                 <div id="questionSection" style="display:none;">

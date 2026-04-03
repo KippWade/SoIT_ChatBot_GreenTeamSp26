@@ -27,6 +27,11 @@ window.addEventListener('DOMContentLoaded', () => {
         localStorage.removeItem('language_for_' + currentTicket);
         localStorage.removeItem('userType_for_' + currentTicket);
     }
+    // Show only the language section on page load
+    const languageSection = document.getElementById('languageSection');
+    const userTypeSection = document.getElementById('userTypeSection');
+    if (languageSection) languageSection.style.display = '';
+    if (userTypeSection) userTypeSection.style.display = 'none';
 });
 
 const form = document.getElementById('chatForm');
@@ -51,6 +56,7 @@ const INACTIVITY_LIMIT = 5 * 60 * 1000; // 5 minutes limit on inactivity
 const languageInput = document.getElementById('language');
 const languageDropdownBtn = document.getElementById('languageDropdownBtn');
 const languageChoices = document.querySelectorAll('.language-choice');
+const languageNext = document.getElementById('languageNext');
 let language = '';
 const LANGUAGE_CONFIRM_DELAY = 3 * 60 * 1000; // 3 minutes before re-confirming language
 let languageConfirmTimer;
@@ -80,7 +86,8 @@ function resetInactivityTimer() {
         const chatBody = document.getElementById('chat-body');
         const botResponse = document.createElement('div');
         botResponse.classList.add('message', 'bot');
-        botResponse.innerHTML = "<div class='avatar'><img src='img/ivybot_face.png'></div><div class='content'>Are you still there? If you need more help, just ask!</div>";
+        const t = getCurrentTranslation();
+        botResponse.innerHTML = "<div class='avatar'><img src='img/ivybot_face.png'></div><div class='content'>" + t.inactivityMessage + "</div>";
         chatBody.appendChild(botResponse);
         chatBody.scrollTop = chatBody.scrollHeight;
     }, INACTIVITY_LIMIT);
@@ -229,6 +236,11 @@ if (emailBack) {
         }
         hideSection(emailSection);
         showSection(userTypeSection);
+        // Clear user type selection
+        userType = '';
+        if (userTypeSelect) userTypeSelect.value = '';
+        if (userTypeDropdownBtn) userTypeDropdownBtn.textContent = 'Select';
+        if (userTypeNext) userTypeNext.disabled = true;
         focusUserTypeControl();
     });
 }
@@ -252,6 +264,28 @@ if (questionBack) {
             showSection(userTypeSection);
             focusUserTypeControl();
         }
+    });
+}
+
+// Back button from userType -> language
+const userTypeBack = document.getElementById('userTypeBack');
+if (userTypeBack) {
+    userTypeBack.addEventListener('click', function() {
+        // Hide userType section, show language section
+        if (userTypeSection) userTypeSection.style.display = 'none';
+        const languageSection = document.getElementById('languageSection');
+        if (languageSection) languageSection.style.display = '';
+        // Reset language selection
+        language = '';
+        if (languageInput) languageInput.value = '';
+        if (languageDropdownBtn) languageDropdownBtn.textContent = 'Select';
+        if (languageNext) languageNext.disabled = true;
+        // Reset UI prompts/buttons to English by default
+        updateUIPromptsForLanguage('english');
+        // Restart the language confirmation timer
+        resetLanguageConfirmTimer();
+        // Optionally, focus the language dropdown for accessibility
+        if (languageDropdownBtn) languageDropdownBtn.focus();
     });
 }
 
@@ -353,133 +387,169 @@ function generateTicketId(userType, schoolEmail) {
     return userType + '-' + schoolEmail + '-' + sessionTimestamp;
 }
 
-// Initialize language UI from localStorage and wire up language choice clicks + modal buttons
+// Translation dictionary for UI prompts/buttons
+const translations = {
+    english: {
+        languagePrompt: "Please select your preferred language to continue",
+        userTypePrompt: "Are you a guest, student, faculty, or staff?",
+        userTypeBack: "Back",
+        userTypeNext: "Next",
+        languageNext: "Next",
+        userTypeDropdown: "Select",
+        languageDropdown: "Select",
+        emailPrompt: "Enter your school email",
+        emailBack: "Back",
+        emailNext: "Next",
+        questionPrompt: "Type your question",
+        userTypeOptions: ["Guest", "Student", "Faculty", "Staff"],
+        languageOptions: ["English", "Filipino"],
+        inactivityMessage: "Are you still there? If you need more help, just ask!",
+        nav: {
+            ivytech: "IvyTech",
+            admission: "Admission",
+            tuition: "Tuition & Costs",
+            campuses: "Campuses"
+        }
+    },
+    filipino: {
+        languagePrompt: "Pumili ng nais na wika upang magpatuloy",
+        userTypePrompt: "Ikaw ba ay isang bisita, mag-aaral, guro, o kawani?",
+        userTypeBack: "Bumalik",
+        userTypeNext: "Susunod",
+        languageNext: "Susunod",
+        userTypeDropdown: "Pumili",
+        languageDropdown: "Pumili",
+        emailPrompt: "Ilagay ang iyong school email",
+        emailBack: "Bumalik",
+        emailNext: "Susunod",
+        questionPrompt: "I-type ang iyong tanong",
+        userTypeOptions: ["Bisita", "Mag-aaral", "Guro", "Kawani"],
+        languageOptions: ["Ingles", "Filipino"],
+        inactivityMessage: "Nandiyan ka pa ba? Kung kailangan mo pa ng tulong, magtanong lang!",
+        nav: {
+            ivytech: "IvyTech",
+            admission: "Pagpasok",
+            tuition: "Matrikula at Gastos",
+            campuses: "Mga Kampus"
+        }
+    }
+};
+
+function getCurrentTranslation() {
+    return translations[language] || translations.english;
+}
+
+function updateUIPromptsForLanguage(lang) {
+    const t = translations[lang] || translations.english;
+    // Language section
+    const langLabel = document.querySelector('#languageSection label[for="languageDropdownBtn"]');
+    if (langLabel) langLabel.textContent = t.languagePrompt;
+    if (languageDropdownBtn) languageDropdownBtn.textContent = t.languageDropdown;
+    const languageNextBtn = document.getElementById('languageNext');
+    if (languageNextBtn) languageNextBtn.textContent = t.languageNext;
+    // Update language dropdown options
+    const languageDropdownItems = document.querySelectorAll('.language-choice');
+    languageDropdownItems.forEach((item, idx) => {
+        item.textContent = t.languageOptions[idx] || item.textContent;
+    });
+    // User type section
+    const userTypeLabel = document.querySelector('#userTypeSection label[for="userType"]');
+    if (userTypeLabel) userTypeLabel.textContent = t.userTypePrompt;
+    if (userTypeDropdownBtn) userTypeDropdownBtn.textContent = t.userTypeDropdown;
+    const userTypeBackBtn = document.getElementById('userTypeBack');
+    if (userTypeBackBtn) userTypeBackBtn.textContent = t.userTypeBack;
+    const userTypeNextBtn = document.getElementById('userTypeNext');
+    if (userTypeNextBtn) userTypeNextBtn.textContent = t.userTypeNext;
+    // Update user type dropdown options
+    const userTypeDropdownItems = document.querySelectorAll('.usertype-choice');
+    userTypeDropdownItems.forEach((item, idx) => {
+        item.textContent = t.userTypeOptions[idx] || item.textContent;
+    });
+    // Email section
+    const emailLabel = document.querySelector('#emailSection label[for="schoolEmail"]');
+    if (emailLabel) emailLabel.textContent = t.emailPrompt;
+    const emailBackBtn = document.getElementById('emailBack');
+    if (emailBackBtn) emailBackBtn.textContent = t.emailBack;
+    const emailNextBtn = document.getElementById('emailNext');
+    if (emailNextBtn) emailNextBtn.textContent = t.emailNext;
+    // Question section
+    const questionLabel = document.querySelector('#questionSection label[for="prompt"]');
+    if (questionLabel) questionLabel.textContent = t.questionPrompt;
+    // Navigation
+    const navIvyTech = document.getElementById('nav-ivytech');
+    if (navIvyTech) navIvyTech.textContent = t.nav.ivytech;
+    const navAdmission = document.getElementById('nav-admission');
+    if (navAdmission) navAdmission.textContent = t.nav.admission;
+    const navTuition = document.getElementById('nav-tuition');
+    if (navTuition) navTuition.textContent = t.nav.tuition;
+    const navCampuses = document.getElementById('nav-campuses');
+    if (navCampuses) navCampuses.textContent = t.nav.campuses;
+}
+
+// Update language UI initialization logic:
 try {
+    // Language dropdown logic: select language, enable Next
     languageChoices.forEach(item => {
         item.addEventListener('click', (ev) => {
             ev.preventDefault();
             const chosen = item.dataset.lang;
-            // First-time selection for this session: commit immediately and continue flow
-            if (!language) {
-                language = chosen;
-                if (languageInput) languageInput.value = chosen;
-                if (languageDropdownBtn) languageDropdownBtn.textContent = item.textContent;
-                // hide language hint and menu after selection
-                const hintEl = document.querySelector('.language-hint');
-                if (hintEl) hintEl.style.display = 'none';
-                const menuEl = document.querySelector('.language-menu');
-                if (menuEl) menuEl.style.display = 'none';
-                
-                // Show userType section
-                if (userTypeSection) {
-                    userTypeSection.style.display = '';
-                    focusUserTypeControl();
-                }
-                
-                // reset timers
-                resetInactivityTimer();
-                resetLanguageConfirmTimer();
-                return;
-            }
-
-            // If user is in "Change Language" flow, commit immediately (no modal needed)
-            if (isChangingLanguage) {
-                isChangingLanguage = false;
-                language = chosen;
-                if (languageInput) languageInput.value = chosen;
-                if (languageDropdownBtn) languageDropdownBtn.textContent = item.textContent;
-                // hide language hint and menu
-                const hintEl = document.querySelector('.language-hint');
-                if (hintEl) hintEl.style.display = 'none';
-                const menuEl = document.querySelector('.language-menu');
-                if (menuEl) menuEl.style.display = 'none';
-                // Show question section directly (skip role/email since already selected)
-                if (emailSection) emailSection.style.display = 'none';
-                if (userTypeSection) userTypeSection.style.display = 'none';
-                if (questionSection) {
-                    questionSection.style.display = '';
-                    const promptEl = document.getElementById('prompt');
-                    if (promptEl) {
-                        promptEl.focus();
-                    }
-                }
-                
-                // reset timers
-                resetInactivityTimer();
-                resetLanguageConfirmTimer();
-                return;
-            }
-
-            // Language change after "Change Language" button (userType and email already set)
-            if (!userType) {
-                // This shouldn't happen, but just in case
-                language = chosen;
-                if (languageInput) languageInput.value = chosen;
-                if (languageDropdownBtn) languageDropdownBtn.textContent = item.textContent;
-                // hide language hint and menu
-                const hintEl = document.querySelector('.language-hint');
-                if (hintEl) hintEl.style.display = 'none';
-                const menuEl = document.querySelector('.language-menu');
-                if (menuEl) menuEl.style.display = 'none';
-                // show userType
-                if (userTypeSection) {
-                    userTypeSection.style.display = '';
-                    focusUserTypeControl();
-                }
-                resetInactivityTimer();
-                resetLanguageConfirmTimer();
-                return;
-            }
-
-            // If we already have a userType, we're resuming conversation after language change
             language = chosen;
             if (languageInput) languageInput.value = chosen;
             if (languageDropdownBtn) languageDropdownBtn.textContent = item.textContent;
-            // hide language hint and menu
-            const hintEl = document.querySelector('.language-hint');
-            if (hintEl) hintEl.style.display = 'none';
-            const menuEl = document.querySelector('.language-menu');
-            if (menuEl) menuEl.style.display = 'none';
-            // Show question section directly (skip role/email since already selected)
-            if (emailSection) emailSection.style.display = 'none';
-            if (userTypeSection) userTypeSection.style.display = 'none';
-            if (questionSection) {
-                questionSection.style.display = '';
-                const promptEl = document.getElementById('prompt');
-                if (promptEl) {
-                    promptEl.focus();
-                }
-            }
-            
-            // reset timers
+            // Enable Next button
+            if (languageNext) languageNext.disabled = false;
+            // Update UI prompts/buttons for selected language
+            updateUIPromptsForLanguage(language);
             resetInactivityTimer();
             resetLanguageConfirmTimer();
         });
     });
 
+    // Language Next button logic: advance to user type section
+    if (languageNext) {
+        languageNext.disabled = true;
+        languageNext.addEventListener('click', () => {
+            // Stop the language confirmation timer when advancing
+            clearTimeout(languageConfirmTimer);
+            const languageSection = document.getElementById('languageSection');
+            const userTypeSection = document.getElementById('userTypeSection');
+            if (languageSection) languageSection.style.display = 'none';
+            if (userTypeSection) {
+                userTypeSection.style.display = '';
+                focusUserTypeControl();
+            }
+        });
+    }
+
     // --- userType dropdown wiring: set hidden input, update button label, enable Next ---
     if (usertypeChoices && userTypeDropdownBtn) {
         // initialize state of Next button
-        if (userTypeSelect && userTypeSelect.value) {
-            userTypeDropdownBtn.textContent = userTypeSelect.value;
-            if (userTypeNext) userTypeNext.disabled = false;
-        } else {
-            if (userTypeNext) userTypeNext.disabled = true;
-        }
-
+        maybeEnableUserTypeNext();
         usertypeChoices.forEach(item => {
             item.addEventListener('click', (ev) => {
                 ev.preventDefault();
                 const val = item.dataset.value;
                 if (userTypeSelect) userTypeSelect.value = val;
                 if (userTypeDropdownBtn) userTypeDropdownBtn.textContent = item.textContent;
-                if (userTypeNext) userTypeNext.disabled = false;
+                // Only enable Next if both language and userType are selected
+                maybeEnableUserTypeNext();
                 // Do NOT persist userType to localStorage; keep it in-memory only
                 // reset timers when user interacts
                 resetInactivityTimer();
                 resetLanguageConfirmTimer();
             });
         });
+    }
+
+    // Helper to enable Next button only if both language and userType are selected
+    function maybeEnableUserTypeNext() {
+        if (userTypeNext) {
+            if (userTypeSelect && userTypeSelect.value && language) {
+                userTypeNext.disabled = false;
+            } else {
+                userTypeNext.disabled = true;
+            }
+        }
     }
 
     // Modal buttons

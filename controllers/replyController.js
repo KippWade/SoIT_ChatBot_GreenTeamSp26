@@ -1,4 +1,3 @@
-
 /**
  * Reply Controller
  *
@@ -23,14 +22,14 @@ const { ENG_ERROR_STATEMENTS, FIL_ERROR_STATEMENTS } = require('./languageContro
  * Builds a reusable styled link button with an external link icon.
  * @param {string} url - The URL to link to.
  * @param {string} label - The button label text.
+ * @param {string} [extraClass] - Optional extra class for the button.
  * @returns {string} HTML for the button.
  */
-function buildLinkButton(url, label) {
-    // Uses button[type="button"] for consistent dark green styling via CSS and adds aria-label for a11y
-    return `<button type="button" onclick="window.open('${url}', '_blank')" class="d-inline-flex align-items-center gap-2" aria-label="${label} (opens in new tab)">
+function buildLinkButton(url, label, extraClass = '') {
+    return `<a href="${url}" target="_blank" class="btn response-link ${extraClass}" aria-label="${label} (opens in new tab)">
         ${label}
         <i class='bx bx-link-external' aria-hidden="true"></i>
-    </button>`;
+    </a>`;
 }
 
 /**
@@ -143,6 +142,7 @@ function getDeanResponse(locIdx, language = LANGUAGE.ENGLISH) {
 
 /**
  * Builds a reply string from a matched response object, including any associated link if present.
+ * If multiple links are present, wraps them in a .response-links-row div.
  *
  * @param {Object} matchedResponse - The matched response object from the responses array.
  * @param {string} [language=LANGUAGE.ENGLISH] - The language for the reply.
@@ -151,8 +151,15 @@ function getDeanResponse(locIdx, language = LANGUAGE.ENGLISH) {
 function getResponseReply(matchedResponse, language = LANGUAGE.ENGLISH) {
     if (!matchedResponse) return null;
     let response = language === LANGUAGE.FILIPINO ? (matchedResponse.reply.fil || matchedResponse.reply.en) : (matchedResponse.reply.en || matchedResponse.reply.fil);
-    if (matchedResponse.url) {
-        response += `<br><br>` + buildLinkButton(matchedResponse.url, matchedResponse.link || 'More Info');
+    // Always wrap links in .response-links-row for consistent layout
+    let linksHtml = '';
+    if (Array.isArray(matchedResponse.links) && matchedResponse.links.length > 0) {
+        linksHtml = matchedResponse.links.map(linkObj => buildLinkButton(linkObj.url, linkObj.label)).join('');
+    } else if (matchedResponse.url) {
+        linksHtml = buildLinkButton(matchedResponse.url, matchedResponse.link || 'More Info');
+    }
+    if (linksHtml) {
+        response += `<div class="response-links-row">${linksHtml}</div>`;
     }
     return response;
 }
