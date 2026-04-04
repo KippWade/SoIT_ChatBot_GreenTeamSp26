@@ -817,6 +817,91 @@ const responses = [
         link: "Academic Calendar"
     },
     {
+        intent: INTENT.LIBRARY_RESEARCH,
+        pattern: {
+            en: [ "research"
+
+            ],
+            fil: [
+
+            ]
+        },
+        reply: {
+            en: "Library Research",
+            fil: ""
+        },
+        url: "https://library.ivytech.edu/indianapolis/research",
+        link: "Library Research"
+    },
+    {
+        intent: INTENT.LIBRARY_STUDYSKILLS,
+        pattern: {
+            en: [ "study"
+
+            ],
+            fil: [
+
+            ]
+        },
+        reply: {
+            en: "Library Study Skills",
+            fil: ""
+        },
+        url: "https://library.ivytech.edu/indianapolis/studyskills",
+        link: "Library Study Skills"
+    },
+    {
+        intent: INTENT.LIBRARY_WRITING,
+        pattern: {
+            en: [ "writing"
+
+            ],
+            fil: [
+
+            ]
+        },
+        reply: {
+            en: "Library Writing and Citations",
+            fil: ""
+        },
+        url: "https://library.ivytech.edu/indianapolis/writing",
+        link: "Library Writing and Citations"
+    },
+    {
+        intent: INTENT.LIBRARY_HANDOUTS,
+        pattern: {
+            en: [ "Handouts"
+
+            ],
+            fil: [
+
+            ]
+        },
+        reply: {
+            en: "Library Instructional Handouts",
+            fil: ""
+        },
+        url: "https://library.ivytech.edu/indianapolis/ESOL/Handouts",
+        link: "Library Instructional Handouts"
+    },
+    {
+        intent: INTENT.LIBRARY_COMPUTING,
+        pattern: {
+            en: ["computing"
+
+            ],
+            fil: [
+
+            ]
+        },
+        reply: {
+            en: "Library Computing Research and Tutoring",
+            fil: ""
+        },
+        url: "https://library.ivytech.edu/indianapolis/computing",
+        link: "Library Computing"
+    },
+    {
         intent: INTENT.EASTER_EGG_HITCHHIKER,
         pattern: {
             en: [
