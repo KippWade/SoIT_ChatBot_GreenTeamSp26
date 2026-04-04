@@ -408,7 +408,8 @@ const translations = {
             ivytech: "IvyTech",
             admission: "Admission",
             tuition: "Tuition & Costs",
-            campuses: "Campuses"
+            campuses: "Campuses",
+            libraries: "Libraries"
         }
     },
     filipino: {
@@ -430,7 +431,8 @@ const translations = {
             ivytech: "IvyTech",
             admission: "Pagpasok",
             tuition: "Matrikula at Gastos",
-            campuses: "Mga Kampus"
+            campuses: "Mga Kampus",
+            libraries: "Mga Aklatan"
         }
     }
 };
@@ -468,6 +470,8 @@ function updateUIPromptsForLanguage(lang) {
     // Email section
     const emailLabel = document.querySelector('#emailSection label[for="schoolEmail"]');
     if (emailLabel) emailLabel.textContent = t.emailPrompt;
+    const emailInput = document.getElementById('schoolEmail');
+    if (emailInput) emailInput.setAttribute('placeholder', t.emailPrompt);
     const emailBackBtn = document.getElementById('emailBack');
     if (emailBackBtn) emailBackBtn.textContent = t.emailBack;
     const emailNextBtn = document.getElementById('emailNext');
@@ -475,6 +479,8 @@ function updateUIPromptsForLanguage(lang) {
     // Question section
     const questionLabel = document.querySelector('#questionSection label[for="prompt"]');
     if (questionLabel) questionLabel.textContent = t.questionPrompt;
+    const questionInput = document.getElementById('prompt');
+    if (questionInput) questionInput.setAttribute('placeholder', t.questionPrompt);
     // Navigation
     const navIvyTech = document.getElementById('nav-ivytech');
     if (navIvyTech) navIvyTech.textContent = t.nav.ivytech;
@@ -484,6 +490,8 @@ function updateUIPromptsForLanguage(lang) {
     if (navTuition) navTuition.textContent = t.nav.tuition;
     const navCampuses = document.getElementById('nav-campuses');
     if (navCampuses) navCampuses.textContent = t.nav.campuses;
+    const navLibraries = document.getElementById('nav-libraries');
+    if (navLibraries) navLibraries.textContent = t.nav.libraries;
 }
 
 // Update language UI initialization logic:
