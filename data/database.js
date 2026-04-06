@@ -1013,16 +1013,12 @@ const responses = [
     {
         intent: INTENT.LIBRARY_RESEARCH,
         pattern: {
-            en: [ "research"
-
-            ],
-            fil: [
-
-            ]
+            en: ["research"],
+            fil: ["pananaliksik", "research"]
         },
         reply: {
             en: "Library Research",
-            fil: ""
+            fil: "Pananaliksik sa Aklatan"
         },
         url: "https://library.ivytech.edu/indianapolis/research",
         link: "Library Research"
@@ -1030,16 +1026,12 @@ const responses = [
     {
         intent: INTENT.LIBRARY_STUDYSKILLS,
         pattern: {
-            en: [ "study"
-
-            ],
-            fil: [
-
-            ]
+            en: ["study"],
+            fil: ["pag-aaral", "study"]
         },
         reply: {
             en: "Library Study Skills",
-            fil: ""
+            fil: "Kasanayan sa Pag-aaral sa Aklatan"
         },
         url: "https://library.ivytech.edu/indianapolis/studyskills",
         link: "Library Study Skills"
@@ -1047,16 +1039,12 @@ const responses = [
     {
         intent: INTENT.LIBRARY_WRITING,
         pattern: {
-            en: [ "writing"
-
-            ],
-            fil: [
-
-            ]
+            en: ["writing"],
+            fil: ["pagsusulat", "writing"]
         },
         reply: {
             en: "Library Writing and Citations",
-            fil: ""
+            fil: "Pagsusulat at Pagbanggit sa Aklatan"
         },
         url: "https://library.ivytech.edu/indianapolis/writing",
         link: "Library Writing and Citations"
@@ -1064,16 +1052,12 @@ const responses = [
     {
         intent: INTENT.LIBRARY_HANDOUTS,
         pattern: {
-            en: [ "Handouts"
-
-            ],
-            fil: [
-
-            ]
+            en: ["Handouts"],
+            fil: ["handouts", "polyeto", "mga polyeto"]
         },
         reply: {
             en: "Library Instructional Handouts",
-            fil: ""
+            fil: "Mga Polyeto ng Instruksyon sa Aklatan"
         },
         url: "https://library.ivytech.edu/indianapolis/ESOL/Handouts",
         link: "Library Instructional Handouts"
@@ -1081,16 +1065,12 @@ const responses = [
     {
         intent: INTENT.LIBRARY_COMPUTING,
         pattern: {
-            en: ["computing"
-
-            ],
-            fil: [
-
-            ]
+            en: ["computing"],
+            fil: ["kompyuter", "computing", "paggamit ng kompyuter"]
         },
         reply: {
             en: "Library Computing Research and Tutoring",
-            fil: ""
+            fil: "Pananaliksik at Pagtuturo sa Kompyuter ng Aklatan"
         },
         url: "https://library.ivytech.edu/indianapolis/computing",
         link: "Library Computing"
