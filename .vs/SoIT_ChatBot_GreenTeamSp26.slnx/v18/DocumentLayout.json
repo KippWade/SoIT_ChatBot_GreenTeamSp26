@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:data\\database.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\views\\partials\\nav.ejs||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:views\\partials\\nav.ejs||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\public\\chatbot.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\chatbot.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\public\\scripts\\chatbot.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\scripts\\chatbot.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\public\\chatbot.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:public\\chatbot.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\views\\partials\\nav.ejs||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:views\\partials\\nav.ejs||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\views\\index.ejs||{8B382828-6202-11D1-8870-0000F87579D2}",
@@ -80,7 +80,7 @@
               "RelativeDocumentMoniker": "public\\scripts\\chatbot.js",
               "ToolTip": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\public\\scripts\\chatbot.js",
               "RelativeToolTip": "public\\scripts\\chatbot.js",
-              "ViewState": "AgIAALsAAAAAAAAAAAAnwAwAAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAIYBAAAAAAAAAAAWwMUAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2026-03-30T14:57:36.995Z",
               "IsPinned": true,
@@ -150,7 +150,7 @@
               "RelativeDocumentMoniker": "views\\index.ejs",
               "ToolTip": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\views\\index.ejs",
               "RelativeToolTip": "views\\index.ejs",
-              "ViewState": "AgIAADoAAAAAAAAAAAArwDcAAAAaAAAAAAAAAA==",
+              "ViewState": "AgIAABIAAAAAAAAAAAArwDcAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2026-03-30T14:51:05.39Z",
               "IsPinned": true,
@@ -223,7 +223,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "nav.ejs",
               "DocumentMoniker": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\views\\partials\\nav.ejs",
               "RelativeDocumentMoniker": "views\\partials\\nav.ejs",
@@ -248,13 +248,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "chatbot.css",
               "DocumentMoniker": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\public\\chatbot.css",
               "RelativeDocumentMoniker": "public\\chatbot.css",
               "ToolTip": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\public\\chatbot.css",
               "RelativeToolTip": "public\\chatbot.css",
-              "ViewState": "AgIAAIkDAAAAAAAAAAAjwJIDAAAxAAAAAAAAAA==",
+              "ViewState": "AgIAAP0BAAAAAAAAAAArwA8CAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
               "WhenOpened": "2026-03-27T17:27:18.63Z",
               "EditorCaption": ""
@@ -267,7 +267,7 @@
               "RelativeDocumentMoniker": "data\\database.js",
               "ToolTip": "C:\\Users\\kws99\\source\\repos\\KippWade\\SoIT_ChatBot_GreenTeamSp26\\data\\database.js",
               "RelativeToolTip": "data\\database.js",
-              "ViewState": "AgIAADADAAAAAAAAAAAAADADAAAhAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAO8DAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2026-03-27T12:37:55.714Z",
               "EditorCaption": ""
