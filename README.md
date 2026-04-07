@@ -7,7 +7,7 @@ This project is forked from the SDEV 265 FA25 Brown Team's repository and enhanc
 - **Conversation Logging**: Automatically logs user conversations and unanswered inquiries for analysis and future improvements.
 - **Improved UI/UX**: Enhanced user interface with a more intuitive design, suggested prompts, and responsive layout.
 - **Expanded Database**: Updated knowledge base to include more comprehensive information on campus resources, classes, financial aid, tutoring, and website navigation.
-  - **Additional Database Entries**: Added course catalog information, friendly response for unknown queries offering helpful suggestions, and ability for the chatbot to offer suggestions if asked for help.
+  - **Additional Database Entries**: Added course catalog information, friendly response for unknown queries offering helpful suggestions, Ivy Tech Libraries Libguides links, and ability for the chatbot to offer suggestions if asked for help.
 - - **Developer-Friendly**: Includes detailed documentation for developers to easily contribute and enhance the chatbot's functionality.
 - **Accessibility Enhancements**: Improved keyboard navigation and screen reader compatibility to ensure all users can interact with the chatbot effectively.
 ## Installation
