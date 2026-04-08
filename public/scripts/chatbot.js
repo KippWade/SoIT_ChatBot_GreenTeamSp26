@@ -74,14 +74,16 @@ function focusUserTypeControl() {
 }
 
 /**
- * Resets the inactivity timer for the chatbot session.
+ * Controls the inactivity timer for the chatbot session.
+ * Usage: userActivityTimer('start') to start, userActivityTimer('stop') to stop/clear.
  * If the user is inactive for the defined limit, a bot message prompts for activity.
- * Also resets the language confirmation timer to follow user activity.
  *
+ * @param {string} action - 'start' to start the timer, 'stop' to clear it.
  * @returns {void}
  */
-function resetInactivityTimer() {
+function userActivityTimer(action) {
     clearTimeout(inactivityTimer);
+    if (action === 'stop') return;
     inactivityTimer = setTimeout(() => {
         const chatBody = document.getElementById('chat-body');
         const botResponse = document.createElement('div');
@@ -91,45 +93,41 @@ function resetInactivityTimer() {
         chatBody.appendChild(botResponse);
         chatBody.scrollTop = chatBody.scrollHeight;
     }, INACTIVITY_LIMIT);
-    // Language reconfirm timer should follow user activity
-    resetLanguageConfirmTimer();
 }
 
 /**
- * Resets the language confirmation timer for the chatbot session.
+ * Controls the language confirmation timer for the chatbot session.
+ * Usage: languageTimer('start') to start, languageTimer('stop') to stop/clear.
  * After a set delay, prompts the user to reconfirm their language choice via a modal dialog.
  *
+ * @param {string} action - 'start' to start the timer, 'stop' to clear it.
  * @returns {void}
  */
-function resetLanguageConfirmTimer() {
+function languageTimer(action) {
     clearTimeout(languageConfirmTimer);
+    if (action === 'stop') return;
     if (!language) return; // nothing chosen yet
     languageConfirmTimer = setTimeout(() => {
         try {
             const name = language.charAt(0).toUpperCase() + language.slice(1);
             const el = document.getElementById('languageConfirmName');
             if (el) el.textContent = name;
-            
             // Update modal text based on current language
             const modalTitle = document.getElementById('languageConfirmModalLabel');
             const modalBody = document.querySelector('.modal-body');
             const changeBtn = document.getElementById('languageChangeBtn');
             const continueBtn = document.getElementById('languageContinueBtn');
-            
-            // this is where would the other languages would change the modal text to
-            // user's chosen language
             if (language === 'filipino') {
                 if (modalTitle) modalTitle.textContent = 'Napiling Wika';
                 if (modalBody) modalBody.innerHTML = 'Sigurado po ba kayong gusto na magpatuloy sa <span id="languageConfirmName">Filipino</span>?';
                 if (changeBtn) changeBtn.textContent = 'Baguhin ang Wika';
                 if (continueBtn) continueBtn.textContent = 'Magpatuloy';
-            } else { // this would always be in English
+            } else {
                 if (modalTitle) modalTitle.textContent = 'Chosen Language';
                 if (modalBody) modalBody.innerHTML = 'Are you sure you want to continue in <span id="languageConfirmName">English</span>?';
                 if (changeBtn) changeBtn.textContent = 'Change Language';
                 if (continueBtn) continueBtn.textContent = 'Continue';
             }
-            
             // Show the confirmation modal directly (no chat message)
             const modalEl = document.getElementById('languageConfirmModal');
             if (modalEl && window.bootstrap) {
@@ -282,8 +280,8 @@ if (userTypeBack) {
         if (languageNext) languageNext.disabled = true;
         // Reset UI prompts/buttons to English by default
         updateUIPromptsForLanguage('english');
-        // Restart the language confirmation timer
-        resetLanguageConfirmTimer();
+        // Start the language confirmation timer
+        languageTimer('start');
         // Optionally, focus the language dropdown for accessibility
         if (languageDropdownBtn) languageDropdownBtn.focus();
     });
@@ -366,7 +364,7 @@ form.addEventListener('submit', async (e) => {
     //update the view by scrolling to the bottom of the conversation
     chatBody.scrollTop = chatBody.scrollHeight;
     resetInactivityTimer();
-    resetLanguageConfirmTimer();
+    //resetLanguageConfirmTimer();
 });
 
 
@@ -503,13 +501,23 @@ try {
             const chosen = item.dataset.lang;
             language = chosen;
             if (languageInput) languageInput.value = chosen;
-            if (languageDropdownBtn) languageDropdownBtn.textContent = item.textContent;
+            // Set dropdown button to the selected language in the correct language
+            if (languageDropdownBtn) {
+                const t = translations[chosen] || translations.english;
+                // Find the index of the selected language in the languageOptions array
+                const idx = ['english', 'filipino'].indexOf(chosen);
+                if (idx !== -1 && t.languageOptions[idx]) {
+                    languageDropdownBtn.textContent = t.languageOptions[idx];
+                } else {
+                    languageDropdownBtn.textContent = item.textContent;
+                }
+            }
             // Enable Next button
             if (languageNext) languageNext.disabled = false;
             // Update UI prompts/buttons for selected language
             updateUIPromptsForLanguage(language);
-            resetInactivityTimer();
-            resetLanguageConfirmTimer();
+            userActivityTimer('start');
+            languageTimer('start');
         });
     });
 
@@ -518,7 +526,7 @@ try {
         languageNext.disabled = true;
         languageNext.addEventListener('click', () => {
             // Stop the language confirmation timer when advancing
-            clearTimeout(languageConfirmTimer);
+            languageTimer('stop');
             const languageSection = document.getElementById('languageSection');
             const userTypeSection = document.getElementById('userTypeSection');
             if (languageSection) languageSection.style.display = 'none';
@@ -543,8 +551,8 @@ try {
                 maybeEnableUserTypeNext();
                 // Do NOT persist userType to localStorage; keep it in-memory only
                 // reset timers when user interacts
-                resetInactivityTimer();
-                resetLanguageConfirmTimer();
+            userActivityTimer('start');
+            languageTimer('start');
             });
         });
     }
@@ -575,8 +583,8 @@ try {
                 pendingLanguage = null;
             }
             // Restart the 3-minute language confirmation timer
-            resetLanguageConfirmTimer();
-            resetInactivityTimer();
+        languageTimer('start');
+        userActivityTimer('start');
             console.log('Continue clicked, language:', language);
         });
     }
@@ -599,8 +607,8 @@ try {
             if (questionSection) questionSection.style.display = 'none';
             // DO NOT reset userType and email - keep them so user doesn't have to re-select
             // Clear timers to avoid interference while selecting new language
-            clearTimeout(languageConfirmTimer);
-            clearTimeout(inactivityTimer);
+            languageTimer('stop');
+            userActivityTimer('stop');
             
             // Wait for modal to close, then open language dropdown
             if (modalEl) {
