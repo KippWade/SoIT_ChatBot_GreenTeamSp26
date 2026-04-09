@@ -233,31 +233,15 @@ module.exports.query = (req, res) => {
         const suggestionsArr = HELPFUL_SUGGESTIONS[activeLanguage === LANGUAGE.FILIPINO ? 'fil' : 'en'] || HELPFUL_SUGGESTIONS.en;
         if (matchesHelpPattern) {
             // Only show helpful suggestions, no "didn't understand" message
-            const shuffled = suggestionsArr.slice().sort(() => 0.5 - Math.random());
-            const suggestions = shuffled.slice(0, 3);
-            if (suggestions.length > 0) {
-                const htmlList = `<ul class="helpful-suggestions-list" aria-label="Example questions you can ask">` + suggestions.map(s => `<li>${s}</li>`).join('') + `</ul>`;
-                response = (activeLanguage === LANGUAGE.FILIPINO)
-                    ? `Narito ang ilang halimbawa ng mga tanong na maaari kong sagutin:${htmlList}`
-                    : `Here are some example questions I can answer:${htmlList}`;
-            } else {
-                response = (activeLanguage === LANGUAGE.FILIPINO)
-                    ? `Narito ang ilang halimbawa ng mga tanong na maaari kong sagutin.`
-                    : `Here are some example questions I can answer.`;
-            }
+            const { buildHelpfulSuggestionsList } = require('../utils/suggestions');
+            response = buildHelpfulSuggestionsList(suggestionsArr, activeLanguage === LANGUAGE.FILIPINO ? 'fil' : 'en');
         } else {
+            const { buildHelpfulSuggestionsList } = require('../utils/suggestions');
             response = (activeLanguage === LANGUAGE.FILIPINO)
                 ? "Paumanhin, hindi ko naintindihan ang iyong tanong."
                 : "Sorry, I didn't understand your question.";
             // Add up to 3 random helpful suggestions as an HTML bullet list
-            const shuffled = suggestionsArr.slice().sort(() => 0.5 - Math.random());
-            const suggestions = shuffled.slice(0, 3);
-            if (suggestions.length > 0) {
-                const htmlList = `<ul class="helpful-suggestions-list" aria-label="Example questions you can ask">` + suggestions.map(s => `<li>${s}</li>`).join('') + `</ul>`;
-                response += (activeLanguage === LANGUAGE.FILIPINO)
-                    ? `<br>Narito ang ilang halimbawa ng mga tanong na maaari kong sagutin:${htmlList}`
-                    : `<br>Here are some example questions I can answer:${htmlList}`;
-            }
+            response += '<br>' + buildHelpfulSuggestionsList(suggestionsArr, activeLanguage === LANGUAGE.FILIPINO ? 'fil' : 'en');
         }
         addUnansweredQuestion(prompt, userType, schoolEmail);
     } else {
