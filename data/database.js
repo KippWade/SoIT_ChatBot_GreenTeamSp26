@@ -225,8 +225,8 @@ const responses = [
     {
         intent: INTENT.BOT_STATUS,
         pattern: {
-            en: ["how are you", "how's it going", "how are you doing", "are you doing great"],
-            fil: ["kamusta ka", "kumusta ka", "okay ka ba"]
+            en: ["how are you", "how's it going", "how are you doing", "are you doing great", "How are you today?"],
+            fil: ["kamusta ka", "kumusta ka", "okay ka ba", "Kamusta ka ngayon?"]
         },
         reply: {
             en: "Doing great! I'm excited to help you find the information you require!",
@@ -237,10 +237,10 @@ const responses = [
         intent: INTENT.BOT_IDENTITY,
         pattern: {
             en: [
-                "what are you", "how are you made", "who made you", "who created you"
+                "what are you", "how are you made", "who made you", "who created you", "Who created you?"
             ],
             fil: [
-                "ano ka", "paano ka ginawa", "sino ang gumawa sa iyo", "sino ang lumikha sa iyo"
+                "ano ka", "paano ka ginawa", "sino ang gumawa sa iyo", "sino ang lumikha sa iyo", "Sino ang lumikha sa iyo?"
             ]
         },
         reply: {
@@ -252,10 +252,10 @@ const responses = [
         intent: INTENT.BOT_NAME,
         pattern: {
             en: [
-                "what's your name", "what can i call you", "who are you", "your name", "do you have a name"
+                "what's your name", "what can i call you", "who are you", "your name", "do you have a name", "What is your name?"
             ],
             fil: [
-                "ano ang pangalan mo", "ano ang tawag sa iyo", "sino ka", "pangalan mo", "may pangalan ka ba"
+                "ano ang pangalan mo", "ano ang tawag sa iyo", "sino ka", "pangalan mo", "may pangalan ka ba", "Ano ang pangalan mo?"
             ]
         },
         reply: {
@@ -268,11 +268,11 @@ const responses = [
         pattern: {
             en: [
                 "what campuses are there", "campus locations", "where are the campuses located",
-                "campus location", "where are the campuses located", "list the campuses"
+                "campus location", "where are the campuses located", "list the campuses", "Where are the campus locations?"
             ],
             fil: [
                 "ano ang mga campus", "ano ang mga lokasyon ng campus", "saan ang mga campus",
-                "saan matatagpuan ang mga campus", "ilista ang mga campus", "mga lokasyon ng campus"
+                "saan matatagpuan ang mga campus", "ilista ang mga campus", "mga lokasyon ng campus", "Saan matatagpuan ang mga campus?"
             ]
         },
         reply: {
@@ -286,10 +286,10 @@ const responses = [
         intent: INTENT.DEAN_INFO,
         pattern: {
             en: [
-                "who is the dean", "dean of", "where is the dean", "what is the dean", "dean info", "dean information"
+                "who is the dean", "dean of", "where is the dean", "what is the dean", "dean info", "dean information", "Who is the dean?"
             ],
             fil: [
-                "sino ang dean", "dean ng", "nasaan ang dean", "ano ang dean", "impormasyon tungkol sa dean", "dean impormasyon"
+                "sino ang dean", "dean ng", "nasaan ang dean", "ano ang dean", "impormasyon tungkol sa dean", "dean impormasyon", "Sino ang dean?"
             ]
         },
         reply: {
@@ -303,11 +303,11 @@ const responses = [
         intent: INTENT.ADMISSIONS_INFO_GENERAL,
         pattern: {
             en: [
-                "can you give me information about admissions", "admissions", "admission details", "admission process", "how to apply"
+                "can you give me information about admissions", "admissions", "admission details", "admission process", "how to apply", "How do I apply for admission?"
             ],
             fil: [
                 "impormasyon tungkol sa pagpasok", "mga detalye sa pagpasok", "mga proseso ng pagpasok",
-                "mga alintuntunin sa pagpasok", "paano mag-apply"
+                "mga alintuntunin sa pagpasok", "paano mag-apply", "Paano ako mag-aapply para sa pagpasok?"
             ]
         },
         reply: {
@@ -587,14 +587,14 @@ const responses = [
                 "tuition and fees ivy tech", "tuition and fees ivytech", "tuition fees ivy tech",
                 "tuition fees ivytech", "what are the tuition and fees ivy tech", "what are the tuition and fees ivytech",
                 "costs", "cost", "cost to attend", "cost per credit hour", "costs ivy tech", "costs ivytech", "what are the costs", "what are the costs ivy tech",
-                "what are the costs ivytech", "payment"
+                "what are the costs ivytech", "payment", "What are the tuition and fees?"
             ],
             fil: [
                 "ano ang mga matrikula at iba pang mga bayarin", "matrikula at iba pang mga bayarin", "mga bayarin sa matrikula",
                 "matrikula at iba pang mga bayarin ivy tech", "matrikula at iba pang mga bayarin ivytech", "mga bayarin sa matrikula ivy tech",
                 "mga bayarin sa matrikula ivytech", "ano ang mga matrikula at iba pang mga bayarin ivy tech", "ano ang mga matrikula at iba pang mga bayarin ivytech",
                 "mga gastos", "mga gastusin ivy tech", "mga gastusin ivytech", "ano ang mga gastos", "ano ang mga gastos ivy tech",
-                "ano ang mga gastos ivytech", "pagbabayad"
+                "ano ang mga gastos ivytech", "pagbabayad", "Ano ang mga matrikula at bayarin?"
             ]
         },
         reply: {
@@ -611,13 +611,13 @@ const responses = [
                 "what financial aid options are available", "financial aid options", "financial aid",
                 "financial aid ivy tech", "financial aid ivytech", "what are the financial aid options ivy tech",
                 "what are the financial aid options ivytech", "financial aid options ivy tech", "financial aid options ivytech",
-                "financial aid", "grants", "scholarships", "loans", "financial deadlines"
+                "financial aid", "grants", "scholarships", "loans", "financial deadlines", "What financial aid options are available?"
             ],
             fil: [
                 "ano ang mga opsyon sa pinansyal na tulong", "mga opsyon sa pinansyal na tulong", "pinansyal na tulong",
                 "pinansyal na tulong ivy tech", "pinansyal na tulong ivytech", "ano ang mga opsyon sa pinansyal na tulong ivy tech",
                 "ano ang mga opsyon sa pinansyal na tulong ivytech", "mga opsyon sa pinansyal na tulong ivy tech", "mga opsyon sa pinansyal na tulong ivytech",
-                "pinansyal na tulong", "mga grant", "mga iskolarship", "mga pautang", "mga deadline sa pinansyal na tulong"
+                "pinansyal na tulong", "mga grant", "mga iskolarship", "mga pautang", "mga deadline sa pinansyal na tulong", "Anong mga opsyon sa pinansyal na tulong ang available?"
             ]
         },
         reply: {
@@ -635,7 +635,7 @@ const responses = [
                 "myivy", "myivy portal", "access myivy", "how do I access myivy",
                 "student portal ivy tech", "student portal ivytech", "access student portal ivy tech",
                 "access student portal ivytech", "myivy ivy tech", "myivy ivytech", "access myivy ivy tech",
-                "access myivy ivytech", "how do I access myivy ivy tech", "how do I access myivy ivytech"
+                "access myivy ivytech", "how do I access myivy ivy tech", "how do I access myivy ivytech", "How do I access my student portal?"
             ],
             fil: [
                 "paano ako makaka-access sa student portal", "access sa student portal", "student portal",
@@ -644,7 +644,7 @@ const responses = [
                 "access sa student portal ivy tech", "access sa student portal ivytech", "student portal ivy tech",
                 "student portal ivytech", "paano mag-access sa student portal ivy tech", "paano mag-access sa student portal ivytech",
                 "paano ako makakapunta sa student portal ivy tech", "paano ako makakapunta sa student portal ivytech",
-                "student portal access ivy tech", "student portal access ivytech"
+                "student portal access ivy tech", "student portal access ivytech", "Paano ko maa-access ang aking student portal?"
             ]
         },
         reply: {
@@ -661,13 +661,13 @@ const responses = [
                 "what is the process for registering for classes", "class registration", "register for classes",
                 "how do I register for classes", "register for classes ivy tech", "register for classes ivytech",
                 "class registration ivy tech", "class registration ivytech", "how do I register for classes ivy tech",
-                "how do I register for classes ivytech"
+                "how do I register for classes ivytech", "How do I register for classes?"
             ],
             fil: [
                 "ano ang proseso para magparehistro sa mga klase", "pagpaparehistro sa klase", "magparehistro sa mga klase",
                 "paano ako magparehistro sa mga klase", "magparehistro sa mga klase ivy tech", "magparehistro sa mga klase ivytech",
                 "pagpaparehistro sa klase ivy tech", "pagpaparehistro sa klase ivytech", "paano ako magparehistro sa mga klase ivy tech",
-                "paano ako magparehistro sa mga klase ivytech"
+                "paano ako magparehistro sa mga klase ivytech", "Paano ako magrerehistro para sa mga klase?"
             ]
         },
         reply: {
@@ -682,7 +682,7 @@ const responses = [
         pattern: {
             en: [
                 "how do I get my transcripts", "transcript request", "request transcripts",
-                "how do I request my transcripts", "transcript", "transcripts", "transcripts ivy tech", "transcripts ivytech"
+                "how do I request my transcripts", "transcript", "transcripts", "transcripts ivy tech", "transcripts ivytech", "How do I request my transcripts?"
             ],
             fil: [
                 "paano ako kukuha ng transcript", "pag kuha ng transcript", "transcript", "saan puwedeng kumuha ng transcript",
@@ -691,7 +691,7 @@ const responses = [
                 "pag kuha ng transcript ivy tech", "pag kuha ng transcript ivytech", "transcript ivy tech",
                 "san puwedeng hilingin ang transcript ivy tech", "san puwedeng hilingin ang transcript ivytech",
                 "pag hiling ng transcript ivy tech", "pag hiling ng transcript ivytech",
-                "transcript ivytech"
+                "transcript ivytech", "Paano ko mahihiling ang aking transcript?"
             ]
         },
         reply: {
@@ -728,13 +728,13 @@ const responses = [
             en: [
                 "how do I find my advisor", "find my advisor", "academic advisors", "academic advisor",
                 "how do I find my advisor ivy tech", "how do I find my advisor ivytech", "find my advisor ivy tech",
-                "find my advisor ivytech", "academic advisor ivy tech", "academic advisor ivytech"
+                "find my advisor ivytech", "academic advisor ivy tech", "academic advisor ivytech", "How can I find my advisor?"
             ],
             fil: [
                 "paano ko mahahanap ang aking tagapayo", "hanapin ang aking tagapayo", "academic advisor",
                 "paano ko mahahanap ang aking tagapayo ivy tech", "paano ko mahahanap ang aking tagapayo ivytech",
                 "hanapin ang aking tagapayo ivy tech", "hanapin ang aking tagapayo ivytech",
-                "akademikong tagapayo", "akademikong tagapayo ivytech"
+                "akademikong tagapayo", "akademikong tagapayo ivytech", "Paano ko mahahanap ang aking tagapayo?"
             ]
         },
         reply: {
@@ -751,13 +751,13 @@ const responses = [
                 "what is the bookstore's location and hours", "bookstore location and hours", "bookstore hours",
                 "bookstore location", "bookstore ivy tech", "bookstore ivytech", "what is the bookstore's location and hours ivy tech",
                 "what is the bookstore's location and hours ivytech", "bookstore location ivy tech", "bookstore location ivytech",
-                "bookstore hours ivy tech", "bookstore hours ivytech"
+                "bookstore hours ivy tech", "bookstore hours ivytech", "What is the bookstore's location and hours?"
             ],
             fil: [
                 "ano ang lokasyon at oras ng bookstore", "lokasyon at oras ng bookstore", "oras ng bookstore",
                 "lokasyon ng bookstore", "bookstore ivy tech", "bookstore ivytech", "ano ang lokasyon at oras ng bookstore ivy tech",
                 "ano ang lokasyon at oras ng bookstore ivytech", "lokasyon ng bookstore ivy tech", "lokasyon ng bookstore ivytech",
-                "oras ng bookstore ivy tech", "oras ng bookstore ivytech"
+                "oras ng bookstore ivy tech", "oras ng bookstore ivytech", "Ano ang lokasyon at oras ng bookstore?"
             ]
         },
         reply: {
@@ -774,12 +774,12 @@ const responses = [
                 "how do I apply for scholarships", "apply for scholarships", "scholarships",
                 "scholarships ivy tech", "scholarships ivytech", "how do I apply for scholarships ivy tech",
                 "how do I apply for scholarships ivytech", "apply for scholarships ivy tech", "apply for scholarships ivytech",
-                "scholarships application ivy tech", "scholarships application ivytech"
+                "scholarships application ivy tech", "scholarships application ivytech", "How do I apply for scholarships?"
             ],
             fil: [
                 "paano ako mag-aapply para sa iskolarships", "mag-apply para sa iskolarships", "iskolarships",
                 "iskolarships ivy tech", "iskorlarships ivytech", "mga iskolarship", "iskolarships sa ivy tech",
-                "iskorlaships sa ivytech", "iskolarship aplikasyon ivy tech", "iskolarship ivytech"
+                "iskorlaships sa ivytech", "iskolarship aplikasyon ivy tech", "iskolarship ivytech", "Paano ako mag-aapply para sa iskolarship?"
             ]
         },
         reply: {
@@ -794,11 +794,11 @@ const responses = [
         pattern: {
             en: [
                 "how do I check my academic standing", "information on my academic standing",
-                "academic standing", "check academic standing"
+                "academic standing", "check academic standing", "How do I check my academic standing?"
             ],
             fil: [
                 "paano ko malalaman ang aking academic standing", "paano ko masusuri ang aking katayuan sa akademya",
-                "impormasyon sa aking katayuan sa akademya", "surian ng katayuan sa akademya"
+                "impormasyon sa aking katayuan sa akademya", "surian ng katayuan sa akademya", "Paano ko malalaman ang aking academic standing?"
             ]
         },
         reply: {
@@ -813,7 +813,7 @@ const responses = [
         pattern: {
             en: [
                 "what are the library resources and services", "student library", "library", "are there any library resources and services",
-                "library information"
+                "library information", "What are the library resources and services?"
             ],
             fil: [
                 "ano ang mga mapagkukunan at serbisyo ng aklatan sa paaralan", "ano ang mga impormasyon ukol sa aklatan sa paaralan",
@@ -821,7 +821,7 @@ const responses = [
                 "ano ang mga mapagkukunan at serbisyo ng silid-aklatan sa paaralan", "ano ang mga impormasyon ukol sa silid-aklatan sa paaralan",
                 "silid-aklatan ng paaralan", "silid-aklatan", "impormasyon sa silid-aklatan",
                 "ano ang mga mapagkukunan at serbisyo ng silid aklatan sa paaralan", "ano ang mga impormasyon ukol sa silid aklatan sa paaralan",
-                "silid aklatan ng paaralan", "silid aklatan", "impormasyon sa silid aklatan"
+                "silid aklatan ng paaralan", "silid aklatan", "impormasyon sa silid aklatan", "Ano ang mga mapagkukunan at serbisyo ng aklatan?"
             ]
         },
         reply: {
@@ -837,14 +837,14 @@ const responses = [
             en: [
                 "how do I get involved in clubs and organizations", "student life", "campus life",
                 "how to get involved", "student council", "leadership opportunities", "campus events",
-                "college experience", "student government", "clubs", "organizations"
+                "college experience", "student government", "clubs", "organizations", "How do I get involved in clubs and organizations?"
             ],
             fil: [
                 "paano ako makakasali sa mga klub at organisasyon", "paano ako makikihalok sa mga klub at samahan",
                 "pamumuhay ng estudyante", "ano ang buhay-estudyante", "ano ang buhay estudyante", "paano makihalok",
                 "paano maging bahagi", "mga kaganapan sa kampus", "mga aktibidad sa kampus", "paano sumali sa pamahalaang estudyante",
                 "kamusta ang buhay ng mga estudyante", "ano ang student life", "paano ang student life",
-                "mga organisasyon sa kampus", "mga club sa campus"
+                "mga organisasyon sa kampus", "mga club sa campus", "Paano ako makakasali sa mga klub at organisasyon?"
             ]
         },
         reply: {
@@ -860,14 +860,13 @@ const responses = [
             en: [
                 "what is the process for dual credit enrollment", "how do i enroll in dual credit courses",
                 "what steps are required fo dual credit enrollment", "how does dual credit enrollment work",
-                "information on dual credit", "what do i need to do to register for dual credit", "dual credit"
-
+                "information on dual credit", "what do i need to do to register for dual credit", "dual credit", "What is the process for dual credit enrollment?"
             ],
             fil: [
                 "ano ang proceso para sa dual credit enrollment", "paano mag enroll sa mga dual credit courses",
                 "anong mga hakbang para sa dual credit enrollment", "paano gumagana ang dual credit enrollment",
                 "impormasyon sa dual credit", "ano ang mga kailangan kong gawin para magparehistro sa dual credit",
-                "dual credit"
+                "dual credit", "Ano ang proseso para sa dual credit enrollment?"
             ]
         },
         reply: {
@@ -882,12 +881,12 @@ const responses = [
         pattern: {
             en: [
                 "how do i access online courses (ivyonline)", "ivyonline courses", "access ivyonline",
-                "ivy online", "ivyonline", "ivy online", "ivy tech online", "ivytech online"
+                "ivy online", "ivyonline", "ivy online", "ivy tech online", "ivytech online", "How do I access online courses?"
             ],
             fil: [
                 "paano ako makaka-access sa mga online na kurso", "paano ako makakapasok sa mga online na kurso sa ivyonline",
                 "mga kurso sa ivyonline", "mag-access sa ivyonline", "mag access sa ivyonline", "mag-access sa ivy online",
-                "mag access sa ivy online", "ivyonline", "ivy online", "ivy tech online", "ivytech online"
+                "mag access sa ivy online", "ivyonline", "ivy online", "ivy tech online", "ivytech online", "Paano ako makaka-access sa mga online na kurso?"
             ]
         },
         reply: {
@@ -924,12 +923,12 @@ const responses = [
         pattern: {
             en: [
                 "how do I get information about campus events", "where can i get updates on campus events",
-                "campus events", "events on campus", "activities on campus", "student events", "college events"
+                "campus events", "events on campus", "activities on campus", "student events", "college events", "How do I get information about campus events?"
             ],
             fil: [
                 "paano ako makakakuha ng impormasyon tungkol sa mga kaganapan sa campus", "saan ako makakakuha ng mga update sa mga kaganapan sa campus",
                 "mga kaganapan sa campus", "mga kaganapan sa campus", "mga aktibidad sa campus", "mga kaganapan ng mag-aaral",
-                "mga kaganapan ng mag aaral", "mga kaganapan sa kolehiyo"
+                "mga kaganapan ng mag aaral", "mga kaganapan sa kolehiyo", "Paano ako makakakuha ng impormasyon tungkol sa mga kaganapan sa campus?"
             ]
         },
         reply: {
@@ -944,7 +943,7 @@ const responses = [
         pattern: {
             en: [
                 "what support is available for online students", "online student support", "support for online students",
-                "support for online learners", "how can online student get help", "services for online students"
+                "support for online learners", "how can online student get help", "services for online students", "What support is available for online students?"
             ],
             fil: [
                 "ilan ang mga estudyante", "populasyon ng estudyante", "bilang ng mga estudyante",
@@ -952,7 +951,7 @@ const responses = [
                 "populasyon ng mag aaral sa ivy tech", "populasyon ng mag aaral sa ivytech",
                 "populasyon ng mag-aaral ivy tech", "populasyon ng mag aaral ivy tech",
                 "bilang ng mga mag-aaral ivy tech", "bilang ng mga mag-aaral ivytech",
-                "bilang ng mga mag aaral ivy tech", "bilang ng mga mag aaral ivytech"
+                "bilang ng mga mag aaral ivy tech", "bilang ng mga mag aaral ivytech", "Anong suporta ang available para sa mga online na estudyante?"
             ]
         },
         reply: {
