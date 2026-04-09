@@ -11,28 +11,100 @@ const { fill } = require("lodash");
  */
 const HELPFUL_SUGGESTIONS = {
     en: [
-        "What programs are offered at Ivy Tech?",
-        "How do I apply for admission?",
-        "Where are the campus locations?",
-        "How do I access my student portal?",
-        "What financial aid options are available?",
-        "How do I register for classes?",
-        "Who is the dean?",
-        "How do I request my transcripts?",
-        "What are the tuition and fees?",
-        "How can I find my advisor?"
+        "What programs are offered at Ivy Tech?", // PROGRAM_INFO
+        "How do I apply for admission?", // ADMISSIONS_INFO_GENERAL
+        "Where are the campus locations?", // CAMPUS_INFO_GENERAL
+        "How do I access my student portal?", // STUDENT_PORTAL_ACCESS
+        "What financial aid options are available?", // FINANCIAL_AID_OPTIONS
+        "How do I register for classes?", // CLASS_REGISTRATION
+        "Who is the dean?", // DEAN_INFO
+        "How do I request my transcripts?", // TRANSCRIPT_REQUEST
+        "What are the tuition and fees?", // TUITION_FEES
+        "How can I find my advisor?", // FIND_ADVISOR
+        "How do I check my academic standing?", // ACADEMIC_STANDING
+        "How do I apply for scholarships?", // SCHOLARSHIP_APPLICATION
+        "What is the bookstore's location and hours?", // BOOKSTORE_INFO
+        "How do I get information about campus events?", // CAMPUS_EVENTS
+        "What support is available for online students?", // ONLINE_STUDENT_SUPPORT
+        "How do I access online courses?", // IVYONLINE_INFO
+        "What is the process for dual credit enrollment?", // DUAL_CREDIT
+        "How do I get involved in clubs and organizations?", // STUDENT_LIFE
+        "What are the library resources and services?", // LIBRARY_INFO
+        "How do I schedule a test?", // TESTING_SERVICES
+        "What are the parking options on campus?", // CAMPUS_PARKING
+        "How do I get to campus?", // ADDRESS_INFO
+        "How do I contact Ivy Tech by phone?", // PHONE_NUMBER_INFO
+        "What is the process for applying to the School of IT?", // APPLICATION_PROCESS
+        "What are the available programs and courses?", // AVAILABLE_PROGRAMS
+        "What certifications or degrees can I earn?", // CERTIFICATION_INFO
+        "How do I check the academic calendar?", // ACADEMIC_CALENDAR
+        "How do I transfer my credits to a 4-year institution?", // TRANSFER_PROGRAMS_INFO
+        "What are the minimum credit hours I can take?", // CREDIT_HOUR_INFO
+        "Who teaches SDEV265?", // INSTRUCTOR_INFO_SDEV265
+        "Who is the instructor for my course?", // INSTRUCTOR_INFO_GENERAL
+        "Where can I find course descriptions and prerequisites?", // COURSE_INFO_GENERAL
+        "How many students are at Ivy Tech?", // STUDENT_POPULATION
+        "What services are available for military and veterans?", // MILITARY_VETERAN_SERVICES
+        "What student services are available?", // STUDENT_SERVICES
+        "What class formats are available? (online, hybrid, etc.)", // CLASS_FORMATS
+        "How do I enroll at Ivy Tech?", // ENROLLMENT_INFO_GENERAL
+        "What is your name?", // BOT_NAME
+        "Who created you?", // BOT_IDENTITY
+        "How are you today?", // BOT_STATUS
+        "Show me some fun facts!", // EASTER_EGG_HITCHHIKER
+        "Where can I find library research help?", // LIBRARY_RESEARCH
+        "Where can I find library study skills resources?", // LIBRARY_STUDYSKILLS
+        "Where can I find library writing and citation help?", // LIBRARY_WRITING
+        "Where can I find library handouts?", // LIBRARY_HANDOUTS
+        "Where can I get help with library computing?", // LIBRARY_COMPUTING
     ],
     fil: [
-        "Anong mga programa ang inaalok sa Ivy Tech?",
-        "Paano ako mag-aapply para sa pagpasok?",
-        "Saan matatagpuan ang mga campus?",
-        "Paano ko maa-access ang aking student portal?",
-        "Anong mga opsyon sa pinansyal na tulong ang available?",
-        "Paano ako magrerehistro para sa mga klase?",
-        "Sino ang dean?",
-        "Paano ko mahihiling ang aking transcript?",
-        "Ano ang mga matrikula at bayarin?",
-        "Paano ko mahahanap ang aking tagapayo?"
+        "Anong mga programa ang inaalok sa Ivy Tech?", // PROGRAM_INFO
+        "Paano ako mag-aapply para sa pagpasok?", // ADMISSIONS_INFO_GENERAL
+        "Saan matatagpuan ang mga campus?", // CAMPUS_INFO_GENERAL
+        "Paano ko maa-access ang aking student portal?", // STUDENT_PORTAL_ACCESS
+        "Anong mga opsyon sa pinansyal na tulong ang available?", // FINANCIAL_AID_OPTIONS
+        "Paano ako magrerehistro para sa mga klase?", // CLASS_REGISTRATION
+        "Sino ang dean?", // DEAN_INFO
+        "Paano ko mahihiling ang aking transcript?", // TRANSCRIPT_REQUEST
+        "Ano ang mga matrikula at bayarin?", // TUITION_FEES
+        "Paano ko mahahanap ang aking tagapayo?", // FIND_ADVISOR
+        "Paano ko malalaman ang aking academic standing?", // ACADEMIC_STANDING
+        "Paano ako mag-aapply para sa iskolarship?", // SCHOLARSHIP_APPLICATION
+        "Ano ang lokasyon at oras ng bookstore?", // BOOKSTORE_INFO
+        "Paano ako makakakuha ng impormasyon tungkol sa mga kaganapan sa campus?", // CAMPUS_EVENTS
+        "Anong suporta ang available para sa mga online na estudyante?", // ONLINE_STUDENT_SUPPORT
+        "Paano ako makaka-access sa mga online na kurso?", // IVYONLINE_INFO
+        "Ano ang proseso para sa dual credit enrollment?", // DUAL_CREDIT
+        "Paano ako makakasali sa mga klub at organisasyon?", // STUDENT_LIFE
+        "Ano ang mga mapagkukunan at serbisyo ng aklatan?", // LIBRARY_INFO
+        "Paano ako mag-schedule ng pagsusulit?", // TESTING_SERVICES
+        "Ano ang mga pagpipilian sa paradahan sa kampus?", // CAMPUS_PARKING
+        "Paano ako makakarating sa campus?", // ADDRESS_INFO
+        "Paano ako makakatawag sa Ivy Tech?", // PHONE_NUMBER_INFO
+        "Ano ang proseso ng aplikasyon para sa School of IT?", // APPLICATION_PROCESS
+        "Ano ang mga available na programa at kurso?", // AVAILABLE_PROGRAMS
+        "Anong mga sertipikasyon o degree ang maaari kong makuha?", // CERTIFICATION_INFO
+        "Paano ko makikita ang akademikong kalendaryo?", // ACADEMIC_CALENDAR
+        "Paano ko maililipat ang aking mga kredito sa 4 na taong institusyon?", // TRANSFER_PROGRAMS_INFO
+        "Ano ang pinakamababang yunit ng kurso na maaari kong kunin?", // CREDIT_HOUR_INFO
+        "Sino ang nagtuturo ng SDEV265?", // INSTRUCTOR_INFO_SDEV265
+        "Sino ang instruktor ng aking kurso?", // INSTRUCTOR_INFO_GENERAL
+        "Saan ko makikita ang mga paglalarawan at kinakailangan ng kurso?", // COURSE_INFO_GENERAL
+        "Ilan ang mga estudyante sa Ivy Tech?", // STUDENT_POPULATION
+        "Anong mga serbisyo para sa militar at beterano?", // MILITARY_VETERAN_SERVICES
+        "Anong mga serbisyo para sa mga estudyante?", // STUDENT_SERVICES
+        "Anong mga format ng klase ang available? (online, hybrid, atbp.)", // CLASS_FORMATS
+        "Paano ako mag-eenroll sa Ivy Tech?", // ENROLLMENT_INFO_GENERAL
+        "Ano ang pangalan mo?", // BOT_NAME
+        "Sino ang lumikha sa iyo?", // BOT_IDENTITY
+        "Kamusta ka ngayon?", // BOT_STATUS
+        "Magpakita ka ng nakakatuwang impormasyon!", // EASTER_EGG_HITCHHIKER
+        "Saan ako makakahanap ng tulong sa pananaliksik sa aklatan?", // LIBRARY_RESEARCH
+        "Saan ako makakahanap ng mga kasanayan sa pag-aaral sa aklatan?", // LIBRARY_STUDYSKILLS
+        "Saan ako makakahanap ng tulong sa pagsusulat at pagbanggit sa aklatan?", // LIBRARY_WRITING
+        "Saan ako makakakuha ng mga polyeto ng aklatan?", // LIBRARY_HANDOUTS
+        "Saan ako makakakuha ng tulong sa kompyuter ng aklatan?", // LIBRARY_COMPUTING
     ]
     // Add more languages as needed
 };
@@ -1013,8 +1085,12 @@ const responses = [
     {
         intent: INTENT.LIBRARY_RESEARCH,
         pattern: {
-            en: ["research"],
-            fil: ["pananaliksik", "research"]
+            en: ["research", "where can i find library research help"],
+            fil: [
+                "pananaliksik",
+                "research",
+                "saan ako makakahanap ng tulong sa pananaliksik sa aklatan"
+            ]
         },
         reply: {
             en: "Library Research",
@@ -1026,8 +1102,12 @@ const responses = [
     {
         intent: INTENT.LIBRARY_STUDYSKILLS,
         pattern: {
-            en: ["study"],
-            fil: ["pag-aaral", "study"]
+            en: ["study", "where can i find library study skills help"],
+            fil: [
+                "pag-aaral",
+                "study",
+                "saan ako makakahanap ng tulong sa kasanayan sa pag-aaral sa aklatan"
+            ]
         },
         reply: {
             en: "Library Study Skills",
@@ -1039,8 +1119,15 @@ const responses = [
     {
         intent: INTENT.LIBRARY_WRITING,
         pattern: {
-            en: ["writing"],
-            fil: ["pagsusulat", "writing"]
+            en: ["writing", "citation", "citations", "where can i find library writing help", "where can i find library citations help"],
+            fil: [
+                "pagsusulat",
+                "writing",
+                "pagbanggit",
+                "mga pagbanggit",
+                "saan ako makakahanap ng tulong sa pagsusulat sa aklatan",
+                "saan ako makakahanap ng tulong sa pagbanggit sa aklatan"
+            ]
         },
         reply: {
             en: "Library Writing and Citations",
@@ -1052,8 +1139,13 @@ const responses = [
     {
         intent: INTENT.LIBRARY_HANDOUTS,
         pattern: {
-            en: ["Handouts"],
-            fil: ["handouts", "polyeto", "mga polyeto"]
+            en: ["Handouts", "where can i find library handouts"],
+            fil: [
+                "handouts",
+                "polyeto",
+                "mga polyeto",
+                "saan ako makakahanap ng mga polyeto ng aklatan"
+            ]
         },
         reply: {
             en: "Library Instructional Handouts",
