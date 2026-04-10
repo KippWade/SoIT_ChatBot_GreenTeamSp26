@@ -211,11 +211,13 @@ const responses = [
             en: [
                 "hello", "hi", "hey", "greetings",
                 "good morning", "good afternoon", "good evening",
-                "howdy", "what's up"],
+                "howdy", "what's up"
+            ],
             fil: [
                 "hoy", "oy", "huy", "uy", "magandang pagbati",
                 "magandang umaga", "magandang hapon", "magandang gabi",
-                "anong balita"]
+                "anong balita"
+            ]
         },
         reply: {
             en: "Hi there! What can I help you with today?",
@@ -225,8 +227,8 @@ const responses = [
     {
         intent: INTENT.BOT_STATUS,
         pattern: {
-            en: ["how are you", "how's it going", "how are you doing", "are you doing great", "How are you today"],
-            fil: ["kamusta ka", "kumusta ka", "okay ka ba", "Kamusta ka ngayon"]
+            en: ["how are you", "how's it going", "how are you doing", "are you doing great", "how are you today"],
+            fil: ["kamusta ka", "kumusta ka", "okay ka ba", "kamusta ka ngayon"]
         },
         reply: {
             en: "Doing great! I'm excited to help you find the information you require!",
@@ -237,10 +239,10 @@ const responses = [
         intent: INTENT.BOT_IDENTITY,
         pattern: {
             en: [
-                "what are you", "how are you made", "who made you", "who created you", "Who created you"
+                "what are you", "how are you made", "who made you", "who created you", "who created you"
             ],
             fil: [
-                "ano ka", "paano ka ginawa", "sino ang gumawa sa iyo", "sino ang lumikha sa iyo", "Sino ang lumikha sa iyo"
+                "ano ka", "paano ka ginawa", "sino ang gumawa sa iyo", "sino ang lumikha sa iyo", "sino ang lumikha sa iyo"
             ]
         },
         reply: {
@@ -252,10 +254,10 @@ const responses = [
         intent: INTENT.BOT_NAME,
         pattern: {
             en: [
-                "what's your name", "what can i call you", "who are you", "your name", "do you have a name", "What is your name"
+                "what's your name", "what can i call you", "who are you", "your name", "do you have a name", "what is your name"
             ],
             fil: [
-                "ano ang pangalan mo", "ano ang tawag sa iyo", "sino ka", "pangalan mo", "may pangalan ka ba", "Ano ang pangalan mo"
+                "ano ang pangalan mo", "ano ang tawag sa iyo", "sino ka", "pangalan mo", "may pangalan ka ba", "ano ang pangalan mo"
             ]
         },
         reply: {
@@ -268,11 +270,11 @@ const responses = [
         pattern: {
             en: [
                 "what campuses are there", "campus locations", "where are the campuses located",
-                "campus location", "where are the campuses located", "list the campuses", "Where are the campus locations"
+                "campus location", "where are the campuses located", "list the campuses", "where are the campus locations"
             ],
             fil: [
                 "ano ang mga campus", "ano ang mga lokasyon ng campus", "saan ang mga campus",
-                "saan matatagpuan ang mga campus", "ilista ang mga campus", "mga lokasyon ng campus", "Saan matatagpuan ang mga campus"
+                "saan matatagpuan ang mga campus", "ilista ang mga campus", "mga lokasyon ng campus", "saan matatagpuan ang mga campus"
             ]
         },
         reply: {
@@ -286,10 +288,10 @@ const responses = [
         intent: INTENT.DEAN_INFO,
         pattern: {
             en: [
-                "who is the dean", "dean of", "where is the dean", "what is the dean", "dean info", "dean information", "Who is the dean"
+                "who is the dean", "dean of", "where is the dean", "what is the dean", "dean info", "dean information", "who is the dean"
             ],
             fil: [
-                "sino ang dean", "dean ng", "nasaan ang dean", "ano ang dean", "impormasyon tungkol sa dean", "dean impormasyon", "Sino ang dean"
+                "sino ang dean", "dean ng", "nasaan ang dean", "ano ang dean", "impormasyon tungkol sa dean", "dean impormasyon", "sino ang dean"
             ]
         },
         reply: {
@@ -303,11 +305,11 @@ const responses = [
         intent: INTENT.ADMISSIONS_INFO_GENERAL,
         pattern: {
             en: [
-                "can you give me information about admissions", "admissions", "admission details", "admission process", "how to apply", "How do I apply for admission"
+                "can you give me information about admissions", "admissions", "admission details", "admission process", "how to apply", "how do i apply for admission"
             ],
             fil: [
                 "impormasyon tungkol sa pagpasok", "mga detalye sa pagpasok", "mga proseso ng pagpasok",
-                "mga alintuntunin sa pagpasok", "paano mag-apply", "Paano ako mag-aapply para sa pagpasok"
+                "mga alintuntunin sa pagpasok", "paano mag-apply", "paano ako mag-aapply para sa pagpasok"
             ]
         },
         reply: {
@@ -321,12 +323,12 @@ const responses = [
         intent: INTENT.ENROLLMENT_INFO_GENERAL,
         pattern: {
             en: [
-                "can you give me information about enrollment", "enrollment", "how to enroll", "How do I enroll at Ivy Tech"
+                "can you give me information about enrollment", "enrollment", "how to enroll", "how do i enroll at ivy tech"
             ],
             fil: [
                 "maaari ka bang magbigay ng impormasyon tungkol sa enrollment", "paano mag-enroll",
                 "proceso ng pag-enroll", "paraan ng pag-enroll", "mga kinakailangan sa pag-enroll",
-                "paano mag enroll", "Paano ako mag-eenroll sa Ivy Tech"
+                "paano mag enroll", "paano ako mag-eenroll sa ivy tech"
             ]
         },
         reply: {
@@ -346,7 +348,7 @@ const responses = [
                 "who is the professor for sdev265",
                 "who is my sdev265 teacher",
                 "who is teaching sdev265 this semester",
-                "sdev265 faculty",
+                "sdev265 faculty"
             ],
             fil: [
                 "sino ang instructor para sa sdev265", "sino ang nagtuturo ng sdev265",
@@ -368,7 +370,7 @@ const responses = [
             en: [
                 "who is the instructor for", "who teaches", "instructor",
                 "who is the professor for", "who is my teacher", "who is teaching this semester",
-                "faculty", "course schedule", "class schedule",
+                "faculty", "course schedule", "class schedule"
             ],
             fil: [
                 "sino ang mga instruktor sa school of it", "sino ang mga guro sa school of it",
@@ -812,12 +814,12 @@ const responses = [
         intent: INTENT.LIBRARY_INFO,
         pattern: {
             en: [
-                "what are the library resources and services", "student library", "library", "are there any library resources and services",
+                "what are the library resources and services", "student library", "are there any library resources and services",
                 "library information", "what are the library resources and services"
             ],
             fil: [
                 "ano ang mga mapagkukunan at serbisyo ng aklatan sa paaralan", "ano ang mga impormasyon ukol sa aklatan sa paaralan",
-                "akalatan ng paaralan", "aklatan", "impormasyon sa aklatan",
+                "akalatan ng paaralan", "impormasyon sa aklatan",
                 "ano ang mga mapagkukunan at serbisyo ng silid-aklatan sa paaralan", "ano ang mga impormasyon ukol sa silid-aklatan sa paaralan",
                 "silid-aklatan ng paaralan", "silid-aklatan", "impormasyon sa silid-aklatan",
                 "ano ang mga mapagkukunan at serbisyo ng silid aklatan sa paaralan", "ano ang mga impormasyon ukol sa silid aklatan sa paaralan",
