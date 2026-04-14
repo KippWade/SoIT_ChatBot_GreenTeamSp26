@@ -57,6 +57,14 @@ const HELPFUL_SUGGESTIONS = {
         "Where can I find library writing and citation help?", // LIBRARY_WRITING
         "Where can I find library handouts?", // LIBRARY_HANDOUTS
         "Where can I get help with library computing?", // LIBRARY_COMPUTING
+        "Tell me about cloud technologies programs", // SOIT_PROGRAMS_CLOUD_TECHNOLOGIES
+        "What is the computer science program?", // SOIT_PROGRAMS_COMPUTER_SCIENCE
+        "What cybersecurity programs do you offer?", // SOIT_PROGRAMS_CYBERSECURITY
+        "Tell me about data analytics", // SOIT_PROGRAMS_DATAANALYTICS
+        "What information technology programs are available?", // SOIT_PROGRAMS_INFORMATION_TECHNOLOGY
+        "What is IT Support program?", // SOIT_PROGRAMS_ITSUPPORT
+        "Tell me about network infrastructure", // SOIT_PROGRAMS_NETWORKINFRASTRUCTURE
+        "What software development programs are available?", // SOIT_PROGRAMS_SOFTWARE_DEVELOPMENT
     ],
     fil: [
         "Anong mga programa ang inaalok sa Ivy Tech?", // PROGRAM_INFO
@@ -105,6 +113,14 @@ const HELPFUL_SUGGESTIONS = {
         "Saan ako makakahanap ng tulong sa pagsusulat at pagbanggit sa aklatan?", // LIBRARY_WRITING
         "Saan ako makakakuha ng mga polyeto ng aklatan?", // LIBRARY_HANDOUTS
         "Saan ako makakakuha ng tulong sa kompyuter ng aklatan?", // LIBRARY_COMPUTTING
+        "Sabihin mo sa akin ang tungkol sa cloud technologies programs", // SOIT_PROGRAMS_CLOUD_TECHNOLOGIES
+        "Ano ang computer science program?", // SOIT_PROGRAMS_COMPUTER_SCIENCE
+        "Anong mga cybersecurity programs ang inaalok ninyo?", // SOIT_PROGRAMS_CYBERSECURITY
+        "Sabihin mo sa akin ang tungkol sa data analytics", // SOIT_PROGRAMS_DATAANALYTICS
+        "Anong mga information technology programs ang available?", // SOIT_PROGRAMS_INFORMATION_TECHNOLOGY
+        "Ano ang IT support program?", // SOIT_PROGRAMS_ITSUPPORT
+        "Sabihin mo sa akin ang tungkol sa network infrastructure", // SOIT_PROGRAMS_NETWORKINFRASTRUCTURE
+        "Anong mga software development programs ang available?", // SOIT_PROGRAMS_SOFTWARE_DEVELOPMENT
     ]
     // Add more languages as needed
 };
@@ -1189,9 +1205,11 @@ const responses = [
         intent: INTENT.LIBRARY_COMPUTING,
         pattern: {
             en: [
-                "Computing", "Informatics", 
+                "Computing", "Informatics", "library computing", "library computing help", "library tutoring computing", "help with computing", "computing tutor", "library computer help"
             ],
-            fil: []
+            fil: [
+                "computing", "informatics", "library computing", "library computing help", "library tutoring computing", "tulong sa computing", "computing tutor", "library computer help"
+            ]
         },
         reply: {
             en: "Library Computing Research and Tutoring",
@@ -1206,11 +1224,13 @@ const responses = [
             en: [
                 "School of IT Guides", "School of IT Library Guide", "SOiT Guides"
             ],
-            fil: []
+            fil: [
+                "Mga Gabay ng School of IT", "Gabay sa Aklatan ng School of IT", "Mga Gabay ng SoIT"
+            ]
         },
         reply: {
             en: "Library Guides for School of IT",
-            fil: ""
+            fil: "Mga Gabay sa Aklatan para sa School of IT"
         },
         url: "https://library.ivytech.edu/indianapolis/guidehome/soit",
         link: "SoIT Libary Guides"
@@ -1219,13 +1239,15 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_CLOUD_TECHNOLOGIES,
         pattern: {
             en: [
-                "Cloud Computing", "Clout Technology", "Cloud Technologies"
+                "Cloud Computing", "Clout Technology", "Cloud Technologies", "cloud degree", "aws", "azure", "cloud certification"
             ],
-            fil: []
+            fil: [
+                "cloud computing", "cloud technology", "cloud technologies", "cloud degree", "aws", "azure", "cloud certification"
+            ]
         },
         reply: {
             en: "School of IT - Cloud Technologies",
-            fil: ""
+            fil: "School of IT - Mga Teknolohiya sa Cloud"
         },
         url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/cloud-technologies/",
         link: "School of IT - Cloud Technologies"
@@ -1234,13 +1256,15 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_COMPUTER_SCIENCE,
         pattern: {
             en: [
-                "computer science",
+                "computer science", "cs degree", "computer science degree", "computer science program"
             ],
-            fil: []
+            fil: [
+                "computer science", "cs degree", "computer science degree", "computer science program"
+            ]
         },
         reply: {
             en: "School of IT Programs - Computer Science",
-            fil: ""
+            fil: "Mga Programa ng School of IT - Computer Science"
         },
         url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/computer-science/",
         link: "School of IT Programs - Computer Science"
@@ -1249,13 +1273,15 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_CYBERSECURITY,
         pattern: {
             en: [
-                "cybersecurity", "cyber security", "information assurance"
+                "cybersecurity", "cyber security", "information assurance", "security degree", "cybersecurity program", "it security"
             ],
-            fil: []
+            fil: [
+                "cybersecurity", "cyber security", "information assurance", "security degree", "cybersecurity program", "it security"
+            ]
         },
         reply: {
             en: "School of IT Programs - Cybersecurity / Information Assurance",
-            fil: ""
+            fil: "Mga Programa ng School of IT - Cybersecurity / Information Assurance"
         },
         url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/cybersecurity-information-assurance/",
         link: "School of IT Programs - Cybersecurity / Information Assurance"
@@ -1264,13 +1290,15 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_DATAANALYTICS,
         pattern: {
             en: [
-                "data analytics",
+                "data analytics", "analytics degree", "data science", "big data"
             ],
-            fil: []
+            fil: [
+                "data analytics", "analytics degree", "data science", "big data"
+            ]
         },
         reply: {
             en: "School of IT Programs - Data Analytics",
-            fil: ""
+            fil: "Mga Programa ng School of IT - Data Analytics"
         },
         url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/data-analytics/",
         link: "School of IT Programs - Data Analytics"
@@ -1279,13 +1307,15 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_INFORMATION_TECHNOLOGY,
         pattern: {
             en: [
-                "information technology", "information technologies", "informatcics"
+                "information technology", "information technologies", "informatcics", "it degree", "it program", "general it", "tech program"
             ],
-            fil: []
+            fil: [
+                "information technology", "information technologies", "informatcics", "it degree", "it program", "general it", "tech program"
+            ]
         },
         reply: {
             en: "School of IT Programs - Information Technology and Informatics",
-            fil: ""
+            fil: "Mga Programa ng School of IT - Information Technology at Informatics"
         },
         url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/information-technology-and-informatics/",
         link: "School of IT Programs - Information Technology and Informatics"
@@ -1294,13 +1324,15 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_ITSUPPORT,
         pattern: {
             en: [
-                "information technology support", "information technologies supprot", "it supports"
+                "information technology support", "information technologies supprot", "it supports", "help desk", "tech support", "support technician"
             ],
-            fil: []
+            fil: [
+                "information technology support", "information technologies support", "it support", "help desk", "tech support", "support technician"
+            ]
         },
         reply: {
             en: "School of IT Programs - Information Technology Support",
-            fil: ""
+            fil: "Mga Programa ng School of IT - Information Technology Support"
         },
         url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/information-technology-support/",
         link: "School of IT Programs - Information Technology Support"
@@ -1309,13 +1341,15 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_NETWORKINFRASTRUCTURE,
         pattern: {
             en: [
-                "network infrastructure",
+                "network infrastructure", "networking", "network engineer", "network program"
             ],
-            fil: []
+            fil: [
+                "network infrastructure", "networking", "network engineer", "network program"
+            ]
         },
         reply: {
             en: "School of IT Programs - Network Infrastructure",
-            fil: ""
+            fil: "Mga Programa ng School of IT - Network Infrastructure"
         },
         url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/network-infrastructure/",
         link: "School of IT Programs - Network Infrastructure"
@@ -1324,13 +1358,15 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_SOFTWARE_DEVELOPMENT,
         pattern: {
             en: [
-                "software development",
+                "software development", "programming", "software engineer", "development program", "coding"
             ],
-            fil: []
+            fil: [
+                "software development", "programming", "software engineer", "development program", "coding"
+            ]
         },
         reply: {
-            en: "School of IT Programs- Software Development,
-            fil: ""
+            en: "School of IT Programs - Software Development",
+            fil: "Mga Programa ng School of IT - Software Development"
         },
         url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/software-development/",
         link: "School of IT  Programs - Software Development"
