@@ -1087,7 +1087,12 @@ const responses = [
     {
         intent: INTENT.LIBRARY_RESEARCH,
         pattern: {
-            en: ["research", "where can i find library research help", "where can i find library research help"],
+            en: [
+                "research", "where can i find library research help", "where can i find library research help",
+                "help with research", "research help", "how do i do research", "how to do research", 
+                "help with research paper", "find sources", "where can i find sources", "academic sources", "scholarly articles", "how do i find articles",
+                "library research help", "help me with research", "research assignment help"
+            ],
             fil: [
                 "pananaliksik",
                 "research",
@@ -1105,7 +1110,11 @@ const responses = [
     {
         intent: INTENT.LIBRARY_STUDYSKILLS,
         pattern: {
-            en: ["study", "where can i find library study skills help", "where can i find library study skills resources"],
+            en: [
+                "study", "where can i find library study skills help", "where can i find library study skills resources",
+                "study help", "study tips", "how to study", "how do i study better", "study skills", "test preparation",
+                "exam help", "how to prepare for exams", "time management", "focus while studying", "help me study"
+            ],
             fil: [
                 "pag-aaral",
                 "study",
@@ -1123,7 +1132,11 @@ const responses = [
     {
         intent: INTENT.LIBRARY_WRITING,
         pattern: {
-            en: ["writing", "citation", "citations", "where can i find library writing help", "where can i find library citations help", "where can i find library writing and citation help"],
+            en: [
+                "writing", "citation", "citations", "where can i find library writing help", "where can i find library citations help", "where can i find library writing and citation help",
+                "help with writing", "writing help", "help writing paper", "how do i write a paper", "essay help", "apa format", "mla format", "how to cite", "how do i cite sources", 
+                "format my paper", "writing and citations help", "grammar help"
+            ],
             fil: [
                 "pagsusulat",
                 "writing",
@@ -1144,7 +1157,11 @@ const responses = [
     {
         intent: INTENT.LIBRARY_HANDOUTS,
         pattern: {
-            en: ["Handouts", "where can i find library handouts", "where can i find library handouts"],
+            en: [
+                "Handouts", "where can i find library handouts", "where can i find library handouts",
+                "library handouts", "study guides", "library guides", "instructional materials", "learning guides", "pdf guides",
+                "where can i find handouts", "school handouts"
+            ],
             fil: [
                 "handouts",
                 "polyeto",
@@ -1163,7 +1180,11 @@ const responses = [
     {
         intent: INTENT.LIBRARY_COMPUTING,
         pattern: {
-            en: ["computing", "where can I get help with library computing"],
+            en: [
+                "computing", "where can I get help with library computing", 
+                "computer help", "tech help", "library computers", "how to use computers", "printing help", 
+                "technology help", "computer lab", "help with computer"
+            ],
             fil: ["kompyuter", "computing", "paggamit ng kompyuter", "Saan ako makakakuha ng tulong sa kompyuter ng aklatan"]
         },
         reply: {
