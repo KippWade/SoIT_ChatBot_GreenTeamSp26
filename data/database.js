@@ -1228,7 +1228,7 @@ const responses = [
             fil: ""
         },
         url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/cloud-technologies/",
-        link: "SSchool of IT - Cloud Technologies"
+        link: "School of IT - Cloud Technologies"
     },
     {
         intent: INTENT.SOIT_PROGRAMS_COMPUTER_SCIENCE,
