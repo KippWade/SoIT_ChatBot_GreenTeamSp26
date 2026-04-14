@@ -199,6 +199,14 @@ const INTENT = {
     TRANSFER_PROGRAMS_INFO: "transfer_programs_info",
     TUITION_FEES: "tuition_fees",
     UNKNOWN: "unknown",
+    SOIT_PROGRAMS_CLOUD_TECHNOLOGIES: "soit_programs_cloudtechnologies",
+    SOIT_PROGRAMS_COMPUTER_SCIENCE: "soit_programs_computer_science",
+    SOIT_PROGRAMS_CYBERSECURITY: "soit_programs_cybersecurity",
+    SOIT_PROGRAMS_DATAANALYTICS: "soit_programs_dataanalytics",
+    SOIT_PROGRAMS_INFORMATION_TECHNOLOGY: "soit_programs_information_technology",
+    SOIT_PROGRAMS_ITSUPPORT: "soit_programs_itsupport",
+    SOIT_PROGRAMS_NETWORKINFRASTRUCTURE: "soit_programs_networkinginfrastructure",
+    SOIT_PROGRAMS_SOFTWARE_DEVELOPMENT: "soit_programs_software_development",
 };
 
 /**
@@ -1268,7 +1276,7 @@ const responses = [
         link: "School of IT Programs - Data Analytics"
     },
     {
-        intent: INTENT.SOIT_PROGRAMS_DATAANALYTICS,
+        intent: INTENT.SOIT_PROGRAMS_INFORMATION_TECHNOLOGY,
         pattern: {
             en: [
                 "information technology", "information technologies", "informatcics"
@@ -1313,7 +1321,7 @@ const responses = [
         link: "School of IT Programs - Network Infrastructure"
     },
     {
-        intent: INTENT.SOIT_PROGRAMS_SOFTWAREDEVELOPMENT,
+        intent: INTENT.SOIT_PROGRAMS_SOFTWARE_DEVELOPMENT,
         pattern: {
             en: [
                 "software development",
