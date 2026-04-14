@@ -1181,11 +1181,9 @@ const responses = [
         intent: INTENT.LIBRARY_COMPUTING,
         pattern: {
             en: [
-                "computing", "where can I get help with library computing", 
-                "computer help", "tech help", "library computers", "how to use computers", "printing help", 
-                "technology help", "computer lab", "help with computer"
+                "Computing", "Informatics", 
             ],
-            fil: ["kompyuter", "computing", "paggamit ng kompyuter", "Saan ako makakakuha ng tulong sa kompyuter ng aklatan"]
+            fil: []
         },
         reply: {
             en: "Library Computing Research and Tutoring",
@@ -1194,6 +1192,141 @@ const responses = [
         url: "https://library.ivytech.edu/indianapolis/computing",
         link: "Library Computing"
     },
+    {
+        intent: INTENT.LIBRARY_SOIT_GUIDES,
+        pattern: {
+            en: [
+                "School of IT Guides", "School of IT Library Guide", "SOiT Guides"
+            ],
+            fil: []
+        },
+        reply: {
+            en: "Library Guides for School of IT",
+            fil: ""
+        },
+        url: "https://library.ivytech.edu/indianapolis/guidehome/soit",
+        link: "SoIT Libary Guides"
+    },
+    {
+        intent: INTENT.SOIT_PROGRAMS_CLOUD_TECHNOLOGIES,
+        pattern: {
+            en: [
+                "Cloud Computing", "Clout Technology", "Cloud Technologies"
+            ],
+            fil: []
+        },
+        reply: {
+            en: "School of IT - Cloud Technologies",
+            fil: ""
+        },
+        url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/cloud-technologies/",
+        link: "SSchool of IT - Cloud Technologies"
+    },
+    {
+        intent: INTENT.SOIT_PROGRAMS_COMPUTER_SCIENCE,
+        pattern: {
+            en: [
+                "computer science",
+            ],
+            fil: []
+        },
+        reply: {
+            en: "School of IT Programs - Computer Science",
+            fil: ""
+        },
+        url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/computer-science/",
+        link: "School of IT Programs - Computer Science"
+    }, 
+    {
+        intent: INTENT.SOIT_PROGRAMS_CYBERSECURITY,
+        pattern: {
+            en: [
+                "cybersecurity", "cyber security", "information assurance"
+            ],
+            fil: []
+        },
+        reply: {
+            en: "School of IT Programs - Cybersecurity / Information Assurance",
+            fil: ""
+        },
+        url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/cybersecurity-information-assurance/",
+        link: "School of IT Programs - Cybersecurity / Information Assurance"
+    },
+    {
+        intent: INTENT.SOIT_PROGRAMS_DATAANALYTICS,
+        pattern: {
+            en: [
+                "data analytics",
+            ],
+            fil: []
+        },
+        reply: {
+            en: "School of IT Programs - Data Analytics",
+            fil: ""
+        },
+        url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/data-analytics/",
+        link: "School of IT Programs - Data Analytics"
+    },
+    {
+        intent: INTENT.SOIT_PROGRAMS_DATAANALYTICS,
+        pattern: {
+            en: [
+                "information technology", "information technologies", "informatcics"
+            ],
+            fil: []
+        },
+        reply: {
+            en: "School of IT Programs - Information Technology and Informatics",
+            fil: ""
+        },
+        url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/information-technology-and-informatics/",
+        link: "School of IT Programs - Information Technology and Informatics"
+    },
+    {
+        intent: INTENT.SOIT_PROGRAMS_ITSUPPORT,
+        pattern: {
+            en: [
+                "information technology support", "information technologies supprot", "it supports"
+            ],
+            fil: []
+        },
+        reply: {
+            en: "School of IT Programs - Information Technology Support",
+            fil: ""
+        },
+        url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/information-technology-support/",
+        link: "School of IT Programs - Information Technology Support"
+    },
+    {
+        intent: INTENT.SOIT_PROGRAMS_NETWORKINFRASTRUCTURE,
+        pattern: {
+            en: [
+                "network infrastructure",
+            ],
+            fil: []
+        },
+        reply: {
+            en: "School of IT Programs - Network Infrastructure",
+            fil: ""
+        },
+        url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/network-infrastructure/",
+        link: "School of IT Programs - Network Infrastructure"
+    },
+    {
+        intent: INTENT.SOIT_PROGRAMS_SOFTWAREDEVELOPMENT,
+        pattern: {
+            en: [
+                "software development",
+            ],
+            fil: []
+        },
+        reply: {
+            en: "School of IT Programs- Software Development,
+            fil: ""
+        },
+        url: "https://www.ivytech.edu/programs/all-academic-programs/school-of-information-technology/software-development/",
+        link: "School of IT  Programs - Software Development"
+    },      
     {
         intent: INTENT.EASTER_EGG_HITCHHIKER,
         pattern: {
