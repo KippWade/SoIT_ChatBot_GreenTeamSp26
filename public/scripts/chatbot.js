@@ -420,6 +420,14 @@ const HELPFUL_SUGGESTIONS = {
         "Where can I find library writing and citation help?", // LIBRARY_WRITING
         "Where can I find library handouts?", // LIBRARY_HANDOUTS
         "Where can I get help with library computing?", // LIBRARY_COMPUTING
+        "Tell me about cloud technologies programs", // SOIT_PROGRAMS_CLOUD_TECHNOLOGIES
+        "What is the computer science program?", // SOIT_PROGRAMS_COMPUTER_SCIENCE
+        "What cybersecurity programs do you offer?", // SOIT_PROGRAMS_CYBERSECURITY
+        "Tell me about data analytics", // SOIT_PROGRAMS_DATAANALYTICS
+        "What information technology programs are available?", // SOIT_PROGRAMS_INFORMATION_TECHNOLOGY
+        "What is IT Support program?", // SOIT_PROGRAMS_ITSUPPORT
+        "Tell me about network infrastructure", // SOIT_PROGRAMS_NETWORKINFRASTRUCTURE
+        "What software development programs are available?", // SOIT_PROGRAMS_SOFTWARE_DEVELOPMENT
     ],
     fil: [
         "Anong mga programa ang inaalok sa Ivy Tech?", // PROGRAM_INFO
@@ -467,7 +475,15 @@ const HELPFUL_SUGGESTIONS = {
         "Saan ako makakahanap ng mga kasanayan sa pag-aaral sa aklatan?", // LIBRARY_STUDYSKILLS
         "Saan ako makakahanap ng tulong sa pagsusulat at pagbanggit sa aklatan?", // LIBRARY_WRITING
         "Saan ako makakakuha ng mga polyeto ng aklatan?", // LIBRARY_HANDOUTS
-        "Saan ako makakakuha ng tulong sa kompyuter ng aklatan?", // LIBRARY_COMPUTING
+        "Saan ako makakakuha ng tulong sa kompyuter ng aklatan?", // LIBRARY_COMPUTTING
+        "Sabihin mo sa akin ang tungkol sa cloud technologies programs", // SOIT_PROGRAMS_CLOUD_TECHNOLOGIES
+        "Ano ang computer science program?", // SOIT_PROGRAMS_COMPUTER_SCIENCE
+        "Anong mga cybersecurity programs ang inaalok ninyo?", // SOIT_PROGRAMS_CYBERSECURITY
+        "Sabihin mo sa akin ang tungkol sa data analytics", // SOIT_PROGRAMS_DATAANALYTICS
+        "Anong mga information technology programs ang available?", // SOIT_PROGRAMS_INFORMATION_TECHNOLOGY
+        "Ano ang IT support program?", // SOIT_PROGRAMS_ITSUPPORT
+        "Sabihin mo sa akin ang tungkol sa network infrastructure", // SOIT_PROGRAMS_NETWORKINFRASTRUCTURE
+        "Anong mga software development programs ang available?", // SOIT_PROGRAMS_SOFTWARE_DEVELOPMENT
     ]
     // Add more languages as needed
 };
