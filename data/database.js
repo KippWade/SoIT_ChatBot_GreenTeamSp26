@@ -469,12 +469,12 @@ const responses = [
             en: [
                 "what programs", "what programs ivy tech", "what kind of programs do you offer",
                 "what programs ivytech", "what programs does ivytech offer", "programs offered ivytech",
-                "programs offered ivy tech", "programs ivytech", "programs ivy tech", "programs"
+                "programs offered ivy tech", "programs ivytech", "programs ivy tech"
             ],
             fil: [
                 "ano ang mga programa", "ano ang mga programa sa ivy tech", "ano ang mga uri ng programa na inaalok ninyo",
                 "ano ang mga programa ng ivytech", "ano ang mga programa na inaalok ng ivytech", "mga programang inaalok ng ivytech",
-                "mga programang inaalok ng ivy tech", "mga programa ng ivytech", "mga programa ng ivy tech", "mga programa"
+                "mga programang inaalok ng ivy tech", "mga programa ng ivytech", "mga programa ng ivy tech"
             ]
         },
         reply: {
