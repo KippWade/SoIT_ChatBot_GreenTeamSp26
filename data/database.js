@@ -1239,10 +1239,10 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_CLOUD_TECHNOLOGIES,
         pattern: {
             en: [
-                "Cloud Computing", "Clout Technology", "Cloud Technologies", "cloud degree", "aws", "azure", "cloud certification"
+                "Cloud Computing", "Clout Technology", "Cloud Technologies", "cloud degree", "aws", "azure", "cloud certification", "Tell me about cloud technologies programs"
             ],
             fil: [
-                "cloud computing", "cloud technology", "cloud technologies", "cloud degree", "aws", "azure", "cloud certification"
+                "cloud computing", "cloud technology", "cloud technologies", "cloud degree", "aws", "azure", "cloud certification", "Sabihin mo sa akin ang tungkol sa cloud technologies programs"
             ]
         },
         reply: {
@@ -1256,10 +1256,10 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_COMPUTER_SCIENCE,
         pattern: {
             en: [
-                "computer science", "cs degree", "computer science degree", "computer science program"
+                "computer science", "cs degree", "computer science degree", "computer science program", "What is the computer science program?"
             ],
             fil: [
-                "computer science", "cs degree", "computer science degree", "computer science program"
+                "computer science", "cs degree", "computer science degree", "computer science program", "Ano ang computer science program?"
             ]
         },
         reply: {
@@ -1273,10 +1273,10 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_CYBERSECURITY,
         pattern: {
             en: [
-                "cybersecurity", "cyber security", "information assurance", "security degree", "cybersecurity program", "it security"
+                "cybersecurity", "cyber security", "information assurance", "security degree", "cybersecurity program", "it security", "What cybersecurity programs do you offer?"
             ],
             fil: [
-                "cybersecurity", "cyber security", "information assurance", "security degree", "cybersecurity program", "it security"
+                "cybersecurity", "cyber security", "information assurance", "security degree", "cybersecurity program", "it security", "Anong mga cybersecurity programs ang inaalok ninyo?"
             ]
         },
         reply: {
@@ -1290,10 +1290,10 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_DATAANALYTICS,
         pattern: {
             en: [
-                "data analytics", "analytics degree", "data science", "big data"
+                "data analytics", "analytics degree", "data science", "big data", "Tell me about data analytics"
             ],
             fil: [
-                "data analytics", "analytics degree", "data science", "big data"
+                "data analytics", "analytics degree", "data science", "big data", "Sabihin mo sa akin ang tungkol sa data analytics"
             ]
         },
         reply: {
@@ -1307,10 +1307,10 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_INFORMATION_TECHNOLOGY,
         pattern: {
             en: [
-                "information technology", "information technologies", "informatcics", "it degree", "it program", "general it", "tech program"
+                "information technology", "information technologies", "informatcics", "it degree", "it program", "general it", "tech program", "What information technology programs are available?"
             ],
             fil: [
-                "information technology", "information technologies", "informatcics", "it degree", "it program", "general it", "tech program"
+                "information technology", "information technologies", "informatcics", "it degree", "it program", "general it", "tech program", "Anong mga information technology programs ang available?"
             ]
         },
         reply: {
@@ -1324,10 +1324,10 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_ITSUPPORT,
         pattern: {
             en: [
-                "information technology support", "information technologies supprot", "it supports", "help desk", "tech support", "support technician"
+                "information technology support", "information technologies supprot", "it supports", "help desk", "tech support", "support technician", "What is IT Support program?"
             ],
             fil: [
-                "information technology support", "information technologies support", "it support", "help desk", "tech support", "support technician"
+                "information technology support", "information technologies support", "it support", "help desk", "tech support", "support technician", "Ano ang IT support program?"
             ]
         },
         reply: {
@@ -1341,10 +1341,10 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_NETWORKINFRASTRUCTURE,
         pattern: {
             en: [
-                "network infrastructure", "networking", "network engineer", "network program"
+                "network infrastructure", "networking", "network engineer", "network program", "Tell me about network infrastructure"
             ],
             fil: [
-                "network infrastructure", "networking", "network engineer", "network program"
+                "network infrastructure", "networking", "network engineer", "network program", "Sabihin mo sa akin ang tungkol sa network infrastructure"
             ]
         },
         reply: {
@@ -1358,10 +1358,10 @@ const responses = [
         intent: INTENT.SOIT_PROGRAMS_SOFTWARE_DEVELOPMENT,
         pattern: {
             en: [
-                "software development", "programming", "software engineer", "development program", "coding"
+                "software development", "programming", "software engineer", "development program", "coding", "What software development programs are available?"
             ],
             fil: [
-                "software development", "programming", "software engineer", "development program", "coding"
+                "software development", "programming", "software engineer", "development program", "coding", "Anong mga software development programs ang available?"
             ]
         },
         reply: {
