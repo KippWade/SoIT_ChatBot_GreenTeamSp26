@@ -1222,7 +1222,7 @@ const responses = [
         intent: INTENT.LIBRARY_SOIT_GUIDES,
         pattern: {
             en: [
-                "School of IT Guides", "School of IT Library Guide", "SOiT Guides"
+                "School of IT Guides", "School of IT Library Guide", "SOiT Guides", "School of IT"
             ],
             fil: [
                 "Mga Gabay ng School of IT", "Gabay sa Aklatan ng School of IT", "Mga Gabay ng SoIT"
