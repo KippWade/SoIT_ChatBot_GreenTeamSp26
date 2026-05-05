@@ -88,7 +88,7 @@ Enjoy seamless access to Ivy Tech resources. For advanced queries, the chatbot m
 - Original Creators: [SDEV 265 FA24 Blue Team](https://github.com/LiongsonEnzo/SoIT_ChatBot)
 - Additional Enhancements: [SDEV 265 FA25 Brown Team](https://github.com/rohydro93/SoIT_ChatBot_BrownTeam)
 - Additional Enhancements (this repository): [SDEV 265 SP26 Green Team](https://github.com/KippWade/SoIT_ChatBot_GreenTeamSp26)
-  - Live service temporarily available for the Spring 2026 semester at [https://ivybot-chatbot.onrender.com](https://ivybot.onrender.com) 
+  - Live service temporarily available for the Spring 2026 semester at [https://ivybot.onrender.com](https://ivybot.onrender.com) 
 - Special thanks to all contributors for their efforts in making IvyBot a valuable resource for the Ivy Tech community.
 
 
